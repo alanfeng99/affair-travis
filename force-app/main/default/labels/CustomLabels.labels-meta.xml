@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>BASE_IMAGE_URL</fullName>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>BASE_IMAGE_URL</shortDescription>
+        <value>sdfsfd</value>
+    </labels>
+    <labels>
+        <fullName>COOKIE_ACCOUNT_ID</fullName>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>COOKIE_ACCOUNT_ID</shortDescription>
+        <value>asdfsf</value>
+    </labels>
+    <labels>
+        <fullName>COOKIE_AUTH_TOKEN</fullName>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>COOKIE_AUTH_TOKEN</shortDescription>
+        <value>sdfsfw2f232</value>
+    </labels>
+</CustomLabels>
