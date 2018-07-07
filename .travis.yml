@@ -20,9 +20,9 @@ before_install:
 - sfdx force:auth:jwt:grant --clientid $CONSUMERKEY --jwtkeyfile assets/server.key
   --username $USERNAME --setdefaultdevhubusername -a DevHub
 script:
-- sfdx force:org:create -v HubOrg -s -f config/project-scratch-def.json -a DevHub --wait
-  2
-- sfdx force:org:display -u DevHub
-- sfdx force:source:push -u DevHub
-- sfdx force:apex:test:run -u DevHub --wait 10
-- sfdx force:org:delete -u DevHub -p
+sfdx force:org:create -f config/project-scratch-def.json --setalias vscodeScratchOrg --setdefaultusername DevCi
+  3
+- sfdx force:org:display -u DevCi
+- sfdx force:source:push -u DevCi
+- sfdx force:apex:test:run -u DevCi --wait 10
+- sfdx force:org:delete -u DevCi -p
