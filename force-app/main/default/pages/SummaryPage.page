@@ -1,0 +1,182 @@
+<apex:page controller="SummaryController" docType="html-5.0"  applyHtmlTag="true" standardStylesheets="false" showHeader="false" action="{!checkCookie}">
+    <!-- Begin Default Content REMOVE THIS -->
+    <html lang="en">    
+        <head>
+            <title>SummaryPage</title>
+            <!-- Required meta tags -->
+            <meta charset="utf-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+            <!-- Bootstrap CSS -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+                  crossorigin="anonymous"/>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+            <!-- FontsStyle CSS -->
+            <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/cwtexyen.css"/>   
+            <apex:stylesheet value="{!$Resource.MediaqueryCSS}"/>
+            <apex:stylesheet value="{!$Resource.TemplateCSS}"/>
+        </head>
+
+        <body class="bg-light">     
+            <apex:form > 
+                <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom" >
+                    <a class="navbar-brand" href="#">週刊編輯</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    
+                    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{!viewModel.account.LastName__c}</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                    <apex:commandLink action="{!logOut}" value="登出" styleClass="dropdown-item"/>
+                                    <!-- <a class="dropdown-item" href="#">Another action</a>
+<a class="dropdown-item" href="#">Something else here</a> -->
+                                </div>
+                            </li>
+                            <li class="nav-item ">
+                                <apex:commandLink value="總覽" action="{!toSummaryPage}" styleClass="nav-link"/>
+                                
+                            </li>
+                            <li class="nav-item">
+                                <apex:commandLink value="帳戶設定" action="{!toAccountSettingPage}" styleClass="nav-link"/>
+                            </li>
+                            <li class="nav-item">
+                                <apex:commandLink value="訂閱管理" action="{!toSubscriptionManagementPage}" styleClass="nav-link "/>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                
+                <div class="card  border-light bg-light ">
+                    <div class="card-header bg-white">                  
+                        <div align="center" style="line-height:20px;">
+                           
+                            <div class="letterspacing3px" style="font-size:20px;">
+                                早安，<apex:outputText value="{!Account.LastName__c}"/>
+                            </div><br/>
+                            <div style="font-size:12px;">{!viewModel.year}年{!viewModel.month}月{!viewModel.day}日註冊成為會員</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-body " style="line-height:25px; font-size:14px;"> 
+                        <div class="container"> 
+                            <div class="form-row">
+                                <div class="col-1 col-sm-2 col-md-3 col-lg-3"/>
+                                <div class="col-10 col-sm-8 col-md-6 col-lg-6">
+                                    <div class="form-group" style="font-size:15px;">
+                                        帳戶資訊
+                                    </div>
+                                    <table class="table  table-bordered" style="background-color:white">
+                                        <tr>
+                                            <td>
+                                                <div class="form-row">
+                                                    <div class="col-auto">
+                                                        會員編號：
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <apex:outputText value="{!Account.Id}"/>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-row">
+                                                    <div class="col-auto">
+                                                        會員暱稱：
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <apex:outputText value="{!Account.LastName__c}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col-auto">
+                                                        註冊信箱：
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <apex:outputText value="{!Account.Email__c }"/>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div class="form-group" style="font-size:15px;">
+                                        訂閱資訊
+                                    </div>
+                                    <apex:pageBlock >
+                                        <table class="table  table-bordered" style="background-color:white"> 
+                                            <tr>
+                                                <td>	
+                                                    <div class="form-row">
+                                                        <div class="col-auto">
+                                                            目前共{!viewModel.SumOfSubscription}筆訂閱
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            ( <apex:commandLink value="訂閱管理" action="{!toSubscriptionManagementPage}"/> )
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <apex:repeat value="{!Subscriptions}" var="sub">
+                                                        <div class="form-group form-row">
+                                                            <div class="col-auto">
+                                                                訂單編號：
+                                                            </div>
+                                                            <div class="col-auto form-row">
+                                                                <div class="col-auto">
+                                                                    {!sub.Name} |
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    {!sub.Recipient__c }｜
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    {!sub.Program__r.Order_Period__c}期
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>           
+                                                    </apex:repeat>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-row">
+                                                        <div class="col-auto">
+                                                            訂一份送家人、朋友：
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <apex:commandLink value="我要新增訂閱" action="{!toNewSubscriptionPage}"/>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </apex:pageBlock>   
+                                </div>
+                                <div class="col-1 col-sm-2 col-md-3 col-lg-3"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+            </apex:form>   
+            <div class="footer text-muted text-right">
+                <hr style="width:100%"/>
+                <p>
+                    The Affairs Mediuum Ltd. 編集者新聞社有限公司
+                </p>
+            </div>
+            
+            
+        </body>
+        <!-- End Default Content REMOVE THIS -->
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    </html>
+</apex:page>

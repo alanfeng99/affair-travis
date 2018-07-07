@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Subscription_item__c</fullName>
+    <externalId>false</externalId>
+    <label>訂閱方案</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>訂閱10期 800元</fullName>
+                <default>true</default>
+                <label>訂閱10期 800元</label>
+            </value>
+            <value>
+                <fullName>訂閱5期 400元</fullName>
+                <default>false</default>
+                <label>訂閱5期 400元</label>
+            </value>
+            <value>
+                <fullName>訂閱20期 1600元</fullName>
+                <default>false</default>
+                <label>訂閱20期 1600元</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

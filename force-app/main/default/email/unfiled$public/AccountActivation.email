@@ -1,0 +1,14 @@
+<table border="0" cellpadding="5" width="600" cellspacing="5" height="400" >
+<tr valign="top" height="50" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[您好 {!Account__c.Email__c}：]]></td>
+</tr>
+<tr valign="top" height="300" >
+<td tEditID="c1r2" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r2" locked="0" >
+<![CDATA[這是一封帳號啟用信件。<div><br></div><div>請點選下列網址以驗證帳號：</div><div><a href="{!$Label.SITE_URL}/apex/SetupPasswordPage?id={!Account.Id}"><br></a></div><div><font face="DSCDefaultFontRegular"><span style="font-size: 14px; background-color: rgb(255, 255, 255);"><a href="{!$Label.SITE_URL}/apex/SetupPasswordPage?id={!Account__c.Id}">{!$Label.SITE_URL}/apex/SetupPasswordPage?id={!Account__c.Id}</a></span></font></div><div><br></div><div><div><br></div><div><br></div></div>]]></td>
+</tr>
+<tr valign="top" height="50" >
+<td tEditID="c1r3" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r3" locked="0" >
+<![CDATA[Affairs 編集者新聞社有限公司&nbsp;]]></td>
+</tr>
+</table>

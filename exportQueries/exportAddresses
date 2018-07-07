@@ -1,0 +1,1 @@
+SELECT City__c, Area__c, Zipcode__c FROM Address__c

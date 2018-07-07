@@ -1,0 +1,301 @@
+<apex:page controller="AccountSettingController" docType="html-5.0"  applyHtmlTag="true" standardStylesheets="false" showHeader="false" action="{!checkCookie}">
+    <!-- Begin Default Content REMOVE THIS -->
+    <html lang="en">    
+        <head>
+            <title>AccountSettingPage</title>
+            <!-- Required meta tags -->
+            <meta charset="utf-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+            <!-- Bootstrap CSS -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+                  crossorigin="anonymous"/>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+            <!-- FontsStyle CSS -->
+            <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/cwtexyen.css"/>        
+            <apex:stylesheet value="{!$Resource.MediaqueryCSS}"/>
+            <apex:stylesheet value="{!$Resource.TemplateCSS}"/>
+        </head>
+        <style>         
+            .card-header{
+            margin-top: 28px;
+            }
+        </style>
+        <body class="bg-light">
+            <apex:form > 
+                <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top border-bottom">
+                    <a class="navbar-brand" href="#">週刊編輯</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    
+                    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{!viewModel.account.LastName__c}</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                    <apex:commandLink action="{!logOut}" value="登出" styleClass="dropdown-item"/>
+                                    <!-- <a class="dropdown-item" href="#">Another action</a>
+<a class="dropdown-item" href="#">Something else here</a> -->
+                                </div>
+                            </li>
+                            <li class="nav-item ">
+                                <apex:commandLink value="總覽" action="{!toSummaryPage}" styleClass="nav-link"/>
+                            </li>
+                            <li class="nav-item">
+                                <apex:commandLink value="帳戶設定" action="{!toAccountSettingPage}" styleClass="nav-link"/>
+                            </li>
+                            <li class="nav-item">
+                                <apex:commandLink value="訂閱管理" action="{!toSubscriptionManagementPage}" styleClass="nav-link "/>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                
+                <div class="card  border-light bg-light ">
+                    <div class="card-header bg-white">                  
+                        <div align="center" style="line-height:20px;">
+                            <br/><br/>
+                            <div class="letterspacing3px" style="font-size:20px;">帳號設定</div><br/>
+                            <div style="font-size:12px;">編輯修改你的個人帳號</div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="card-body " style="line-height:25px; font-size:14px;"> 
+                        <div class="container"> 
+                            <div class="form-row">
+                                <div class="col-0 col-sm-2 col-md-3 col-lg-3 col-xl-4"/>
+                                <div class="col-12 col-sm-8 col-md-6 col-lg-6 col-xl-4">    
+                                    <div class="form-group" style="font-size:15px;">
+                                        你目前使用 {!viewModel.account.Email__c } 做為登入信箱。
+                                    </div>
+                                    <apex:outputText style="font-color:red; font-size:12px;" rendered="{!viewModel.ifChangeEmail}">您已更改電子郵件，請至信箱重新認證帳號</apex:outputText>
+                                    <apex:messages style="color:red"/>
+                                    <apex:outputPanel rendered="{!viewModel.isMainShow}">
+                                        <table class="table  table-bordered" style="background-color:white">
+                                            <tr>
+                                                <td>
+                                                    <div class="form-row">
+                                                        <div class="col-auto">
+                                                            暱稱：
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            {!viewModel.account.LastName__c} 
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <apex:commandLink value="變更" action="{!viewModel.changeName}"/>  
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-row">
+                                                        <div class="col-auto">
+                                                            信箱：
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            {!viewModel.account.Email__c}
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <apex:commandLink value="變更" action="{!viewModel.changeEmail}"/>  
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-row">
+                                                        <div class="col-auto">
+                                                            密碼：
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            {!viewModel.account.Password__c}
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <apex:commandLink value="變更" action="{!viewModel.changePassword}"/>  
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>                          
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{!viewModel.isChangeName}">
+                                        <table class="table  table-bordered" style="background-color:white">
+                                            <tr>
+                                                <td>
+                                                    <div class="form-group">
+                                                        請輸入新的暱稱 
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <apex:inputField value="{!viewModel.account.LastName__c}" style="width:60%" html-placeholder="暱稱"/>
+                                                    </div>
+                                                    
+                                                    <div class="form-group form-row">
+                                                        <div class="col-auto">
+                                                            <apex:commandButton value="儲存變更" action="{!submitName}" style=" color:black;  background-color:#dde2e2; border-width:0px;" styleClass="btn"/>     
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <apex:commandLink value="取消" action="{!viewModel.cancelChange}"/>     
+                                                        </div>          
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>   
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{!viewModel.isChangeEmail}">
+                                        <table class="table  table-bordered" style="background-color:white">
+                                            <tr>
+                                                <td>
+                                                    <div class="form-row">
+                                                        <div class="col-auto">
+                                                            暱稱：
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            {!viewModel.account.LastName__c} 
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <apex:commandLink value="變更" action="{!viewModel.changeName}"/>  
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-group">
+                                                        請輸入變更後的電子信箱<br/>
+                                                        <small>Email 信箱變更後需要再重新驗證已確認信箱無誤</small><br/>
+                                                    </div>
+                                                    
+                                                    <div class="form-group">
+                                                        <apex:inputField value="{!viewModel.account.Email__c}" html-placeholder="電子信箱"/><br/>
+                                                    </div>
+                                                    
+                                                    <div class="form-group form-row">
+                                                        <div class="col-auto">
+                                                            <apex:commandButton value="儲存變更" action="{!submitEmail}" style=" color:black;  background-color:#dde2e2; border-width:0px;" styleClass="btn"/>     
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <apex:commandLink value="取消" immediate="true" action="{!viewModel.cancelChange}"/>     
+                                                        </div>          
+                                                    </div>        
+                                                </td>
+                                            </tr>
+                                        </table>   
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{!viewModel.isChangePassword}">
+                                        <table class="table  table-bordered" style="background-color:white">
+                                            <tr>
+                                                <td>
+                                                    <div class="form-row">
+                                                        <div class="col-auto">
+                                                            暱稱：
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            {!viewModel.account.LastName__c} 
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <apex:commandLink value="變更" action="{!viewModel.changeName}"/>  
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-row">
+                                                        <div class="col-auto">
+                                                            信箱：
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            {!viewModel.account.Email__c} 
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <apex:commandLink value="變更" action="{!viewModel.changeEmail}"/>  
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div >
+                                                        請輸入目前的密碼<br/>
+                                                        <small>請輸入你目前設定的密碼以確認身份</small><br/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <apex:inputField value="{!viewModel.accountOld.Password__c}" style="width:70%" html-placeholder="舊密碼"/><br/>
+                                                    </div>
+                                                    <div >
+                                                        新密碼
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <apex:inputField value="{!viewModel.accountNew.Password__c}" style="width:70%" html-placeholder="新密碼"/><br/>
+                                                    </div>
+                                                    <div >
+                                                        再輸入一次新密碼
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <apex:inputField value="{!viewModel.accountVerify.Password__c}" style="width:70%" html-placeholder="再輸入一次新密碼"/><br/>
+                                                    </div>
+                                                    <apex:outputPanel >
+                                                        <small class="form-text text-danger">
+                                                            <apex:messages />
+                                                        </small> 
+                                                    </apex:outputPanel>
+                                                    <div class="form-group form-row">
+                                                        <div class="col-auto">
+                                                            <apex:commandButton value="儲存變更" action="{!submitPassword}" style=" color:black;  background-color:#dde2e2; border-width:0px;" styleClass="btn"/>     
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <apex:commandLink value="取消" action="{!viewModel.cancelChange}"/>     
+                                                        </div>       
+                                                    </div>
+                                                    
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel >
+                                        <table class="table table-bordered" style="background-color:white" >
+                                            <tr>
+                                                <td>
+                                                    與外部的帳號建立聯結
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <apex:commandButton action="{!submitName}" value="已聯結，停用FACEBOOK帳號連結" style="width:70%; font-size:12px; " styleClass="btn btn-social btn-facebook"/><br/>    
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <apex:commandButton action="{!submitName}" value="使用 GOOGLE 帳號" style="width:70%;" styleClass="btn btn-social btn-google"/>       
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>       
+                                    </apex:outputPanel>
+                                </div>
+                                <div class="col-0 col-sm-2 col-md-3 col-lg-3 col-xl-4"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+            </apex:form>   
+            <div class="footer text-muted text-right">
+                <hr style="width:100%"/>
+                <p>
+                    The Affairs Mediuum Ltd. 編集者新聞社有限公司
+                </p>
+            </div>
+            
+            
+        </body>
+        <!-- End Default Content REMOVE THIS -->
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    </html>
+</apex:page>

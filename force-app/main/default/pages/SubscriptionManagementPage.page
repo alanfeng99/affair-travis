@@ -1,0 +1,280 @@
+<apex:page controller="SubscriptionManagementController" docType="html-5.0"  applyHtmlTag="true" standardStylesheets="false" showHeader="false" action="{!checkCookie}">
+    <!-- Begin Default Content REMOVE THIS -->
+    <html lang="en">    
+        <head>
+            <title>SubscriptionManagementPage</title>
+            <!-- Required meta tags -->
+            <meta charset="utf-8"/>
+            <!-- End Default Content REMOVE THIS -->
+            <!-- Optional JavaScript -->
+            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+            <!-- Bootstrap CSS -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+                  crossorigin="anonymous"/>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+            <!-- FontsStyle CSS -->
+            <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/cwtexyen.css"/> 
+            <apex:stylesheet value="{!$Resource.MediaqueryCSS}"/>
+            <apex:stylesheet value="{!$Resource.TemplateCSS}"/>
+            
+        </head>
+        <body class="bg-light">
+            <apex:form id="form">   
+                <apex:actionFunction name="afterSubmit" action="{!viewModel.afterSubmit}" reRender="form"/>
+                <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
+                    <a class="navbar-brand" href="#">週刊編輯</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    
+                    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{!viewModel.account.LastName__c}</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                    <apex:commandLink action="{!logOut}" value="登出" styleClass="dropdown-item"/>
+                                    <!-- <a class="dropdown-item" href="#">Another action</a>
+<a class="dropdown-item" href="#">Something else here</a> -->
+                                </div>
+                            </li>
+                            <li class="nav-item ">
+                                <apex:commandLink value="總覽" action="{!toSummaryPage}" styleClass="nav-link"/>   
+                            </li>
+                            <li class="nav-item">
+                                <apex:commandLink value="帳戶設定" action="{!toAccountSettingPage}" styleClass="nav-link"/>
+                            </li>
+                            <li class="nav-item">
+                                <apex:commandLink value="訂閱管理" action="{!toSubscriptionManagementPage}" styleClass="nav-link "/>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                
+                <div class="card  border-light bg-light " >
+                    <div class="card-header bg-white">                  
+                        <div align="center" style="line-height:20px;">
+                            
+                            
+                            <div class="letterspacing3px" style="font-size:20px;">訂閱管理</div><br/>
+                            <div style="font-size:12px;">查看訂閱明細，變更修改付款、收件資料</div>
+                        </div>
+                    </div>
+                    <apex:outputPanel rendered="{!orderSucceed}">
+                        <small class="form-text text-danger text-center" >感謝您的訂閱！我們將依據您選擇的訂閱方案將報紙配送給您。</small>
+                    </apex:outputPanel>
+                    
+                    <apex:outputPanel rendered="{!viewModel.updatedCreditcard}"> 
+                        <small class="form-text text-danger text-center" >信用卡資訊已完成新增(變更)，訂閱到期時將會透過此信用卡繳款</small>
+                    </apex:outputPanel>
+                    <div class="card-body " style="line-height:25px; font-size:14px;" > 
+                        <div class="container"> 
+                            <div class="form-row">
+                                <div class="col-0 col-sm-1 col-md-2 col-lg-3 col-xl-3"/>
+                                <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6">
+                                    <apex:repeat value="{!Subscriptions}" var="sub">
+                                        <div class="form-group">
+                                            訂單編號：{!sub.Name}   
+                                        </div>
+                                        <table class="table  table-bordered" style="background-color:white">
+                                            <tr>
+                                                <td>週刊編集：{!sub.Program__r.ProgramName__c }</td>
+                                            </tr>
+                                            <tr>
+                                                <td>訂閱期數：第{!sub.Start_period__c }期-第{!sub.End_period__c }期</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <apex:outputPanel rendered="{!viewModel.currentEditRowId != sub.Id}">
+                                                        <div class=" form-row">
+                                                            <div class="col-auto">
+                                                                收件人:  
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                {!sub.Recipient__c}
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                ( <apex:commandLink value="變更收件資訊" action="{!viewModel.changeRecipientInfo}" reRender="form">
+                                                                <apex:param id="getEditRowId" name="getEditRowId" assignTo="{!viewModel.currentEditRowId}" value="{!sub.Id}" />
+                                                                </apex:commandLink> )
+                                                            </div>
+                                                        </div>
+                                                        <div class=" form-row">
+                                                            <div class="col-auto">
+                                                                地址:
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                {!sub.Postal_code__c}{!sub.City_picklist__c }{!sub.Area_picklist__c}{!sub.Address__c }
+                                                            </div>
+                                                        </div>
+                                                        <div class=" form-row">
+                                                            <div class="col-auto">
+                                                                電話:
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                {!sub.Tel__c }
+                                                            </div>
+                                                        </div>
+                                                    </apex:outputPanel>
+                                                    <apex:outputPanel rendered="{!viewModel.currentEditRowId == sub.Id}">
+                                                        <div class="form-group">
+                                                            收件者資料
+                                                        </div>
+                                                        <div class="form-group ">
+                                                            <apex:inputField value="{!sub.Recipient__c}" styleClass="form-control" style="width:66%;" required="true" html-placeholder="收件人名稱"/>
+                                                        </div>
+                                                        <div class="form-group form-row">
+                                                            <div class="col-4">
+                                                                <apex:inputField value="{!sub.City_picklist__c}" styleClass="city_picker form-control" style="height:35px;" required="true"/>
+                                                            </div>
+                                                            <div>
+                                                                <apex:inputField value="{!sub.Area_picklist__c}" style="height:35px;" required="true"/>
+                                                            </div>
+                                                        </div>   
+                                                        <div class="form-group">
+                                                            <apex:inputField value="{!sub.Address__c}" styleClass="form-control" style="width:66%;" required="true" html-placeholder="詳細地址"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <apex:inputField value="{!sub.Tel__c}" styleClass="form-control" style="width:66%;" required="true" html-placeholder="電話號碼"/>
+                                                        </div>
+                                                        <div class="form-group form-row">
+                                                            <div class="col-auto">
+                                                                <apex:commandButton value="儲存變更" action="{!submitForm}" style=" color:black;  background-color:#dde2e2; border-width:0px;" styleClass="btn btn-default" reRender="form" oncomplete="afterSubmit()"/>     
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <apex:commandLink value="取消" action="{!viewModel.cancelChange}" reRender="form"/>     
+                                                            </div>       
+                                                        </div>
+                                                    </apex:outputPanel>       
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <!--最一開始顯示版面-->
+                                                    <apex:outputPanel rendered="{!IF(AND(viewModel.currentUseRowId != sub.id, viewModel.currentCancelRowId != sub.id), TRUE, FALSE)}"> 
+                                                        付款方式：{!sub.Payment_method__c }<br/>
+                                                        <apex:outputPanel rendered="{!IF(sub.Payment_method__c == '信用卡',true,false)}">
+                                                            <div class="form-row">
+                                                                <div class="col-auto">
+                                                                    <apex:commandLink action="{!toUpdateCreditcardPage}" value="更新信用卡資訊" rendered="{!IF(sub.isReplenish__c == false, false, true)}" reRender="form"/>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <apex:commandLink action="{!viewModel.stopAutoOrderPanel}" value="取消自動續訂服務" rendered="{!IF(sub.isReplenish__c == true, true, false)}" reRender="form">
+                                                                        <apex:param id="getCancelIdbyCredit" name="getEditRowId" assignTo="{!viewModel.currentCancelRowId}" value="{!sub.Id}" />
+                                                                    </apex:commandLink>
+                                                                    <apex:commandLink action="{!viewModel.useAutoOrderPanel}" value="使用自動續訂服務" rendered="{!IF(sub.isReplenish__c == false, true, false)}" reRender="form">
+                                                                        <apex:param id="getUseIdByCredit" name="getEditRowId" assignTo="{!viewModel.currentUseRowId}" value="{!sub.Id}" />
+                                                                    </apex:commandLink>
+                                                                </div>
+                                                            </div>
+                                                        </apex:outputPanel>
+                                                        <apex:outputPanel rendered="{!IF(sub.Payment_method__c == 'ATM轉帳',true,false)}">
+                                                            <apex:commandLink value="啟用信用卡自動續訂服務" action="{!viewModel.useAutoOrderPanel}" rendered="{!IF(sub.isReplenish__c == false, true, false)}" reRender="form">
+                                                                <apex:param id="getUseIdByATM" name="getEditRowId" assignTo="{!viewModel.currentUseRowId}" value="{!sub.Id}" />
+                                                            </apex:commandLink>
+                                                            <div class="form-row">
+                                                                <div class="col-auto">
+                                                                    <apex:commandLink action="{!toUpdateCreditcardPage}" value="更新信用卡資訊" rendered="{!IF(sub.isReplenish__c == false, false, true)}" reRender="form"/>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <apex:commandLink action="{!viewModel.stopAutoOrderPanel}" value="取消自動續訂服務" rendered="{!IF(sub.isReplenish__c == true, true, false)}" reRender="form">
+                                                                        <apex:param id="getCancelRowIdByATM" name="getEditRowId" assignTo="{!viewModel.currentCancelRowId}" value="{!sub.Id}" />
+                                                                    </apex:commandLink>
+                                                                </div>
+                                                            </div>
+                                                        </apex:outputPanel>
+                                                        <apex:outputPanel rendered="{!IF(sub.Payment_method__c == '超商付款',true,false)}">
+                                                            <apex:commandLink value="啟用信用卡自動續訂服務" action="{!viewModel.useAutoOrderPanel}" rendered="{!IF(sub.isReplenish__c == false, true, false)}" reRender="form">
+                                                                <apex:param id="getUseIdByMarket" name="getEditRowId" assignTo="{!viewModel.currentUseRowId}" value="{!sub.Id}" />
+                                                            </apex:commandLink>
+                                                            <div class="form-row">
+                                                                <div class="col-auto">
+                                                                    <apex:commandLink action="{!toUpdateCreditcardPage}" value="更新信用卡資訊" rendered="{!IF(sub.isReplenish__c == false, false, true)}" reRender="form"/>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <apex:commandLink action="{!viewModel.stopAutoOrderPanel}" value="取消自動續訂服務" rendered="{!IF(sub.isReplenish__c == true, true, false)}" reRender="form">
+                                                                        <apex:param id="getCancelRowIdByMarket" name="getEditRowId" assignTo="{!viewModel.currentCancelRowId}" value="{!sub.Id}" />
+                                                                    </apex:commandLink>
+                                                                </div>
+                                                            </div>
+                                                        </apex:outputPanel>
+                                                    </apex:outputPanel>
+                                                    
+                                                    <!--取消自動續訂服務-->
+                                                    <apex:outputPanel rendered="{!viewModel.currentCancelRowId == sub.id}" >
+                                                        <div class="form-group">
+                                                            停止自動續訂服務
+                                                        </div>
+                                                        <div class="form-group form-row">
+                                                            <div class="col-md-7 col-sm-8 col-10">
+                                                                如果您現在停止自動續訂的服務，您目前訂閱的期數將會於<span style="color:#00ace6"> 第{!sub.End_period__c  }期 </span>  
+                                                                到期，屆時將不會再透過信用卡自動幫您繳款續訂。
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        <div class="form-group form-row">
+                                                            <div class="col-auto">
+                                                                <apex:commandButton value="停止自動續訂" action="{!viewModel.stopAutoOrderService}" reRender="form" styleClass="btn btn-default" style=" color:black;  background-color:#dde2e2; border-width:0px;" >
+                                                                    <apex:param name="stopAuto" value="false" assignTo="{!sub.isReplenish__c}" />
+                                                                </apex:commandButton>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <apex:commandLink value="取消" action="{!viewModel.cancelReturn}" reRender="form"/>
+                                                            </div>
+                                                        </div>
+                                                    </apex:outputPanel>
+                                                    
+                                                    <!--使用自動續訂服務-->
+                                                    <apex:outputPanel rendered="{!viewModel.currentUseRowId == sub.id}">
+                                                        <div class="form-group">
+                                                            使用自動續訂服務
+                                                        </div>
+                                                        <div class="form-group form-row">
+                                                            <div class="col-md-7 col-sm-8 col-10">
+                                                                如果您現在新增使用自動續訂的服務，我們將會在 <span style="color:#00ace6"> 第{!sub.End_period__c  }期 </span>   
+                                                                到期後，依您目前的訂閱方案，透過用卡自動幫您扣款續訂。	
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        <div class="form-group form-row">
+                                                            <div class="col-auto">
+                                                                <apex:commandButton value="確認自動續訂" action="{!viewModel.useAutoOrderService}" reRender="form"/>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <apex:commandLink value="取消" action="{!viewModel.cancelReturn}" reRender="form"/>
+                                                            </div>
+                                                        </div>
+                                                    </apex:outputPanel>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <br/>
+                                    </apex:repeat>
+                                </div>
+                                <div class="col-0 col-sm-1 col-md-2 col-lg-3 col-xl-3"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+            </apex:form>   
+            <div class="footer text-muted text-right">
+                <hr style="width:100%"/>
+                <p>
+                    The Affairs Mediuum Ltd. 編集者新聞社有限公司
+                </p>
+            </div>
+        </body>
+        <script>
+        $j = jQuery.noConflict();
+        $j(document).ready(function(){
+            $j('.area_picker_parent').find('select').addClass('form-control');
+        });
+        </script>
+    </html>
+</apex:page>

@@ -1,0 +1,1 @@
+SELECT Name, ProductCode, Picture__c, PicturePath__c, EndDate__c, StartDate__c FROM Product2
