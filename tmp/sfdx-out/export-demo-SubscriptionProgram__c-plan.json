@@ -1,0 +1,10 @@
+[
+    {
+        "sobject": "SubscriptionProgram__c",
+        "saveRefs": true,
+        "resolveRefs": false,
+        "files": [
+            "export-demo-SubscriptionProgram__cs.json"
+        ]
+    }
+]

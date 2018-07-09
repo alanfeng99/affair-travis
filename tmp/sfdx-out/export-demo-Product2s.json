@@ -1,0 +1,28 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Product2",
+                "referenceId": "Product2Ref1"
+            },
+            "Name": "第一期",
+            "ProductCode": "1",
+            "Picture__c": "<img src=\"https://innovation-enterprise-5124-dev-ed.cs31.my.salesforce.com/servlet/servlet.FileDownload?file=00Pp0000000Tlp6EAC\" alt=\" \" border=\"0\"/>",
+            "PicturePath__c": "https://innovation-enterprise-5124-dev-ed.cs31.my.salesforce.com/servlet/servlet.FileDownload?file=00Pp0000000Tlp6EAC",
+            "EndDate__c": "2018-07-14",
+            "StartDate__c": "2018-07-08"
+        },
+        {
+            "attributes": {
+                "type": "Product2",
+                "referenceId": "Product2Ref2"
+            },
+            "Name": "第二期",
+            "ProductCode": "2",
+            "Picture__c": "<img src=\"https://innovation-enterprise-5124-dev-ed.cs31.my.salesforce.com/servlet/servlet.FileDownload?file=00Pp0000000TlpBEAS\" alt=\" \" border=\"0\"/>",
+            "PicturePath__c": "https://innovation-enterprise-5124-dev-ed.cs31.my.salesforce.com/servlet/servlet.FileDownload?file=00Pp0000000TlpBEAS",
+            "EndDate__c": "2018-07-21",
+            "StartDate__c": "2018-07-15"
+        }
+    ]
+}

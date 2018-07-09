@@ -1,0 +1,10 @@
+[
+    {
+        "sobject": "Address__c",
+        "saveRefs": true,
+        "resolveRefs": false,
+        "files": [
+            "export-demo-Address__cs.json"
+        ]
+    }
+]

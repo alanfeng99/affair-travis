@@ -1,0 +1,3343 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef1"
+            },
+            "City__c": "新北市",
+            "Area__c": "蘆洲區",
+            "ZipCode__c": "247"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef2"
+            },
+            "City__c": "新北市",
+            "Area__c": "五股區",
+            "ZipCode__c": "248"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef3"
+            },
+            "City__c": "新北市",
+            "Area__c": "八里區",
+            "ZipCode__c": "249"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef4"
+            },
+            "City__c": "新北市",
+            "Area__c": "淡水區",
+            "ZipCode__c": "251"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef5"
+            },
+            "City__c": "新北市",
+            "Area__c": "新莊區",
+            "ZipCode__c": "242"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef6"
+            },
+            "City__c": "新北市",
+            "Area__c": "三芝區",
+            "ZipCode__c": "252"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef7"
+            },
+            "City__c": "新北市",
+            "Area__c": "石門區",
+            "ZipCode__c": "253"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef8"
+            },
+            "City__c": "新北市",
+            "Area__c": "泰山區",
+            "ZipCode__c": "243"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef9"
+            },
+            "City__c": "新北市",
+            "Area__c": "林口區",
+            "ZipCode__c": "244"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef10"
+            },
+            "City__c": "宜蘭縣",
+            "Area__c": "宜蘭市",
+            "ZipCode__c": "260"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef11"
+            },
+            "City__c": "宜蘭縣",
+            "Area__c": "頭城鎮",
+            "ZipCode__c": "261"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef12"
+            },
+            "City__c": "宜蘭縣",
+            "Area__c": "礁溪鄉",
+            "ZipCode__c": "262"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef13"
+            },
+            "City__c": "宜蘭縣",
+            "Area__c": "壯圍鄉",
+            "ZipCode__c": "263"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef14"
+            },
+            "City__c": "宜蘭縣",
+            "Area__c": "員山鄉",
+            "ZipCode__c": "264"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef15"
+            },
+            "City__c": "宜蘭縣",
+            "Area__c": "羅東鎮",
+            "ZipCode__c": "265"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef16"
+            },
+            "City__c": "宜蘭縣",
+            "Area__c": "三星鄉",
+            "ZipCode__c": "266"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef17"
+            },
+            "City__c": "宜蘭縣",
+            "Area__c": "大同鄉",
+            "ZipCode__c": "267"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef18"
+            },
+            "City__c": "宜蘭縣",
+            "Area__c": "五結鄉",
+            "ZipCode__c": "268"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef19"
+            },
+            "City__c": "宜蘭縣",
+            "Area__c": "冬山鄉",
+            "ZipCode__c": "269"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef20"
+            },
+            "City__c": "宜蘭縣",
+            "Area__c": "蘇澳鎮",
+            "ZipCode__c": "270"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef21"
+            },
+            "City__c": "宜蘭縣",
+            "Area__c": "南澳鄉",
+            "ZipCode__c": "272"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef22"
+            },
+            "City__c": "宜蘭縣",
+            "Area__c": "釣魚台列嶼",
+            "ZipCode__c": "290"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef23"
+            },
+            "City__c": "新竹市",
+            "Area__c": "東區",
+            "ZipCode__c": "300"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef24"
+            },
+            "City__c": "新竹市",
+            "Area__c": "北區",
+            "ZipCode__c": "300"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef25"
+            },
+            "City__c": "新竹市",
+            "Area__c": "香山區",
+            "ZipCode__c": "300"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef26"
+            },
+            "City__c": "新竹縣",
+            "Area__c": "竹北市",
+            "ZipCode__c": "302"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef27"
+            },
+            "City__c": "新竹縣",
+            "Area__c": "湖口鄉",
+            "ZipCode__c": "303"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef28"
+            },
+            "City__c": "新竹縣",
+            "Area__c": "新豐鄉",
+            "ZipCode__c": "304"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef29"
+            },
+            "City__c": "新竹縣",
+            "Area__c": "新埔鎮",
+            "ZipCode__c": "305"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef30"
+            },
+            "City__c": "新竹縣",
+            "Area__c": "關西鎮",
+            "ZipCode__c": "306"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef31"
+            },
+            "City__c": "新竹縣",
+            "Area__c": "芎林鄉",
+            "ZipCode__c": "307"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef32"
+            },
+            "City__c": "新竹縣",
+            "Area__c": "寶山鄉",
+            "ZipCode__c": "308"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef33"
+            },
+            "City__c": "新竹縣",
+            "Area__c": "竹東鎮",
+            "ZipCode__c": "310"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef34"
+            },
+            "City__c": "新竹縣",
+            "Area__c": "五峰鄉",
+            "ZipCode__c": "311"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef35"
+            },
+            "City__c": "新竹縣",
+            "Area__c": "橫山鄉",
+            "ZipCode__c": "312"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef36"
+            },
+            "City__c": "新竹縣",
+            "Area__c": "尖石鄉",
+            "ZipCode__c": "313"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef37"
+            },
+            "City__c": "新竹縣",
+            "Area__c": "北埔鄉",
+            "ZipCode__c": "314"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef38"
+            },
+            "City__c": "新竹縣",
+            "Area__c": "峨眉鄉",
+            "ZipCode__c": "315"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef39"
+            },
+            "City__c": "桃園市",
+            "Area__c": "中壢區",
+            "ZipCode__c": "320"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef40"
+            },
+            "City__c": "桃園市",
+            "Area__c": "平鎮區",
+            "ZipCode__c": "324"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef41"
+            },
+            "City__c": "桃園市",
+            "Area__c": "龍潭區",
+            "ZipCode__c": "325"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef42"
+            },
+            "City__c": "桃園市",
+            "Area__c": "楊梅區",
+            "ZipCode__c": "326"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef43"
+            },
+            "City__c": "桃園市",
+            "Area__c": "新屋區",
+            "ZipCode__c": "327"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef44"
+            },
+            "City__c": "桃園市",
+            "Area__c": "觀音區",
+            "ZipCode__c": "328"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef45"
+            },
+            "City__c": "桃園市",
+            "Area__c": "桃園區",
+            "ZipCode__c": "330"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef46"
+            },
+            "City__c": "桃園市",
+            "Area__c": "龜山區",
+            "ZipCode__c": "333"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef47"
+            },
+            "City__c": "桃園市",
+            "Area__c": "八德區",
+            "ZipCode__c": "334"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef48"
+            },
+            "City__c": "桃園市",
+            "Area__c": "大溪區",
+            "ZipCode__c": "335"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef49"
+            },
+            "City__c": "桃園市",
+            "Area__c": "復興區",
+            "ZipCode__c": "336"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef50"
+            },
+            "City__c": "桃園市",
+            "Area__c": "大園區",
+            "ZipCode__c": "337"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef51"
+            },
+            "City__c": "桃園市",
+            "Area__c": "蘆竹區",
+            "ZipCode__c": "338"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef52"
+            },
+            "City__c": "苗栗縣",
+            "Area__c": "竹南鎮",
+            "ZipCode__c": "350"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef53"
+            },
+            "City__c": "苗栗縣",
+            "Area__c": "頭份鎮",
+            "ZipCode__c": "351"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef54"
+            },
+            "City__c": "苗栗縣",
+            "Area__c": "三灣鄉",
+            "ZipCode__c": "352"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef55"
+            },
+            "City__c": "苗栗縣",
+            "Area__c": "南庄鄉",
+            "ZipCode__c": "353"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef56"
+            },
+            "City__c": "苗栗縣",
+            "Area__c": "獅潭鄉",
+            "ZipCode__c": "354"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef57"
+            },
+            "City__c": "苗栗縣",
+            "Area__c": "後龍鎮",
+            "ZipCode__c": "356"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef58"
+            },
+            "City__c": "苗栗縣",
+            "Area__c": "通霄鎮",
+            "ZipCode__c": "357"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef59"
+            },
+            "City__c": "苗栗縣",
+            "Area__c": "苑裡鎮",
+            "ZipCode__c": "358"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef60"
+            },
+            "City__c": "苗栗縣",
+            "Area__c": "苗栗市",
+            "ZipCode__c": "360"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef61"
+            },
+            "City__c": "苗栗縣",
+            "Area__c": "造橋鄉",
+            "ZipCode__c": "361"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef62"
+            },
+            "City__c": "苗栗縣",
+            "Area__c": "頭屋鄉",
+            "ZipCode__c": "362"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef63"
+            },
+            "City__c": "苗栗縣",
+            "Area__c": "公館鄉",
+            "ZipCode__c": "363"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef64"
+            },
+            "City__c": "苗栗縣",
+            "Area__c": "大湖鄉",
+            "ZipCode__c": "364"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef65"
+            },
+            "City__c": "苗栗縣",
+            "Area__c": "泰安鄉",
+            "ZipCode__c": "365"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef66"
+            },
+            "City__c": "苗栗縣",
+            "Area__c": "銅鑼鄉",
+            "ZipCode__c": "366"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef67"
+            },
+            "City__c": "苗栗縣",
+            "Area__c": "三義鄉",
+            "ZipCode__c": "367"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef68"
+            },
+            "City__c": "苗栗縣",
+            "Area__c": "西湖鄉",
+            "ZipCode__c": "368"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef69"
+            },
+            "City__c": "苗栗縣",
+            "Area__c": "卓蘭鎮",
+            "ZipCode__c": "369"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef70"
+            },
+            "City__c": "台中市",
+            "Area__c": "中區",
+            "ZipCode__c": "400"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef71"
+            },
+            "City__c": "台中市",
+            "Area__c": "東區",
+            "ZipCode__c": "401"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef72"
+            },
+            "City__c": "台中市",
+            "Area__c": "南區",
+            "ZipCode__c": "402"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef73"
+            },
+            "City__c": "台中市",
+            "Area__c": "北區",
+            "ZipCode__c": "404"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef74"
+            },
+            "City__c": "台中市",
+            "Area__c": "北屯區",
+            "ZipCode__c": "406"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef75"
+            },
+            "City__c": "台中市",
+            "Area__c": "西區",
+            "ZipCode__c": "403"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef76"
+            },
+            "City__c": "台中市",
+            "Area__c": "西屯區",
+            "ZipCode__c": "407"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef77"
+            },
+            "City__c": "台中市",
+            "Area__c": "南屯區",
+            "ZipCode__c": "408"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef78"
+            },
+            "City__c": "台中市",
+            "Area__c": "太平區",
+            "ZipCode__c": "411"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef79"
+            },
+            "City__c": "台中市",
+            "Area__c": "大里區",
+            "ZipCode__c": "412"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef80"
+            },
+            "City__c": "台中市",
+            "Area__c": "霧峰區",
+            "ZipCode__c": "413"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef81"
+            },
+            "City__c": "台中市",
+            "Area__c": "烏日區",
+            "ZipCode__c": "414"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef82"
+            },
+            "City__c": "台中市",
+            "Area__c": "豐原區",
+            "ZipCode__c": "420"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef83"
+            },
+            "City__c": "台中市",
+            "Area__c": "后里區",
+            "ZipCode__c": "421"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef84"
+            },
+            "City__c": "台中市",
+            "Area__c": "石岡區",
+            "ZipCode__c": "422"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef85"
+            },
+            "City__c": "台中市",
+            "Area__c": "東勢區",
+            "ZipCode__c": "423"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef86"
+            },
+            "City__c": "台中市",
+            "Area__c": "和平區",
+            "ZipCode__c": "424"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef87"
+            },
+            "City__c": "台中市",
+            "Area__c": "新社區",
+            "ZipCode__c": "426"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef88"
+            },
+            "City__c": "台中市",
+            "Area__c": "潭子區",
+            "ZipCode__c": "427"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef89"
+            },
+            "City__c": "台中市",
+            "Area__c": "大雅區",
+            "ZipCode__c": "428"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef90"
+            },
+            "City__c": "台中市",
+            "Area__c": "神岡區",
+            "ZipCode__c": "429"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef91"
+            },
+            "City__c": "台中市",
+            "Area__c": "大肚區",
+            "ZipCode__c": "432"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef92"
+            },
+            "City__c": "台中市",
+            "Area__c": "沙鹿區",
+            "ZipCode__c": "433"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef93"
+            },
+            "City__c": "台中市",
+            "Area__c": "龍井區",
+            "ZipCode__c": "434"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef94"
+            },
+            "City__c": "台中市",
+            "Area__c": "梧棲區",
+            "ZipCode__c": "435"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef95"
+            },
+            "City__c": "台中市",
+            "Area__c": "清水區",
+            "ZipCode__c": "436"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef96"
+            },
+            "City__c": "台中市",
+            "Area__c": "大甲區",
+            "ZipCode__c": "437"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef97"
+            },
+            "City__c": "台中市",
+            "Area__c": "外埔區",
+            "ZipCode__c": "438"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef98"
+            },
+            "City__c": "台中市",
+            "Area__c": "大安區",
+            "ZipCode__c": "439"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef99"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "彰化市",
+            "ZipCode__c": "500"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef100"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "芬園鄉",
+            "ZipCode__c": "502"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef101"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "花壇鄉",
+            "ZipCode__c": "503"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef102"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "秀水鄉",
+            "ZipCode__c": "504"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef103"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "鹿港鎮",
+            "ZipCode__c": "505"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef104"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "福興鄉",
+            "ZipCode__c": "506"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef105"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "線西鄉",
+            "ZipCode__c": "507"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef106"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "和美鎮",
+            "ZipCode__c": "508"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef107"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "伸港鄉",
+            "ZipCode__c": "509"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef108"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "員林鎮",
+            "ZipCode__c": "510"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef109"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "社頭鄉",
+            "ZipCode__c": "511"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef110"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "永靖鄉",
+            "ZipCode__c": "512"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef111"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "埔心鄉",
+            "ZipCode__c": "513"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef112"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "溪湖鎮",
+            "ZipCode__c": "514"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef113"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "大村鄉",
+            "ZipCode__c": "515"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef114"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "埔鹽鄉",
+            "ZipCode__c": "516"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef115"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "田中鎮",
+            "ZipCode__c": "520"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef116"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "北斗鎮",
+            "ZipCode__c": "521"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef117"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "田尾鄉",
+            "ZipCode__c": "522"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef118"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "埤頭鄉",
+            "ZipCode__c": "523"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef119"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "溪州鄉",
+            "ZipCode__c": "524"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef120"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "竹塘鄉",
+            "ZipCode__c": "525"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef121"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "二林鎮",
+            "ZipCode__c": "526"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef122"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "大城鄉",
+            "ZipCode__c": "527"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef123"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "芳苑鄉",
+            "ZipCode__c": "528"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef124"
+            },
+            "City__c": "彰化縣",
+            "Area__c": "二水鄉",
+            "ZipCode__c": "530"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef125"
+            },
+            "City__c": "南投縣",
+            "Area__c": "南投市",
+            "ZipCode__c": "540"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef126"
+            },
+            "City__c": "南投縣",
+            "Area__c": "中寮鄉",
+            "ZipCode__c": "541"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef127"
+            },
+            "City__c": "南投縣",
+            "Area__c": "草屯鎮",
+            "ZipCode__c": "542"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef128"
+            },
+            "City__c": "南投縣",
+            "Area__c": "國姓鄉",
+            "ZipCode__c": "544"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef129"
+            },
+            "City__c": "南投縣",
+            "Area__c": "埔里鎮",
+            "ZipCode__c": "545"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef130"
+            },
+            "City__c": "南投縣",
+            "Area__c": "仁愛鄉",
+            "ZipCode__c": "546"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef131"
+            },
+            "City__c": "南投縣",
+            "Area__c": "名間鄉",
+            "ZipCode__c": "551"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef132"
+            },
+            "City__c": "南投縣",
+            "Area__c": "集集鎮",
+            "ZipCode__c": "552"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef133"
+            },
+            "City__c": "南投縣",
+            "Area__c": "水里鄉",
+            "ZipCode__c": "553"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef134"
+            },
+            "City__c": "南投縣",
+            "Area__c": "魚池鄉",
+            "ZipCode__c": "555"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef135"
+            },
+            "City__c": "南投縣",
+            "Area__c": "信義鄉",
+            "ZipCode__c": "556"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef136"
+            },
+            "City__c": "南投縣",
+            "Area__c": "竹山鎮",
+            "ZipCode__c": "557"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef137"
+            },
+            "City__c": "南投縣",
+            "Area__c": "鹿谷鄉",
+            "ZipCode__c": "558"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef138"
+            },
+            "City__c": "嘉義市",
+            "Area__c": "東區",
+            "ZipCode__c": "600"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef139"
+            },
+            "City__c": "嘉義市",
+            "Area__c": "西區",
+            "ZipCode__c": "600"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef140"
+            },
+            "City__c": "嘉義縣",
+            "Area__c": "番路鄉",
+            "ZipCode__c": "602"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef141"
+            },
+            "City__c": "嘉義縣",
+            "Area__c": "梅山鄉",
+            "ZipCode__c": "603"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef142"
+            },
+            "City__c": "嘉義縣",
+            "Area__c": "竹崎鄉",
+            "ZipCode__c": "604"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef143"
+            },
+            "City__c": "嘉義縣",
+            "Area__c": "阿里山鄉",
+            "ZipCode__c": "605"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef144"
+            },
+            "City__c": "嘉義縣",
+            "Area__c": "中埔鄉",
+            "ZipCode__c": "606"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef145"
+            },
+            "City__c": "嘉義縣",
+            "Area__c": "大埔鄉",
+            "ZipCode__c": "607"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef146"
+            },
+            "City__c": "嘉義縣",
+            "Area__c": "水上鄉",
+            "ZipCode__c": "608"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef147"
+            },
+            "City__c": "嘉義縣",
+            "Area__c": "民雄鄉",
+            "ZipCode__c": "621"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef148"
+            },
+            "City__c": "嘉義縣",
+            "Area__c": "鹿草鄉",
+            "ZipCode__c": "611"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef149"
+            },
+            "City__c": "嘉義縣",
+            "Area__c": "大林鎮",
+            "ZipCode__c": "622"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef150"
+            },
+            "City__c": "嘉義縣",
+            "Area__c": "溪口鄉",
+            "ZipCode__c": "623"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef151"
+            },
+            "City__c": "嘉義縣",
+            "Area__c": "義竹鄉",
+            "ZipCode__c": "624"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef152"
+            },
+            "City__c": "嘉義縣",
+            "Area__c": "布袋鎮",
+            "ZipCode__c": "625"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef153"
+            },
+            "City__c": "嘉義縣",
+            "Area__c": "太保市",
+            "ZipCode__c": "612"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef154"
+            },
+            "City__c": "嘉義縣",
+            "Area__c": "朴子市",
+            "ZipCode__c": "613"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef155"
+            },
+            "City__c": "嘉義縣",
+            "Area__c": "東石鄉",
+            "ZipCode__c": "614"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef156"
+            },
+            "City__c": "嘉義縣",
+            "Area__c": "六腳鄉",
+            "ZipCode__c": "615"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef157"
+            },
+            "City__c": "嘉義縣",
+            "Area__c": "新港鄉",
+            "ZipCode__c": "616"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef158"
+            },
+            "City__c": "雲林縣",
+            "Area__c": "斗南鎮",
+            "ZipCode__c": "630"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef159"
+            },
+            "City__c": "雲林縣",
+            "Area__c": "大埤鄉",
+            "ZipCode__c": "631"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef160"
+            },
+            "City__c": "雲林縣",
+            "Area__c": "虎尾鎮",
+            "ZipCode__c": "632"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef161"
+            },
+            "City__c": "雲林縣",
+            "Area__c": "土庫鎮",
+            "ZipCode__c": "633"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef162"
+            },
+            "City__c": "雲林縣",
+            "Area__c": "褒忠鄉",
+            "ZipCode__c": "634"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef163"
+            },
+            "City__c": "雲林縣",
+            "Area__c": "東勢鄉",
+            "ZipCode__c": "635"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef164"
+            },
+            "City__c": "雲林縣",
+            "Area__c": "崙背鄉",
+            "ZipCode__c": "637"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef165"
+            },
+            "City__c": "雲林縣",
+            "Area__c": "麥寮鄉",
+            "ZipCode__c": "638"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef166"
+            },
+            "City__c": "雲林縣",
+            "Area__c": "斗六市",
+            "ZipCode__c": "640"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef167"
+            },
+            "City__c": "雲林縣",
+            "Area__c": "林內鄉",
+            "ZipCode__c": "643"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef168"
+            },
+            "City__c": "雲林縣",
+            "Area__c": "四湖鄉",
+            "ZipCode__c": "654"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef169"
+            },
+            "City__c": "雲林縣",
+            "Area__c": "臺西鄉",
+            "ZipCode__c": "636"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef170"
+            },
+            "City__c": "雲林縣",
+            "Area__c": "古坑鄉",
+            "ZipCode__c": "646"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef171"
+            },
+            "City__c": "雲林縣",
+            "Area__c": "莿桐鄉",
+            "ZipCode__c": "647"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef172"
+            },
+            "City__c": "雲林縣",
+            "Area__c": "西螺鎮",
+            "ZipCode__c": "648"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef173"
+            },
+            "City__c": "雲林縣",
+            "Area__c": "二崙鄉",
+            "ZipCode__c": "649"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef174"
+            },
+            "City__c": "雲林縣",
+            "Area__c": "北港鎮",
+            "ZipCode__c": "651"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef175"
+            },
+            "City__c": "雲林縣",
+            "Area__c": "水林鄉",
+            "ZipCode__c": "652"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef176"
+            },
+            "City__c": "雲林縣",
+            "Area__c": "口湖鄉",
+            "ZipCode__c": "653"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef177"
+            },
+            "City__c": "雲林縣",
+            "Area__c": "元長鄉",
+            "ZipCode__c": "655"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef178"
+            },
+            "City__c": "台南市",
+            "Area__c": "中西區",
+            "ZipCode__c": "700"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef179"
+            },
+            "City__c": "台南市",
+            "Area__c": "東區",
+            "ZipCode__c": "701"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef180"
+            },
+            "City__c": "台南市",
+            "Area__c": "南區",
+            "ZipCode__c": "702"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef181"
+            },
+            "City__c": "台南市",
+            "Area__c": "北區",
+            "ZipCode__c": "704"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef182"
+            },
+            "City__c": "台南市",
+            "Area__c": "安平區",
+            "ZipCode__c": "708"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef183"
+            },
+            "City__c": "台南市",
+            "Area__c": "安南區",
+            "ZipCode__c": "709"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef184"
+            },
+            "City__c": "台南市",
+            "Area__c": "永康區",
+            "ZipCode__c": "710"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef185"
+            },
+            "City__c": "台南市",
+            "Area__c": "歸仁區",
+            "ZipCode__c": "711"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef186"
+            },
+            "City__c": "台南市",
+            "Area__c": "新化區",
+            "ZipCode__c": "712"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef187"
+            },
+            "City__c": "台南市",
+            "Area__c": "左鎮區",
+            "ZipCode__c": "713"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef188"
+            },
+            "City__c": "台南市",
+            "Area__c": "玉井區",
+            "ZipCode__c": "714"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef189"
+            },
+            "City__c": "台南市",
+            "Area__c": "楠西區",
+            "ZipCode__c": "715"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef190"
+            },
+            "City__c": "台南市",
+            "Area__c": "南化區",
+            "ZipCode__c": "716"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef191"
+            },
+            "City__c": "台南市",
+            "Area__c": "仁德區",
+            "ZipCode__c": "717"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef192"
+            },
+            "City__c": "台南市",
+            "Area__c": "關廟區",
+            "ZipCode__c": "718"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef193"
+            },
+            "City__c": "台南市",
+            "Area__c": "龍崎區",
+            "ZipCode__c": "719"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef194"
+            },
+            "City__c": "台南市",
+            "Area__c": "官田區",
+            "ZipCode__c": "720"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef195"
+            },
+            "City__c": "台南市",
+            "Area__c": "麻豆區",
+            "ZipCode__c": "721"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef196"
+            },
+            "City__c": "台南市",
+            "Area__c": "佳里區",
+            "ZipCode__c": "722"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef197"
+            },
+            "City__c": "台南市",
+            "Area__c": "西港區",
+            "ZipCode__c": "723"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef198"
+            },
+            "City__c": "台南市",
+            "Area__c": "七股區",
+            "ZipCode__c": "724"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef199"
+            },
+            "City__c": "台南市",
+            "Area__c": "將軍區",
+            "ZipCode__c": "725"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef200"
+            },
+            "City__c": "台南市",
+            "Area__c": "學甲區",
+            "ZipCode__c": "726"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef201"
+            },
+            "City__c": "台南市",
+            "Area__c": "北門區",
+            "ZipCode__c": "727"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef202"
+            },
+            "City__c": "台南市",
+            "Area__c": "新營區",
+            "ZipCode__c": "730"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef203"
+            },
+            "City__c": "台南市",
+            "Area__c": "後壁區",
+            "ZipCode__c": "731"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef204"
+            },
+            "City__c": "台南市",
+            "Area__c": "白河區",
+            "ZipCode__c": "732"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef205"
+            },
+            "City__c": "台南市",
+            "Area__c": "東山區",
+            "ZipCode__c": "733"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef206"
+            },
+            "City__c": "台南市",
+            "Area__c": "六甲區",
+            "ZipCode__c": "734"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef207"
+            },
+            "City__c": "台南市",
+            "Area__c": "下營區",
+            "ZipCode__c": "735"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef208"
+            },
+            "City__c": "台南市",
+            "Area__c": "柳營區",
+            "ZipCode__c": "736"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef209"
+            },
+            "City__c": "台南市",
+            "Area__c": "鹽水區",
+            "ZipCode__c": "737"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef210"
+            },
+            "City__c": "高雄市",
+            "Area__c": "小港區",
+            "ZipCode__c": "812"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef211"
+            },
+            "City__c": "高雄市",
+            "Area__c": "左營區",
+            "ZipCode__c": "813"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef212"
+            },
+            "City__c": "高雄市",
+            "Area__c": "仁武區",
+            "ZipCode__c": "814"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef213"
+            },
+            "City__c": "高雄市",
+            "Area__c": "大社區",
+            "ZipCode__c": "815"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef214"
+            },
+            "City__c": "台南市",
+            "Area__c": "善化區",
+            "ZipCode__c": "741"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef215"
+            },
+            "City__c": "台南市",
+            "Area__c": "大內區",
+            "ZipCode__c": "742"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef216"
+            },
+            "City__c": "高雄市",
+            "Area__c": "東沙群島",
+            "ZipCode__c": "817"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef217"
+            },
+            "City__c": "高雄市",
+            "Area__c": "南沙群島",
+            "ZipCode__c": "819"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef218"
+            },
+            "City__c": "台南市",
+            "Area__c": "山上區",
+            "ZipCode__c": "743"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef219"
+            },
+            "City__c": "台南市",
+            "Area__c": "新市區",
+            "ZipCode__c": "744"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef220"
+            },
+            "City__c": "台南市",
+            "Area__c": "安定區",
+            "ZipCode__c": "745"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef221"
+            },
+            "City__c": "高雄市",
+            "Area__c": "新興區",
+            "ZipCode__c": "800"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef222"
+            },
+            "City__c": "高雄市",
+            "Area__c": "前金區",
+            "ZipCode__c": "801"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef223"
+            },
+            "City__c": "高雄市",
+            "Area__c": "苓雅區",
+            "ZipCode__c": "802"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef224"
+            },
+            "City__c": "高雄市",
+            "Area__c": "鹽埕區",
+            "ZipCode__c": "803"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef225"
+            },
+            "City__c": "高雄市",
+            "Area__c": "鼓山區",
+            "ZipCode__c": "804"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef226"
+            },
+            "City__c": "高雄市",
+            "Area__c": "旗津區",
+            "ZipCode__c": "805"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef227"
+            },
+            "City__c": "高雄市",
+            "Area__c": "前鎮區",
+            "ZipCode__c": "806"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef228"
+            },
+            "City__c": "高雄市",
+            "Area__c": "三民區",
+            "ZipCode__c": "807"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef229"
+            },
+            "City__c": "高雄市",
+            "Area__c": "楠梓區",
+            "ZipCode__c": "811"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef230"
+            },
+            "City__c": "高雄市",
+            "Area__c": "岡山區",
+            "ZipCode__c": "820"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef231"
+            },
+            "City__c": "高雄市",
+            "Area__c": "路竹區",
+            "ZipCode__c": "821"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef232"
+            },
+            "City__c": "高雄市",
+            "Area__c": "阿蓮區",
+            "ZipCode__c": "822"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef233"
+            },
+            "City__c": "高雄市",
+            "Area__c": "田寮區",
+            "ZipCode__c": "823"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef234"
+            },
+            "City__c": "高雄市",
+            "Area__c": "燕巢區",
+            "ZipCode__c": "824"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef235"
+            },
+            "City__c": "高雄市",
+            "Area__c": "橋頭區",
+            "ZipCode__c": "825"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef236"
+            },
+            "City__c": "高雄市",
+            "Area__c": "梓官區",
+            "ZipCode__c": "826"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef237"
+            },
+            "City__c": "高雄市",
+            "Area__c": "彌陀區",
+            "ZipCode__c": "827"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef238"
+            },
+            "City__c": "高雄市",
+            "Area__c": "永安區",
+            "ZipCode__c": "828"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef239"
+            },
+            "City__c": "高雄市",
+            "Area__c": "湖內區",
+            "ZipCode__c": "829"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef240"
+            },
+            "City__c": "高雄市",
+            "Area__c": "鳳山區",
+            "ZipCode__c": "830"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef241"
+            },
+            "City__c": "高雄市",
+            "Area__c": "大寮區",
+            "ZipCode__c": "831"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef242"
+            },
+            "City__c": "高雄市",
+            "Area__c": "林園區",
+            "ZipCode__c": "832"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef243"
+            },
+            "City__c": "高雄市",
+            "Area__c": "鳥松區",
+            "ZipCode__c": "833"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef244"
+            },
+            "City__c": "高雄市",
+            "Area__c": "大樹區",
+            "ZipCode__c": "840"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef245"
+            },
+            "City__c": "高雄市",
+            "Area__c": "旗山區",
+            "ZipCode__c": "842"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef246"
+            },
+            "City__c": "高雄市",
+            "Area__c": "美濃區",
+            "ZipCode__c": "843"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef247"
+            },
+            "City__c": "高雄市",
+            "Area__c": "六龜區",
+            "ZipCode__c": "844"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef248"
+            },
+            "City__c": "高雄市",
+            "Area__c": "內門區",
+            "ZipCode__c": "845"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef249"
+            },
+            "City__c": "高雄市",
+            "Area__c": "杉林區",
+            "ZipCode__c": "846"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef250"
+            },
+            "City__c": "高雄市",
+            "Area__c": "甲仙區",
+            "ZipCode__c": "847"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef251"
+            },
+            "City__c": "高雄市",
+            "Area__c": "桃源區",
+            "ZipCode__c": "848"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef252"
+            },
+            "City__c": "高雄市",
+            "Area__c": "茂林區",
+            "ZipCode__c": "851"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef253"
+            },
+            "City__c": "高雄市",
+            "Area__c": "茄萣區",
+            "ZipCode__c": "852"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef254"
+            },
+            "City__c": "澎湖縣",
+            "Area__c": "馬公市",
+            "ZipCode__c": "880"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef255"
+            },
+            "City__c": "澎湖縣",
+            "Area__c": "西嶼鄉",
+            "ZipCode__c": "881"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef256"
+            },
+            "City__c": "澎湖縣",
+            "Area__c": "望安鄉",
+            "ZipCode__c": "882"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef257"
+            },
+            "City__c": "澎湖縣",
+            "Area__c": "七美鄉",
+            "ZipCode__c": "883"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef258"
+            },
+            "City__c": "澎湖縣",
+            "Area__c": "白沙鄉",
+            "ZipCode__c": "884"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef259"
+            },
+            "City__c": "澎湖縣",
+            "Area__c": "湖西鄉",
+            "ZipCode__c": "885"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef260"
+            },
+            "City__c": "高雄市",
+            "Area__c": "那瑪夏區",
+            "ZipCode__c": "849"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef261"
+            },
+            "City__c": "金門縣",
+            "Area__c": "金沙鎮",
+            "ZipCode__c": "890"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef262"
+            },
+            "City__c": "金門縣",
+            "Area__c": "金湖鎮",
+            "ZipCode__c": "891"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef263"
+            },
+            "City__c": "金門縣",
+            "Area__c": "金寧鄉",
+            "ZipCode__c": "892"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef264"
+            },
+            "City__c": "金門縣",
+            "Area__c": "金城鎮",
+            "ZipCode__c": "893"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef265"
+            },
+            "City__c": "金門縣",
+            "Area__c": "烈嶼鄉",
+            "ZipCode__c": "894"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef266"
+            },
+            "City__c": "金門縣",
+            "Area__c": "烏坵鄉",
+            "ZipCode__c": "896"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef267"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "屏東市",
+            "ZipCode__c": "900"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef268"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "三地門鄉",
+            "ZipCode__c": "901"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef269"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "霧臺鄉",
+            "ZipCode__c": "902"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef270"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "瑪家鄉",
+            "ZipCode__c": "903"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef271"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "九如鄉",
+            "ZipCode__c": "904"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef272"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "里港鄉",
+            "ZipCode__c": "905"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef273"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "高樹鄉",
+            "ZipCode__c": "906"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef274"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "鹽埔鄉",
+            "ZipCode__c": "907"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef275"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "長治鄉",
+            "ZipCode__c": "908"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef276"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "麟洛鄉",
+            "ZipCode__c": "909"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef277"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "竹田鄉",
+            "ZipCode__c": "911"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef278"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "內埔鄉",
+            "ZipCode__c": "912"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef279"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "萬丹鄉",
+            "ZipCode__c": "913"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef280"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "潮州鎮",
+            "ZipCode__c": "920"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef281"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "泰武鄉",
+            "ZipCode__c": "921"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef282"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "來義鄉",
+            "ZipCode__c": "922"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef283"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "萬巒鄉",
+            "ZipCode__c": "923"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef284"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "崁頂鄉",
+            "ZipCode__c": "924"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef285"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "新埤鄉",
+            "ZipCode__c": "925"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef286"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "南州鄉",
+            "ZipCode__c": "926"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef287"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "林邊鄉",
+            "ZipCode__c": "927"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef288"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "東港鎮",
+            "ZipCode__c": "928"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef289"
+            },
+            "City__c": "台北市",
+            "Area__c": "中正區",
+            "ZipCode__c": "100"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef290"
+            },
+            "City__c": "台北市",
+            "Area__c": "大同區",
+            "ZipCode__c": "103"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef291"
+            },
+            "City__c": "台北市",
+            "Area__c": "中山區",
+            "ZipCode__c": "104"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef292"
+            },
+            "City__c": "台北市",
+            "Area__c": "松山區",
+            "ZipCode__c": "105"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef293"
+            },
+            "City__c": "台北市",
+            "Area__c": "大安區",
+            "ZipCode__c": "106"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef294"
+            },
+            "City__c": "台北市",
+            "Area__c": "萬華區",
+            "ZipCode__c": "108"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef295"
+            },
+            "City__c": "台北市",
+            "Area__c": "信義區",
+            "ZipCode__c": "110"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef296"
+            },
+            "City__c": "台北市",
+            "Area__c": "士林區",
+            "ZipCode__c": "111"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef297"
+            },
+            "City__c": "台北市",
+            "Area__c": "北投區",
+            "ZipCode__c": "112"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef298"
+            },
+            "City__c": "台北市",
+            "Area__c": "內湖區",
+            "ZipCode__c": "114"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef299"
+            },
+            "City__c": "台北市",
+            "Area__c": "南港區",
+            "ZipCode__c": "115"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef300"
+            },
+            "City__c": "台北市",
+            "Area__c": "文山區",
+            "ZipCode__c": "116"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef301"
+            },
+            "City__c": "基隆市",
+            "Area__c": "仁愛區",
+            "ZipCode__c": "200"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef302"
+            },
+            "City__c": "基隆市",
+            "Area__c": "信義區",
+            "ZipCode__c": "201"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef303"
+            },
+            "City__c": "基隆市",
+            "Area__c": "中正區",
+            "ZipCode__c": "202"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef304"
+            },
+            "City__c": "基隆市",
+            "Area__c": "中山區",
+            "ZipCode__c": "203"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef305"
+            },
+            "City__c": "基隆市",
+            "Area__c": "安樂區",
+            "ZipCode__c": "204"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef306"
+            },
+            "City__c": "基隆市",
+            "Area__c": "暖暖區",
+            "ZipCode__c": "205"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef307"
+            },
+            "City__c": "基隆市",
+            "Area__c": "七堵區",
+            "ZipCode__c": "206"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef308"
+            },
+            "City__c": "連江縣",
+            "Area__c": "南竿鄉",
+            "ZipCode__c": "209"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef309"
+            },
+            "City__c": "連江縣",
+            "Area__c": "北竿鄉",
+            "ZipCode__c": "210"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef310"
+            },
+            "City__c": "連江縣",
+            "Area__c": "莒光鄉",
+            "ZipCode__c": "211"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef311"
+            },
+            "City__c": "連江縣",
+            "Area__c": "東引鄉",
+            "ZipCode__c": "212"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef312"
+            },
+            "City__c": "新北市",
+            "Area__c": "萬里區",
+            "ZipCode__c": "207"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef313"
+            },
+            "City__c": "新北市",
+            "Area__c": "金山區",
+            "ZipCode__c": "208"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef314"
+            },
+            "City__c": "新北市",
+            "Area__c": "板橋區",
+            "ZipCode__c": "220"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef315"
+            },
+            "City__c": "新北市",
+            "Area__c": "汐止區",
+            "ZipCode__c": "221"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef316"
+            },
+            "City__c": "新北市",
+            "Area__c": "深坑區",
+            "ZipCode__c": "222"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef317"
+            },
+            "City__c": "新北市",
+            "Area__c": "石碇區",
+            "ZipCode__c": "223"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef318"
+            },
+            "City__c": "新北市",
+            "Area__c": "瑞芳區",
+            "ZipCode__c": "224"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef319"
+            },
+            "City__c": "新北市",
+            "Area__c": "平溪區",
+            "ZipCode__c": "226"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef320"
+            },
+            "City__c": "新北市",
+            "Area__c": "雙溪區",
+            "ZipCode__c": "227"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef321"
+            },
+            "City__c": "新北市",
+            "Area__c": "貢寮區",
+            "ZipCode__c": "228"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef322"
+            },
+            "City__c": "新北市",
+            "Area__c": "新店區",
+            "ZipCode__c": "231"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef323"
+            },
+            "City__c": "新北市",
+            "Area__c": "坪林區",
+            "ZipCode__c": "232"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef324"
+            },
+            "City__c": "新北市",
+            "Area__c": "烏來區",
+            "ZipCode__c": "233"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef325"
+            },
+            "City__c": "新北市",
+            "Area__c": "永和區",
+            "ZipCode__c": "234"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef326"
+            },
+            "City__c": "新北市",
+            "Area__c": "中和區",
+            "ZipCode__c": "235"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef327"
+            },
+            "City__c": "新北市",
+            "Area__c": "土城區",
+            "ZipCode__c": "236"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef328"
+            },
+            "City__c": "新北市",
+            "Area__c": "三峽區",
+            "ZipCode__c": "237"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef329"
+            },
+            "City__c": "新北市",
+            "Area__c": "樹林區",
+            "ZipCode__c": "238"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef330"
+            },
+            "City__c": "新北市",
+            "Area__c": "鶯歌區",
+            "ZipCode__c": "239"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef331"
+            },
+            "City__c": "新北市",
+            "Area__c": "三重區",
+            "ZipCode__c": "241"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef332"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "車城鄉",
+            "ZipCode__c": "944"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef333"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "牡丹鄉",
+            "ZipCode__c": "945"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef334"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "恆春鎮",
+            "ZipCode__c": "946"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef335"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "滿州鄉",
+            "ZipCode__c": "947"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef336"
+            },
+            "City__c": "台東縣",
+            "Area__c": "臺東市",
+            "ZipCode__c": "950"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef337"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "琉球鄉",
+            "ZipCode__c": "929"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef338"
+            },
+            "City__c": "台東縣",
+            "Area__c": "綠島鄉",
+            "ZipCode__c": "951"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef339"
+            },
+            "City__c": "台東縣",
+            "Area__c": "蘭嶼鄉",
+            "ZipCode__c": "952"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef340"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "佳冬鄉",
+            "ZipCode__c": "931"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef341"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "新園鄉",
+            "ZipCode__c": "932"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef342"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "枋寮鄉",
+            "ZipCode__c": "940"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef343"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "枋山鄉",
+            "ZipCode__c": "941"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef344"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "春日鄉",
+            "ZipCode__c": "942"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef345"
+            },
+            "City__c": "屏東縣",
+            "Area__c": "獅子鄉",
+            "ZipCode__c": "943"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef346"
+            },
+            "City__c": "台東縣",
+            "Area__c": "延平鄉",
+            "ZipCode__c": "953"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef347"
+            },
+            "City__c": "台東縣",
+            "Area__c": "卑南鄉",
+            "ZipCode__c": "954"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef348"
+            },
+            "City__c": "台東縣",
+            "Area__c": "鹿野鄉",
+            "ZipCode__c": "955"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef349"
+            },
+            "City__c": "台東縣",
+            "Area__c": "關山鎮",
+            "ZipCode__c": "956"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef350"
+            },
+            "City__c": "台東縣",
+            "Area__c": "海端鄉",
+            "ZipCode__c": "957"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef351"
+            },
+            "City__c": "台東縣",
+            "Area__c": "池上鄉",
+            "ZipCode__c": "958"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef352"
+            },
+            "City__c": "台東縣",
+            "Area__c": "東河鄉",
+            "ZipCode__c": "959"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef353"
+            },
+            "City__c": "台東縣",
+            "Area__c": "成功鎮",
+            "ZipCode__c": "961"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef354"
+            },
+            "City__c": "台東縣",
+            "Area__c": "長濱鄉",
+            "ZipCode__c": "962"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef355"
+            },
+            "City__c": "台東縣",
+            "Area__c": "太麻里鄉",
+            "ZipCode__c": "963"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef356"
+            },
+            "City__c": "台東縣",
+            "Area__c": "金峰鄉",
+            "ZipCode__c": "964"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef357"
+            },
+            "City__c": "台東縣",
+            "Area__c": "大武鄉",
+            "ZipCode__c": "965"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef358"
+            },
+            "City__c": "台東縣",
+            "Area__c": "達仁鄉",
+            "ZipCode__c": "966"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef359"
+            },
+            "City__c": "花蓮縣",
+            "Area__c": "花蓮市",
+            "ZipCode__c": "970"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef360"
+            },
+            "City__c": "花蓮縣",
+            "Area__c": "新城鄉",
+            "ZipCode__c": "971"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef361"
+            },
+            "City__c": "花蓮縣",
+            "Area__c": "秀林鄉",
+            "ZipCode__c": "972"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef362"
+            },
+            "City__c": "花蓮縣",
+            "Area__c": "吉安鄉",
+            "ZipCode__c": "973"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef363"
+            },
+            "City__c": "花蓮縣",
+            "Area__c": "壽豐鄉",
+            "ZipCode__c": "974"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef364"
+            },
+            "City__c": "花蓮縣",
+            "Area__c": "鳳林鎮",
+            "ZipCode__c": "975"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef365"
+            },
+            "City__c": "花蓮縣",
+            "Area__c": "光復鄉",
+            "ZipCode__c": "976"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef366"
+            },
+            "City__c": "花蓮縣",
+            "Area__c": "豐濱鄉",
+            "ZipCode__c": "977"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef367"
+            },
+            "City__c": "花蓮縣",
+            "Area__c": "瑞穗鄉",
+            "ZipCode__c": "978"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef368"
+            },
+            "City__c": "花蓮縣",
+            "Area__c": "萬榮鄉",
+            "ZipCode__c": "979"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef369"
+            },
+            "City__c": "花蓮縣",
+            "Area__c": "玉里鎮",
+            "ZipCode__c": "981"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef370"
+            },
+            "City__c": "花蓮縣",
+            "Area__c": "卓溪鄉",
+            "ZipCode__c": "982"
+        },
+        {
+            "attributes": {
+                "type": "Address__c",
+                "referenceId": "Address__cRef371"
+            },
+            "City__c": "花蓮縣",
+            "Area__c": "富里鄉",
+            "ZipCode__c": "983"
+        }
+    ]
+}
