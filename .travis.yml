@@ -30,6 +30,11 @@ script:
 - sfdx force:data:tree:import -f tmp/sfdx-out/export-demo-Address__cs2.json
 - sfdx force:apex:test:run -u DevCi --wait 10
 - sfdx force:org:delete -u DevCi -p
+- sfdx force:auth:jwt:grant --clientid $CONSUMERKEY --jwtkeyfile assets/server.key
+  --username $USERNAME
+- rm mdapioutput/
+- sfdx force:source:convert -d mdapioutput/
+- force:mdapi:deploy -d mdapioutput/ -u area43@gmail.com.Sandbox2 -w 100
 notifications:
   email:
     recipients:
