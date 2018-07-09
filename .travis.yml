@@ -23,6 +23,7 @@ script:
 - sfdx force:org:create -f config/project-scratch-def.json --setalias DevCi --setdefaultusername --wait 2
 - sfdx force:org:display -u DevCi
 - sfdx force:source:push -u DevCi
+- sfdx force:user:permset:assign --targetusername DevCi --permsetname Scratch
 - sfdx force:data:tree:import -f tmp/sfdx-out/export-demo-SubscriptionProgram__cs.json
 - sfdx force:data:tree:import -f tmp/sfdx-out/export-demo-Product2s.json
 - sfdx force:data:tree:import -f tmp/sfdx-out/export-demo-Address__cs.json
