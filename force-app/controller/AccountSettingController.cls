@@ -37,7 +37,11 @@ public with sharing class AccountSettingController extends ApexBaseController {
             addMessage(Apexpages.Severity.INFO, '更新成功');
             viewModel.showView('Main');
             EmailUtility.sendEmail(viewModel.account.Email__c, 'AccountActivation');
-            return ApexUtility.toPage('RegisterResultPage');
+            Pagereference page = new Pagereference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/RegisterResultPage');
+            page.getParameters().put('id', viewModel.account.Id);
+            page.setRedirect(true);
+
+            return page;
         } else {
             addMessage(Apexpages.Severity.ERROR, viewModel.errorMessage);
         }
