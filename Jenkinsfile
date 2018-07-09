@@ -14,6 +14,12 @@ node {
     //def toolbelt = tool 'toolbelt'
     def toolbelt = '/usr/local/bin'
 
+    environment {
+        // Removed other variables for clarity...
+        SFDX_USE_GENERIC_UNIX_KEYCHAIN = true
+        // ...
+    }
+
     stage('checkout source') {
         // when running in multi-branch job, one must issue this command
         checkout scm
