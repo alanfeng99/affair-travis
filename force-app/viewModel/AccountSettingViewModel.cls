@@ -30,6 +30,8 @@ public with sharing class AccountSettingViewModel {
             errorMessage = '請輸入密碼';
         } else if (checkPasswordLength(accountNew) == false) {
             errorMessage = '新密碼長度不符';            
+        } else if (checkPasswordHasEnglish(accountNew.Password__c) == false) {
+            errorMessage = '密碼至少需要一個數字和英文';
         } else if (accountVerify.Password__c == null) {
             errorMessage = '請輸入驗證碼';
         } else if (accountNew.Password__c.equals(accountVerify.Password__c) == false){
@@ -91,6 +93,13 @@ public with sharing class AccountSettingViewModel {
             return false;
         }
         return true;
+    }
+
+    private Boolean checkPasswordHasEnglish(String password) {
+        //8-12 characters, at least one letter and one number
+        Pattern MyPattern = Pattern.compile('^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,12}$');
+        Matcher MyMatcher = MyPattern.matcher(password);
+        return MyMatcher.matches();
     }
 
     private void clearPassword() {

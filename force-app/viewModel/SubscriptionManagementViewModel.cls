@@ -57,6 +57,7 @@ public with sharing class SubscriptionManagementViewModel {
     
     public PageReference cancelReturn(){
         currentUseRowId = '';
+        currentCancelRowId = '';
         return null;
     }
     

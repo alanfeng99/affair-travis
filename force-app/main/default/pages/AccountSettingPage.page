@@ -235,11 +235,6 @@
                                                     <div class="form-group">
                                                         <apex:inputField value="{!viewModel.accountVerify.Password__c}" style="width:70%" html-placeholder="再輸入一次新密碼"/><br/>
                                                     </div>
-                                                    <apex:outputPanel >
-                                                        <small class="form-text text-danger">
-                                                            <apex:messages />
-                                                        </small> 
-                                                    </apex:outputPanel>
                                                     <div class="form-group form-row">
                                                         <div class="col-auto">
                                                             <apex:commandButton value="儲存變更" action="{!submitPassword}" style=" color:black;  background-color:#dde2e2; border-width:0px;" styleClass="btn"/>     

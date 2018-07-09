@@ -8,8 +8,7 @@
             "Price__c": 400,
             "ProgramId__c": "five",
             "ProgramName__c": "5期400元",
-            "Order_Period__c": 5,
-            "Name": "000000"
+            "Order_Period__c": 5
         },
         {
             "attributes": {
@@ -19,8 +18,7 @@
             "Price__c": 800,
             "ProgramId__c": "ten",
             "ProgramName__c": "10期800元",
-            "Order_Period__c": 10,
-            "Name": "000001"
+            "Order_Period__c": 10
         },
         {
             "attributes": {
@@ -30,8 +28,7 @@
             "Price__c": 1600,
             "ProgramId__c": "twenty",
             "ProgramName__c": "20期1600元",
-            "Order_Period__c": 20,
-            "Name": "000002"
+            "Order_Period__c": 20
         }
     ]
 }
