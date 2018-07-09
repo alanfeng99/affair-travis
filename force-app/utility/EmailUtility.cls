@@ -10,6 +10,10 @@ public with sharing class EmailUtility {
 
     public static Boolean sendEmail(String email, String name) {
         Account__c account = AccountModel.getAccountByEmail(email);
+        if(account == null) {
+            return false;
+        }
+
         Messaging.SingleEmailMessage message = new Messaging.SingleEmailMessage();
         EmailTemplate emailTemp = [SELECT id, HtmlValue, Name, Body FROM EmailTemplate WHERE developerName = :name];
         User currentUser = [Select email, firstName, lastName from User where username = :UserInfo.getUserName() limit 1];

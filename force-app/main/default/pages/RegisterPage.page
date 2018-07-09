@@ -28,33 +28,29 @@
                 <div align="center" style="font-size:20px;">
                     建立帳號
                 </div>   
-                <div class="card-body container"  style="line-height:55px;">
-                    <div class="form-row">
-                        <div class="col-0 col-sm-3 col-md-3 col-lg-4"/>
-                        <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                            <div style="font-size:14px;">
-                                <span>
-                                    已經有帳號？
-                                </span>
-                                <span>
-                                    <a href="/apex/LoginPage">直接登入 </a>
-                                </span>
-                            </div>
-                            <hr width="100%;"/>
-                            <apex:inputText value="{!viewModel.account.Email__c}" html-placeholder="請輸入 E-mail 電子信箱" styleClass="form-control field-w100 field-h50px" />
-                            
-                            <div style="font-size:12px;" align="center">
-                                送出建立帳號時，代表您同意我們的服務條款和隱私政策
-                            </div>
-                            
-                            <div align="right">
-                                <apex:commandButton value="建立帳號" action="{!register}" style="width:120px; border-width:0px; background-color:#585e5d;" styleClass="btn btn-dark field-h40px" reRender="form"/>                        
-                            </div>
-                            <apex:messages />
-                        </div>
-                        <div class="col-0 col-sm-3 col-md-3 col-lg-4"/>
+                <div class="card-body container"  style="line-height:55px; max-width:340px;">                   
+                    <div style="font-size:14px;">
+                        <span>
+                            已經有帳號？
+                        </span>
+                        <span>
+                            <a href="/apex/LoginPage">直接登入 </a>
+                        </span>  
                     </div>
-                </div> 
+                    <apex:commandButton value="使用FaceBook 帳號登入" action="{!register}"  styleClass="btn btn-social btn-facebook"/>              
+                    <apex:commandButton value="使用Google 帳號登入" action="{!register}" styleClass="btn btn-social btn-google"/> 
+                    <hr width="100%;"/>
+                    
+                    <apex:inputText value="{!viewModel.account.Email__c}" html-placeholder="請輸入 E-mail 電子信箱" styleClass="form-control w100 h50px" />
+                     <small style="color:red;"><apex:messages /></small>
+                    <div style="font-size:12px;" align="center">
+                        送出建立帳號時，代表您同意我們的服務條款和隱私政策
+                    </div>
+                    
+                    <div align="right">
+                        <apex:commandButton value="建立帳號" action="{!register}" style="width:120px; border-width:0px; background-color:#585e5d;" styleClass="btn btn-dark h40px" reRender="form"/>                        
+                    </div>                    
+                </div>     
             </div>          
         </apex:form>   
         <div class="footer text-muted text-right">
