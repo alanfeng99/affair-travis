@@ -12,13 +12,13 @@
         <language>zh_TW</language>
         <protected>true</protected>
         <shortDescription>COOKIE_ACCOUNT_ID</shortDescription>
-        <value>asdfsf</value>
+        <value>ACCOUNT_ID</value>
     </labels>
     <labels>
         <fullName>COOKIE_AUTH_TOKEN</fullName>
         <language>zh_TW</language>
         <protected>true</protected>
         <shortDescription>COOKIE_AUTH_TOKEN</shortDescription>
-        <value>sdfsfw2f232</value>
+        <value>AUTH_TOKEN</value>
     </labels>
 </CustomLabels>
