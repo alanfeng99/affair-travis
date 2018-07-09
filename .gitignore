@@ -1,2 +1,4 @@
 
 assets/server.key
+.sfdx/
+.vscode/settings.json
