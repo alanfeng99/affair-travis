@@ -2,3 +2,6 @@
 assets/server.key
 .sfdx/
 .vscode/settings.json
+force-app/main/default/profiles/Custom: Marketing Profile.profile-meta.xml
+force-app/main/default/profiles/Custom: Sales Profile.profile-meta.xml
+force-app/main/default/profiles/Custom: Support Profile.profile-meta.xml
