@@ -25,3 +25,11 @@ script:
 - sfdx force:source:push -u DevCi
 - sfdx force:apex:test:run -u DevCi --wait 10
 - sfdx force:org:delete -u DevCi -p
+notifications:
+  email:
+    recipients:
+      - jin@4idps.com
+      - bruno.chami@4idps.com
+      - alan.feng@4idps.com
+    on_success: never # default: change
+    on_failure: always # default: always
