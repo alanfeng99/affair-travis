@@ -1,10 +1,9 @@
 public with sharing class LoginController extends ApexBaseController {
     public LoginViewModel viewModel {get; set;}
-    private Integer loginFailTimes {get; set;}
+    
    
     public LoginController() {
         viewModel = new LoginViewModel();
-        loginFailTimes = 0;
     }
 
     public Pagereference checkAuthentication() {
@@ -35,10 +34,9 @@ public with sharing class LoginController extends ApexBaseController {
         viewModel.account.Password__c = '';
     }
     
-    private Integer loginFail() {
-        loginFailTimes ++;
-
-        return loginFailTimes;
+    private Decimal loginFail(Account__c realAccount) {
+        realAccount.PasswordRetry__c ++;
+        return realAccount.PasswordRetry__c;
     }
 
     private Boolean isAccountAndPasswordValid(Account__c realAccount) {
@@ -55,7 +53,8 @@ public with sharing class LoginController extends ApexBaseController {
         Cookie authToken = new Cookie(Label.COOKIE_AUTH_TOKEN, token, null, -1, false);
         Cookie accountId = new Cookie(label.COOKIE_ACCOUNT_ID, realAccount.Id, null, -1, false);
         ApexPages.currentPage().setCookies(new Cookie[]{authToken, accountId});
-        
+        realAccount.PasswordRetry__c = 0;
+        update realAccount;
         return true;
     }
 
@@ -78,9 +77,10 @@ public with sharing class LoginController extends ApexBaseController {
     }
 
     private Boolean resultAccountPasswordNotCorrect(Account__c realAccount) {
-        if(loginFailTimes < 2) {
-            addMessage(Apexpages.Severity.WARNING, '帳號或密碼不符，如果連續登入三次失敗，則帳號鎖定，請小心輸入');
-            loginFail();
+        if(realAccount.PasswordRetry__c < 2) {
+            addMessage(Apexpages.Severity.WARNING, '帳號或密碼不符，登入三次失敗則帳號鎖定，請小心輸入');
+            loginFail(realAccount);
+            update realAccount;
         } else {
             addMessage(Apexpages.Severity.WARNING, '您的帳號已被鎖定，請聯絡編集者客服');
             AccountModel.lockAccountForThreeTimes(realAccount);    

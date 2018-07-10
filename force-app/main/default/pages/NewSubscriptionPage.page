@@ -1,4 +1,4 @@
-<apex:page Controller="NewSubscriptionController" docType="html-5.0"  applyHtmlTag="true" standardStylesheets="false" showHeader="false" action="{!checkCookie}">
+<apex:page Controller="NewSubscriptionController" docType="html-5.0" cache="false"  applyHtmlTag="true" standardStylesheets="false" showHeader="false" action="{!checkCookie}">
     <!-- Begin Default Content REMOVE THIS -->
     <head>
         <title>NewSubscriptionPage</title>

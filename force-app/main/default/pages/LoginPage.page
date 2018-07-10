@@ -29,45 +29,40 @@
                 <div align="center" class="letterspacing3px" style="font-size:20px;">
                     請先登入
                 </div>
-                <div class="card-body container " style="line-height:50px;">
-                    <div class="form-row">
-                        <div class="col-0 col-sm-3 col-md-4 col-lg-4"/>
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-4">
-                          <div style="font-size:14px;">
-                        <span>
-                            第一次使用週刊編集？
-                        </span>
-                        <span>
-                            <a href="/apex/RegisterPage" style="text-decoration: underline;">建立新帳號 </a>
-                        </span>
-                    </div>
-                    	<apex:commandButton value="使用FaceBook 帳號登入" action="{!checkFacebookAuthentication}"  styleClass="btn btn-social btn-facebook"/>              
-                        <apex:commandButton value="使用Google 帳號登入" action="{!checkGoogleAuthentication}" styleClass="btn btn-social btn-google"/>          
-                    <hr width="90%;"/>
-                    <small style="color:red"><apex:messages /></small>
-                    <div class="form-group">
-                        <apex:inputField value="{!viewModel.account.Email__c}" html-placeholder="電子信箱" styleClass="form-control field-w100 field-h50px" />                            
-                    </div>    
-                    <div class="form-group">
-                        <apex:inputField value="{!viewModel.account.Password__c}" html-placeholder="密碼" styleClass="form-control field-w100 field-h50px" />
-                    </div>
-                    <div align="right">
-                        <a href="/apex/RetrievePasswordPage" style="color:#585e5d; text-decoration: underline;">忘記密碼?</a> <br/>
-                        <apex:commandButton value="登入" action="{!checkAuthentication}" reRender="form" style="width:120px; color:white; background-color:#585e5d; border-width:0px;" styleClass="btn field-h40px"/>                        
-                    </div>  
-                        </div>
-                        <div class="col-0 col-sm-3 col-md-4 col-lg-4"/>
-                    </div>
+                <div class="card-body container " style="line-height:50px; max-width:380px;">
+                            <div style="font-size:14px;">
+                                <span>
+                                    第一次使用週刊編集？
+                                </span>
+                                <span>
+                                    <a href="/apex/RegisterPage" style="text-decoration: underline;">建立新帳號 </a>
+                                </span>
+                            </div>
+                            <apex:commandButton value="使用FaceBook 帳號登入" action="{!checkFacebookAuthentication}"  styleClass="btn btn-social btn-facebook"/>              
+                            <apex:commandButton value="使用Google 帳號登入" action="{!checkGoogleAuthentication}" styleClass="btn btn-social btn-google"/>          
+                            <hr width="90%;"/>
+                                     <small style="color:red"><apex:messages /></small>
                     
-                </div> 
+                            <div class="form-group">
+                                <apex:inputField value="{!viewModel.account.Email__c}" html-placeholder="電子信箱" styleClass="form-control field-w100 field-h50px" />                            
+                            </div>    
+                            <div class="form-group">
+                                <apex:inputField value="{!viewModel.account.Password__c}" html-placeholder="密碼" styleClass="form-control field-w100 field-h50px" />
+                            </div>
+                            <div align="right">
+                                <a href="/apex/RetrievePasswordPage" style="color:#585e5d; text-decoration: underline;">忘記密碼?</a> <br/>
+                                <apex:commandButton value="登入" action="{!checkAuthentication}" reRender="form" style="width:120px; color:white; background-color:#585e5d; border-width:0px;" styleClass="btn field-h40px"/>                        
+                            </div>  
+                        </div>
+               
             </div>         
         </apex:form>   
-            <div class="footer text-muted text-right">
-                <hr style="width:100%"/>
-                <p>
-                    The Affairs Mediuum Ltd. 編集者新聞社有限公司
-                </p>
-            </div>
+        <div class="footer text-muted text-right">
+            <hr style="width:100%"/>
+            <p>
+                The Affairs Mediuum Ltd. 編集者新聞社有限公司
+            </p>
+        </div>
         
     </body>
     

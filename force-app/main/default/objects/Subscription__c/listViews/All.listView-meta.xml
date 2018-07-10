@@ -3,10 +3,18 @@
     <fullName>All</fullName>
     <columns>NAME</columns>
     <columns>Recipient__c</columns>
-    <columns>Payment_method__c</columns>
+    <columns>Tel__c</columns>
     <columns>City_picklist__c</columns>
     <columns>Area_picklist__c</columns>
+    <columns>Postal_code__c</columns>
     <columns>isReplenish__c</columns>
+    <columns>Program__c</columns>
+    <columns>Start_period__c</columns>
+    <columns>End_period__c</columns>
+    <columns>Amount__c</columns>
+    <columns>Payment_method__c</columns>
+    <columns>isInvoice__c</columns>
+    <columns>Tax_No__c</columns>
     <filterScope>Everything</filterScope>
     <label>全部</label>
 </ListView>

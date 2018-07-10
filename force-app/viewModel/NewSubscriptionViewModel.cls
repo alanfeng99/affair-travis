@@ -82,6 +82,8 @@ public with sharing class NewSubscriptionViewModel {
                 for(Database.SaveResult result : results) {
                     if (result.isSuccess() == false) {
                         updateResult = false;
+                    } else {
+                        update account;
                     }
                 }
                 return updateResult;
@@ -161,7 +163,7 @@ public with sharing class NewSubscriptionViewModel {
             } else if (sub.Payment_method__c == null) {
                 errorMessage = '請選擇付款方式';
             } else if (!isFieldFilledWhenChoosenCard()) {
-                errorMessage = '如要使用信用卡付款，請填寫完整信用卡資訊';
+                
             } else {
                 result = true;
             }
@@ -170,12 +172,26 @@ public with sharing class NewSubscriptionViewModel {
         return result; 
     }
 
+    private boolean isCreditCardPattenMatching(String str){
+        Pattern MyPattern = Pattern.compile('^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})$');
+        Matcher MyMatcher = MyPattern.matcher(str);
+
+        return MyMatcher.matches();
+    }
+
     private Boolean isFieldFilledWhenChoosenCard() {
         Boolean result = true;
         for(Subscription__c sub : subscriptionInsertList) {
             if(sub.Payment_method__c == '信用卡') {
                 if(account.credit_card_number__c == null || account.Expiration_Year_text__c == null || 
                     account.Expiration_month__c == null || account.CVC__c == null) {
+                    errorMessage = '如要使用信用卡付款，請填寫完整信用卡資訊';
+                    result = false;
+                } else if(account.CVC__c.length() != 3) {
+                    errorMessage = 'CVC需3碼';
+                    result = false;
+                } else if(!isCreditCardPattenMatching(account.credit_card_number__c)) {
+                    errorMessage = '請檢查信用卡號是否正確';
                     result = false;
                 }
             }

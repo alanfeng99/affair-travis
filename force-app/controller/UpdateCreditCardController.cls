@@ -21,12 +21,13 @@ public with sharing class UpdateCreditCardController extends ApexBaseController 
 
     public Pagereference submit() {
         if (viewModel.updateAccount() == true) {
-            updateReplenish();
-            addMessage(ApexPages.Severity.INFO, '更新成功');
-          //  ApexUtility.toPage('UpdateCreditcardPage');
-            PageReference page = ApexUtility.toPage('SubscriptionManagementPage');
-            page.getParameters().put('updateCreditcard','true');
-            return page;
+            if(updateReplenish()) {
+                addMessage(ApexPages.Severity.INFO, '更新成功');
+                //  ApexUtility.toPage('UpdateCreditcardPage');
+                PageReference page = ApexUtility.toPage('SubscriptionManagementPage');
+                page.getParameters().put('updateCreditcard','true');
+                return page;    
+            }
         } else {
             addMessage(ApexPages.Severity.ERROR, viewModel.errorMessage);
         }
@@ -51,13 +52,17 @@ public with sharing class UpdateCreditCardController extends ApexBaseController 
         return year;
     }
     
-    private void updateReplenish() {
+    private boolean updateReplenish() {
+        Boolean result = true;
         for(Subscription__c sub : viewModel.subscriptions) {
             if(sub.id == subscriptionId) {
                 sub.isReplenish__c = true;
-                update sub;
+                Database.SaveResult databaseResult = Database.update(sub);
+                if (!databaseResult.isSuccess())
+                    result = false;    
             }
         }
+        return result;
     }
     
 }
