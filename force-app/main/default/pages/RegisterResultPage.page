@@ -29,10 +29,7 @@
                         驗證 E-mail 信箱
                     </div>
                     <div class="card-body " style="line-height:25px; font-size:14px;">
-                        <div class="container" style="line-height:40px;">
-                            <div class="form-row">
-                        <div class="col-1 col-sm-2 col-md-3 col-lg-4 col-xl-4"/>
-                        <div class="col-10 col-sm-8 col-md-6 col-lg-4 col-xl-4">
+                        <div class="container" style="line-height:40px; max-width:300px;">
                             <div>系統已經將驗證信件寄到此電子信箱中：</div>
                             <div style="color:#00ace6; " >
                                 <apex:outputText value="{!viewModel.account.Email__c}"/>
@@ -40,10 +37,7 @@
                             <div>
                                 請查看您的收件匣，並點選驗證信中的驗證連結，完成帳號的登錄。
                             </div>
-                                </div>
-                                <div class="col-1 col-sm-2 col-md-3 col-lg-4 col-xl-4"/>
-                            </div>
-                        </div>
+                        </div> 
                     </div>
                 </div>   
             </apex:form>   

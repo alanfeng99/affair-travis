@@ -147,8 +147,8 @@
                     <small><apex:messages style="color:red"/></small>
                     
                     <div class="form-row form-group">
-                        <div class="col-md-2 col-sm-2 col-2"/>
-                        <div class="col-md-10 col-sm-10 col-10" align="right" style="line-height:1px;">
+                        <div class="col-md-1 col-sm-1 col-1"/>
+                        <div class="col-md-11 col-sm-11 col-11" align="right" style="line-height:1px;">
                             <apex:outputPanel rendered="{!viewModel.showProgramResult}"> 
                                 <div style="color:#00ace6; font-size:14px;">
                                     {!viewModel.programName}x {!viewModel.subscriptionSize}，訂閱金額共：{!viewModel.programTotalPrice}元

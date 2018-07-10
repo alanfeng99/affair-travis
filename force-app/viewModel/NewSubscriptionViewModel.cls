@@ -163,12 +163,28 @@ public with sharing class NewSubscriptionViewModel {
                 errorMessage = '請填寫電話';
             } else if (sub.Payment_method__c == null) {
                 errorMessage = '請選擇付款方式';
+            } else if (!isFieldFilledWhenChoosenCard()) {
+                errorMessage = '如要使用信用卡付款，請填寫完整信用卡資訊';
             } else {
                 result = true;
             }
         }
 
         return result; 
+    }
+
+    private Boolean isFieldFilledWhenChoosenCard() {
+        Boolean result = true;
+        for(Subscription__c sub : subscriptionInsertList) {
+            if(sub.Payment_method__c == '信用卡') {
+                if(account.credit_card_number__c == null || account.Expiration_Year_text__c == null || 
+                    account.Expiration_month__c == null || account.CVC__c == null) {
+                    result = false;
+                }
+            }
+        }
+
+        return result;
     }
 
     private void calculateSize() {

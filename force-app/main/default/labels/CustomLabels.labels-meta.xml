@@ -5,7 +5,7 @@
         <language>zh_TW</language>
         <protected>true</protected>
         <shortDescription>BASE_IMAGE_URL</shortDescription>
-        <value>https://innovation-enterprise-5124-dev-ed.cs31.my.salesforce.com/servlet/servlet.FileDownload?file=</value>
+        <value>https://velocity-velocity-468-dev-ed.cs58.my.salesforce.com/servlet/servlet.FileDownload?file=</value>
     </labels>
     <labels>
         <fullName>COOKIE_ACCOUNT_ID</fullName>
