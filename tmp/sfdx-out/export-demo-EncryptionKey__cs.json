@@ -1,0 +1,12 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "EncryptionKey__c",
+                "referenceId": "EncryptionKey__cRef1"
+            },
+            "Key__c": "PeQyfCcKffN6qYFl5cwKIdDvuuFD89IAE+va9CWAogM=",
+            "Name": "EncryptionKeyPkcs8"
+        }
+    ]
+}

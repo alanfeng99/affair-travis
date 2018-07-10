@@ -1,0 +1,10 @@
+[
+    {
+        "sobject": "EncryptionKey__c",
+        "saveRefs": true,
+        "resolveRefs": false,
+        "files": [
+            "export-demo-EncryptionKey__cs.json"
+        ]
+    }
+]
