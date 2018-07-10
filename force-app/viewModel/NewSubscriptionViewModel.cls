@@ -77,6 +77,9 @@ public with sharing class NewSubscriptionViewModel {
                     return false;
                 }
                 insertSubscriptionPriceAndProgram();
+                
+                account.credit_card_number__c = EncryptionUtility.encrypt(account.credit_card_number__c);
+
                 List<Database.SaveResult> results = Database.insert(subscriptionInsertList);
                 Boolean updateResult = true;
                 for(Database.SaveResult result : results) {
