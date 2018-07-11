@@ -1,1 +1,1 @@
-SELECT Price__c, ProgramId__c, ProgramName__c, Order_Period__c FROM SubscriptionProgram__c 
+SELECT Price__c, ProgramId__c, ProgramName__c, Order_Period__c FROM SubscriptionProgram__c
