@@ -114,12 +114,13 @@ public with sharing class NewSubscriptionViewModel {
 
     public Pagereference programPriceDecide() {
         List<SubscriptionProgram__c> programs = SubscriptionModel.getProgram(programId);
-        
-        programPrice = programs.get(0).Price__c;   
-        programName = programs.get(0).ProgramName__c;
-        programTotalPrice = programPrice * subscriptionSize;
-        showProgramResult = true;
-        showErrorForNullProgram = false;
+        if(programId != null) {
+            programPrice = programs.get(0).Price__c;   
+            programName = programs.get(0).ProgramName__c;
+            programTotalPrice = programPrice * subscriptionSize;
+            showProgramResult = true;
+            showErrorForNullProgram = false;
+        }   
         return null;
     }
     
