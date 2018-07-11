@@ -15,6 +15,8 @@ public with sharing class NewSubscriptionViewModel {
     public Boolean showProgramResult {get; set;}
     public Boolean showErrorForNullProgram {get; set;}
     public String programName {get; set;}
+    public String paymentMethod {get; set;}
+    public Boolean isChooseCreditcard {get; set;}
 
     public NewSubscriptionViewModel(String accountId) {
         account = AccountModel.getAccountById(accountId);
@@ -28,6 +30,8 @@ public with sharing class NewSubscriptionViewModel {
         showErrorForNullProgram = false;
 
         account.CVC__c = '';
+        isChooseCreditcard = false;
+
     }
 
     public Account__c getAccount() {
@@ -78,7 +82,7 @@ public with sharing class NewSubscriptionViewModel {
                 }
                 insertSubscriptionPriceAndProgram();
                 
-                if (account.credit_card_number__c != null && String.isBlank(account.credit_card_number__c))
+                if (account.credit_card_number__c != null && !String.isBlank(account.credit_card_number__c))
                     account.credit_card_number__c = EncryptionUtility.encrypt(account.credit_card_number__c);
 
                 List<Database.SaveResult> results = Database.insert(subscriptionInsertList);
@@ -88,8 +92,15 @@ public with sharing class NewSubscriptionViewModel {
                         updateResult = false;
                     } 
                 }
-                if(updateResult)
-                    update account;
+                if(updateResult) {
+                    for(Subscription__c sub : subscriptionInsertList) {
+                        if(sub.Payment_Method__c == '信用卡') {
+                            update account;
+                        }
+                    }
+                }
+                    
+                    
                 return updateResult;
             } else {
                 errorMessage = '請選擇訂閱方案';
@@ -127,6 +138,16 @@ public with sharing class NewSubscriptionViewModel {
     public List<Product2> getProgramInfo() {
         return ProductModel.getProduct(); 
     }
+
+    public Pagereference chooseCreditCard() {
+        if(paymentMethod == '信用卡'){
+            isChooseCreditcard = true;
+        } else {
+            isChooseCreditcard = false;
+        }
+
+        return null;
+    }
     
     public List<SelectOption> getProductRadioButton() {
         List<SelectOption> options = new List<SelectOption>();
@@ -142,6 +163,7 @@ public with sharing class NewSubscriptionViewModel {
         subscriptionInsertList = new List<Subscription__c>();
 
         for(Subscription__c sub : tempSubscriptions) {
+            sub.Payment_method__c = paymentMethod;
             Subscription__c clone_Subscription = firstSubscription.clone();
             clone_Subscription.Recipient__c = sub.Recipient__c;
             clone_Subscription.Address__c = sub.Address__c;
@@ -187,7 +209,7 @@ public with sharing class NewSubscriptionViewModel {
                     errorMessage = '如要使用信用卡付款，請填寫完整信用卡資訊';
                     result = false;
                 } else if(!CreditcardUtility.isCVCPattenMatching(account.CVC__c)) {
-                    errorMessage = 'CVC需3碼(數字)';
+                    errorMessage = '請檢查CVC填寫是否正確';
                     result = false;
                 } else if(!CreditcardUtility.isCreditCardPattenMatching(account.credit_card_number__c)) {
                     errorMessage = '請檢查信用卡號是否正確';

@@ -19,7 +19,7 @@ public with sharing class UpdateCreditCardViewModel {
 
     public Boolean updateAccount() {
         if(checkField() == true){
-            if (account.credit_card_number__c != null && String.isBlank(account.credit_card_number__c))
+            if (account.credit_card_number__c != null && !String.isBlank(account.credit_card_number__c))
                     account.credit_card_number__c = EncryptionUtility.encrypt(account.credit_card_number__c);
             Database.UpsertResult result = Database.upsert(account);
             return result.isSuccess();    
@@ -42,7 +42,7 @@ public with sharing class UpdateCreditCardViewModel {
         } else if (account.CVC__c == null) {
             errorMessage = '請填寫CVC';
         } else if (!CreditcardUtility.isCVCPattenMatching(account.CVC__c)) {
-            errorMessage = 'CVC須填三碼(數字)';
+            errorMessage = '請檢查CVC填寫是否正確';
         } else {
             result = true;
         }

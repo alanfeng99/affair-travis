@@ -96,36 +96,39 @@
                         付款方式
                     </div>
                     <div>
-                        <apex:selectRadio value="{!viewModel.firstSubscription.Payment_method__c }" style="width:100%" >
+                        <apex:selectRadio value="{!viewModel.paymentMethod }" style="width:100%" >
                             <apex:selectOptions value="{!paymentOptions}"/>
+                            <apex:actionSupport action="{!viewModel.chooseCreditCard}" event="onchange" reRender="form"/>
                         </apex:selectRadio>
                     </div>
-                    <div class="form-group">
-                        <apex:inputField value="{!viewModel.account.credit_card_number__c }" html-placeholder="信用卡號" styleClass="form-control w100" />                            
-                    </div>    
-                    <div class="form-group form-row">
-                        <div class="col-5">
-                            <apex:inputField value="{!viewModel.account.Expiration_month__c }" html-placeholder="月份" styleClass="form-control w100" style="height:35px;"/>    
+                    <apex:outputPanel rendered="{!viewModel.isChooseCreditCard}">
+                        <div class="form-group">
+                            <apex:inputField value="{!viewModel.account.credit_card_number__c }" html-placeholder="信用卡號" styleClass="form-control w100" />                            
+                        </div>    
+                        <div class="form-group form-row">
+                            <div class="col-5">
+                                <apex:inputField value="{!viewModel.account.Expiration_month__c }" html-placeholder="月份" styleClass="form-control w100" style="height:35px;"/>    
+                            </div>
+                            <div class="col-5">
+                                <apex:selectList value="{!viewModel.account.Expiration_Year_text__c }" size="1" styleClass="form-control" style="height:35px;">
+                                    <apex:selectOptions value="{!Creditcard_Year}"/>
+                                </apex:selectList>
+                            </div>
+                            <div style="font-size:14px;">
+                                到期日    
+                            </div>
+                            
                         </div>
-                        <div class="col-5">
-                            <apex:selectList value="{!viewModel.account.Expiration_Year_text__c }" size="1" styleClass="form-control" style="height:35px;">
-                                <apex:selectOptions value="{!Creditcard_Year}"/>
-                            </apex:selectList>
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <apex:inputField value="{!viewModel.account.CVC__c  }" html-placeholder="CVC" styleClass="form-control w100"/>                                 
+                            </div>
+                            <div  style="font-size:14px;">
+                                卡片背面後 3 碼
+                            </div>
+                            
                         </div>
-                        <div style="font-size:14px;">
-                            到期日    
-                        </div>
-                        
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-4">
-                            <apex:inputField value="{!viewModel.account.CVC__c  }" html-placeholder="CVC" styleClass="form-control w100"/>                                 
-                        </div>
-                        <div  style="font-size:14px;">
-                            卡片背面後 3 碼
-                        </div>
-                        
-                    </div>
+                    </apex:outputPanel>
                     <div style="font-size:14px;">
                         信用卡訂閱提醒<br/>
                         <div style="line-height:25px;">當您點選『確認訂閱』送出後，表示您同意我們收取本次的訂閱費用，並在訂閱到期時自動續訂付款，您可以隨時取消自動續訂服務。</div>
