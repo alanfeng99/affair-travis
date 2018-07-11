@@ -85,10 +85,10 @@ public with sharing class NewSubscriptionViewModel {
                 for(Database.SaveResult result : results) {
                     if (result.isSuccess() == false) {
                         updateResult = false;
-                    } else {
-                        update account;
-                    }
+                    } 
                 }
+                if(updateResult)
+                    update account;
                 return updateResult;
             } else {
                 errorMessage = '請選擇訂閱方案';
@@ -190,8 +190,8 @@ public with sharing class NewSubscriptionViewModel {
                     account.Expiration_month__c == null || account.CVC__c == null) {
                     errorMessage = '如要使用信用卡付款，請填寫完整信用卡資訊';
                     result = false;
-                } else if(account.CVC__c.length() != 3) {
-                    errorMessage = 'CVC需3碼';
+                } else if(!isCVCPattenMatching(account.CVC__c)) {
+                    errorMessage = 'CVC需3碼(數字)';
                     result = false;
                 } else if(!isCreditCardPattenMatching(account.credit_card_number__c)) {
                     errorMessage = '請檢查信用卡號是否正確';
@@ -201,6 +201,13 @@ public with sharing class NewSubscriptionViewModel {
         }
 
         return result;
+    }
+
+    private boolean isCVCPattenMatching(String str){
+        Pattern MyPattern = Pattern.compile('[1-9][0-9]{2}');
+        Matcher MyMatcher = MyPattern.matcher(str);
+
+        return MyMatcher.matches();
     }
 
     private void calculateSize() {
