@@ -177,25 +177,19 @@ public with sharing class NewSubscriptionViewModel {
         return result; 
     }
 
-    private boolean isCreditCardPattenMatching(String str){
-        Pattern MyPattern = Pattern.compile('^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})$');
-        Matcher MyMatcher = MyPattern.matcher(str);
-
-        return MyMatcher.matches();
-    }
-
     private Boolean isFieldFilledWhenChoosenCard() {
         Boolean result = true;
         for(Subscription__c sub : subscriptionInsertList) {
             if(sub.Payment_method__c == '信用卡') {
                 if(account.credit_card_number__c == null || account.Expiration_Year_text__c == null || 
-                    account.Expiration_month__c == null || account.CVC__c == null) {
+                    account.Expiration_Year_text__c == '' ||account.Expiration_month__c == null || 
+                    account.CVC__c == null) {
                     errorMessage = '如要使用信用卡付款，請填寫完整信用卡資訊';
                     result = false;
-                } else if(!isCVCPattenMatching(account.CVC__c)) {
+                } else if(!CreditcardUtility.isCVCPattenMatching(account.CVC__c)) {
                     errorMessage = 'CVC需3碼(數字)';
                     result = false;
-                } else if(!isCreditCardPattenMatching(account.credit_card_number__c)) {
+                } else if(!CreditcardUtility.isCreditCardPattenMatching(account.credit_card_number__c)) {
                     errorMessage = '請檢查信用卡號是否正確';
                     result = false;
                 }
@@ -203,13 +197,6 @@ public with sharing class NewSubscriptionViewModel {
         }
 
         return result;
-    }
-
-    private boolean isCVCPattenMatching(String str){
-        Pattern MyPattern = Pattern.compile('[1-9][0-9]{2}');
-        Matcher MyMatcher = MyPattern.matcher(str);
-
-        return MyMatcher.matches();
     }
 
     private void calculateSize() {
