@@ -78,7 +78,8 @@ public with sharing class NewSubscriptionViewModel {
                 }
                 insertSubscriptionPriceAndProgram();
                 
-                account.credit_card_number__c = EncryptionUtility.encrypt(account.credit_card_number__c);
+                if (account.credit_card_number__c != null && String.isBlank(account.credit_card_number__))
+                    account.credit_card_number__c = EncryptionUtility.encrypt(account.credit_card_number__c);
 
                 List<Database.SaveResult> results = Database.insert(subscriptionInsertList);
                 Boolean updateResult = true;
