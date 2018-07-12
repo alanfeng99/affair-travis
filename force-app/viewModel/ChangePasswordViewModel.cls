@@ -25,7 +25,7 @@ public with sharing class ChangePasswordViewModel {
     public Boolean checkPassword() {
         Boolean result = true;
         String password = account.Password__c;
-        if (checkPasswordHasEnglish(password) == false) {
+        if (PasswordUtility.checkPasswordHasEnglish(password) == false) {
             clearPassword();
             errorMessage = '密碼長度需8~12碼，且至少需要一個數字和英文';
             result = false;
@@ -35,13 +35,6 @@ public with sharing class ChangePasswordViewModel {
             result = false;            
         }
         return result;
-    }
-
-    private Boolean checkPasswordHasEnglish(String password) {
-        //8-12 characters, at least one letter and one number
-        Pattern MyPattern = Pattern.compile('^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,12}$');
-        Matcher MyMatcher = MyPattern.matcher(password);
-        return MyMatcher.matches();
     }
     
     private void clearPassword() {

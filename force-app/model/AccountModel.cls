@@ -23,4 +23,9 @@ public with sharing class AccountModel {
         update account;
         return token;
     }
+
+    public static Boolean updateAccount(Account__c account) {
+        Database.SaveResult result = Database.update(account); 
+        return result.isSuccess();
+    }
 }

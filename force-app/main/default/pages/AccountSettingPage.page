@@ -21,7 +21,7 @@
             }
         </style>
         <body class="bg-light">
-            <apex:form > 
+            <apex:form id="form"> 
                 <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top border-bottom">
                     <a class="navbar-brand" href="#">週刊編輯</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,16 +61,14 @@
                     </div>
                     <br/>
                     <div class="card-body " style="line-height:25px; font-size:14px;"> 
-                        <div class="container"> 
-                            <div class="form-row">
-                                <div class="col-0 col-sm-2 col-md-3 col-lg-3 col-xl-4"/>
-                                <div class="col-12 col-sm-8 col-md-6 col-lg-6 col-xl-4">    
+                        <div class="container" style="max-width:400px;"> 
+          
                                     <div class="form-group" style="font-size:15px;">
                                         你目前使用 {!viewModel.account.Email__c } 做為登入信箱。
                                     </div>
-                                    <apex:outputText style="font-color:red; font-size:12px;" rendered="{!viewModel.ifChangeEmail}">您已更改電子郵件，請至信箱重新認證帳號</apex:outputText>
-                                    <apex:messages style="color:red"/>
-                                    <apex:outputPanel rendered="{!viewModel.isMainShow}">
+                                    <apex:outputText style="font-color:red; font-size:12px;" rendered="{!ifChangeEmail}">您已更改電子郵件，請至信箱重新認證帳號</apex:outputText>
+                                    <small><apex:messages style="color:red"/></small>
+                                    <apex:outputPanel rendered="{!isMainShow}">
                                         <table class="table  table-bordered" style="background-color:white">
                                             <tr>
                                                 <td>
@@ -82,7 +80,7 @@
                                                             {!viewModel.account.LastName__c} 
                                                         </div>
                                                         <div class="col-auto">
-                                                            <apex:commandLink value="變更" action="{!viewModel.changeName}"/>  
+                                                            <apex:commandLink value="變更" action="{!changeName}" reRender="form"/>  
                                                         </div>
                                                     </div>
                                                 </td>
@@ -97,7 +95,7 @@
                                                             {!viewModel.account.Email__c}
                                                         </div>
                                                         <div class="col-auto">
-                                                            <apex:commandLink value="變更" action="{!viewModel.changeEmail}"/>  
+                                                            <apex:commandLink value="變更" action="{!changeEmail}" reRender="form"/>  
                                                         </div>
                                                     </div>
                                                 </td>
@@ -112,14 +110,14 @@
                                                             {!viewModel.account.Password__c}
                                                         </div>
                                                         <div class="col-auto">
-                                                            <apex:commandLink value="變更" action="{!viewModel.changePassword}"/>  
+                                                            <apex:commandLink value="變更" action="{!changePassword}" reRender="form"/>  
                                                         </div>
                                                     </div>
                                                 </td>
                                             </tr>
                                         </table>                          
                                     </apex:outputPanel>
-                                    <apex:outputPanel rendered="{!viewModel.isChangeName}">
+                                    <apex:outputPanel rendered="{!isChangeName}">
                                         <table class="table  table-bordered" style="background-color:white">
                                             <tr>
                                                 <td>
@@ -132,17 +130,17 @@
                                                     
                                                     <div class="form-group form-row">
                                                         <div class="col-auto">
-                                                            <apex:commandButton value="儲存變更" action="{!submitName}" style=" color:black;  background-color:#dde2e2; border-width:0px;" styleClass="btn"/>     
+                                                            <apex:commandButton value="儲存變更" action="{!submitName}" reRender="form" style=" color:black; background-color:#dde2e2; border-width:0px;" styleClass="btn"/>     
                                                         </div>
                                                         <div class="col-auto">
-                                                            <apex:commandLink value="取消" action="{!viewModel.cancelChange}"/>     
+                                                            <apex:commandLink value="取消" action="{!cancelChange}" reRender="form"/>     
                                                         </div>          
                                                     </div>
                                                 </td>
                                             </tr>
                                         </table>   
                                     </apex:outputPanel>
-                                    <apex:outputPanel rendered="{!viewModel.isChangeEmail}">
+                                    <apex:outputPanel rendered="{!isChangeEmail}">
                                         <table class="table  table-bordered" style="background-color:white">
                                             <tr>
                                                 <td>
@@ -154,7 +152,7 @@
                                                             {!viewModel.account.LastName__c} 
                                                         </div>
                                                         <div class="col-auto">
-                                                            <apex:commandLink value="變更" action="{!viewModel.changeName}"/>  
+                                                            <apex:commandLink value="變更" action="{!changeName}"/>  
                                                         </div>
                                                     </div>
                                                 </td>
@@ -167,22 +165,22 @@
                                                     </div>
                                                     
                                                     <div class="form-group">
-                                                        <apex:inputField value="{!viewModel.account.Email__c}" html-placeholder="電子信箱"/><br/>
+                                                        <apex:inputField value="{!viewModel.account.Email__c}" html-placeholder="電子信箱" style="width:200px;"/><br/>
                                                     </div>
                                                     
                                                     <div class="form-group form-row">
                                                         <div class="col-auto">
-                                                            <apex:commandButton value="儲存變更" action="{!submitEmail}" style=" color:black;  background-color:#dde2e2; border-width:0px;" styleClass="btn"/>     
+                                                            <apex:commandButton value="儲存變更" action="{!submitEmail}" style=" color:black; background-color:#dde2e2; border-width:0px;" styleClass="btn" reRender="form"/>     
                                                         </div>
                                                         <div class="col-auto">
-                                                            <apex:commandLink value="取消" immediate="true" action="{!viewModel.cancelChange}"/>     
+                                                            <apex:commandLink value="取消" immediate="true" action="{!cancelChange}" reRender="form"/>     
                                                         </div>          
                                                     </div>        
                                                 </td>
                                             </tr>
                                         </table>   
                                     </apex:outputPanel>
-                                    <apex:outputPanel rendered="{!viewModel.isChangePassword}">
+                                    <apex:outputPanel rendered="{!isChangePassword}">
                                         <table class="table  table-bordered" style="background-color:white">
                                             <tr>
                                                 <td>
@@ -194,7 +192,7 @@
                                                             {!viewModel.account.LastName__c} 
                                                         </div>
                                                         <div class="col-auto">
-                                                            <apex:commandLink value="變更" action="{!viewModel.changeName}"/>  
+                                                            <apex:commandLink value="變更" action="{!changeName}"/>  
                                                         </div>
                                                     </div>
                                                 </td>
@@ -209,7 +207,7 @@
                                                             {!viewModel.account.Email__c} 
                                                         </div>
                                                         <div class="col-auto">
-                                                            <apex:commandLink value="變更" action="{!viewModel.changeEmail}"/>  
+                                                            <apex:commandLink value="變更" action="{!changeEmail}"/>  
                                                         </div>
                                                     </div>
                                                 </td>
@@ -221,26 +219,26 @@
                                                         <small>請輸入你目前設定的密碼以確認身份</small><br/>
                                                     </div>
                                                     <div class="form-group">
-                                                        <apex:inputField value="{!viewModel.accountOld.Password__c}" style="width:70%" html-placeholder="舊密碼"/><br/>
+                                                        <apex:inputField value="{!accountOld.Password__c}" style="width:70%" html-placeholder="舊密碼"/><br/>
                                                     </div>
                                                     <div >
                                                         新密碼
                                                     </div>
                                                     <div class="form-group">
-                                                        <apex:inputField value="{!viewModel.accountNew.Password__c}" style="width:70%" html-placeholder="新密碼"/><br/>
+                                                        <apex:inputField value="{!accountNew.Password__c}" style="width:70%" html-placeholder="新密碼"/><br/>
                                                     </div>
                                                     <div >
                                                         再輸入一次新密碼
                                                     </div>
                                                     <div class="form-group">
-                                                        <apex:inputField value="{!viewModel.accountVerify.Password__c}" style="width:70%" html-placeholder="再輸入一次新密碼"/><br/>
+                                                        <apex:inputField value="{!accountVerify.Password__c}" style="width:70%" html-placeholder="再輸入一次新密碼"/><br/>
                                                     </div>
                                                     <div class="form-group form-row">
                                                         <div class="col-auto">
-                                                            <apex:commandButton value="儲存變更" action="{!submitPassword}" style=" color:black;  background-color:#dde2e2; border-width:0px;" styleClass="btn"/>     
+                                                            <apex:commandButton value="儲存變更" action="{!submitPassword}" style=" color:black;  background-color:#dde2e2; border-width:0px;" styleClass="btn" reRender="form"/>     
                                                         </div>
                                                         <div class="col-auto">
-                                                            <apex:commandLink value="取消" action="{!viewModel.cancelChange}"/>     
+                                                            <apex:commandLink value="取消" action="{!cancelChange}" reRender="form"/>     
                                                         </div>       
                                                     </div>
                                                     
@@ -268,9 +266,7 @@
                                         </table>       
                                     </apex:outputPanel>
                                 </div>
-                                <div class="col-0 col-sm-2 col-md-3 col-lg-3 col-xl-4"/>
-                            </div>
-                        </div>
+                                
                     </div>
                 </div>   
             </apex:form>   
