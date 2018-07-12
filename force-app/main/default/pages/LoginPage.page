@@ -12,11 +12,76 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
         <!-- FontsStyle CSS -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/cwtexyen.css"/>   
+        <!-- End Default Content REMOVE THIS -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
         <apex:stylesheet value="{!$Resource.TemplateCSS}"/>
         <apex:stylesheet value="{!$Resource.MediaqueryCSS}"/>
-        
     </head>
     <body class="bg-light">
+            <script>
+                    function statusChangeCallback(response) {
+                        console.log(response);
+                        if (response.status === 'connected') {
+                            console.log('WOW CONNECTED');
+                        } else {
+                            console.log('Fail');
+                        }
+                    }
+
+                    window.fbAsyncInit = function() {
+                      FB.init({
+                        appId      : '220395842018721',
+                        cookie     : true,
+                        xfbml      : true,
+                        version    : 'v2.8'
+                      });
+
+                        FB.getLoginStatus(function(response) {
+                            statusChangeCallback(response);
+                        });
+                      
+                        FB.Event.subscribe('auth.login', function(response) {
+                            statusChangeCallback(response);
+                            
+                        });
+                    };
+                    
+                    (function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); js.id = id;
+                    js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=220395842018721&autoLogAppEvents=1';
+                    fjs.parentNode.insertBefore(js, fjs);
+                  }(document, 'script', 'facebook-jssdk'));
+
+/*
+                    (function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                        js = d.createElement(s); js.id = id;
+                        js.src = "https://connect.facebook.net/en_US/sdk.js";
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));
+
+                    function testAPI() {
+                        console.log('Welcome!  Fetching your information.... ');
+                        FB.api('/me', function(response) {
+                        console.log('Successful login for: ' + response.name);
+                        document.getElementById('status').innerHTML =
+                            'Thanks for logging in, ' + response.name + '!';
+                        });
+                    }*/
+
+                    
+                  </script>
+                   
         <apex:form id="form">
             <div class="card border-light bg-light" >   
                 <div class="card-header bg-white field-w100" >
@@ -38,11 +103,17 @@
                                     <a href="/apex/RegisterPage" style="text-decoration: underline;">建立新帳號 </a>
                                 </span>
                             </div>
-                            <apex:commandButton value="使用FaceBook 帳號登入" action="{!checkFacebookAuthentication}"  styleClass="btn btn-social btn-facebook"/>              
+                            <div id="fbLogin" class="fb-login-button" data-max-rows="1" data-size="large" data-scope="public_profile,email"
+                            data-button-type="continue_with" data-show-faces="false" 
+                            data-auto-logout-link="false" data-use-continue-as="false" >
+                            </div>
+                   
+                            <!-- <fb:login-button scope="public_profile,email " onlogin="checkLoginState();">
+                            </fb:login-button> -->  
                             <apex:commandButton value="使用Google 帳號登入" action="{!checkGoogleAuthentication}" styleClass="btn btn-social btn-google"/>          
                             <hr width="90%;"/>
                                      <small style="color:red"><apex:messages /></small>
-                    
+                                    
                             <div class="form-group">
                                 <apex:inputField value="{!viewModel.account.Email__c}" html-placeholder="電子信箱" styleClass="form-control field-w100 field-h50px" />                            
                             </div>    
@@ -65,17 +136,4 @@
         </div>
         
     </body>
-    
-    
-    <!-- End Default Content REMOVE THIS -->
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
-    
-    
 </apex:page>

@@ -1,7 +1,5 @@
 public with sharing class AccountSettingViewModel {
-
     public Account__c account {get; set;}
-    public String errorMessage {get; set;}
 
     public AccountSettingViewModel(String userId) {
         account = AccountModel.getAccountById(userId); 

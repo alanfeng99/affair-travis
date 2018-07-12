@@ -14,15 +14,11 @@
         <link rel="stylesheet" href="{!$Resource.MediaqueryCSS}"/>
         <apex:stylesheet value="{!$Resource.TemplateCSS}"/>
     </head>
-    <style>
-       
-        
-    </style>
     <body class="bg-light" >
         <apex:form id="form">
             <div class="card border-light bg-light">   
                 <div class="card-header bg-white ">
-                    <b class="letterspacing3px" style="font-size:20px;">週刊編集</b> {!Account.LastName__c}
+                    <b class="letterspacing3px" style="font-size:20px;">週刊編集</b> {!viewModel.account.LastName__c}
                     <hr style="width:100%"/>
                     <div class="letterspacing3px" align="center" style="font-size:20px;">信用卡資訊更新</div><br/>
                     <div align="center" style="font-size:12px;">信用卡資訊新增、變更</div>
@@ -38,14 +34,14 @@
                                     <apex:messages style="color:red"/>
                                 </div>
                                 <div class="form-group">
-                                     <apex:inputField value="{!Account.credit_card_number__c }" styleClass="form-control" style="width:60%" html-placeholder="信用卡號"/>
+                                     <apex:inputField value="{!viewModel.account.credit_card_number__c }" styleClass="form-control" style="width:60%" html-placeholder="信用卡號"/>
                                 </div>
                                 <div class="form-group form-row">
                                     <div class="col-auto">
-                                        <apex:inputField value="{!Account.Expiration_month__c  }" styleClass="form-control" style="height:35px;"/>
+                                        <apex:inputField value="{!viewModel.account.Expiration_month__c  }" styleClass="form-control" style="height:35px;"/>
                                     </div>
                                     <div class="col-auto">
-                                        <apex:selectList value="{!Account.Expiration_Year_text__c }" size="1" styleClass="form-control" style="height:35px;">
+                                        <apex:selectList value="{!viewModel.account.Expiration_Year_text__c }" size="1" styleClass="form-control" style="height:35px;">
                                             <apex:selectOptions value="{!Creditcard_Year}"/>
                                         </apex:selectList>
                                     </div>
@@ -55,7 +51,7 @@
                                 </div>
                                	<div class="form-group form-row">
                                     <div class="col-auto">
-                                        <apex:inputField value="{!Account.CVC__c  }" styleClass="form-control" html-placeholder="CVC" style="width:70px;"/>
+                                        <apex:inputField value="{!viewModel.account.CVC__c  }" styleClass="form-control" html-placeholder="CVC" style="width:70px;"/>
                                     </div>
                                     <div class="col-auto" style="font-size:14px;">
                                         卡片背面後3碼
@@ -83,7 +79,7 @@
                                     	<apex:commandButton value="返回" action="{!cancel}" reRender="form" style="width:100px; color:white; background-color:#585e5d; border-width:0px;" styleClass="btn"/>                            
                                     </div>
                                     <div class="col" align="left">
-                                    	<apex:commandButton value="確定更新" action="{!submit}" reRender="form" style="width:100px; color:white; background-color:#585e5d; border-width:0px;" styleClass="btn"/>                            
+                                    	<apex:commandButton value="確定更新" action="{!updateCreditcard}" reRender="form" style="width:100px; color:white; background-color:#585e5d; border-width:0px;" styleClass="btn"/>                            
                                     </div>                           	 
                                 </div>
                             </td>
