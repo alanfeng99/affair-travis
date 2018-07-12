@@ -3,9 +3,10 @@
     <fullName>credit_card_number__c</fullName>
     <externalId>false</externalId>
     <label>信用卡號</label>
-    <length>255</length>
+    <length>175</length>
+    <maskChar>X</maskChar>
+    <maskType>all</maskType>
     <required>false</required>
     <trackTrending>false</trackTrending>
-    <type>Text</type>
-    <unique>false</unique>
+    <type>EncryptedText</type>
 </CustomField>
