@@ -38,5 +38,5 @@ notifications:
       - jin@4idps.com
       - bruno.chami@4idps.com
       - alan.feng@4idps.com
-    on_success: never # default: change
+    on_success: change # default: change
     on_failure: always # default: always
