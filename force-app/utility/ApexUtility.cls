@@ -5,7 +5,7 @@ public with sharing class ApexUtility {
     	return page;  
     }
 
-    public static String generateRandomANumeric(Integer size) {
+    public static String generateRandomAlphaNumeric(Integer size) {
         final String chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
         String randomAlphaNumeric = '';
 
