@@ -3,23 +3,24 @@ public with sharing class NewSubscriptionController  extends ApexBaseController 
     public NewSubscriptionViewModel viewModel {get; set;} 
     public  List<SelectOption> year {get; set;}
     private String accountId {get; set;}
+    public String salesForceIP {get; set;}
     
     public NewSubscriptionController() {
 
         Cookie accountIdCookie = ApexPages.currentPage().getCookies().get(Label.COOKIE_ACCOUNT_ID);
         
         if (accountIdCookie != null) {
-            String accountId = accountIdCookie.getValue();	
+            String accountId = accountIdCookie.getValue();
             viewModel = new NewSubscriptionViewModel(accountId);
         }
     }
     
-    public List<SelectOption> getPaymentOptions(){
+    public List<SelectOption> getPaymentOptions() {
         List<SelectOption> options = new List<SelectOption>();
         Schema.DescribeFieldResult fieldResult = Schema.Subscription__c.fields.Payment_method__c.getDescribe();
         List<Schema.PicklistEntry> ple = fieldResult.getPicklistValues();
         
-        for(Schema.PicklistEntry f : ple){
+        for (Schema.PicklistEntry f : ple) {
             options.add(new SelectOption(f.getLabel(), f.getValue()));
         }
         return options;

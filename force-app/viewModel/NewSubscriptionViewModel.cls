@@ -85,6 +85,12 @@ public with sharing class NewSubscriptionViewModel {
                 if (account.credit_card_number__c != null && !String.isBlank(account.credit_card_number__c))
                     account.credit_card_number__c = EncryptionUtility.encrypt(account.credit_card_number__c);
 
+                for(Subscription__c sub : subscriptionInsertList) {
+                    if(sub.Payment_Method__c == '信用卡') {
+                        executePayment(sub);
+                    }
+                }
+
                 List<Database.SaveResult> results = Database.insert(subscriptionInsertList);
                 Boolean updateResult = true;
                 for(Database.SaveResult result : results) {
@@ -167,7 +173,7 @@ public with sharing class NewSubscriptionViewModel {
             Subscription__c clone_Subscription = firstSubscription.clone();
             clone_Subscription.Recipient__c = sub.Recipient__c;
             clone_Subscription.Address__c = sub.Address__c;
-            clone_Subscription.Area_pickList__c = sub.Area_pickList__c;
+            clone_Subscription.Area_pickList__c = sub.Area_pickList__c;+
             clone_Subscription.Postal_code__c = sub.Postal_code__c;
             clone_Subscription.City_pickList__c = sub.City_pickList__c;
             clone_Subscription.Tel__c = sub.Tel__c;
@@ -243,5 +249,28 @@ public with sharing class NewSubscriptionViewModel {
             sub.CustomAccount__c = account.Id;
         }
         
+    }
+
+    public void executePayment(Subscription__c subscription) {
+        GMOPaymentBean gmoPaymentBean = new GMOPaymentBean();
+
+        gmoPaymentBean.contract_code = '10081070';
+        gmoPaymentBean.user_id = account.Email__c;
+        gmoPaymentBean.user_name = account.LastName__c;
+        gmoPaymentBean.user_mail_add = account.Email__c;
+        gmoPaymentBean.card_number = EncryptionUtility.decrypt(account.credit_card_number__c);
+        gmoPaymentBean.expire_year = account.Expiration_Year_text__c;
+        gmoPaymentBean.expire_month = account.Expiration_month__c;
+        gmoPaymentBean.security_code = account.CVC__c;
+        gmoPaymentBean.card_holder_name = account.LastName__c;
+        
+        gmoPaymentBean.ip_address = ApexUtility.getUserIPAddress();
+        gmoPaymentBean.item_code = subscription.Program__r.ProgramId__c;
+        gmoPaymentBean.item_name = subscription.Program__r.ProgramName__c;
+        gmoPaymentBean.order_number = ApexUtility.generateRandomNumeric(4) + Datetime.now().format('yyyyMMddHHmmss');
+        gmoPaymentBean.item_price = String.valueOf(subscription.Amount__c);
+
+        GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(gmoPaymentBean);
+        gmoPaymentAPI.saveCreditCardZPayment();
     }
 }

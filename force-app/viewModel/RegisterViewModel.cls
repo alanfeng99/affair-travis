@@ -16,7 +16,14 @@ public with sharing class RegisterViewModel {
     public Boolean registerByEmail() {
         if (!EmailUtility.emailFormatValidation(account.Email__c)) {
             errorMessage = '電子郵件格式不符';   
-        } else if(createAccountByEmail(account.Email__c)) {
+            return false;
+        }
+        if (AccountModel.getAccountByEmail(account.Email__c) != null) {
+            errorMessage = '帳號已存在';   
+            return false;
+        }
+
+        if (createAccountByEmail(account.Email__c)) {
             if (EmailUtility.sendEmail(account.Email__c, 'AccountActivation') == true) {
                 return true;
             } 

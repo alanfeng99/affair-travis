@@ -7,19 +7,13 @@ public with sharing class AuthUtility {
     }
 
     public static String generateToken() {
-        String token = '';
         String dateNow = Datetime.now().format('yyyyMMddHHmmss');
 
-        final String chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
-        for (Integer i = 0; i < 7; i++) {
-            Integer idx = Math.mod(Math.abs(Crypto.getRandomInteger()), chars.length());
-            token += chars.substring(idx, idx+1);
-        }
+        String token = '';
+
+        token += ApexUtility.generateRandomAlphaNumeric(7);        
         token += dateNow;
-        for (Integer i = 0; i < 7; i++) {
-            Integer idx = Math.mod(Math.abs(Crypto.getRandomInteger()), chars.length());
-            token += chars.substring(idx, idx+1);
-        }
+        token += ApexUtility.generateRandomAlphaNumeric(7);
         return token;
     }
 
