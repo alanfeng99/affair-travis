@@ -1,6 +1,9 @@
 public with sharing class LoginController extends ApexBaseController {
     public LoginViewModel viewModel {get; set;}
-    
+    public String facebookUserEmail {get; set;}
+    public String facebookUserID {get; set;}
+    public String facebookUserName {get; set;}
+    public String facebookUserToken {get; set;}
    
     public LoginController() {
         viewModel = new LoginViewModel();
@@ -99,5 +102,12 @@ public with sharing class LoginController extends ApexBaseController {
             return page;
         }
         return null;
+    }
+
+    public void saveFacebookUserInformation() {
+        System.debug('TEST FB USER Email:' + facebookUserEmail);
+        System.debug('TEST FB USER id:' + facebookUserID);
+        System.debug('TEST FB USER name:' + facebookUserName);
+        System.debug('TEST FB USER token:' + facebookUserToken);
     }
 }
