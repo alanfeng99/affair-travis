@@ -6,6 +6,7 @@
         <!-- Required meta tags -->
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="google-signin-client_id" content="96182436003-3882ubjvc2h62m5tp4tso2dluamdtvja.apps.googleusercontent.com" />
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
               crossorigin="anonymous"/>
@@ -22,11 +23,20 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
     <script src="//connect.facebook.net/en_US/all.js"></script>
-        <apex:stylesheet value="{!$Resource.TemplateCSS}"/>
-        <apex:stylesheet value="{!$Resource.MediaqueryCSS}"/>
+    <script src="https://apis.google.com/js/platform.js" async="async defer"></script>
+    <apex:stylesheet value="{!$Resource.TemplateCSS}"/>
+    <apex:stylesheet value="{!$Resource.MediaqueryCSS}"/>
     </head>
     <body class="bg-light">
         <script>
+            function onSignIn(googleUser) {
+                var profile = googleUser.getBasicProfile();
+                console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+                console.log('Name: ' + profile.getName());
+                console.log('Image URL: ' + profile.getImageUrl());
+                console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+            }
+
             window.fbAsyncInit = function() {
                 FB.init({
                     appId      : '220395842018721',
@@ -108,14 +118,11 @@
                                     <a href="/apex/RegisterPage" style="text-decoration: underline;">建立新帳號 </a>
                                 </span>
                             </div>
+                            <!-- Facebook button -->
                             <div id="fbLogin" class="fb-login-button" data-max-rows="1" data-size="large" data-scope="public_profile,email"
-                            data-button-type="continue_with" data-show-faces="false" 
-                            data-auto-logout-link="false" data-use-continue-as="false" >
-                            </div>
-                   
-                            <!-- <fb:login-button scope="public_profile,email " onlogin="checkLoginState();">
-                            </fb:login-button> -->  
-                            <apex:commandButton value="使用Google 帳號登入" action="{!checkGoogleAuthentication}" styleClass="btn btn-social btn-google"/>          
+                            data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" ></div>
+                            <!-- Google button -->
+                            <div class="g-signin2" data-onsuccess="onSignIn"></div>          
                             <hr width="90%;"/>
                                      <small style="color:red"><apex:messages /></small>
                                     
