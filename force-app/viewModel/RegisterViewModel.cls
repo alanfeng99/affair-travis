@@ -23,29 +23,18 @@ public with sharing class RegisterViewModel {
             return false;
         }
 
-        if (createAccountByEmail(account.Email__c)) {
+        String creationError = AccountModel.createAccountByEmail(account.Email__c);
+        if (creationError == null) {
             if (EmailUtility.sendEmail(account.Email__c, 'AccountActivation') == true) {
                 return true;
             } 
             errorMessage = '電子郵件寄送失敗';   
         }
-            
+        errorMessage = creationError;
         return false;
     }
 
     public String getErrorMessage() {
         return errorMessage;
     }
-   
-    private Boolean createAccountByEmail(String email) {
-        List<Account__c> accounts = [Select Id from Account__c where Email__c = :email];
-        if (accounts.size() > 0) {
-            errorMessage = '帳號已存在';
-            return false;
-        }
-        account.LastName__c = account.Email__c;
-        insert account;
-        return true;
-    }
-
 }

@@ -1,6 +1,9 @@
 public with sharing class LoginController extends ApexBaseController {
     public LoginViewModel viewModel {get; set;}
-    
+    public String facebookUserEmail {get; set;}
+    public String facebookUserID {get; set;}
+    public String facebookUserName {get; set;}
+    public String facebookUserToken {get; set;}
    
     public LoginController() {
         viewModel = new LoginViewModel();
@@ -16,10 +19,9 @@ public with sharing class LoginController extends ApexBaseController {
         if (!isAccountAndPasswordValid(realAccount))
             return null;
 
-        addMessage(Apexpages.Severity.INFO, '登入成功:' + viewModel.sessionString);
-        Pagereference page = new Pagereference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/SummaryPage');
-        page.setRedirect(true);
-        return page;
+        saveLoginCookies(realAccount);
+        resetPasswordRetryToZero(realAccount);
+        return loginSuccessRedirectionPage();
     }
 
     public Pagereference checkFacebookAuthentication() {
@@ -49,12 +51,6 @@ public with sharing class LoginController extends ApexBaseController {
         if (!AuthUtility.checkPassword(realAccount.Email__c, realAccount.Password__c, viewModel.account.Password__c))
             return resultAccountPasswordNotCorrect(realAccount);
 
-        String token = AccountModel.saveToken(realAccount);
-        Cookie authToken = new Cookie(Label.COOKIE_AUTH_TOKEN, token, null, -1, false);
-        Cookie accountId = new Cookie(label.COOKIE_ACCOUNT_ID, realAccount.Id, null, -1, false);
-        ApexPages.currentPage().setCookies(new Cookie[]{authToken, accountId});
-        realAccount.PasswordRetry__c = 0;
-        update realAccount;
         return true;
     }
 
@@ -99,5 +95,31 @@ public with sharing class LoginController extends ApexBaseController {
             return page;
         }
         return null;
+    }
+
+    public void saveLoginCookies(Account__c realAccount) {
+        String token = AccountModel.saveToken(realAccount);
+        Cookie authToken = new Cookie(Label.COOKIE_AUTH_TOKEN, token, null, -1, false);
+        Cookie accountId = new Cookie(label.COOKIE_ACCOUNT_ID, realAccount.Id, null, -1, false);
+        ApexPages.currentPage().setCookies(new Cookie[]{authToken, accountId});
+    }
+
+    public void resetPasswordRetryToZero(Account__c realAccount) {
+        realAccount.PasswordRetry__c = 0;
+        update realAccount;
+    }
+
+    public Pagereference loginSuccessRedirectionPage() {
+        addMessage(Apexpages.Severity.INFO, '登入成功:' + viewModel.sessionString);
+        Pagereference page = new Pagereference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/SummaryPage');
+        page.setRedirect(true);
+        return page;
+    }
+
+    public void saveFacebookUserInformation() {
+        System.debug('TEST FB USER Email:' + facebookUserEmail);
+        System.debug('TEST FB USER id:' + facebookUserID);
+        System.debug('TEST FB USER name:' + facebookUserName);
+        System.debug('TEST FB USER token:' + facebookUserToken);
     }
 }
