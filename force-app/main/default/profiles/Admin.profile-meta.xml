@@ -482,7 +482,7 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>ChangePasswordPage</apexPage>
+        <apexPage>ResetPasswordPage</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
