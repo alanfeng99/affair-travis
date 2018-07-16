@@ -117,9 +117,8 @@ public with sharing class LoginController extends ApexBaseController {
     }
 
     public void saveFacebookUserInformation() {
-        System.debug('TEST FB USER Email:' + facebookUserEmail);
-        System.debug('TEST FB USER id:' + facebookUserID);
-        System.debug('TEST FB USER name:' + facebookUserName);
-        System.debug('TEST FB USER token:' + facebookUserToken);
+        if (facebookUserToken != null)
+            AccountModel.createAccountByEmail(facebookUserEmail, facebookUserName);
+        
     }
 }

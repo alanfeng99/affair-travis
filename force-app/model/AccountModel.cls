@@ -29,12 +29,25 @@ public with sharing class AccountModel {
         return result.isSuccess();
     }
 
-    public static String createAccountByEmail(String email) {
+    public static Account__c createAccountByEmail(String email) {
         List<Account__c> accounts = [Select Id from Account__c where Email__c = :email];
         if (accounts.size() > 0)
-            return '帳號已存在';
+            return null;
+
         Account__c account = new Account__c(Email__c = email, LastName__c = email);
         insert account;
-        return null;
+        
+        return account;
+    }
+
+    public static Account__c createAccountByEmail(String email, String lastName) {
+        List<Account__c> accounts = [Select Id from Account__c where Email__c = :email];
+        if (accounts.size() > 0)
+            return null;
+        
+        Account__c account = new Account__c(Email__c = email, LastName__c = lastName);
+        insert account;
+
+        return account;
     }
 }

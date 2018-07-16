@@ -23,14 +23,16 @@ public with sharing class RegisterViewModel {
             return false;
         }
 
-        String creationError = AccountModel.createAccountByEmail(account.Email__c);
-        if (creationError == null) {
-            if (EmailUtility.sendEmail(account.Email__c, 'AccountActivation') == true) {
-                return true;
-            } 
-            errorMessage = '電子郵件寄送失敗';   
+        Account__c accountCreated = AccountModel.createAccountByEmail(account.Email__c);
+        if (accountCreated == null) {
+            errorMessage = '帳號已存在';
+            return false;
         }
-        errorMessage = creationError;
+
+        if (EmailUtility.sendEmail(account.Email__c, 'AccountActivation'))
+            return true;
+        
+        errorMessage = '電子郵件寄送失敗';   
         return false;
     }
 
