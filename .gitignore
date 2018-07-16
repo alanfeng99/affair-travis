@@ -8,3 +8,4 @@ force-app/main/default/profiles/Custom: Support Profile.profile-meta.xml
 force-app/main/default/sites/AffairJin.site-meta.xml
 force-app/main/default/profiles/affair Profile.profile-meta.xml
 force-app/main/default/sites/affair.site-meta.xml
+force-app/main/default/profiles/Admin.profile-meta.xml
