@@ -16,7 +16,7 @@ public with sharing class RetrievePasswordController extends ApexBaseController 
             
                 return page;
             } else {
-                addMessage(ApexPages.Severity.ERROR, '此信箱不存在');
+                addMessage(ApexPages.Severity.ERROR, System.Label.Msg_EmailNotExist);
             }
         }
         return null;

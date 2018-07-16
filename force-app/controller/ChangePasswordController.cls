@@ -14,7 +14,7 @@ public with sharing class ChangePasswordController extends ApexBaseController {
     public PageReference changePassword() {
         if(checkPassword()) {
             if(viewModel.submit()) {
-                addMessage(ApexPages.Severity.INFO, '密碼更新成功');
+                addMessage(ApexPages.Severity.INFO, System.Label.Msg_UpdateCompleted);
                 return AuthUtility.logOut();
             }
         }
@@ -24,13 +24,13 @@ public with sharing class ChangePasswordController extends ApexBaseController {
     private Boolean checkPassword() {
         if (!PasswordUtility.checkPasswordHasEnglish(viewModel.account.Password__c)) {
             clearPassword();
-            addMessage(ApexPages.Severity.ERROR, '密碼長度需8~12碼，且至少需要一個數字和英文');
+            addMessage(ApexPages.Severity.ERROR, System.Label.Msg_PasswordFormat);
             return false;
         } 
         
         if (!viewModel.account.Password__c.equals(accountVerify.Password__c)) {
             clearPassword();
-            addMessage(ApexPages.Severity.ERROR, '密碼與驗證密碼不相符');
+            addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Password_Inconsistent);
             return false;           
         }
         return true;
