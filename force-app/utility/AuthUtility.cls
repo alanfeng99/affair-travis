@@ -18,18 +18,22 @@ public with sharing class AuthUtility {
     }
 
     public static PageReference logOut() {
-        PageReference page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/LoginPage');
+        PageReference page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/LoginPage?logout=true');
         page.setRedirect(true);
-        Cookie authToken = ApexPages.currentPage().getCookies().get(Label.COOKIE_AUTH_TOKEN);
-        Cookie accountId = ApexPages.currentPage().getCookies().get(Label.COOKIE_ACCOUNT_ID);
-        if (authToken != null) {
-            authToken = new Cookie(authToken.getName(), authToken.getValue(), authToken.getPath(), 0, authToken.isSecure());
-        }
-        if (accountId != null) {
-            accountId = new Cookie(accountId.getName(), authToken.getValue(), accountId.getPath(), 0, accountId.isSecure());
-        }
-        ApexPages.currentPage().setCookies(new Cookie[]{authToken, accountId});
-
         return page;
+    }
+
+    public static void deleteAuthCookies() {
+        Pagereference currentPage = ApexPages.currentPage();
+
+        Cookie authToken = currentPage.getCookies().get(Label.COOKIE_AUTH_TOKEN);
+        Cookie accountId = currentPage.getCookies().get(Label.COOKIE_ACCOUNT_ID);
+        if (authToken != null)
+            authToken = new Cookie(authToken.getName(), authToken.getValue(), authToken.getPath(), 0, authToken.isSecure());
+        if (accountId != null)
+            accountId = new Cookie(accountId.getName(), authToken.getValue(), accountId.getPath(), 0, accountId.isSecure());
+    
+        System.debug('Test: get cookies loginpage ' + currentPage.getCookies());
+        currentPage.setCookies(new Cookie[]{authToken, accountId});
     }
 }

@@ -6,6 +6,9 @@ public with sharing class LoginController extends ApexBaseController {
     public String facebookUserToken {get; set;}
    
     public LoginController() {
+        String logout = ApexPages.currentPage().getParameters().get('logout');
+        if (logout != null && logout == 'true')
+            AuthUtility.deleteAuthCookies();
         viewModel = new LoginViewModel();
     }
 
@@ -116,9 +119,20 @@ public with sharing class LoginController extends ApexBaseController {
         return page;
     }
 
-    public void saveFacebookUserInformation() {
-        if (facebookUserToken != null)
-            AccountModel.createAccountByEmail(facebookUserEmail, facebookUserName);
+    public Pagereference loginWithFacebook() {
+        if (facebookUserToken == null)
+            return null;
+        
+        Account__c accountCreated = AccountModel.createAccountByEmail(facebookUserEmail, facebookUserName);
+        Account__c accountSF = null;
+        if (accountCreated == null) {
+            accountSF = AccountModel.getAccountByEmail(facebookUserEmail);
+        } else {
+            accountSF = accountCreated;
+        }
+
+        saveLoginCookies(accountSF);
+        return loginSuccessRedirectionPage();
         
     }
 }
