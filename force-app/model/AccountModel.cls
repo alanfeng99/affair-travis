@@ -28,4 +28,13 @@ public with sharing class AccountModel {
         Database.SaveResult result = Database.update(account); 
         return result.isSuccess();
     }
+
+    public static String createAccountByEmail(String email) {
+        List<Account__c> accounts = [Select Id from Account__c where Email__c = :email];
+        if (accounts.size() > 0)
+            return '帳號已存在';
+        Account__c account = new Account__c(Email__c = email, LastName__c = email);
+        insert account;
+        return null;
+    }
 }
