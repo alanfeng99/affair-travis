@@ -23,7 +23,7 @@ public with sharing class UpdateCreditCardController extends ApexBaseController 
 
             if(viewModel.updateAccount()) 
                 if(updateReplenish()) {
-                    addMessage(ApexPages.Severity.INFO, '更新成功');
+                    addMessage(ApexPages.Severity.INFO, System.Label.Msg_UpdateCompleted);
                     PageReference page = ApexUtility.toPage('SubscriptionManagementPage');
                     page.getParameters().put('updateCreditcard','true');
                     return page;    
@@ -48,33 +48,20 @@ public with sharing class UpdateCreditCardController extends ApexBaseController 
     }
 
     private Boolean checkField() {
-        if (viewModel.account.credit_card_number__c == null){
-            addMessage(ApexPages.Severity.ERROR, '請填寫信用卡卡號');
+        if (viewModel.account.credit_card_number__c == null || viewModel.account.Expiration_month__c == null ||
+                viewModel.account.Expiration_Year_text__c == null || viewModel.account.Expiration_Year_text__c == '' ||
+                viewModel.account.CVC__c == null){
+            addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckAll);
             return false;
         } 
 
-        if (viewModel.account.Expiration_month__c == null) {
-            addMessage(ApexPages.Severity.ERROR, '請選擇到期月份');
-            return false;
-        } 
-        
-        if (viewModel.account.Expiration_Year_text__c == null || viewModel.account.Expiration_Year_text__c == '') {
-            addMessage(ApexPages.Severity.ERROR, '請選擇到期年份');
-            return false;
-        } 
-        
-        if (viewModel.account.CVC__c == null) {
-            addMessage(ApexPages.Severity.ERROR, '請填寫CVC');
-            return false;
-        } 
-        
         if (!CreditcardUtility.isCreditCardPattenMatching(viewModel.account.credit_card_number__c)) {
-            addMessage(ApexPages.Severity.ERROR, '請確認您填寫的信用卡號是否正確');
+            addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckNumber);
             return false;
         } 
 
         if (!CreditcardUtility.isCVCPattenMatching(viewModel.account.CVC__c)) {
-            addMessage(ApexPages.Severity.ERROR, '請檢查CVC填寫是否正確');
+            addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckCVC);
             return false;
         }
 

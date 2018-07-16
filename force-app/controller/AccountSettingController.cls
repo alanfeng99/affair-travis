@@ -37,7 +37,7 @@ public with sharing class AccountSettingController extends ApexBaseController {
         else {
             viewModel.account.Password__c = accountNew.Password__c;    
             if (viewModel.updatePasswordAccount()) {
-                addMessage(Apexpages.Severity.INFO, '更新成功');
+                addMessage(Apexpages.Severity.INFO, System.Label.Msg_UpdateCompleted);
                 showView('Main');
             } 
         }
@@ -66,7 +66,7 @@ public with sharing class AccountSettingController extends ApexBaseController {
             return false;
         }
         if (!accountNew.Password__c.equals(accountVerify.Password__c)) {
-            addMessage(Apexpages.Severity.ERROR, '密碼不一致'); 
+            addMessage(Apexpages.Severity.ERROR, System.Label.Msg_Password_Inconsistent); 
             return false;
         }
 
@@ -85,7 +85,7 @@ public with sharing class AccountSettingController extends ApexBaseController {
             addMessage(Apexpages.Severity.ERROR, '請輸入暱稱');
         else {
             if(viewModel.updateName()) {
-                addMessage(Apexpages.Severity.INFO, '更新成功');
+                addMessage(Apexpages.Severity.INFO, System.Label.Msg_UpdateCompleted);
                 showView('Main');
             }
         }
@@ -97,7 +97,7 @@ public with sharing class AccountSettingController extends ApexBaseController {
             addMessage(Apexpages.Severity.ERROR, '請輸入信箱');
         else {
             if (viewModel.updateEmail()) {
-                addMessage(Apexpages.Severity.INFO, '更新成功');
+                addMessage(Apexpages.Severity.INFO, System.Label.Msg_UpdateCompleted);
                 showView('Main');
                 ifChangeEmail = true;
                 EmailUtility.sendEmail(viewModel.account.Email__c, 'AccountActivation');

@@ -14,7 +14,7 @@ public with sharing class LoginController extends ApexBaseController {
 
     public Pagereference checkAuthentication() {
         if(viewModel.account.Password__c == null || viewModel.account.Email__c == null) {
-            addMessage(Apexpages.Severity.WARNING, '請輸入帳號密碼');
+            addMessage(Apexpages.Severity.WARNING, System.Label.Msg_Login_AccountPasswordEmpty);
             return null;
         }
 
@@ -58,30 +58,30 @@ public with sharing class LoginController extends ApexBaseController {
     }
 
     private Boolean resultAccountNotExisting() {
-        addMessage(Apexpages.Severity.WARNING, 'This user does not exist.');
+        addMessage(Apexpages.Severity.WARNING, System.Label.Msg_AccountNotExist);
         clearPassword();
         return false;
     }
 
     private Boolean resultAccountNotActive() {
-        addMessage(Apexpages.Severity.WARNING, '您的帳號未通過驗證，請檢查信箱');
+        addMessage(Apexpages.Severity.WARNING, System.Label.Msg_Login_AccountNotVerify);
         clearPassword();
         return false;
     }
 
     private Boolean resultAccountLocked() {
-        addMessage(Apexpages.Severity.WARNING, '您的帳號已被鎖定，請聯絡編集者客服');
+        addMessage(Apexpages.Severity.WARNING, System.Label.Msg_Login_AccountLocked);
         clearPassword();
         return false;
     }
 
     private Boolean resultAccountPasswordNotCorrect(Account__c realAccount) {
         if(realAccount.PasswordRetry__c < 2) {
-            addMessage(Apexpages.Severity.WARNING, '帳號或密碼不符，登入三次失敗則帳號鎖定，請小心輸入');
+            addMessage(Apexpages.Severity.WARNING, System.Label.Msg_Login_LockedRemind);
             loginFail(realAccount);
             update realAccount;
         } else {
-            addMessage(Apexpages.Severity.WARNING, '您的帳號已被鎖定，請聯絡編集者客服');
+            addMessage(Apexpages.Severity.WARNING, System.Label.Msg_Login_AccountLocked);
             AccountModel.lockAccountForThreeTimes(realAccount);    
         }
         clearPassword();
