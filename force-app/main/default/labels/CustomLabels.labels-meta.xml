@@ -86,28 +86,12 @@
         <value>請輸入信箱</value>
     </labels>
     <labels>
-        <fullName>Msg_RecipientEmpty</fullName>
+        <fullName>Msg_RecipientInfoEmpty</fullName>
         <categories>Messages</categories>
         <language>zh_TW</language>
         <protected>true</protected>
-        <shortDescription>Msg_收件人未輸入</shortDescription>
-        <value>請填寫收件人</value>
-    </labels>
-    <labels>
-        <fullName>Msg_AddressEmpty</fullName>
-        <categories>Messages</categories>
-        <language>zh_TW</language>
-        <protected>true</protected>
-        <shortDescription>Msg_地址未輸入</shortDescription>
-        <value>請填寫地址</value>
-    </labels>
-    <labels>
-        <fullName>Msg_PhoneEmpty</fullName>
-        <categories>Messages</categories>
-        <language>zh_TW</language>
-        <protected>true</protected>
-        <shortDescription>Msg_電話未輸入</shortDescription>
-        <value>請填寫電話</value>
+        <shortDescription>Msg_收件人資訊未輸入</shortDescription>
+        <value>請填寫完整收件人資訊</value>
     </labels>
     <labels>
         <fullName>Msg_PaymentEmpty</fullName>
@@ -116,6 +100,22 @@
         <protected>true</protected>
         <shortDescription>Msg_付款方式未輸入</shortDescription>
         <value>請選擇付款方式</value>
+    </labels>
+    <labels>
+        <fullName>Msg_ProgramEmpty</fullName>
+        <categories>Messages</categories>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>Msg_訂閱方案未選擇</shortDescription>
+        <value>請選擇訂閱方案</value>
+    </labels>
+    <labels>
+        <fullName>Msg_PeriodEmpty</fullName>
+        <categories>Messages</categories>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>Msg_週刊期數未選擇</shortDescription>
+        <value>請點選欲開始的週刊期數</value>
     </labels>
     <labels>
         <fullName>Msg_Login_AccountLocked</fullName>
@@ -172,6 +172,14 @@
         <protected>true</protected>
         <shortDescription>Msg_檢查信用卡資訊完整</shortDescription>
         <value>請填寫完整信用卡資訊</value>
+    </labels>
+    <labels>
+        <fullName>Msg_PhoneFormat</fullName>
+        <categories>Messages</categories>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>Msg_電話格式</shortDescription>
+        <value>請確認電話是否正確</value>
     </labels>
     <labels>
         <fullName>Msg_UpdateCompleted</fullName>
