@@ -23,13 +23,33 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
     <script src="//connect.facebook.net/en_US/all.js"></script>
-    <script src="https://apis.google.com/js/platform.js" async="async defer"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async="async defer"></script>
     <apex:stylesheet value="{!$Resource.TemplateCSS}"/>
     <apex:stylesheet value="{!$Resource.MediaqueryCSS}"/>
     </head>
 
     <body class="bg-light">
         <script>
+            function onSuccess(googleUser) {
+                console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+            }
+            function onFailure(error) {
+                console.log(error);
+            }
+            
+            function renderButton() {
+                gapi.signin2.render('my-signin2', {
+                    'scope': 'profile email',
+                    'width': 340,
+                    'height': 40,
+                    'longtitle': true,
+                    'theme': 'dark',
+                    'onsuccess': onSuccess,
+                    'onfailure': onFailure
+                    
+                });
+            }
+            
             function onSignIn(googleUser) {
                 var url = new URL(window.location.href);
                 var logout = url.searchParams.get("logout");
@@ -116,18 +136,18 @@
         
         <apex:form id="form">
             <div class="card border-light bg-light" >   
-                <div class="card-header bg-white field-w100" >
-                    <div align="center" style="line-height:22px;" class="title">
+                <div class="card-header bg-white w100" >
+                    <div align="center" class="title lineheight22px">
                         <b class="letterspacing3px">週刊編集</b><br/>
                         <b ><span>The Affairs Medium</span></b>
                     </div>
                 </div>
                 <br/>
-                <div align="center" class="letterspacing3px" style="font-size:20px;">
+                <div align="center" class="letterspacing3px fontsize20px">
                     請先登入
                 </div>
-                <div class="card-body container " style="line-height:50px; max-width:380px;">
-                            <div style="font-size:14px;">
+                <div class="card-body container lineheight40px" style="max-width:380px;">
+                            <div class="fontsize14px">
                                 <span>
                                     第一次使用週刊編集？
                                 </span>
@@ -136,22 +156,29 @@
                                 </span>
                             </div>
                             <!-- Facebook button -->
-                            <div id="fbLogin" class="fb-login-button" data-max-rows="1" data-size="large" data-scope="public_profile,email"
-                            data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" ></div>
+                            <div class="form-group">
+                                <div id="fbLogin" class="fb-login-button" data-max-rows="1" data-size="large" data-scope="public_profile,email"
+                                data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" width="340"></div>
+                            </div>
+                           
                             <!-- Google button -->
-                            <div class="g-signin2" data-onsuccess="onSignIn"></div>          
+                            <div class="form-group">
+                                <div id="my-signin2" class="g-signin2" data-onsuccess="onSignIn"></div>  
+                            </div>
+                            
+
                             <hr width="90%;"/>
                                      <small style="color:red"><apex:messages /></small>
                                     
                             <div class="form-group">
-                                <apex:inputField value="{!viewModel.account.Email__c}" html-placeholder="電子信箱" styleClass="form-control field-w100 field-h50px" />                            
+                                <apex:inputField value="{!viewModel.account.Email__c}" html-placeholder="電子信箱" styleClass="form-control w100 h50px" />                            
                             </div>    
                             <div class="form-group">
-                                <apex:inputField value="{!viewModel.account.Password__c}" html-placeholder="密碼" styleClass="form-control field-w100 field-h50px" />
+                                <apex:inputField value="{!viewModel.account.Password__c}" html-placeholder="密碼" styleClass="form-control w100 h50px" />
                             </div>
                             <div align="right">
                                 <a href="/apex/RetrievePasswordPage" style="color:#585e5d; text-decoration: underline;">忘記密碼?</a> <br/>
-                                <apex:commandButton value="登入" action="{!checkAuthentication}" reRender="form" style="width:120px; color:white; background-color:#585e5d; border-width:0px;" styleClass="btn field-h40px"/>                        
+                                <apex:commandButton value="登入" action="{!checkAuthentication}" reRender="form" style="width:120px; color:white; background-color:#585e5d; border-width:0px;" styleClass="btn h40px"/>                        
                             </div>  
                         </div>
                
