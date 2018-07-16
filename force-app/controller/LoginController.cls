@@ -4,6 +4,10 @@ public with sharing class LoginController extends ApexBaseController {
     public String facebookUserID {get; set;}
     public String facebookUserName {get; set;}
     public String facebookUserToken {get; set;}
+    public String googleUserName {get; set;}
+    public String googleUserEmail {get; set;}
+    public String googleUserID {get; set;}
+
    
     public LoginController() {
         String logout = ApexPages.currentPage().getParameters().get('logout');
@@ -123,10 +127,35 @@ public with sharing class LoginController extends ApexBaseController {
         if (facebookUserToken == null)
             return null;
         
-        Account__c accountCreated = AccountModel.createAccountByEmail(facebookUserEmail, facebookUserName);
+        Account__c accountCreated = AccountModel.createAccountByFacebook(facebookUserEmail, facebookUserName);
         Account__c accountSF = null;
         if (accountCreated == null) {
             accountSF = AccountModel.getAccountByEmail(facebookUserEmail);
+            if (accountSF.FacebookEmail__c == null) {
+                accountSF.FacebookEmail__c = facebookUserEmail;
+                upsert accountSF;
+            }
+        } else {
+            accountSF = accountCreated;
+        }
+
+        saveLoginCookies(accountSF);
+        return loginSuccessRedirectionPage();
+        
+    }
+
+    public Pagereference loginWithGoogle() {
+        if (googleUserEmail == null)
+            return null;
+        
+        Account__c accountCreated = AccountModel.createAccountByGoogle(googleUserEmail, googleUserName);
+        Account__c accountSF = null;
+        if (accountCreated == null) {
+            accountSF = AccountModel.getAccountByEmail(googleUserEmail);
+            if (accountSF.GoogleEmail__c == null) {
+                accountSF.GoogleEmail__c = googleUserEmail;
+                upsert accountSF;
+            }
         } else {
             accountSF = accountCreated;
         }

@@ -40,12 +40,23 @@ public with sharing class AccountModel {
         return account;
     }
 
-    public static Account__c createAccountByEmail(String email, String lastName) {
+    public static Account__c createAccountByFacebook(String email, String lastName) {
         List<Account__c> accounts = [Select Id from Account__c where Email__c = :email];
         if (accounts.size() > 0)
             return null;
         
-        Account__c account = new Account__c(Email__c = email, LastName__c = lastName);
+        Account__c account = new Account__c(Email__c = email, LastName__c = lastName, FacebookEmail__c = email);
+        insert account;
+
+        return account;
+    }
+
+    public static Account__c createAccountByGoogle(String email, String lastName) {
+        List<Account__c> accounts = [Select Id from Account__c where Email__c = :email];
+        if (accounts.size() > 0)
+            return null;
+        
+        Account__c account = new Account__c(Email__c = email, LastName__c = lastName, GoogleEmail__c = email);
         insert account;
 
         return account;
