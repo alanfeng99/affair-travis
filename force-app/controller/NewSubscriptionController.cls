@@ -43,6 +43,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         isChooseCreditcard = false;
         showProgramResult = false;
         showErrorForNullProgram = false;
+        subscriptionInsertList = new List<Subscription__c>();
     }
 
     public PageReference newSubscription() {
@@ -177,8 +178,9 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     }
 
     private void newSubscriptionInsertList() {
-        subscriptionInsertList = new List<Subscription__c>();
-
+        
+        subscriptionInsertList.clear();
+        
         for (Subscription__c sub : tempSubscriptions) {
             sub.Payment_method__c = paymentMethod;
             Subscription__c clone_Subscription = firstSubscription.clone();
