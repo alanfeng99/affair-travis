@@ -1,10 +1,10 @@
 public with sharing class AccountModel {
     public static Account__c getAccountById(String userId) {
-        return [Select Active__c, Locked__c, Email__c, PasswordRetry__c, LastName__c, Password__c, JoinDate__c from Account__c where Id = :userId];
+        return [Select Active__c, Locked__c, Email__c, PasswordRetry__c, LastName__c, Password__c, JoinDate__c, GoogleEmail__c, FacebookEmail__c from Account__c where Id = :userId];
     }
 
     public static Account__c getAccountByEmail(String email) {
-        List<Account__c> accounts = [Select Id, PasswordRetry__c, Locked__c, Active__c, Email__c, LastName__c, Password__c from Account__c where Email__c = :email];
+        List<Account__c> accounts = [Select Id, PasswordRetry__c, Locked__c, Active__c, Email__c, LastName__c, Password__c, GoogleEmail__c, FacebookEmail__c from Account__c where Email__c = :email];
         if (accounts.size() > 0) {
             return accounts.get(0);
         } else { 
