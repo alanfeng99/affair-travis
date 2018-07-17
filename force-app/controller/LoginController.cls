@@ -130,7 +130,7 @@ public with sharing class LoginController extends ApexBaseController {
         Account__c accountCreated = AccountModel.createAccountByFacebook(facebookUserEmail, facebookUserName);
         Account__c accountSF = null;
         if (accountCreated == null) {
-            accountSF = AccountModel.getAccountByEmail(facebookUserEmail);
+            accountSF = AccountModel.getAccountByFacebookEmail(facebookUserEmail);
             if (accountSF.FacebookEmail__c == null) {
                 accountSF.FacebookEmail__c = facebookUserEmail;
                 upsert accountSF;
@@ -151,7 +151,7 @@ public with sharing class LoginController extends ApexBaseController {
         Account__c accountCreated = AccountModel.createAccountByGoogle(googleUserEmail, googleUserName);
         Account__c accountSF = null;
         if (accountCreated == null) {
-            accountSF = AccountModel.getAccountByEmail(googleUserEmail);
+            accountSF = AccountModel.getAccountByGoogleEmail(googleUserEmail);
             if (accountSF.GoogleEmail__c == null) {
                 accountSF.GoogleEmail__c = googleUserEmail;
                 upsert accountSF;

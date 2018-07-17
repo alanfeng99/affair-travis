@@ -32,9 +32,7 @@
         <script>
             function disconnectGoogleAndFacebook(auth2, response) {
                 if (auth2 != null) {
-                    auth2.signOut().then(function () {
-                            console.log('User signed out.');
-                    });
+                    auth2.signOut().then(function () {});
                 }
                 if (response != null) {
                     FB.logout(function(response) {
