@@ -30,8 +30,31 @@
 
     <body class="bg-light">
         <script>
+            function disconnectGoogleAndFacebook(auth2, response) {
+                if (auth2 != null) {
+                    auth2.signOut().then(function () {
+                            console.log('User signed out.');
+                    });
+                }
+                if (response != null) {
+                    FB.logout(function(response) {
+                    });
+                }
+                var old_url = window.location.href;
+                var new_url = old_url.substring(0, old_url.indexOf('?'));
+                window.location.replace(new_url);
+            }
+
             function onSuccess(googleUser) {
-                console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+                var url = new URL(window.location.href);
+                var logout = url.searchParams.get("logout");
+                if (logout == "true") {
+                    var auth2 = gapi.auth2.getAuthInstance();
+                    disconnectGoogleAndFacebook(auth2, null);                    
+                } else {
+                    var profile = googleUser.getBasicProfile();
+                    loginWithGoogleJS(profile.getEmail(), profile.getId(), profile.getName());
+                }
             }
             function onFailure(error) {
                 console.log(error);
@@ -46,27 +69,9 @@
                     'theme': 'dark',
                     'onsuccess': onSuccess,
                     'onfailure': onFailure
-                    
                 });
             }
             
-            function onSignIn(googleUser) {
-                var url = new URL(window.location.href);
-                var logout = url.searchParams.get("logout");
-                if (logout == "true") {
-                    var auth2 = gapi.auth2.getAuthInstance();
-                    auth2.signOut().then(function () {
-                        console.log('User signed out.');
-                    });
-                    var old_url = window.location.href;
-                    var new_url = old_url.substring(0, old_url.indexOf('?'));
-                    window.location.replace(new_url);
-                } else {
-                    var profile = googleUser.getBasicProfile();
-                    loginWithGoogleJS(profile.getEmail(), profile.getId(), profile.getName());
-                }
-            }
-
             window.fbAsyncInit = function() {
                 FB.init({
                     appId      : '220395842018721',
@@ -80,12 +85,8 @@
                     var logout = url.searchParams.get("logout");
                     if (logout == "true") {
                         if (response.authResponse != null) {
-                            FB.logout(function(response) {
-                            });
+                            disconnectGoogleAndFacebook(null, response);
                         }
-                        var old_url = window.location.href;
-                        var new_url = old_url.substring(0, old_url.indexOf('?'));
-                        window.location.replace(new_url);
                     } else {
                         if (response.authResponse != null) {
                             FB.api('/me', { locale: 'en_US', fields: 'name, email' }, function(response) {
