@@ -10,7 +10,6 @@ public with sharing class RetrievePasswordController extends ApexBaseController 
         if (account.Email__c != null) {
             if (EmailUtility.sendEmail(account.Email__c, 'PasswordReset') == true) {
                 turnActiveFalse(account);
-                addMessage(ApexPages.Severity.INFO, '請檢查您的信箱');
                 PageReference page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/RetrievePasswordResultPage');
                 page.setRedirect(true);
             

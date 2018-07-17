@@ -11,6 +11,14 @@ public with sharing class AccountSettingController extends ApexBaseController {
     public Boolean isChangeEmail {get; set;}
     public Boolean isChangePassword {get; set;}
     public Boolean ifChangeEmail {get; set;}
+
+    public String facebookUserEmail {get; set;}
+    public String facebookUserID {get; set;}
+    public String facebookUserName {get; set;}
+    public String facebookUserToken {get; set;}
+    public String googleUserName {get; set;}
+    public String googleUserEmail {get; set;}
+    public String googleUserID {get; set;}
     
     public AccountSettingController() {
         Cookie accountIdCookie = ApexPages.currentPage().getCookies().get(Label.COOKIE_ACCOUNT_ID);
@@ -183,6 +191,55 @@ public with sharing class AccountSettingController extends ApexBaseController {
     
     public PageReference logOut() {  
         return AuthUtility.logOut();
+    }
+
+    public void saveLoginCookies(Account__c realAccount) {
+        String token = AccountModel.saveToken(realAccount);
+        Cookie authToken = new Cookie(Label.COOKIE_AUTH_TOKEN, token, null, -1, false);
+        Cookie accountId = new Cookie(label.COOKIE_ACCOUNT_ID, realAccount.Id, null, -1, false);
+        ApexPages.currentPage().setCookies(new Cookie[]{authToken, accountId});
+    }
+
+    public PageReference loginWithFacebook() {
+        if (facebookUserToken == null)
+            return null;
+        
+        Account__c accountCreated = AccountModel.createAccountByFacebook(facebookUserEmail, facebookUserName);
+        Account__c accountSF = null;
+        if (accountCreated == null) {
+            accountSF = AccountModel.getAccountByEmail(facebookUserEmail);
+            if (accountSF.FacebookEmail__c == null) {
+                accountSF.FacebookEmail__c = facebookUserEmail;
+                upsert accountSF;
+            }
+        } else {
+            accountSF = accountCreated;
+        }
+
+        saveLoginCookies(accountSF);
+        return null;
+        
+    }
+
+    public Pagereference loginWithGoogle() {
+        if (googleUserEmail == null)
+            return null;
+        
+        Account__c accountCreated = AccountModel.createAccountByGoogle(googleUserEmail, googleUserName);
+        Account__c accountSF = null;
+        if (accountCreated == null) {
+            accountSF = AccountModel.getAccountByEmail(googleUserEmail);
+            if (accountSF.GoogleEmail__c == null) {
+                accountSF.GoogleEmail__c = googleUserEmail;
+                upsert accountSF;
+            }
+        } else {
+            accountSF = accountCreated;
+        }
+
+        saveLoginCookies(accountSF);
+        return null;
+        
     }
 
 }
