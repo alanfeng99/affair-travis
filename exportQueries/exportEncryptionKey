@@ -1,0 +1,1 @@
+SELECT Key__c, Name FROM EncryptionKey__c

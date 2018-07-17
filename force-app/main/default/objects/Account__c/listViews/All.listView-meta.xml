@@ -3,10 +3,14 @@
     <fullName>All</fullName>
     <columns>NAME</columns>
     <columns>LastName__c</columns>
-    <columns>FirstName__c</columns>
+    <columns>Password__c</columns>
     <columns>Active__c</columns>
-    <columns>Email__c</columns>
     <columns>Locked__c</columns>
+    <columns>Email__c</columns>
+    <columns>credit_card_number__c</columns>
+    <columns>Expiration_month__c</columns>
+    <columns>CVC__c</columns>
+    <columns>PasswordRetry__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>

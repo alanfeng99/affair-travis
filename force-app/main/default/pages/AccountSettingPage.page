@@ -1,4 +1,4 @@
-<apex:page controller="AccountSettingController" docType="html-5.0"  applyHtmlTag="true" standardStylesheets="false" showHeader="false" action="{!checkCookie}">
+<apex:page controller="AccountSettingController" docType="html-5.0" cache="false" applyHtmlTag="true" standardStylesheets="false" showHeader="false" action="{!checkCookie}">
     <!-- Begin Default Content REMOVE THIS -->
     <html lang="en">    
         <head>
@@ -6,22 +6,126 @@
             <!-- Required meta tags -->
             <meta charset="utf-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+            <meta name="google-signin-client_id" content="96182436003-3882ubjvc2h62m5tp4tso2dluamdtvja.apps.googleusercontent.com" />
             <!-- Bootstrap CSS -->
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
                   crossorigin="anonymous"/>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
             <!-- FontsStyle CSS -->
-            <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/cwtexyen.css"/>        
+            <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/cwtexyen.css"/> 
+            <script src="//connect.facebook.net/en_US/all.js"></script> 
+            <script src="https://apis.google.com/js/platform.js?onload=renderButton" async="async defer"></script>      
             <apex:stylesheet value="{!$Resource.MediaqueryCSS}"/>
             <apex:stylesheet value="{!$Resource.TemplateCSS}"/>
         </head>
-        <style>         
-            .card-header{
-            margin-top: 28px;
-            }
-        </style>
         <body class="bg-light">
-            <apex:form > 
+            <script>
+                function disconnectGoogleAndFacebook(auth2, response) {
+                    if (auth2 != null) {
+                        auth2.signOut().then(function () {
+                                console.log('User signed out.');
+                        });
+                    }
+                    if (response != null) {
+                        FB.logout(function(response) {
+                        });
+                    }
+                    var old_url = window.location.href;
+                    var new_url = old_url.substring(0, old_url.indexOf('?'));
+                    window.location.replace(new_url);
+                }
+    
+                function onSuccess(googleUser) {
+                    var url = new URL(window.location.href);
+                    var logout = url.searchParams.get("logout");
+                    if (logout == "true") {
+                        var auth2 = gapi.auth2.getAuthInstance();
+                        disconnectGoogleAndFacebook(auth2, null);                    
+                    } else {
+                        var profile = googleUser.getBasicProfile();
+                        loginWithGoogleJS(profile.getEmail(), profile.getId(), profile.getName());
+                    }
+                }
+
+                function onFailure(error) {
+                    console.log(error);
+                }
+                
+                function renderButton() {
+                    gapi.signin2.render('my-signin2', {
+                        'scope': 'profile email',
+                        'width': 340,
+                        'height': 40,
+                        'longtitle': true,
+                        'theme': 'dark',
+                        'onsuccess': onSuccess,
+                        'onfailure': onFailure
+                    });
+                }
+
+                window.fbAsyncInit = function() {
+                FB.init({
+                    appId      : '220395842018721',
+                    cookie     : true,
+                    xfbml      : true,
+                    version    : 'v2.8'
+                });
+
+                FB.getLoginStatus(function(response) {
+                    var url = new URL(window.location.href);
+                    var logout = url.searchParams.get("logout");
+                    if (logout == "true") {
+                        if (response.authResponse != null) {
+                            disconnectGoogleAndFacebook(null, response);
+                        }
+                    } else {
+                        if (response.authResponse != null) {
+                            FB.api('/me', { locale: 'en_US', fields: 'name, email' }, function(response) {
+                                var token = response.authResponse.accessToken;
+                                loginWithFacebookJS(response.email, response.id, response.name, token);
+                            });
+                        }
+                    }
+                    
+                });
+                
+                    FB.Event.subscribe('auth.login', function(response) {
+                        var url = new URL(window.location.href);
+                        var logout = url.searchParams.get("logout");
+                        if (logout != "true" && response.authResponse != null) {
+                            var token = response.authResponse.accessToken;
+                            FB.api('/me', { locale: 'en_US', fields: 'name, email' },
+                            function(response) {
+                                loginWithFacebookJS(response.email, response.id, response.name, token);
+                            });
+                        }
+                        });
+                };
+            
+                    (function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); js.id = id;
+                    js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=220395842018721&autoLogAppEvents=1';
+                    fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));
+            </script>
+            <apex:form>
+                <apex:actionFunction action="{!loginWithGoogle}" name="loginWithGoogleJS" rerender="showname">
+                    <apex:param name="googleUserEmail" value="" assignTo="{!googleUserEmail}"/>
+                    <apex:param name="googleUserID" value="" assignTo="{!googleUserID}"/>
+                    <apex:param name="googleUserName" value="" assignTo="{!googleUserName}"/>
+                </apex:actionFunction>
+            </apex:form>
+            <apex:form>
+                <apex:actionFunction action="{!loginWithFacebook}" name="loginWithFacebookJS" rerender="showname">
+                    <apex:param name="facebookUserEmail" value="" assignTo="{!facebookUserEmail}"/>
+                    <apex:param name="facebookUserID" value="" assignTo="{!facebookUserID}"/>
+                    <apex:param name="facebookUserName" value="" assignTo="{!facebookUserName}"/>
+                    <apex:param name="facebookUserToken" value="" assignTo="{!facebookUserToken}"/>
+                </apex:actionFunction>
+            </apex:form>
+            <apex:form id="form"> 
                 <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top border-bottom">
                     <a class="navbar-brand" href="#">週刊編輯</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,7 +156,7 @@
                 </nav>
                 
                 <div class="card  border-light bg-light ">
-                    <div class="card-header bg-white">                  
+                    <div class="card-header bg-white" style="margin-top: 28px;">                  
                         <div align="center" style="line-height:20px;">
                             <br/><br/>
                             <div class="letterspacing3px" style="font-size:20px;">帳號設定</div><br/>
@@ -61,16 +165,14 @@
                     </div>
                     <br/>
                     <div class="card-body " style="line-height:25px; font-size:14px;"> 
-                        <div class="container"> 
-                            <div class="form-row">
-                                <div class="col-0 col-sm-2 col-md-3 col-lg-3 col-xl-4"/>
-                                <div class="col-12 col-sm-8 col-md-6 col-lg-6 col-xl-4">    
+                        <div class="container" style="max-width:400px;"> 
+          
                                     <div class="form-group" style="font-size:15px;">
                                         你目前使用 {!viewModel.account.Email__c } 做為登入信箱。
                                     </div>
-                                    <apex:outputText style="font-color:red; font-size:12px;" rendered="{!viewModel.ifChangeEmail}">您已更改電子郵件，請至信箱重新認證帳號</apex:outputText>
-                                    <apex:messages style="color:red"/>
-                                    <apex:outputPanel rendered="{!viewModel.isMainShow}">
+                                    <apex:outputText style="font-color:red; font-size:12px;" rendered="{!ifChangeEmail}">您已更改電子郵件，請至信箱重新認證帳號</apex:outputText>
+                                    <small><apex:messages style="color:red"/></small>
+                                    <apex:outputPanel rendered="{!isMainShow}">
                                         <table class="table  table-bordered" style="background-color:white">
                                             <tr>
                                                 <td>
@@ -82,7 +184,7 @@
                                                             {!viewModel.account.LastName__c} 
                                                         </div>
                                                         <div class="col-auto">
-                                                            <apex:commandLink value="變更" action="{!viewModel.changeName}"/>  
+                                                            <apex:commandLink value="變更" action="{!changeName}" reRender="form"/>  
                                                         </div>
                                                     </div>
                                                 </td>
@@ -97,7 +199,7 @@
                                                             {!viewModel.account.Email__c}
                                                         </div>
                                                         <div class="col-auto">
-                                                            <apex:commandLink value="變更" action="{!viewModel.changeEmail}"/>  
+                                                            <apex:commandLink value="變更" action="{!changeEmail}" reRender="form"/>  
                                                         </div>
                                                     </div>
                                                 </td>
@@ -112,14 +214,14 @@
                                                             {!viewModel.account.Password__c}
                                                         </div>
                                                         <div class="col-auto">
-                                                            <apex:commandLink value="變更" action="{!viewModel.changePassword}"/>  
+                                                            <apex:commandLink value="變更" action="{!changePassword}" reRender="form"/>  
                                                         </div>
                                                     </div>
                                                 </td>
                                             </tr>
                                         </table>                          
                                     </apex:outputPanel>
-                                    <apex:outputPanel rendered="{!viewModel.isChangeName}">
+                                    <apex:outputPanel rendered="{!isChangeName}">
                                         <table class="table  table-bordered" style="background-color:white">
                                             <tr>
                                                 <td>
@@ -132,17 +234,17 @@
                                                     
                                                     <div class="form-group form-row">
                                                         <div class="col-auto">
-                                                            <apex:commandButton value="儲存變更" action="{!submitName}" style=" color:black;  background-color:#dde2e2; border-width:0px;" styleClass="btn"/>     
+                                                            <apex:commandButton value="儲存變更" action="{!submitName}" reRender="form" style=" color:black; background-color:#dde2e2; border-width:0px;" styleClass="btn"/>     
                                                         </div>
                                                         <div class="col-auto">
-                                                            <apex:commandLink value="取消" action="{!viewModel.cancelChange}"/>     
+                                                            <apex:commandLink value="取消" action="{!cancelChange}" reRender="form"/>     
                                                         </div>          
                                                     </div>
                                                 </td>
                                             </tr>
                                         </table>   
                                     </apex:outputPanel>
-                                    <apex:outputPanel rendered="{!viewModel.isChangeEmail}">
+                                    <apex:outputPanel rendered="{!isChangeEmail}">
                                         <table class="table  table-bordered" style="background-color:white">
                                             <tr>
                                                 <td>
@@ -154,7 +256,7 @@
                                                             {!viewModel.account.LastName__c} 
                                                         </div>
                                                         <div class="col-auto">
-                                                            <apex:commandLink value="變更" action="{!viewModel.changeName}"/>  
+                                                            <apex:commandLink value="變更" action="{!changeName}"/>  
                                                         </div>
                                                     </div>
                                                 </td>
@@ -167,22 +269,22 @@
                                                     </div>
                                                     
                                                     <div class="form-group">
-                                                        <apex:inputField value="{!viewModel.account.Email__c}" html-placeholder="電子信箱"/><br/>
+                                                        <apex:inputField value="{!viewModel.account.Email__c}" html-placeholder="電子信箱" style="width:200px;"/><br/>
                                                     </div>
                                                     
                                                     <div class="form-group form-row">
                                                         <div class="col-auto">
-                                                            <apex:commandButton value="儲存變更" action="{!submitEmail}" style=" color:black;  background-color:#dde2e2; border-width:0px;" styleClass="btn"/>     
+                                                            <apex:commandButton value="儲存變更" action="{!submitEmail}" style=" color:black; background-color:#dde2e2; border-width:0px;" styleClass="btn" reRender="form"/>     
                                                         </div>
                                                         <div class="col-auto">
-                                                            <apex:commandLink value="取消" immediate="true" action="{!viewModel.cancelChange}"/>     
+                                                            <apex:commandLink value="取消" immediate="true" action="{!cancelChange}" reRender="form"/>     
                                                         </div>          
                                                     </div>        
                                                 </td>
                                             </tr>
                                         </table>   
                                     </apex:outputPanel>
-                                    <apex:outputPanel rendered="{!viewModel.isChangePassword}">
+                                    <apex:outputPanel rendered="{!isChangePassword}">
                                         <table class="table  table-bordered" style="background-color:white">
                                             <tr>
                                                 <td>
@@ -194,7 +296,7 @@
                                                             {!viewModel.account.LastName__c} 
                                                         </div>
                                                         <div class="col-auto">
-                                                            <apex:commandLink value="變更" action="{!viewModel.changeName}"/>  
+                                                            <apex:commandLink value="變更" action="{!changeName}"/>  
                                                         </div>
                                                     </div>
                                                 </td>
@@ -209,7 +311,7 @@
                                                             {!viewModel.account.Email__c} 
                                                         </div>
                                                         <div class="col-auto">
-                                                            <apex:commandLink value="變更" action="{!viewModel.changeEmail}"/>  
+                                                            <apex:commandLink value="變更" action="{!changeEmail}"/>  
                                                         </div>
                                                     </div>
                                                 </td>
@@ -221,26 +323,26 @@
                                                         <small>請輸入你目前設定的密碼以確認身份</small><br/>
                                                     </div>
                                                     <div class="form-group">
-                                                        <apex:inputField value="{!viewModel.accountOld.Password__c}" style="width:70%" html-placeholder="舊密碼"/><br/>
+                                                        <apex:inputSecret value="{!accountOld.Password__c}" style="width:70%" html-placeholder="舊密碼"/><br/>
                                                     </div>
                                                     <div >
                                                         新密碼
                                                     </div>
                                                     <div class="form-group">
-                                                        <apex:inputField value="{!viewModel.accountNew.Password__c}" style="width:70%" html-placeholder="新密碼"/><br/>
+                                                        <apex:inputSecret value="{!accountNew.Password__c}" style="width:70%" html-placeholder="新密碼"/><br/>
                                                     </div>
                                                     <div >
                                                         再輸入一次新密碼
                                                     </div>
                                                     <div class="form-group">
-                                                        <apex:inputField value="{!viewModel.accountVerify.Password__c}" style="width:70%" html-placeholder="再輸入一次新密碼"/><br/>
+                                                        <apex:inputSecret value="{!accountVerify.Password__c}" style="width:70%" html-placeholder="再輸入一次新密碼"/><br/>
                                                     </div>
                                                     <div class="form-group form-row">
                                                         <div class="col-auto">
-                                                            <apex:commandButton value="儲存變更" action="{!submitPassword}" style=" color:black;  background-color:#dde2e2; border-width:0px;" styleClass="btn"/>     
+                                                            <apex:commandButton value="儲存變更" action="{!submitPassword}" style=" color:black;  background-color:#dde2e2; border-width:0px;" styleClass="btn" reRender="form"/>     
                                                         </div>
                                                         <div class="col-auto">
-                                                            <apex:commandLink value="取消" action="{!viewModel.cancelChange}"/>     
+                                                            <apex:commandLink value="取消" action="{!cancelChange}" reRender="form"/>     
                                                         </div>       
                                                     </div>
                                                     
@@ -257,20 +359,22 @@
                                             </tr>
                                             <tr>
                                                 <td>
+                                                    <!-- Facebook button -->
                                                     <div class="form-group">
-                                                        <apex:commandButton action="{!submitName}" value="已聯結，停用FACEBOOK帳號連結" style="width:70%; font-size:12px; " styleClass="btn btn-social btn-facebook"/><br/>    
+                                                        <div id="fbLogin" class="fb-login-button" data-max-rows="1" data-size="large" data-scope="public_profile,email"
+                                                        data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" width="340"></div>
                                                     </div>
+                                                
+                                                    <!-- Google button -->
                                                     <div class="form-group">
-                                                        <apex:commandButton action="{!submitName}" value="使用 GOOGLE 帳號" style="width:70%;" styleClass="btn btn-social btn-google"/>       
+                                                        <div id="my-signin2" class="g-signin2" data-onsuccess="onSignIn"></div>  
                                                     </div>
                                                 </td>
                                             </tr>
                                         </table>       
                                     </apex:outputPanel>
                                 </div>
-                                <div class="col-0 col-sm-2 col-md-3 col-lg-3 col-xl-4"/>
-                            </div>
-                        </div>
+                                
                     </div>
                 </div>   
             </apex:form>   

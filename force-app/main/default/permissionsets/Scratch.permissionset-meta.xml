@@ -272,11 +272,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Account__c.Expiration_year__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Account__c.FirstName__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -608,7 +603,7 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>ChangePasswordPage</apexPage>
+        <apexPage>ResetPasswordPage</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

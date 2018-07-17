@@ -9,16 +9,22 @@ public with sharing class RetrievePasswordController extends ApexBaseController 
     public Pagereference submit() {
         if (account.Email__c != null) {
             if (EmailUtility.sendEmail(account.Email__c, 'PasswordReset') == true) {
-                addMessage(ApexPages.Severity.INFO, '請檢查您的信箱');
+                turnActiveFalse(account);
                 PageReference page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/RetrievePasswordResultPage');
                 page.setRedirect(true);
             
-        	    return page;
-
+                return page;
             } else {
-                addMessage(ApexPages.Severity.ERROR, '此信箱不存在');
+                addMessage(ApexPages.Severity.ERROR, System.Label.Msg_EmailNotExist);
             }
         }
         return null;
+    }
+
+    private void turnActiveFalse(Account__c account) {
+        Account__c realAccount = AccountModel.getAccountByEmail(account.Email__c);
+        
+        realAccount.Active__c = false;
+        update realAccount;
     }
 }
