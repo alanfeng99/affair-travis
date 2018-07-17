@@ -29,6 +29,7 @@ script:
 - sfdx force:data:tree:import -f tmp/sfdx-out/export-demo-Product2s.json
 - sfdx force:data:tree:import -f tmp/sfdx-out/export-demo-Address__cs.json
 - sfdx force:data:tree:import -f tmp/sfdx-out/export-demo-Address__cs2.json
+- sfdx force:data:tree:import -f tmp/sfdx-out/export-demo-EncryptionKey__cs.json
 - sfdx force:apex:test:run -u DevCi --wait 10
 - sfdx force:org:delete -u DevCi -p
 notifications:
