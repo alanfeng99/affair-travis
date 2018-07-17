@@ -28,6 +28,7 @@ public with sharing class RegisterViewModel {
             errorMessage = '帳號已存在';
             return false;
         }
+        account = accountCreated;
 
         if (EmailUtility.sendEmail(account.Email__c, 'AccountActivation'))
             return true;
