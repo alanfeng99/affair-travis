@@ -51,11 +51,11 @@ public with sharing class NewSubscriptionViewModel {
         }
                 
         gmoPaymentBean.card_holder_name = account.LastName__c;
-        
+        System.debug(subscription.Id);
         gmoPaymentBean.ip_address = ApexUtility.getUserIPAddress();
-        Subscription__c subscriptionProgram = [SELECT Program__r.ProgramId__c, Program__r.ProgramName__c FROM Subscription__c];
-        gmoPaymentBean.item_code = subscriptionProgram.Program__r.ProgramId__c;
-        gmoPaymentBean.item_name = subscriptionProgram.Program__r.ProgramName__c;
+        SubscriptionProgram__c program = [SELECT ProgramId__c, ProgramName__c FROM SubscriptionProgram__c WHERE ID = :subscription.Program__c];
+        gmoPaymentBean.item_code = program.ProgramId__c;
+        gmoPaymentBean.item_name = program.ProgramName__c;
         gmoPaymentBean.order_number = ApexUtility.generateRandomNumeric(4) + Datetime.now().format('yyyyMMddHHmmss');
         gmoPaymentBean.item_price = String.valueOf(subscription.Amount__c);
 

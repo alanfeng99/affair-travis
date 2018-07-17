@@ -12,14 +12,13 @@ public with sharing class UpdateCreditCardController extends ApexBaseController 
         	subscriptionId = ApexPages.currentpage().getparameters().get('subscriptionId');
             viewModel = new UpdateCreditCardViewModel(accountId);  
             tempAccount = viewModel.account.clone();
-            viewModel.account.CVC__c = '';
         }    
     }
 
     public Pagereference updateCreditcard() {
         if (checkField()) {
-            if (viewModel.account.credit_card_number__c != null && !String.isBlank(viewModel.account.credit_card_number__c))
-                viewModel.account.credit_card_number__c = EncryptionUtility.encrypt(viewModel.account.credit_card_number__c);
+            if (viewModel.cc != null && !String.isBlank(viewModel.cc))
+                viewModel.account.credit_card_number__c = viewModel.cc.substring(0,4) + '****' + viewModel.cc.substring(viewModel.cc.length()-4, viewModel.cc.length());
 
             if(viewModel.updateAccount()) 
                 if(updateReplenish()) {
@@ -33,7 +32,6 @@ public with sharing class UpdateCreditCardController extends ApexBaseController 
     }
 
     public Pagereference cancel() {
-        rollbackAccount();  
         return ApexUtility.toPage('SubscriptionManagementPage');
     }
 
@@ -47,20 +45,29 @@ public with sharing class UpdateCreditCardController extends ApexBaseController 
         return year;
     }
 
+    public List<SelectOption> getCreditcard_Month() {
+        List<SelectOption> months = new List<SelectOption>();
+        months.add(new SelectOption('','--None--'));
+        for (Integer i=1; i<13; i++)
+            months.add(new SelectOption(String.valueOf(i),String.valueOf(i)));   
+
+        return months;
+    }
+
     private Boolean checkField() {
-        if (viewModel.account.credit_card_number__c == null || viewModel.account.Expiration_month__c == null ||
-                viewModel.account.Expiration_Year_text__c == null || viewModel.account.Expiration_Year_text__c == '' ||
-                viewModel.account.CVC__c == null){
+        if (viewModel.cc == null || viewModel.expireMonth == null ||
+                viewModel.expireYear == null || viewModel.expireYear == '' ||
+                viewModel.expireMonth == '' || viewModel.cvc == null){
             addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckAll);
             return false;
         } 
 
-        if (!CreditcardUtility.isCreditCardPattenMatching(viewModel.account.credit_card_number__c)) {
+        if (!CreditcardUtility.isCreditCardPattenMatching(viewModel.cc)) {
             addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckNumber);
             return false;
         } 
 
-        if (!CreditcardUtility.isCVCPattenMatching(viewModel.account.CVC__c)) {
+        if (!CreditcardUtility.isCVCPattenMatching(viewModel.cvc)) {
             addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckCVC);
             return false;
         }
@@ -77,11 +84,5 @@ public with sharing class UpdateCreditCardController extends ApexBaseController 
             }
         }
         return true;
-    }
-
-    private void rollbackAccount() {
-        viewModel.account.credit_card_number__c = tempAccount.credit_card_number__c;
-        viewModel.account.Expiration_month__c = tempAccount.Expiration_month__c;
-        viewModel.account.CVC__c = tempAccount.CVC__c;
     }
 }

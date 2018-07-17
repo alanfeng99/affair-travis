@@ -38,10 +38,12 @@ public class GMOPaymentAPI {
         params.put('mission_code', '1');
         params.put('currency_id', 'TWD');
         params.put('item_price', gmoPaymentBean.item_price);
-        params.put('card_number', gmoPaymentBean.card_number);
-        params.put('expire_year', gmoPaymentBean.expire_year);
-        params.put('expire_month', gmoPaymentBean.expire_month);
-        params.put('security_code', gmoPaymentBean.security_code);
+        if (gmoPaymentBean.card_number != null) {
+            params.put('card_number', gmoPaymentBean.card_number);
+            params.put('expire_year', gmoPaymentBean.expire_year);
+            params.put('expire_month', gmoPaymentBean.expire_month);
+            params.put('security_code', gmoPaymentBean.security_code);
+        }
         params.put('pan_bank', 'CitiBank');
         params.put('pan_country', 'TW');
         params.put('card_holder_name', gmoPaymentBean.card_holder_name);

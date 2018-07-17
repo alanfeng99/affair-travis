@@ -8,8 +8,6 @@
     <columns>Locked__c</columns>
     <columns>Email__c</columns>
     <columns>credit_card_number__c</columns>
-    <columns>Expiration_month__c</columns>
-    <columns>CVC__c</columns>
     <columns>PasswordRetry__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
