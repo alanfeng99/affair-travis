@@ -5,6 +5,5 @@ public with sharing class RegisterResultController {
     public RegisterResultController() {
         String accountId = ApexPages.currentPage().getParameters().get('id');     
         viewModel = new RegisterResultViewModel(accountId);
-
     }
 }
