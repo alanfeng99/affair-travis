@@ -23,31 +23,31 @@
                 <br/>
                 <div align="center" class="letterspacing3px" style="font-size:18px; line-height:1px;">
                     請填寫訂閱資料
-                    <hr style="width:160px;" color="black"/>
+                    <hr class="w160px" color="black"/>
                 </div>
                 <div class="card-body container" style="max-width:320px;">
-                    <div style="font-size:14px;">
+                    <div class="fontsize14px">
                         選擇訂閱方案
                     </div>
                     <div class="form-group">
-                        <apex:selectList value="{!programId}"  size="1" styleClass="form-control" style="height:35px;">
+                        <apex:selectList value="{!programId}"  size="1" styleClass="form-control h40px" >
                             <apex:selectOptions value="{!ProgramSelection}" />
                             <apex:actionSupport event="onchange" action="{!programPriceDecide}" reRender="form"/>     
                         </apex:selectList> 
                         
                     </div>
-                    <div style="font-size:14px;">
+                    <div class="fontsize12px">
                         起始期數
                     </div>
                     <div class="form-row">
                         <apex:repeat value="{!ProgramInfo}" var="program"> 
                     	<div class="col">
-                            <apex:image url="{!program.PicturePath__c}" style="width:120px; height:160px;"/>
+                            <apex:image url="{!program.PicturePath__c}" styleClass="w120px h160px"/>
                         </div>
                     </apex:repeat>
                     </div>
                     <div align="center">
-                         <apex:selectRadio value="{!startPeriod}"  style="width:100%" >
+                         <apex:selectRadio value="{!startPeriod}"  styleClass="w100" >
                         <apex:selectOptions value="{!ProductRadioButton}" />
                     </apex:selectRadio> 
                     </div>
@@ -56,7 +56,7 @@
                         <hr width="310px;"/>
                         <small style="color:red"><apex:outputText rendered="{!showErrorForNullProgram}">請優先選擇訂閱方案，方能新增收件人</apex:outputText></small>
                         <div>
-                            <div class="row" style="font-size:14px;">
+                            <div class="row fontsize14px" >
                                 <div class="col">
                                     收件者資料 {!tempSub.Index__c}   
                                 </div>
@@ -69,21 +69,21 @@
                             </div>
                             <apex:outputPanel >
                                 <div class="form-group">
-                                    <apex:inputField value="{!tempSub.Recipient__c}"  styleClass="form-control w100" html-placeholder="收件人名稱"/>    
+                                    <apex:inputField value="{!tempSub.Recipient__c}"  styleClass="form-control w100 h40px" html-placeholder="收件人名稱"/>    
                                 </div>   
                                 <div class="form-row form-group" style="font-size:14px;" id="address">
                                     <div class="col-6">
-                                        <apex:inputField value="{!tempSub.City_picklist__c}" styleClass="form-control" style="height:35px;"/>
+                                        <apex:inputField value="{!tempSub.City_picklist__c}" styleClass="form-control h40px"/>
                                     </div>
                                     <div class="col-6">
-                                        <apex:inputField value="{!tempSub.Area_picklist__c}" styleClass="form-control" style="height:35px;"/>
+                                        <apex:inputField value="{!tempSub.Area_picklist__c}" styleClass="form-control h40px" />
                                     </div>    
                                 </div>
                                 <div class="form-group">
-                                    <apex:inputField value="{!tempSub.Address__c }" styleClass="form-control w100" html-placeholder="地址" />
+                                    <apex:inputField value="{!tempSub.Address__c }" styleClass="form-control w100 h40px" html-placeholder="地址" />
                                 </div>
                                 <div class="form-group">
-                                    <apex:inputField value="{!tempSub.Tel__c }" styleClass="form-control w100" html-placeholder="電話" />                        	
+                                    <apex:inputField value="{!tempSub.Tel__c }" styleClass="form-control w100 h40px" html-placeholder="電話" />                        	
                                 </div> 
                             </apex:outputPanel>   
                         </div>

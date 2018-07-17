@@ -181,6 +181,14 @@
         <shortDescription>Msg_電話格式</shortDescription>
         <value>請確認電話是否正確</value>
     </labels>
+     <labels>
+        <fullName>Msg_EmailFormat</fullName>
+        <categories>Messages</categories>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>Msg_信箱格式不符</shortDescription>
+        <value>電子郵件格式不符</value>
+    </labels>
     <labels>
         <fullName>Msg_UpdateCompleted</fullName>
         <categories>Messages</categories>
@@ -212,5 +220,13 @@
         <protected>true</protected>
         <shortDescription>Msg_信箱不存在</shortDescription>
         <value>此信箱不存在</value>
+    </labels>
+    <labels>
+        <fullName>Msg_EmailSendFail</fullName>
+        <categories>Messages</categories>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>Msg_信件傳送失敗</shortDescription>
+        <value>電子郵件傳送失敗</value>
     </labels>
 </CustomLabels>

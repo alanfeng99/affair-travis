@@ -25,11 +25,11 @@
                     </div>
                 </div>
                 <br/>
-                <div align="center" style="font-size:20px;">
+                <div align="center" class="fontsize20px">
                     建立帳號
                 </div>   
-                <div class="card-body container"  style="line-height:55px; max-width:340px;">                   
-                    <div style="font-size:14px;">
+                <div class="card-body container"  style="max-width:340px;">                   
+                    <div class="fontsize14px">
                         <span>
                             已經有帳號？
                         </span>
@@ -37,24 +37,22 @@
                             <a href="/apex/LoginPage">直接登入 </a>
                         </span>  
                     </div>
-                    <apex:commandButton value="使用FaceBook 帳號登入" action="{!register}"  styleClass="btn btn-social btn-facebook"/>              
-                    <apex:commandButton value="使用Google 帳號登入" action="{!register}" styleClass="btn btn-social btn-google"/> 
-                    <hr width="100%;"/>
+                    <hr class="w100"/>
                     
                     <apex:inputText value="{!viewModel.account.Email__c}" html-placeholder="請輸入 E-mail 電子信箱" styleClass="form-control w100 h50px" />
                      <small style="color:red;"><apex:messages /></small>
-                    <div style="font-size:12px;" align="center">
+                    <div  align="center" style="font-size:12px;">
                         送出建立帳號時，代表您同意我們的服務條款和隱私政策
                     </div>
                     
                     <div align="right">
-                        <apex:commandButton value="建立帳號" action="{!register}" style="width:120px; border-width:0px; background-color:#585e5d;" styleClass="btn btn-dark h40px" reRender="form"/>                        
+                        <apex:commandButton value="建立帳號" action="{!register}" style="border-width:0px; background-color:#585e5d;" styleClass="btn btn-dark h40px w120px" reRender="form"/>                        
                     </div>                    
                 </div>     
             </div>          
         </apex:form>   
         <div class="footer text-muted text-right">
-            <hr style="width:100%"/>
+            <hr class="w100"/>
             <p>
                 The Affairs Mediuum Ltd. 編集者新聞社有限公司
             </p>
