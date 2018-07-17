@@ -12,6 +12,24 @@ public with sharing class AccountModel {
         }
     }
 
+    public static Account__c getAccountByGoogleEmail(String googleEmail) {
+        List<Account__c> accounts = [Select Id, PasswordRetry__c, Locked__c, Active__c, Email__c, LastName__c, Password__c, GoogleEmail__c, FacebookEmail__c from Account__c where GoogleEmail__c = :googleEmail OR Email__c = :googleEmail];
+        if (accounts.size() > 0) {
+            return accounts.get(0);
+        } else { 
+            return null;
+        }
+    }
+
+    public static Account__c getAccountByFacebookEmail(String facebookEmail) {
+        List<Account__c> accounts = [Select Id, PasswordRetry__c, Locked__c, Active__c, Email__c, LastName__c, Password__c, GoogleEmail__c, FacebookEmail__c from Account__c where FacebookEmail__c = :facebookEmail OR Email__c = :facebookEmail];
+        if (accounts.size() > 0) {
+            return accounts.get(0);
+        } else { 
+            return null;
+        }
+    }
+
     public static void lockAccountForThreeTimes(Account__c account) {
         account.Locked__c = true;
         update account;
@@ -41,7 +59,7 @@ public with sharing class AccountModel {
     }
 
     public static Account__c createAccountByFacebook(String email, String lastName) {
-        List<Account__c> accounts = [Select Id from Account__c where Email__c = :email];
+        List<Account__c> accounts = [Select Id from Account__c where FacebookEmail__c = :email OR Email__c = :email];
         if (accounts.size() > 0)
             return null;
         
@@ -52,7 +70,7 @@ public with sharing class AccountModel {
     }
 
     public static Account__c createAccountByGoogle(String email, String lastName) {
-        List<Account__c> accounts = [Select Id from Account__c where Email__c = :email];
+        List<Account__c> accounts = [Select Id from Account__c where GoogleEmail__c = :email OR Email__c = :email];
         if (accounts.size() > 0)
             return null;
         
