@@ -37,7 +37,9 @@ notifications:
     - jin@4idps.com
     - bruno.chami@4idps.com
     - alan.feng@4idps.com
-    on_success: never
+    on_success: change
     on_failure: always
   slack:
     secure: TY/5GH9fTyY+uTQFfLqWEiXBNVCavNeYGbdqVoZqc1Uqaw6ftjGxC1q++5KG4eY1SW1YDHtZREyX534BwDSuZmqYECrzLQPS0W98F9wQbCNl6pXBy18P954cMKCySnZ5NjKZUTegMlbQkK+RXIliTEPhDxy2aKA8l7tLwISd+o6mV8tUxESyZ8g/ANyTzWhwz7SHnW6KAtA7Hg1bGiRia3PKnNcAmBW253PT9aekXIzabxH78VJXgLawsATpwYhVSC45R68nnhhQmKG62GjptLN950IjH+7xBheU01WOY7rOpEOaw/UkJzZXdV+Pzrgzr9KCcYUhV6nXzv5eDKPRmiGqwubq1gE2I4afO+8g4MKX5G94BtJfopuJ1cD6ipG5ehGjfv+FNqW1XrwexhKXoI9frOYZgifUOrwNt/YR02eAlaYNx/J7sX3sGtKlfCYrEM69XG2t7W8qZrTJAVGfDaTUNRy3Gtq+vYN5MledLfWX/eB3dXGpiswXmQvmllReC2bd1tnGHFz/FuGHuQW0/7Hz4YPJQKLztfzFl1bFHsR7bYuf/Aqw9+Sjdk3Gkg7BkkfYho9ZvabFZJ4i80d/v6xWYGJdOKSJR5RKzuk1DZgwmmLoQ0X5CMG/4y8TjEtZjjaSD0C+ec6PYUqf5n+NfosDplFP46AG5AYW1Jz3hO4=
+    on_success: change
+    on_failure: always
