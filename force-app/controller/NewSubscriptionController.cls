@@ -33,7 +33,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             firstSubscription.Index__c = 1;
             tempSubscriptions.add(firstSubscription);
 
-            viewModel.account.CVC__c = '';
+            viewModel.cvc = '';
             calculateSize();
         }
         pageInit();
@@ -153,8 +153,8 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
 
         
         insertSubscriptionPriceAndProgram();
-        if (viewModel.account.credit_card_number__c != null && !String.isBlank(viewModel.account.credit_card_number__c))
-            viewModel.account.credit_card_number__c = EncryptionUtility.encrypt(viewModel.account.credit_card_number__c);
+        if (viewModel.cc != null && !String.isBlank(viewModel.cc))
+            viewModel.account.credit_card_number__c = viewModel.cc.substring(0,4) + '****' + viewModel.cc.substring(viewModel.cc.length()-4, viewModel.cc.length());
 
         if (viewModel.newSubscription(subscriptionInsertList)) {
             PageReference page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/SubscriptionManagementPage');
@@ -239,18 +239,18 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     private Boolean isFieldFilledWhenChoosenCard() {
         for (Subscription__c sub : subscriptionInsertList) {
             if (sub.Payment_method__c == '信用卡') {
-                if (viewModel.account.credit_card_number__c == null || viewModel.account.Expiration_Year_text__c == null || 
-                    viewModel.account.Expiration_Year_text__c == '' ||viewModel.account.Expiration_month__c == null || 
-                    viewModel.account.CVC__c == null) {
+                if (viewModel.cc == null || viewModel.expireYear == null ||
+                    viewModel.expireYear == '' || viewModel.expireMonth == null ||
+                    viewModel.expireMonth == '' || viewModel.cvc == null) {
                     addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckAll);
                     return false;
                 }
-                if (!CreditcardUtility.isCVCPattenMatching(viewModel.account.CVC__c)) {
+                if (!CreditcardUtility.isCVCPattenMatching(viewModel.cvc)) {
                     addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckCVC);
                     return false;
                 } 
                 
-                if (!CreditcardUtility.isCreditCardPattenMatching(viewModel.account.credit_card_number__c)) {
+                if (!CreditcardUtility.isCreditCardPattenMatching(viewModel.cc)) {
                     addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckNumber);
                     return false;
                 }

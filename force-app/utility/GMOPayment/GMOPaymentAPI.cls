@@ -15,8 +15,8 @@ public class GMOPaymentAPI {
         request.setBody(buildGMOPaymentBody());
         System.debug(request.getBody());
 
-        HttpResponse response = http.send(request);
-        System.debug(response.getBody());
+        //HttpResponse response = http.send(request);
+        //System.debug(response.getBody());
     }
 
     public String buildGMOPaymentBody() {
@@ -24,7 +24,7 @@ public class GMOPaymentAPI {
         params.put('contract_code', gmoPaymentBean.contract_code);
         params.put('version', '1');
         params.put('character_code', 'UTF-8');
-        params.put('process_code', '1');
+        params.put('process_code', '2');
         params.put('user_id', gmoPaymentBean.user_id);
         params.put('user_name', gmoPaymentBean.user_name);
         params.put('user_mail_add', gmoPaymentBean.user_mail_add);
