@@ -12,14 +12,14 @@ public class GMOPaymentAPI {
         request.setEndpoint('https://test.global-payment.asia/payment/api/direct_payment.cgi');
         request.setMethod('POST');
         
-        request.setBody(buildGMOPaymentBody());
+        request.setBody(buildGMOPaymentBodyForRegisteredID());
         System.debug(request.getBody());
 
-        //HttpResponse response = http.send(request);
-        //System.debug(response.getBody());
+        HttpResponse response = http.send(request);
+        System.debug(response.getBody());
     }
 
-    public String buildGMOPaymentBody() {
+    public String buildGMOPaymentBodyForRegisteredID() {
         Map<String, String> params = new Map<String,String>();
         params.put('contract_code', gmoPaymentBean.contract_code);
         params.put('version', '1');
@@ -38,16 +38,18 @@ public class GMOPaymentAPI {
         params.put('mission_code', '1');
         params.put('currency_id', 'TWD');
         params.put('item_price', gmoPaymentBean.item_price);
+        params.put('pan_bank', 'CitiBank');
+        params.put('pan_country', 'TW');
+        params.put('card_holder_name', gmoPaymentBean.card_holder_name);
+        params.put('add_info1', '1');
+
         if (gmoPaymentBean.card_number != null) {
             params.put('card_number', gmoPaymentBean.card_number);
             params.put('expire_year', gmoPaymentBean.expire_year);
             params.put('expire_month', gmoPaymentBean.expire_month);
             params.put('security_code', gmoPaymentBean.security_code);
         }
-        params.put('pan_bank', 'CitiBank');
-        params.put('pan_country', 'TW');
-        params.put('card_holder_name', gmoPaymentBean.card_holder_name);
-        params.put('add_info1', '1');
+
         String mapToString = '';
         
         for(String key:params.keySet())

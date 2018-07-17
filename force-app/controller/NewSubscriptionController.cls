@@ -33,7 +33,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             firstSubscription.Index__c = 1;
             tempSubscriptions.add(firstSubscription);
 
-            viewModel.cvc = '';
+            viewModel.creditCardBean.cvc = '';
             calculateSize();
         }
         pageInit();
@@ -162,8 +162,9 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
 
         
         insertSubscriptionPriceAndProgram();
-        if (viewModel.cc != null && !String.isBlank(viewModel.cc))
-            viewModel.account.credit_card_number__c = viewModel.cc.substring(0,4) + '****' + viewModel.cc.substring(viewModel.cc.length()-4, viewModel.cc.length());
+        if (viewModel.creditCardBean.cc != null && !String.isBlank(viewModel.creditCardBean.cc))
+            viewModel.account.credit_card_number__c = viewModel.creditCardBean.cc.substring(0,4) + '****' + 
+                                                    viewModel.creditCardBean.cc.substring(viewModel.creditCardBean.cc.length()-4, viewModel.creditCardBean.cc.length());
 
         if (viewModel.newSubscription(subscriptionInsertList)) {
             PageReference page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/SubscriptionManagementPage');
@@ -209,7 +210,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         
         for (Subscription__c sub : subscriptionInsertList) {
             sub.Start_period__c = startPeriod;
-            sub.End_period__c = startPeriod + programs.get(0).Order_Period__c;
+            sub.End_period__c = startPeriod + programs.get(0).Order_Period__c - 1;
             sub.Amount__c = programPrice;      
             sub.Program__c = programs.get(0).id;
             sub.CustomAccount__c = viewModel.account.Id;
@@ -248,18 +249,18 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     private Boolean isFieldFilledWhenChoosenCard() {
         for (Subscription__c sub : subscriptionInsertList) {
             if (sub.Payment_method__c == '信用卡') {
-                if (viewModel.cc == null || viewModel.expireYear == null ||
-                    viewModel.expireYear == '' || viewModel.expireMonth == null ||
-                    viewModel.expireMonth == '' || viewModel.cvc == null) {
+                if (viewModel.creditCardBean.cc == null || viewModel.creditCardBean.expireYear == null ||
+                    viewModel.creditCardBean.expireYear == '' || viewModel.creditCardBean.expireMonth == null ||
+                    viewModel.creditCardBean.expireMonth == '' || viewModel.creditCardBean.cvc == null) {
                     addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckAll);
                     return false;
                 }
-                if (!CreditcardUtility.isCVCPattenMatching(viewModel.cvc)) {
+                if (!CreditcardUtility.isCVCPattenMatching(viewModel.creditCardBean.cvc)) {
                     addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckCVC);
                     return false;
                 } 
                 
-                if (!CreditcardUtility.isCreditCardPattenMatching(viewModel.cc)) {
+                if (!CreditcardUtility.isCreditCardPattenMatching(viewModel.creditCardBean.cc)) {
                     addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckNumber);
                     return false;
                 }
