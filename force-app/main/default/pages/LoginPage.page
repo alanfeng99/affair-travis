@@ -175,7 +175,7 @@
                                 <apex:inputField value="{!viewModel.account.Email__c}" html-placeholder="電子信箱" styleClass="form-control w100 h50px" />                            
                             </div>    
                             <div class="form-group">
-                                <apex:inputField value="{!viewModel.account.Password__c}" html-placeholder="密碼" styleClass="form-control w100 h50px" />
+                                <apex:inputSecret value="{!viewModel.account.Password__c}" html-placeholder="密碼" styleClass="form-control w100 h50px" />
                             </div>
                             <div align="right">
                                 <a href="/apex/RetrievePasswordPage" style="color:#585e5d; text-decoration: underline;">忘記密碼?</a> <br/>

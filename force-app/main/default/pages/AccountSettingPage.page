@@ -219,19 +219,19 @@
                                                         <small>請輸入你目前設定的密碼以確認身份</small><br/>
                                                     </div>
                                                     <div class="form-group">
-                                                        <apex:inputField value="{!accountOld.Password__c}" style="width:70%" html-placeholder="舊密碼"/><br/>
+                                                        <apex:inputSecret value="{!accountOld.Password__c}" style="width:70%" html-placeholder="舊密碼"/><br/>
                                                     </div>
                                                     <div >
                                                         新密碼
                                                     </div>
                                                     <div class="form-group">
-                                                        <apex:inputField value="{!accountNew.Password__c}" style="width:70%" html-placeholder="新密碼"/><br/>
+                                                        <apex:inputSecret value="{!accountNew.Password__c}" style="width:70%" html-placeholder="新密碼"/><br/>
                                                     </div>
                                                     <div >
                                                         再輸入一次新密碼
                                                     </div>
                                                     <div class="form-group">
-                                                        <apex:inputField value="{!accountVerify.Password__c}" style="width:70%" html-placeholder="再輸入一次新密碼"/><br/>
+                                                        <apex:inputSecret value="{!accountVerify.Password__c}" style="width:70%" html-placeholder="再輸入一次新密碼"/><br/>
                                                     </div>
                                                     <div class="form-group form-row">
                                                         <div class="col-auto">
