@@ -78,7 +78,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     }
         
     public Pagereference programPriceDecide() {
-        List<SubscriptionProgram__c> programs = SubscriptionModel.getProgram(programId);
+        List<SubscriptionProgram__c> programs = SubscriptionModel.getProgramById(programId);
         if (programId != null) {
             programPrice = programs.get(0).Price__c;   
             programName = programs.get(0).ProgramName__c;
@@ -206,7 +206,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     }
 
     private void insertSubscriptionPriceAndProgram() {
-        List<SubscriptionProgram__c> programs = SubscriptionModel.getProgram(programId);
+        List<SubscriptionProgram__c> programs = SubscriptionModel.getProgramById(programId);
         
         for (Subscription__c sub : subscriptionInsertList) {
             sub.Start_period__c = startPeriod;

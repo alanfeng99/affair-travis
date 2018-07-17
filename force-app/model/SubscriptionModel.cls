@@ -12,7 +12,7 @@ public with sharing class SubscriptionModel {
         return [SELECT Id, Price__c, ProgramId__c, ProgramName__c, Order_Period__c FROM SubscriptionProgram__c Order by Price__c];
     }
 
-    public static List<SubscriptionProgram__c> getProgram(String programId) {
+    public static List<SubscriptionProgram__c> getProgramById(String programId) {
         return [SELECT Id, Price__c, ProgramId__c, ProgramName__c, Order_Period__c FROM SubscriptionProgram__c WHERE ProgramId__c =: programId  Order by Price__c LIMIT 1] ;
     }
 }
