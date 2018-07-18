@@ -81,10 +81,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>GMOPaymentBean</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>LoginController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -278,6 +274,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>GMOPaymentBean__c.access_url__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>GMOPaymentBean__c.add_info1__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -299,6 +300,16 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>GMOPaymentBean__c.currency_id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.err_code__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.err_detail__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -343,6 +354,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>GMOPaymentBean__c.mode__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>GMOPaymentBean__c.order_number__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -358,7 +374,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>GMOPaymentBean__c.payment_code__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>GMOPaymentBean__c.process_code__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.result__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -369,6 +395,21 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>GMOPaymentBean__c.st_code__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.status__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.trans_code__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.trans_code_hash__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
