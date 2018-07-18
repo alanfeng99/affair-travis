@@ -5,6 +5,7 @@ public with sharing class NewSubscriptionViewModel {
     
     public NewSubscriptionViewModel(String accountId) {
         account = AccountModel.getAccountById(accountId);
+        creditCardBean = new CreditCardBean();
     }
 
     public Boolean newSubscription(List<Subscription__c> subscriptionInsertList) {

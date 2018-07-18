@@ -12,11 +12,16 @@ public class GMOPaymentAPI {
         request.setEndpoint('https://test.global-payment.asia/payment/api/direct_payment.cgi');
         request.setMethod('POST');
         
-        request.setBody(buildGMOPaymentBodyForRegisteredID());
+        String requestBody = buildGMOPaymentBodyForRegisteredID();
+        request.setBody(requestBody);
         System.debug(request.getBody());
 
         HttpResponse response = http.send(request);
         System.debug(response.getBody());
+        GMOPaymentBean__c beanAPIResponseToInsert = deserializationGMOResponse(response.getBody());
+        beanAPIResponseToInsert = (GMOPaymentBean__c) ApexUtility.mergeSecondObjectIntoFirstObject(beanAPIResponseToInsert, gmoPaymentBean);
+        
+        System.debug(beanAPIResponseToInsert);
     }
 
     public String buildGMOPaymentBodyForRegisteredID() {
@@ -57,5 +62,26 @@ public class GMOPaymentAPI {
         mapToString = mapToString.removeEnd(';');
 
         return mapToString;
+    }
+
+    public GMOPaymentBean__c deserializationGMOResponse(String response) {
+        Dom.Document doc = new Dom.Document();
+        doc.load(response);
+        //Retrieve the root element for this document.
+        Dom.XMLNode xroot = doc.getRootElement();
+        Dom.Document docNewXml = new Dom.Document();
+        Dom.XMLNode xrootNewXml = docNewXml.createRootElement(xroot.getName(),null,null);
+        for (Dom.XMLNode node : xroot.getChildren()) {
+            String nodeAttributeKey = node.getAttributeKeyAt(0);
+            String nodeAttributeValue = node.getAttribute(nodeAttributeKey, null);
+            Dom.XMLNode tmp = xrootNewXml.addChildElement(nodeAttributeKey + '__c',null,null);
+            tmp.addTextNode(nodeAttributeValue);
+        }
+        String newXml = docNewXml.toXmlString();
+        XMLSerializer xmlSerializer = new XMLSerializer();
+
+        GMOPaymentBean__c gmoPaymentBeanDeserialized = new GMOPaymentBean__c();
+        gmoPaymentBeanDeserialized = (GMOPaymentBean__c) xmlSerializer.deSerialize(newXml, GMOPaymentBean__c.class);
+        return gmoPaymentBeanDeserialized;
     }
 }

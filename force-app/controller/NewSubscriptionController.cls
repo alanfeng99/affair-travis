@@ -96,6 +96,11 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     public List<SelectOption> getProductRadioButton() {
         List<SelectOption> options = new List<SelectOption>();
         List<Product2> products = ProductModel.getProduct();
+        if (products == null) {
+            options.add(new SelectOption('No product', 'No product'));
+            return options;
+        }
+        
         for (Product2 product : products) 
         	options.add(new SelectOption(product.ProductCode, product.Name));    
 
