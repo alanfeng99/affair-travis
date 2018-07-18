@@ -1,3 +1,4 @@
+@isTest
 public class GMOPaymentAPITest {
     public GMOPaymentBean__c buildGMOPaymentBean() {
         GMOPaymentBean__c gmoPaymentBean = new GMOPaymentBean__c();
