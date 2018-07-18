@@ -98,7 +98,7 @@
                             <apex:actionSupport action="{!chooseCreditCard}" event="onchange" reRender="form"/>
                         </apex:selectRadio>
                     </div>
-                    <apex:outputPanel rendered="{!isChooseCreditCard}">
+                    <apex:outputPanel rendered="{!isChooseCreditCard}, {!viewModel.account.credit_card_number__c}">
                         <div class="form-group">
                             <apex:input value="{!viewModel.creditCardBean.cc }" html-placeholder="信用卡號" styleClass="form-control w100" />                            
                         </div>    

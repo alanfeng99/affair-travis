@@ -1,6 +1,6 @@
 public with sharing class AccountModel {
     public static Account__c getAccountById(String userId) {
-        return [Select Active__c, Locked__c, Email__c, PasswordRetry__c, LastName__c, Password__c, JoinDate__c, GoogleEmail__c, FacebookEmail__c from Account__c where Id = :userId];
+        return [Select Active__c, Locked__c, Email__c, PasswordRetry__c, LastName__c, Password__c, JoinDate__c, GoogleEmail__c, FacebookEmail__c, credit_card_number__c from Account__c where Id = :userId];
     }
 
     public static Account__c getAccountByEmail(String email) {

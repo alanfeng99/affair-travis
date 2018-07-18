@@ -56,7 +56,7 @@ public with sharing class ApexUtility {
 
     public static GMOPaymentBean__c generateGMOPaymentBean(Account__c account, Subscription__c subscription) {
         GMOPaymentBean__c gmoPaymentBean = new GMOPaymentBean__c();
-        gmoPaymentBean.contract_code__c = '10081070';
+        gmoPaymentBean.contract_code__c = System.Label.GMOPAYMENT_CONTRACT_CODE;
         gmoPaymentBean.user_id__c = account.Id;
         gmoPaymentBean.user_name__c = account.LastName__c;
         gmoPaymentBean.user_mail_add__c = account.Email__c;

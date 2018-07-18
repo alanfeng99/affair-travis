@@ -9,7 +9,7 @@ public class GMOPaymentAPI {
     public void executePayment() {
         Http http = new Http();
         HttpRequest request = new HttpRequest();
-        request.setEndpoint('https://test.global-payment.asia/payment/api/direct_payment.cgi');
+        request.setEndpoint(System.Label.GMOPAYMENT_API_URL);
         request.setMethod('POST');
 
         gmoPaymentBean = addCommonGMOPaymentBeanValues(gmoPaymentBean);

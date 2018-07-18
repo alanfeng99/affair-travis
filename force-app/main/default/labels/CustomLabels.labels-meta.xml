@@ -229,4 +229,18 @@
         <shortDescription>Msg_信件傳送失敗</shortDescription>
         <value>電子郵件傳送失敗</value>
     </labels>
+    <labels>
+        <fullName>GMOPAYMENT_CONTRACT_CODE</fullName>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>GMOPAYMENT_CONTRACT_CODE</shortDescription>
+        <value>10081070</value>
+    </labels>
+    <labels>
+        <fullName>GMOPAYMENT_API_URL</fullName>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>GMOPAYMENT_API_URL</shortDescription>
+        <value>https://test.global-payment.asia/payment/api/direct_payment.cgi</value>
+    </labels>
 </CustomLabels>
