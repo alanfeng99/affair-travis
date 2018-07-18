@@ -41,6 +41,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>CreditCardBean</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>CreditcardUtility</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -54,6 +58,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>EncryptionUtility</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ExecutePaymentEveryDay</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -165,6 +173,14 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>TestAccountModel</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>TestSubscriptionModel</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>UpdateCreditCardController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -258,6 +274,126 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>EncryptionKey__c.Key__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.add_info1__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.card_holder_name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.card_number__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.character_code__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.currency_id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.expire_month__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.expire_year__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.ip_address__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.item_code__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.item_name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.item_price__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.lang_id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.mission_code__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.order_number__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.pan_bank__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.pan_country__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.process_code__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.security_code__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.st_code__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.user_agent__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.user_id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.user_mail_add__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.user_name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>GMOPaymentBean__c.version__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -423,6 +559,9 @@
         <layout>EncryptionKey__c-EncryptionKey Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>GMOPaymentBean__c-GMOPaymentBean Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Product2-Product Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -456,6 +595,15 @@
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
         <object>EncryptionKey__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>GMOPaymentBean__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>

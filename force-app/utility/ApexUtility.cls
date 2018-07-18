@@ -41,34 +41,34 @@ public with sharing class ApexUtility {
         return responseBodyMapped.get('IP');
     }
 
-    public static GMOPaymentBean generateGMOPaymentBean(Account__c account, Subscription__c subscription, CreditCardBean creditCardBean) {
-        GMOPaymentBean gmoPaymentBean = generateGMOPaymentBean(account, subscription);
+    public static GMOPaymentBean__c generateGMOPaymentBean(Account__c account, Subscription__c subscription, CreditCardBean creditCardBean) {
+        GMOPaymentBean__c gmoPaymentBean = generateGMOPaymentBean(account, subscription);
         
         if (account.credit_card_number__c == null) {
-            gmoPaymentBean.card_number = creditCardBean.cc;
-            gmoPaymentBean.expire_year = creditCardBean.expireYear;
-            gmoPaymentBean.expire_month = creditCardBean.expireMonth;
-            gmoPaymentBean.security_code = creditCardBean.cvc;
+            gmoPaymentBean.card_number__c = creditCardBean.cc;
+            gmoPaymentBean.expire_year__c = creditCardBean.expireYear;
+            gmoPaymentBean.expire_month__c = creditCardBean.expireMonth;
+            gmoPaymentBean.security_code__c = creditCardBean.cvc;
         }
         
         return gmoPaymentBean;
     }
 
-    public static GMOPaymentBean generateGMOPaymentBean(Account__c account, Subscription__c subscription) {
-        GMOPaymentBean gmoPaymentBean = new GMOPaymentBean();
-        gmoPaymentBean.contract_code = '10081070';
-        gmoPaymentBean.user_id = account.Id;
-        gmoPaymentBean.user_name = account.LastName__c;
-        gmoPaymentBean.user_mail_add = account.Email__c;
+    public static GMOPaymentBean__c generateGMOPaymentBean(Account__c account, Subscription__c subscription) {
+        GMOPaymentBean__c gmoPaymentBean = new GMOPaymentBean__c();
+        gmoPaymentBean.contract_code__c = '10081070';
+        gmoPaymentBean.user_id__c = account.Id;
+        gmoPaymentBean.user_name__c = account.LastName__c;
+        gmoPaymentBean.user_mail_add__c = account.Email__c;
 
-        gmoPaymentBean.card_holder_name = account.LastName__c;
+        gmoPaymentBean.card_holder_name__c = account.LastName__c;
         System.debug(subscription.Id);
-        gmoPaymentBean.ip_address = ApexUtility.getUserIPAddress();
+        gmoPaymentBean.ip_address__c = ApexUtility.getUserIPAddress();
         SubscriptionProgram__c program = [SELECT ProgramId__c, ProgramName__c FROM SubscriptionProgram__c WHERE ID = :subscription.Program__c];
-        gmoPaymentBean.item_code = program.ProgramId__c;
-        gmoPaymentBean.item_name = program.ProgramName__c;
-        gmoPaymentBean.order_number = ApexUtility.generateRandomNumeric(4) + Datetime.now().format('yyyyMMddHHmmss');
-        gmoPaymentBean.item_price = String.valueOf(subscription.Amount__c);
+        gmoPaymentBean.item_code__c = program.ProgramId__c;
+        gmoPaymentBean.item_name__c = program.ProgramName__c;
+        gmoPaymentBean.order_number__c = ApexUtility.generateRandomNumeric(4) + Datetime.now().format('yyyyMMddHHmmss');
+        gmoPaymentBean.item_price__c = String.valueOf(subscription.Amount__c);
 
         return gmoPaymentBean;
     }

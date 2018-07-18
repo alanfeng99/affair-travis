@@ -12,8 +12,11 @@ public with sharing class NewSubscriptionViewModel {
         try {
             for (Subscription__c sub : subscriptionInsertList) 
                 if (sub.Payment_Method__c == '信用卡')
-                    if(creditCardBean.cc != null)
-                       executePayment(sub);
+                    if(creditCardBean.cc != null) {
+                        GMOPaymentBean__c gmoPaymentBean = ApexUtility.generateGMOPaymentBean(account, sub, creditCardBean);
+                        GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(gmoPaymentBean);
+                        gmoPaymentAPI.executePayment();
+                    }
 
             List<Database.SaveResult> results = Database.insert(subscriptionInsertList);
             
@@ -31,12 +34,5 @@ public with sharing class NewSubscriptionViewModel {
             errorMessage = ex.getMessage();
             return false;
         }
-    }
-    
-    public void executePayment(Subscription__c subscription) {
-        GMOPaymentBean gmoPaymentBean = ApexUtility.generateGMOPaymentBean(account, subscription, creditCardBean);
-
-        GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(gmoPaymentBean);
-        gmoPaymentAPI.saveCreditCardZPayment();
     }
 }
