@@ -40,7 +40,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>Subscription__c</field>
+                <field>ParentSubscription__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns/>
