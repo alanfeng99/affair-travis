@@ -126,9 +126,9 @@
                                                                 <div class="col-auto">
                                                                     {!sub.Name} |
                                                                 </div>
-                                                                <div class="col-auto">
+                                                                <!--<div class="col-auto">
                                                                     {!sub.Recipient__c }｜
-                                                                </div>
+                                                                </div>-->
                                                                 <div class="col-auto">
                                                                     {!sub.Program__r.Order_Period__c}期
                                                                 </div>

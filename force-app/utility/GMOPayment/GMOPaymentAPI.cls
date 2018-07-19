@@ -1,30 +1,44 @@
 public class GMOPaymentAPI {
 
     public GMOPaymentBean__c gmoPaymentBean {get; set;}
+    public String gmoPaymentURL {get; set;}
 
     public GMOPaymentAPI (GMOPaymentBean__c gmoPaymentBeanParam) {
         gmoPaymentBean = gmoPaymentBeanParam;
+        gmoPaymentURL = System.Label.GMOPAYMENT_API_URL;
+    }
+
+    public HttpRequest prepareRequest(String endPoint) {
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint(gmoPaymentURL + endPoint);
+        request.setMethod('POST');
+
+        return request;
     }
 
     public String executePayment() {
-        Http http = new Http();
-        HttpRequest request = new HttpRequest();
-        request.setEndpoint(System.Label.GMOPAYMENT_API_URL);
-        request.setMethod('POST');
+        HttpRequest request = prepareRequest(System.Label.ENDPOINT_DIRECT_PAYMENT);
 
         gmoPaymentBean = addCommonGMOPaymentBeanValues(gmoPaymentBean);
-        String requestBody = buildGMOPaymentBodyForRegisteredID(gmoPaymentBean);
+        String requestBody = buildGMOPaymentBodyForDirectPayment(gmoPaymentBean);
         request.setBody(requestBody);
         
+        Http http = new Http();
         HttpResponse response = http.send(request);
         GMOPaymentBean__c beanAPIResponse = deserializationGMOResponse(response.getBody());
         ApexUtility.mergeSecondObjectIntoFirstObject(gmoPaymentBean, beanAPIResponse);
         
         insert gmoPaymentBean;
-        if (gmoPaymentBean.result__c != '1' && gmoPaymentBean.trans_code__c != null && String.isBlank(gmoPaymentBean.trans_code__c)) {
+        if (gmoPaymentBean.result__c == '1' && gmoPaymentBean.trans_code__c != null && String.isBlank(gmoPaymentBean.trans_code__c)) {
             return gmoPaymentBean.trans_code__c;
         }
         return null;
+    }
+
+    public void checkOrder(String contract_code, String trans_code) {
+        HttpRequest request = prepareRequest(System.Label.ENDPOINT_CHECK_ORDER);
+        String requestBody = '';
+        request.setBody(requestBody);
     }
 
     public GMOPaymentBean__c addCommonGMOPaymentBeanValues(GMOPaymentBean__c gmoPaymentBeanParam) {
@@ -43,8 +57,9 @@ public class GMOPaymentAPI {
         return gmoPaymentBeanParam;
     }
 
-    public String buildGMOPaymentBodyForRegisteredID(GMOPaymentBean__c gmoPaymentBeanParam) {
+    public String buildGMOPaymentBodyForDirectPayment(GMOPaymentBean__c gmoPaymentBeanParam) {
         Map<String, String> params = new Map<String,String>();
+
         params.put('contract_code', gmoPaymentBeanParam.contract_code__c);
         params.put('version', gmoPaymentBeanParam.version__c);
         params.put('character_code', gmoPaymentBeanParam.character_code__c);
@@ -74,12 +89,25 @@ public class GMOPaymentAPI {
             params.put('security_code', gmoPaymentBeanParam.security_code__c);
         }
 
+        return convertMapToString(params);
+    }
+
+    public String buildGMOPaymentBodyForCheckOrder(String contract_code, String trans_code) {
+        Map<String, String> params = new Map<String,String>();
+
+        params.put('contract_code', contract_code);
+        params.put('trans_code', trans_code);
+
+        return convertMapToString(params);
+    }
+
+    public String convertMapToString(Map<String,String> params) {
         String mapToString = '';
         
         for(String key:params.keySet())
             mapToString += key + '=' + params.get(key) + ';';
         mapToString = mapToString.removeEnd(';');
-
+        System.debug(mapToString);
         return mapToString;
     }
 

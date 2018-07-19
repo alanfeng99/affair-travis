@@ -1,7 +1,7 @@
 public with sharing class NewSubscriptionController extends ApexBaseController {
     public NewSubscriptionViewModel viewModel {get; set;} 
     public Subscription__c firstSubscription {get; set;}
-    public List<Subscription__c> tempSubscriptions {get; set;}
+    public List<SubscriptionRecipient__c> tempSubscriptions {get; set;}
     public List<Subscription__c> subscriptionInsertList {get; set;}
     public List<SelectOption> year {get; set;}
     
@@ -27,11 +27,13 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         if (accountIdCookie != null) {
             String accountId = accountIdCookie.getValue();
             viewModel = new NewSubscriptionViewModel(accountId);
-            tempSubscriptions = new List<Subscription__c>();
+            tempSubscriptions = new List<SubscriptionRecipient__c>();
 
             firstSubscription = new Subscription__c(CustomAccount__c = accountId);
-            firstSubscription.Index__c = 1;
-            tempSubscriptions.add(firstSubscription);
+            
+            SubscriptionRecipient__c recipient = new SubscriptionRecipient__c();
+            recipient.Index__c = 1;
+            tempSubscriptions.add(recipient);
 
             viewModel.creditCardBean.cvc = '';
             calculateSize();
@@ -51,17 +53,16 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             showErrorForNullProgram = true;
             return null;
         }
-        Subscription__c subscription = new Subscription__c(CustomAccount__c = viewModel.account.Id);
-        subscription.Index__c = tempSubscriptions.size() + 1;
-      
-        tempSubscriptions.add(subscription);
+        SubscriptionRecipient__c recipient = new SubscriptionRecipient__c();
+        
+        tempSubscriptions.add(recipient);
         calculateSize();
         programPriceDecide();
         return null;
     }
 
     public PageReference deleteSubscription() {
-        Integer indexForRemove ;
+        Integer indexForRemove;
         
         for (Integer i=0; i<tempSubscriptions.size(); i++) 
             if (tempSubscriptions.get(i).Index__c == deleteRowId) 
@@ -189,11 +190,10 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     }
 
     private void newSubscriptionInsertList() {
-        
+        /*
         subscriptionInsertList.clear();
         
-        for (Subscription__c sub : tempSubscriptions) {
-            sub.Payment_method__c = paymentMethod;
+        for (SubscriptionRecipient__c sub : tempSubscriptions) {
             Subscription__c clone_Subscription = firstSubscription.clone();
             clone_Subscription.Recipient__c = sub.Recipient__c;
             clone_Subscription.Address__c = sub.Address__c;
@@ -203,7 +203,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             clone_Subscription.Tel__c = sub.Tel__c;
 
             subscriptionInsertList.add(clone_Subscription);
-        }
+        }*/
     }
 
     private void insertSubscriptionPriceAndProgram() {
@@ -224,24 +224,25 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             return false;
         }
         
-        for (Subscription__c sub : subscriptionInsertList) {
-            if (sub.Recipient__c == null || sub.City_picklist__c == null || sub.Area_picklist__c == null || 
-                    sub.Address__c == null || sub.Tel__c == null ) {
+        for (SubscriptionRecipient__c recipient : tempSubscriptions) {
+            if (recipient.Recipient__c == null || recipient.City_picklist__c == null || recipient.Area_picklist__c == null || 
+                    recipient.Address__c == null || recipient.Tel__c == null ) {
                 addMessage(ApexPages.Severity.ERROR, System.Label.Msg_RecipientInfoEmpty);
                 return false;
             }
 
-            if (!checkPhoneFormat(sub.Tel__c)){
+            if (!checkPhoneFormat(recipient.Tel__c)){
                 addMessage(ApexPages.Severity.ERROR, System.Label.Msg_PhoneFormat);
                 return false;
             }
 
-            if (sub.Payment_method__c == null) {
+            
+            if (subscriptionInsertList.get(0).Payment_method__c == null) {
                 addMessage(ApexPages.Severity.ERROR, System.Label.Msg_PaymentEmpty);
                 return false;
             }
                 
-            if (sub.Payment_method__c == '信用卡') 
+            if (subscriptionInsertList.get(0).Payment_method__c == '信用卡') 
                 return isFieldFilledWhenChoosenCard();   
         }
         return true; 

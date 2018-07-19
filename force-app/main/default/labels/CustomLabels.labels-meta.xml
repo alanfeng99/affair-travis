@@ -241,6 +241,20 @@
         <language>zh_TW</language>
         <protected>true</protected>
         <shortDescription>GMOPAYMENT_API_URL</shortDescription>
-        <value>https://test.global-payment.asia/payment/api/direct_payment.cgi</value>
+        <value>https://test.global-payment.asia</value>
+    </labels>
+    <labels>
+        <fullName>ENDPOINT_DIRECT_PAYMENT</fullName>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>ENDPOINT_DIRECT_PAYMENT</shortDescription>
+        <value>/payment/api/direct_payment.cgi</value>
+    </labels>
+    <labels>
+        <fullName>ENDPOINT_CHECK_ORDER</fullName>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>ENDPOINT_CHECK_ORDER</shortDescription>
+        <value>/payment/cgi/order/check_order.cgi</value>
     </labels>
 </CustomLabels>
