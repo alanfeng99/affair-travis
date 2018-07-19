@@ -1,7 +1,7 @@
 public with sharing class NewSubscriptionController extends ApexBaseController {
     public NewSubscriptionViewModel viewModel {get; set;} 
     public Subscription__c subscriptionToInsert {get; set;}
-    public List<SubscriptionRecipient__c> tempSubscriptions {get; set;}
+    public List<SubscriptionRecipient__c> recipients {get; set;}
     public List<SelectOption> year {get; set;}
     
     public String salesForceIP {get; set;}
@@ -26,13 +26,13 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         if (accountIdCookie != null) {
             String accountId = accountIdCookie.getValue();
             viewModel = new NewSubscriptionViewModel(accountId);
-            tempSubscriptions = new List<SubscriptionRecipient__c>();
+            recipients = new List<SubscriptionRecipient__c>();
 
             subscriptionToInsert = new Subscription__c(CustomAccount__c = accountId);
             
             SubscriptionRecipient__c recipient = new SubscriptionRecipient__c();
             recipient.Index__c = 1;
-            tempSubscriptions.add(recipient);
+            recipients.add(recipient);
 
             viewModel.creditCardBean.cvc = '';
             calculateSize();
@@ -52,8 +52,8 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             return null;
         }
         SubscriptionRecipient__c recipient = new SubscriptionRecipient__c();
-        recipient.Index__c = tempSubscriptions.size() + 1;
-        tempSubscriptions.add(recipient);
+        recipient.Index__c = recipients.size() + 1;
+        recipients.add(recipient);
         calculateSize();
         programPriceDecide();
         return null;
@@ -62,14 +62,14 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     public PageReference deleteSubscription() {
         Integer indexForRemove;
         
-        for (Integer i=0; i<tempSubscriptions.size(); i++) 
-            if (tempSubscriptions.get(i).Index__c == deleteRowId) 
+        for (Integer i=0; i<recipients.size(); i++) 
+            if (recipients.get(i).Index__c == deleteRowId) 
                indexForRemove = i;
             
-        tempSubscriptions.remove(indexForRemove);
+        recipients.remove(indexForRemove);
         
-        for (Integer i=0; i<tempSubscriptions.size(); i++) 
-            tempSubscriptions.get(i).Index__c = i+1;
+        for (Integer i=0; i<recipients.size(); i++) 
+            recipients.get(i).Index__c = i+1;
         
         calculateSize();
         programPriceDecide();
@@ -159,12 +159,12 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             addMessage(ApexPages.Severity.ERROR, System.Label.Msg_ProgramEmpty);
             return null;
         }
-        
+        subscriptionToInsert.Payment_method__c = paymentMethod;
         if (!checkField()) 
             return null;
         
         insertSubscriptionPriceAndProgram();
-        if (viewModel.newSubscription(subscriptionToInsert)) {
+        if (viewModel.newSubscription(subscriptionToInsert, recipients)) {
             PageReference page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/SubscriptionManagementPage');
             page.getParameters().put('orderSucceed','true');
             page.setRedirect(true);
@@ -175,9 +175,9 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         
         return null;
     }
-    
+
     private void calculateSize() {
-        subscriptionSize = tempSubscriptions.size();
+        subscriptionSize = recipients.size();
     }
 
     private void calculatePeriod() {
@@ -202,7 +202,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             return false;
         }
         
-        for (SubscriptionRecipient__c recipient : tempSubscriptions) {
+        for (SubscriptionRecipient__c recipient : recipients) {
             if (recipient.Recipient__c == null || recipient.City_picklist__c == null || recipient.Area_picklist__c == null || 
                     recipient.Address__c == null || recipient.Tel__c == null ) {
                 addMessage(ApexPages.Severity.ERROR, System.Label.Msg_RecipientInfoEmpty);

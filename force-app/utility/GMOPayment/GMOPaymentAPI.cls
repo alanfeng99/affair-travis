@@ -29,7 +29,7 @@ public class GMOPaymentAPI {
         ApexUtility.mergeSecondObjectIntoFirstObject(gmoPaymentBean, beanAPIResponse);
         
         insert gmoPaymentBean;
-        if (gmoPaymentBean.result__c == '1' && gmoPaymentBean.trans_code__c != null && String.isBlank(gmoPaymentBean.trans_code__c)) {
+        if (gmoPaymentBean.result__c == '1' && gmoPaymentBean.trans_code__c != null && !String.isBlank(gmoPaymentBean.trans_code__c)) {
             return gmoPaymentBean.trans_code__c;
         }
         return null;
@@ -87,6 +87,10 @@ public class GMOPaymentAPI {
             params.put('expire_year', gmoPaymentBeanParam.expire_year__c);
             params.put('expire_month', gmoPaymentBeanParam.expire_month__c);
             params.put('security_code', gmoPaymentBeanParam.security_code__c);
+            gmoPaymentBeanParam.card_number__c = CreditcardUtility.hideCreditCardNumber(gmoPaymentBeanParam.card_number__c);
+            gmoPaymentBeanParam.expire_year__c = '';
+            gmoPaymentBeanParam.expire_month__c = '';
+            gmoPaymentBeanParam.security_code__c = '';
         }
 
         return convertMapToString(params);

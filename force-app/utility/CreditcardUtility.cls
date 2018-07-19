@@ -15,4 +15,8 @@ public with sharing class CreditcardUtility {
 
         return MyMatcher.matches();
     }
+
+    public static String hideCreditCardNumber(String creditCardNumber) {
+        return creditCardNumber.substring(0,4) + '****' + creditCardNumber.substring(creditCardNumber.length()-4, creditCardNumber.length());
+    }
 }

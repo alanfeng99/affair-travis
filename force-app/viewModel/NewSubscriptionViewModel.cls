@@ -8,7 +8,7 @@ public with sharing class NewSubscriptionViewModel {
         creditCardBean = new CreditCardBean();
     }
 
-    public Boolean newSubscription(Subscription__c subscriptionToInsert) {
+    public Boolean newSubscription(Subscription__c subscriptionToInsert, List<SubscriptionRecipient__c> recipients) {
         Boolean updateResult = true;  
         try {
             if (subscriptionToInsert.Payment_Method__c == '信用卡' && updateResult == true) {
@@ -22,12 +22,20 @@ public with sharing class NewSubscriptionViewModel {
             }
 
             Database.SaveResult dbInsertResult = Database.insert(subscriptionToInsert);
-            
             updateResult = dbInsertResult.isSuccess();
+            
+            if (updateResult)
+                for (SubscriptionRecipient__c recipient : recipients)
+                    recipient.ParentSubscription__c = subscriptionToInsert.Id;
+
+            List<Database.SaveResult> dbInsertRecipientsResults = Database.insert(recipients);
+            for (Database.SaveResult dbInsertRecipientsResult : dbInsertRecipientsResults)
+                if (!dbInsertRecipientsResult.isSuccess())
+                    updateResult = false;
 
             if (updateResult)
                 if (subscriptionToInsert.Payment_Method__c == '信用卡' && creditCardBean.cc != null && !String.isBlank(creditCardBean.cc))
-                    account.credit_card_number__c = creditCardBean.cc.substring(0,4) + '****' + creditCardBean.cc.substring(creditCardBean.cc.length()-4, creditCardBean.cc.length());
+                    account.credit_card_number__c = CreditcardUtility.hideCreditCardNumber(creditCardBean.cc);
             
             return updateResult;   
         } catch (DmlException ex) {

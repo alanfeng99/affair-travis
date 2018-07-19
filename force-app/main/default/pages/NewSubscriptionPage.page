@@ -52,38 +52,38 @@
                         </apex:selectRadio> 
                     </div>
                    
-                    <apex:repeat value="{!tempSubscriptions}" var="tempSub">
+                    <apex:repeat value="{!recipients}" var="recip">
                         <hr width="310px;"/>
                         <small style="color:red"><apex:outputText rendered="{!showErrorForNullProgram}">請優先選擇訂閱方案，方能新增收件人</apex:outputText></small>
                         <div>
                             <div class="row fontsize14px" >
                                 <div class="col">
-                                    收件者資料 {!tempSub.Index__c}   
+                                    收件者資料 {!recip.Index__c}   
                                 </div>
                                 <div class="col" align="right">
-                                    <apex:commandLink value="+ 增訂一份" action="{!newSubscription}" reRender="form" rendered="{!tempSub.Index__c == 1}"/>
-                                    <apex:commandLink value="X 刪除" action="{!deleteSubscription}" reRender="form" rendered="{!tempSub.Index__c != 1}">
-                                        <apex:param name="deleteSub" assignTo="{!deleteRowId}" value="{!tempSub.Index__c}"/>
+                                    <apex:commandLink value="+ 增訂一份" action="{!newSubscription}" reRender="form" rendered="{!recip.Index__c == 1}"/>
+                                    <apex:commandLink value="X 刪除" action="{!deleteSubscription}" reRender="form" rendered="{!recip.Index__c != 1}">
+                                        <apex:param name="deleteSub" assignTo="{!deleteRowId}" value="{!recip.Index__c}"/>
                                     </apex:commandLink>
                                 </div>    
                             </div>
                             <apex:outputPanel >
                                 <div class="form-group">
-                                    <apex:inputField value="{!tempSub.Recipient__c}"  styleClass="form-control w100 h40px" html-placeholder="收件人名稱"/>    
+                                    <apex:inputField value="{!recip.Recipient__c}"  styleClass="form-control w100 h40px" html-placeholder="收件人名稱"/>    
                                 </div>   
                                 <div class="form-row form-group" style="font-size:14px;" id="address">
                                     <div class="col-6">
-                                        <apex:inputField value="{!tempSub.City_picklist__c}" styleClass="form-control h40px"/>
+                                        <apex:inputField value="{!recip.City_picklist__c}" styleClass="form-control h40px"/>
                                     </div>
                                     <div class="col-6">
-                                        <apex:inputField value="{!tempSub.Area_picklist__c}" styleClass="form-control h40px" />
+                                        <apex:inputField value="{!recip.Area_picklist__c}" styleClass="form-control h40px" />
                                     </div>    
                                 </div>
                                 <div class="form-group">
-                                    <apex:inputField value="{!tempSub.Address__c }" styleClass="form-control w100 h40px" html-placeholder="地址" />
+                                    <apex:inputField value="{!recip.Address__c }" styleClass="form-control w100 h40px" html-placeholder="地址" />
                                 </div>
                                 <div class="form-group">
-                                    <apex:inputField value="{!tempSub.Tel__c }" styleClass="form-control w100 h40px" html-placeholder="電話" />                        	
+                                    <apex:inputField value="{!recip.Tel__c }" styleClass="form-control w100 h40px" html-placeholder="電話" />                        	
                                 </div> 
                             </apex:outputPanel>   
                         </div>
