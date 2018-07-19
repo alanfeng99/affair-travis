@@ -62,6 +62,6 @@
     <searchLayouts>
         <customTabListAdditionalFields>isReplenish__c</customTabListAdditionalFields>
     </searchLayouts>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>
