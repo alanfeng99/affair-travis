@@ -6,7 +6,7 @@ public class GMOPaymentAPI {
         gmoPaymentBean = gmoPaymentBeanParam;
     }
 
-    public void executePayment() {
+    public Boolean executePayment() {
         Http http = new Http();
         HttpRequest request = new HttpRequest();
         request.setEndpoint(System.Label.GMOPAYMENT_API_URL);
@@ -21,6 +21,10 @@ public class GMOPaymentAPI {
         ApexUtility.mergeSecondObjectIntoFirstObject(gmoPaymentBean, beanAPIResponse);
         
         insert gmoPaymentBean;
+        if (gmoPaymentBean.result__c != '1') {
+            return false;
+        }
+        return true;
     }
 
     public GMOPaymentBean__c addCommonGMOPaymentBeanValues(GMOPaymentBean__c gmoPaymentBeanParam) {
@@ -34,7 +38,8 @@ public class GMOPaymentAPI {
         gmoPaymentBeanParam.currency_id__c = 'TWD';
         gmoPaymentBeanParam.pan_bank__c = 'CitiBank';
         gmoPaymentBeanParam.pan_country__c = 'TW';
-        
+        gmoPaymentBeanParam.add_info1__c = '1';
+
         return gmoPaymentBeanParam;
     }
 

@@ -57,18 +57,18 @@ public with sharing class ApexUtility {
     public static GMOPaymentBean__c generateGMOPaymentBean(Account__c account, Subscription__c subscription) {
         GMOPaymentBean__c gmoPaymentBean = new GMOPaymentBean__c();
         gmoPaymentBean.contract_code__c = System.Label.GMOPAYMENT_CONTRACT_CODE;
-        gmoPaymentBean.user_id__c = subscription.Id;
+        gmoPaymentBean.user_id__c = account.Id;
         gmoPaymentBean.user_name__c = account.LastName__c;
         gmoPaymentBean.user_mail_add__c = account.Email__c;
 
         gmoPaymentBean.card_holder_name__c = account.LastName__c;
+        System.debug(subscription.Id);
         gmoPaymentBean.ip_address__c = ApexUtility.getUserIPAddress();
         SubscriptionProgram__c program = [SELECT ProgramId__c, ProgramName__c FROM SubscriptionProgram__c WHERE ID = :subscription.Program__c];
         gmoPaymentBean.item_code__c = program.ProgramId__c;
         gmoPaymentBean.item_name__c = program.ProgramName__c;
         gmoPaymentBean.order_number__c = ApexUtility.generateRandomNumeric(4) + Datetime.now().format('yyyyMMddHHmmss');
         gmoPaymentBean.item_price__c = String.valueOf(subscription.Amount__c);
-        gmoPaymentBean.add_info1__c = account.Id;
 
         return gmoPaymentBean;
     }
