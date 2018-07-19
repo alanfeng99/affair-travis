@@ -350,6 +350,7 @@
                                             </tr>
                                         </table>
                                     </apex:outputPanel>
+                                    <!--
                                     <apex:outputPanel >
                                         <table class="table table-bordered" style="background-color:white" >
                                             <tr>
@@ -359,24 +360,19 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <!-- Facebook button -->
-                                                    <!--
                                                     <div class="form-group">
                                                         <div id="fbLogin" class="fb-login-button" data-max-rows="1" data-size="large" data-scope="public_profile,email"
                                                         data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" width="340"></div>
                                                     </div>
-                                                    -->
-                                                
-                                                    <!-- Google button -->
-                                                    <!--
+                                                    
                                                     <div class="form-group">
                                                         <div id="my-signin2" class="g-signin2" data-onsuccess="onSignIn"></div>  
                                                     </div>
-                                                    -->
                                                 </td>
                                             </tr>
                                         </table>       
                                     </apex:outputPanel>
+                                    -->
                                 </div>
                                 
                     </div>
