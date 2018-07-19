@@ -34,8 +34,7 @@ public class GMOPaymentAPI {
         gmoPaymentBeanParam.currency_id__c = 'TWD';
         gmoPaymentBeanParam.pan_bank__c = 'CitiBank';
         gmoPaymentBeanParam.pan_country__c = 'TW';
-        gmoPaymentBeanParam.add_info1__c = '1';
-
+        
         return gmoPaymentBeanParam;
     }
 

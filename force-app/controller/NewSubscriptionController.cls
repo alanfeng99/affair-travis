@@ -167,10 +167,6 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
 
         
         insertSubscriptionPriceAndProgram();
-        if (viewModel.creditCardBean.cc != null && !String.isBlank(viewModel.creditCardBean.cc))
-            viewModel.account.credit_card_number__c = viewModel.creditCardBean.cc.substring(0,4) + '****' + 
-                                                    viewModel.creditCardBean.cc.substring(viewModel.creditCardBean.cc.length()-4, viewModel.creditCardBean.cc.length());
-
         if (viewModel.newSubscription(subscriptionInsertList)) {
             PageReference page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/SubscriptionManagementPage');
             page.getParameters().put('orderSucceed','true');
@@ -253,7 +249,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
 
     private Boolean isFieldFilledWhenChoosenCard() {
         for (Subscription__c sub : subscriptionInsertList) {
-            if (sub.Payment_method__c == '信用卡') {
+            if (sub.Payment_method__c == '信用卡' && viewModel.account.credit_card_number__c == null) {
                 if (viewModel.creditCardBean.cc == null || viewModel.creditCardBean.expireYear == null ||
                     viewModel.creditCardBean.expireYear == '' || viewModel.creditCardBean.expireMonth == null ||
                     viewModel.creditCardBean.expireMonth == '' || viewModel.creditCardBean.cvc == null) {
