@@ -60,6 +60,6 @@
         <type>AutoNumber</type>
     </nameField>
     <searchLayouts/>
-    <sharingModel>ControlledByParent</sharingModel>
+    <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>
