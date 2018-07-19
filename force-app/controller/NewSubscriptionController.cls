@@ -1,8 +1,7 @@
 public with sharing class NewSubscriptionController extends ApexBaseController {
     public NewSubscriptionViewModel viewModel {get; set;} 
-    public Subscription__c firstSubscription {get; set;}
+    public Subscription__c subscriptionToInsert {get; set;}
     public List<SubscriptionRecipient__c> tempSubscriptions {get; set;}
-    public List<Subscription__c> subscriptionInsertList {get; set;}
     public List<SelectOption> year {get; set;}
     
     public String salesForceIP {get; set;}
@@ -29,7 +28,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             viewModel = new NewSubscriptionViewModel(accountId);
             tempSubscriptions = new List<SubscriptionRecipient__c>();
 
-            firstSubscription = new Subscription__c(CustomAccount__c = accountId);
+            subscriptionToInsert = new Subscription__c(CustomAccount__c = accountId);
             
             SubscriptionRecipient__c recipient = new SubscriptionRecipient__c();
             recipient.Index__c = 1;
@@ -45,7 +44,6 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         isChooseCreditcard = false;
         showProgramResult = false;
         showErrorForNullProgram = false;
-        subscriptionInsertList = new List<Subscription__c>();
     }
 
     public PageReference newSubscription() {
@@ -161,14 +159,13 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             addMessage(ApexPages.Severity.ERROR, System.Label.Msg_ProgramEmpty);
             return null;
         }
-        newSubscriptionInsertList();
         
         if (!checkField()) 
             return null;
 
         
         insertSubscriptionPriceAndProgram();
-        if (viewModel.newSubscription(subscriptionInsertList)) {
+        if (viewModel.newSubscription(subscriptionToInsert)) {
             PageReference page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/SubscriptionManagementPage');
             page.getParameters().put('orderSucceed','true');
             page.setRedirect(true);
@@ -185,37 +182,19 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     }
 
     private void calculatePeriod() {
-        if (firstSubscription.Start_period__c != null)  
-       		firstSubscription.End_period__c = firstSubscription.Start_period__c + firstSubscription.Program__r.Order_Period__c;     
+        if (subscriptionToInsert.Start_period__c != null)  
+       		subscriptionToInsert.End_period__c = subscriptionToInsert.Start_period__c + subscriptionToInsert.Program__r.Order_Period__c;     
     }
 
-    private void newSubscriptionInsertList() {
-        /*
-        subscriptionInsertList.clear();
-        
-        for (SubscriptionRecipient__c sub : tempSubscriptions) {
-            Subscription__c clone_Subscription = firstSubscription.clone();
-            clone_Subscription.Recipient__c = sub.Recipient__c;
-            clone_Subscription.Address__c = sub.Address__c;
-            clone_Subscription.Area_pickList__c = sub.Area_pickList__c;+
-            clone_Subscription.Postal_code__c = sub.Postal_code__c;
-            clone_Subscription.City_pickList__c = sub.City_pickList__c;
-            clone_Subscription.Tel__c = sub.Tel__c;
-
-            subscriptionInsertList.add(clone_Subscription);
-        }*/
-    }
-
-    private void insertSubscriptionPriceAndProgram() {
+   private void insertSubscriptionPriceAndProgram() {
         List<SubscriptionProgram__c> programs = SubscriptionModel.getProgramById(programId);
+
+        subscriptionToInsert.Start_period__c = startPeriod;
+        subscriptionToInsert.End_period__c = startPeriod + programs.get(0).Order_Period__c - 1;
+        subscriptionToInsert.Amount__c = programPrice;      
+        subscriptionToInsert.Program__c = programs.get(0).id;
+        subscriptionToInsert.CustomAccount__c = viewModel.account.Id;
         
-        for (Subscription__c sub : subscriptionInsertList) {
-            sub.Start_period__c = startPeriod;
-            sub.End_period__c = startPeriod + programs.get(0).Order_Period__c - 1;
-            sub.Amount__c = programPrice;      
-            sub.Program__c = programs.get(0).id;
-            sub.CustomAccount__c = viewModel.account.Id;
-        }
     }
 
     private Boolean checkField() {
@@ -237,37 +216,36 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             }
 
             
-            if (subscriptionInsertList.get(0).Payment_method__c == null) {
+            if (subscriptionToInsert.Payment_method__c == null) {
                 addMessage(ApexPages.Severity.ERROR, System.Label.Msg_PaymentEmpty);
                 return false;
             }
                 
-            if (subscriptionInsertList.get(0).Payment_method__c == '信用卡') 
+            if (subscriptionToInsert.Payment_method__c == '信用卡') 
                 return isFieldFilledWhenChoosenCard();   
         }
         return true; 
     }
 
     private Boolean isFieldFilledWhenChoosenCard() {
-        for (Subscription__c sub : subscriptionInsertList) {
-            if (sub.Payment_method__c == '信用卡' && viewModel.account.credit_card_number__c == null) {
-                if (viewModel.creditCardBean.cc == null || viewModel.creditCardBean.expireYear == null ||
-                    viewModel.creditCardBean.expireYear == '' || viewModel.creditCardBean.expireMonth == null ||
-                    viewModel.creditCardBean.expireMonth == '' || viewModel.creditCardBean.cvc == null) {
-                    addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckAll);
-                    return false;
-                }
-                if (!CreditcardUtility.isCVCPattenMatching(viewModel.creditCardBean.cvc)) {
-                    addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckCVC);
-                    return false;
-                } 
-                
-                if (!CreditcardUtility.isCreditCardPattenMatching(viewModel.creditCardBean.cc)) {
-                    addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckNumber);
-                    return false;
-                }
-            }    
-        }
+        if (subscriptionToInsert.Payment_method__c == '信用卡' && viewModel.account.credit_card_number__c == null) {
+            if (viewModel.creditCardBean.cc == null || viewModel.creditCardBean.expireYear == null ||
+                viewModel.creditCardBean.expireYear == '' || viewModel.creditCardBean.expireMonth == null ||
+                viewModel.creditCardBean.expireMonth == '' || viewModel.creditCardBean.cvc == null) {
+                addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckAll);
+                return false;
+            }
+            if (!CreditcardUtility.isCVCPattenMatching(viewModel.creditCardBean.cvc)) {
+                addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckCVC);
+                return false;
+            } 
+            
+            if (!CreditcardUtility.isCreditCardPattenMatching(viewModel.creditCardBean.cc)) {
+                addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckNumber);
+                return false;
+            }
+        }    
+        
         return true;
     }
 

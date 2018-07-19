@@ -8,34 +8,27 @@ public with sharing class NewSubscriptionViewModel {
         creditCardBean = new CreditCardBean();
     }
 
-    public Boolean newSubscription(List<Subscription__c> subscriptionInsertList) {
+    public Boolean newSubscription(Subscription__c subscriptionToInsert) {
         Boolean updateResult = true;  
         try {
-            for (Subscription__c sub : subscriptionInsertList) {
-                if (sub.Payment_Method__c == '信用卡' && updateResult == true) {
-                        GMOPaymentBean__c gmoPaymentBean = ApexUtility.generateGMOPaymentBean(account, sub, creditCardBean);
-                        GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(gmoPaymentBean);
-                        updateResult = gmoPaymentAPI.executePayment() == null? false:true;
-                }
+            if (subscriptionToInsert.Payment_Method__c == '信用卡' && updateResult == true) {
+                    GMOPaymentBean__c gmoPaymentBean = ApexUtility.generateGMOPaymentBean(account, subscriptionToInsert, creditCardBean);
+                    GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(gmoPaymentBean);
+                    updateResult = gmoPaymentAPI.executePayment() == null? false:true;
             }
             if (updateResult != true) {
                 errorMessage = 'Payment went wrong.';
                 return false;
             }
 
-            List<Database.SaveResult> results = Database.insert(subscriptionInsertList);
+            Database.SaveResult dbInsertResult = Database.insert(subscriptionToInsert);
             
-            for (Database.SaveResult result : results) 
-                if (result.isSuccess() == false) 
-                    updateResult = false;
+            updateResult = dbInsertResult.isSuccess();
 
-            if (creditCardBean.cc != null && !String.isBlank(creditCardBean.cc))
-                account.credit_card_number__c = creditCardBean.cc.substring(0,4) + '****' + creditCardBean.cc.substring(creditCardBean.cc.length()-4, creditCardBean.cc.length());
-            if (updateResult) 
-                for (Subscription__c sub : subscriptionInsertList) 
-                    if (sub.Payment_Method__c == '信用卡') 
-                        update account;
-
+            if (updateResult)
+                if (subscriptionToInsert.Payment_Method__c == '信用卡' && creditCardBean.cc != null && !String.isBlank(creditCardBean.cc))
+                    account.credit_card_number__c = creditCardBean.cc.substring(0,4) + '****' + creditCardBean.cc.substring(creditCardBean.cc.length()-4, creditCardBean.cc.length());
+            
             return updateResult;   
         } catch (DmlException ex) {
             errorMessage = ex.getMessage();
