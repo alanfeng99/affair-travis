@@ -15,14 +15,14 @@ public with sharing class NewSubscriptionViewModel {
                 if (sub.Payment_Method__c == '信用卡' && updateResult == true) {
                         GMOPaymentBean__c gmoPaymentBean = ApexUtility.generateGMOPaymentBean(account, sub, creditCardBean);
                         GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(gmoPaymentBean);
-                        updateResult = gmoPaymentAPI.executePayment();
+                        updateResult = gmoPaymentAPI.executePayment() == null? false:true;
                 }
             }
             if (updateResult != true) {
                 errorMessage = 'Payment went wrong.';
                 return false;
             }
-            
+
             List<Database.SaveResult> results = Database.insert(subscriptionInsertList);
             
             for (Database.SaveResult result : results) 

@@ -6,7 +6,7 @@ public class GMOPaymentAPI {
         gmoPaymentBean = gmoPaymentBeanParam;
     }
 
-    public Boolean executePayment() {
+    public String executePayment() {
         Http http = new Http();
         HttpRequest request = new HttpRequest();
         request.setEndpoint(System.Label.GMOPAYMENT_API_URL);
@@ -21,10 +21,10 @@ public class GMOPaymentAPI {
         ApexUtility.mergeSecondObjectIntoFirstObject(gmoPaymentBean, beanAPIResponse);
         
         insert gmoPaymentBean;
-        if (gmoPaymentBean.result__c != '1') {
-            return false;
+        if (gmoPaymentBean.result__c != '1' && gmoPaymentBean.trans_code__c != null && String.isBlank(gmoPaymentBean.trans_code__c)) {
+            return gmoPaymentBean.trans_code__c;
         }
-        return true;
+        return null;
     }
 
     public GMOPaymentBean__c addCommonGMOPaymentBeanValues(GMOPaymentBean__c gmoPaymentBeanParam) {
