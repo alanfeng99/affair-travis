@@ -641,10 +641,6 @@
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>
-        <tab>Address__c</tab>
-        <visibility>Visible</visibility>
-    </tabSettings>
-    <tabSettings>
         <tab>Subscription__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
