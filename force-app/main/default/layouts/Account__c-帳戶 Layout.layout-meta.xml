@@ -97,7 +97,6 @@
     </layoutSections>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Recipient__c</fields>
         <fields>isReplenish__c</fields>
         <relatedList>Subscription__c.CustomAccount__c</relatedList>
     </relatedLists>

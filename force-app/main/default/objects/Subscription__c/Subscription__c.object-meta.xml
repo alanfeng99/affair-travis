@@ -60,9 +60,8 @@
         <type>AutoNumber</type>
     </nameField>
     <searchLayouts>
-        <customTabListAdditionalFields>Recipient__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>isReplenish__c</customTabListAdditionalFields>
     </searchLayouts>
-    <sharingModel>ControlledByParent</sharingModel>
+    <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

@@ -65,7 +65,6 @@
     </layoutSections>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Recipient__c</fields>
         <fields>isReplenish__c</fields>
         <relatedList>Subscription__c.Program__c</relatedList>
     </relatedLists>

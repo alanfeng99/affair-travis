@@ -2,11 +2,6 @@
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>All</fullName>
     <columns>NAME</columns>
-    <columns>Recipient__c</columns>
-    <columns>Tel__c</columns>
-    <columns>City_picklist__c</columns>
-    <columns>Area_picklist__c</columns>
-    <columns>Postal_code__c</columns>
     <columns>isReplenish__c</columns>
     <columns>Program__c</columns>
     <columns>Start_period__c</columns>
