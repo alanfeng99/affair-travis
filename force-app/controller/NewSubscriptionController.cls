@@ -52,7 +52,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             return null;
         }
         SubscriptionRecipient__c recipient = new SubscriptionRecipient__c();
-        
+        recipient.Index__c = tempSubscriptions.size() + 1;
         tempSubscriptions.add(recipient);
         calculateSize();
         programPriceDecide();
@@ -162,7 +162,6 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         
         if (!checkField()) 
             return null;
-
         
         insertSubscriptionPriceAndProgram();
         if (viewModel.newSubscription(subscriptionToInsert)) {
@@ -214,7 +213,6 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
                 addMessage(ApexPages.Severity.ERROR, System.Label.Msg_PhoneFormat);
                 return false;
             }
-
             
             if (subscriptionToInsert.Payment_method__c == null) {
                 addMessage(ApexPages.Severity.ERROR, System.Label.Msg_PaymentEmpty);
