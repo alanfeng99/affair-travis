@@ -11,15 +11,16 @@ public with sharing class NewSubscriptionViewModel {
     public Boolean newSubscription(Subscription__c subscriptionToInsert, List<SubscriptionRecipient__c> recipients) {
         Boolean updateResult = true;  
         try {
-            if (subscriptionToInsert.Payment_Method__c == '信用卡' && updateResult == true) {
-                    GMOPaymentBean__c gmoPaymentBean = ApexUtility.generateGMOPaymentBean(account, subscriptionToInsert, creditCardBean);
-                    GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(gmoPaymentBean);
-                    updateResult = gmoPaymentAPI.executePayment() == null? false:true;
-            }
-            if (updateResult != true) {
+            GMOPaymentBean__c gmoPaymentBean = ApexUtility.generateGMOPaymentBean(account, subscriptionToInsert, creditCardBean);
+            GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(gmoPaymentBean);
+            String transCode = gmoPaymentAPI.executePayment();
+            
+            if (transCode == null) {
                 errorMessage = 'Payment went wrong.';
                 return false;
             }
+
+            GMOPaymentCheckOrderResultBean checkOrderResult = gmoPaymentAPI.checkOrder(System.Label.GMOPAYMENT_CONTRACT_CODE, transCode);
 
             Database.SaveResult dbInsertResult = Database.insert(subscriptionToInsert);
             updateResult = dbInsertResult.isSuccess();

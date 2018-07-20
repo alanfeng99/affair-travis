@@ -31,7 +31,7 @@ public with sharing class ApexUtility {
         HttpRequest req = new HttpRequest();
         req.setMethod('GET');
         req.setHeader('content-type', 'application/json');
-        req.setEndpoint( 'https://www.trackip.net/ip?json');
+        req.setEndpoint('https://www.trackip.net/ip?json');
         Http http = new Http();
         HTTPResponse res = http.send(req);
         String jsonInput = res.getBody();
@@ -56,13 +56,14 @@ public with sharing class ApexUtility {
 
     public static GMOPaymentBean__c generateGMOPaymentBean(Account__c account, Subscription__c subscription) {
         GMOPaymentBean__c gmoPaymentBean = new GMOPaymentBean__c();
+
+        gmoPaymentBean.st_code__c = GMOPaymentAPI.generateStCode(subscription.Payment_method__c);
+        gmoPaymentBean.process_code__c = GMOPaymentAPI.generateProcessCode(subscription.Payment_method__c);
         gmoPaymentBean.contract_code__c = System.Label.GMOPAYMENT_CONTRACT_CODE;
         gmoPaymentBean.user_id__c = account.Id;
         gmoPaymentBean.user_name__c = account.LastName__c;
         gmoPaymentBean.user_mail_add__c = account.Email__c;
-
         gmoPaymentBean.card_holder_name__c = account.LastName__c;
-        System.debug(subscription.Id);
         gmoPaymentBean.ip_address__c = ApexUtility.getUserIPAddress();
         SubscriptionProgram__c program = [SELECT ProgramId__c, ProgramName__c FROM SubscriptionProgram__c WHERE ID = :subscription.Program__c];
         gmoPaymentBean.item_code__c = program.ProgramId__c;
@@ -72,15 +73,15 @@ public with sharing class ApexUtility {
 
         return gmoPaymentBean;
     }
-
+    
     public static SObject mergeSecondObjectIntoFirstObject(SObject object1, SObject object2) {
         for(SObjectField field:object1.getSObjectType().getDescribe().fields.getMap().values()) {
             try {
                 Object opp1Field = object1.get(field);
                 Object opp2Field = object2.get(field);
                 if (opp2Field != null) 
-                    object1.put(field, opp1Field==null ? opp2Field : opp1Field);
-            }catch (SObjectException ex) {
+                    object1.put(field, opp1Field == null ? opp2Field : opp1Field);
+            } catch (SObjectException ex) {
             }
         }
         return object1;

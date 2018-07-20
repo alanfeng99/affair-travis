@@ -36,19 +36,21 @@ global class ExecutePaymentEveryDay implements Schedulable {
             List<Subscription__c> subscriptions = [SELECT ID, Start_period__c, End_period__c, Program__c, Amount__c FROM Subscription__c WHERE CustomAccount__c = :account.Id];
             if (subscriptions.size() > 0) {
                 for (Subscription__c subscription : subscriptions) {
-                    List<Product2> products = [SELECT Id, EndDate__c FROM Product2 WHERE ProductCode = :String.valueOf(subscription.End_period__c)];
-                    if (products.size() == 1) {
-                        Date dateNow = Date.today();
-                        Date productEndDate = Date.valueOf(products.get(0).EndDate__c);
-                        if (dateNow >= productEndDate) {
-                            GMOPaymentBean__c gmoPaymentBean = ApexUtility.generateGMOPaymentBean(account, subscription);
-                            GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(gmoPaymentBean);
-                            gmoPaymentAPI.executePayment();
-                            
-                            SubscriptionProgram__c program = [SELECT Order_Period__c FROM SubscriptionProgram__c WHERE ID = :subscription.Program__c];
-                            subscription.Start_period__c = subscription.End_period__c + 1;
-                            subscription.End_period__c += program.Order_Period__c;
-                            update subscription;
+                    if (subscription.Payment_method__c == '信用卡') {
+                        List<Product2> products = [SELECT Id, EndDate__c FROM Product2 WHERE ProductCode = :String.valueOf(subscription.End_period__c)];
+                        if (products.size() == 1) {
+                            Date dateNow = Date.today();
+                            Date productEndDate = Date.valueOf(products.get(0).EndDate__c);
+                            if (dateNow >= productEndDate) {
+                                GMOPaymentBean__c gmoPaymentBean = ApexUtility.generateGMOPaymentBean(account, subscription);
+                                GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(gmoPaymentBean);
+                                gmoPaymentAPI.executePayment();
+                                
+                                SubscriptionProgram__c program = [SELECT Order_Period__c FROM SubscriptionProgram__c WHERE ID = :subscription.Program__c];
+                                subscription.Start_period__c = subscription.End_period__c + 1;
+                                subscription.End_period__c += program.Order_Period__c;
+                                update subscription;
+                            }
                         }
                     }
                 }
