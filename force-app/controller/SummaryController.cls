@@ -1,6 +1,7 @@
 public with sharing class SummaryController extends ApexBaseController  {
 
     public SummaryViewModel viewModel {get; set;}
+    public String greetingWord {get; set;}
 
     public SummaryController() {
         Cookie accountIdCookie = ApexPages.currentPage().getCookies().get(Label.COOKIE_ACCOUNT_ID);
@@ -9,8 +10,8 @@ public with sharing class SummaryController extends ApexBaseController  {
             String accountId = accountIdCookie.getValue();
         	viewModel = new SummaryViewModel(accountId);
             Account__c account = viewModel.getAccount();   
-        }
-        
+            greetingChange();
+        }    
     }
 
     public Account__c getAccount() {
@@ -19,6 +20,15 @@ public with sharing class SummaryController extends ApexBaseController  {
 
     public List<Subscription__c> getSubscriptions() {
         return viewModel.getSubscriptions();
+    }
+
+    public void greetingChange() {
+        Integer timeForGreeting = Integer.valueOf(System.now().format('k'));
+        if(timeForGreeting < 17) 
+            greetingWord = '早安';
+        else 
+            greetingWord = '晚安';
+        
     }
     
     public PageReference toNewSubscriptionPage(){

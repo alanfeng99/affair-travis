@@ -127,7 +127,7 @@
             </apex:form>
             <apex:form id="form"> 
                 <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top border-bottom">
-                    <a class="navbar-brand" href="#">週刊編輯</a>
+                    <a class="navbar-brand" href="#">週刊編集</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -159,7 +159,7 @@
                     <div class="card-header bg-white" style="margin-top: 28px;">                  
                         <div align="center" style="line-height:20px;">
                             <br/><br/>
-                            <div class="letterspacing3px" style="font-size:20px;">帳號設定</div><br/>
+                            <div class="letterspacing3px" style="font-size:20px;">帳戶設定</div><br/>
                             <div style="font-size:12px;">編輯修改你的個人帳號</div>
                         </div>
                     </div>
@@ -318,34 +318,43 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <div >
-                                                        請輸入目前的密碼<br/>
-                                                        <small>請輸入你目前設定的密碼以確認身份</small><br/>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <apex:inputSecret value="{!accountOld.Password__c}" style="width:70%" html-placeholder="舊密碼"/><br/>
-                                                    </div>
-                                                    <div >
-                                                        新密碼
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <apex:inputSecret value="{!accountNew.Password__c}" style="width:70%" html-placeholder="新密碼"/><br/>
-                                                    </div>
-                                                    <div >
-                                                        再輸入一次新密碼
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <apex:inputSecret value="{!accountVerify.Password__c}" style="width:70%" html-placeholder="再輸入一次新密碼"/><br/>
-                                                    </div>
-                                                    <div class="form-group form-row">
-                                                        <div class="col-auto">
-                                                            <apex:commandButton value="儲存變更" action="{!submitPassword}" style=" color:black;  background-color:#dde2e2; border-width:0px;" styleClass="btn" reRender="form"/>     
+                                                    <apex:outputPanel rendered="{!IF(viewModel.account.Password__c != null, true, false)}">
+                                                        <div >
+                                                            請輸入目前的密碼<br/>
+                                                            <small>請輸入你目前設定的密碼以確認身份</small><br/>
                                                         </div>
-                                                        <div class="col-auto">
-                                                            <apex:commandLink value="取消" action="{!cancelChange}" reRender="form"/>     
-                                                        </div>       
-                                                    </div>
-                                                    
+                                                        <div class="form-group">
+                                                            <apex:inputSecret value="{!accountOld.Password__c}" style="width:70%" html-placeholder="舊密碼"/><br/>
+                                                        </div>
+                                                        <div >
+                                                            新密碼
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <apex:inputSecret value="{!accountNew.Password__c}" style="width:70%" html-placeholder="新密碼"/><br/>
+                                                        </div>
+                                                        <div >
+                                                            再輸入一次新密碼
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <apex:inputSecret value="{!accountVerify.Password__c}" style="width:70%" html-placeholder="再輸入一次新密碼"/><br/>
+                                                        </div>
+                                                        <div class="form-group form-row">
+                                                            <div class="col-auto">
+                                                                <apex:commandButton value="儲存變更" action="{!submitPassword}" style=" color:black;  background-color:#dde2e2; border-width:0px;" styleClass="btn" reRender="form"/>     
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <apex:commandLink value="取消" action="{!cancelChange}" reRender="form"/>     
+                                                            </div>       
+                                                        </div>
+                                                    </apex:outputPanel>
+                                                    <apex:outputPanel rendered="{!IF(viewModel.account.Password__c == null, true, false)}">
+                                                        <div>
+                                                            若要設定密碼，請先登出帳號，
+                                                        </div>
+                                                        <div>
+                                                            點選忘記密碼來設定密碼
+                                                        </div>
+                                                    </apex:outputPanel>
                                                 </td>
                                             </tr>
                                         </table>

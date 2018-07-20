@@ -64,6 +64,7 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
     }
 
     public PageReference changeRecipientInfo(){
+        
         originalSubscriptions = viewModel.subscriptions.deepClone(true);
         return null;
     }

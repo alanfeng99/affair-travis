@@ -16,11 +16,35 @@
     </head>
     <body class="bg-light" >
         <apex:form id="form">
-            <div class="card border-light bg-light">   
-                <div class="card-header bg-white">
-                    <b class="letterspacing3px" style="font-size:20px;">週刊編集</b> {!viewModel.account.LastName__c}
+            <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
+                <a class="navbar-brand letterspacing3px fontsize20px" href="#">週刊編集</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{!viewModel.account.LastName__c}</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                <apex:commandLink action="{!logOut}" value="登出" styleClass="dropdown-item"/>
+                                <!-- <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a> -->
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            <apex:commandLink value="總覽" action="{!toSummaryPage}" styleClass="nav-link"/>   
+                        </li>
+                        <li class="nav-item">
+                            <apex:commandLink value="帳戶設定" action="{!toAccountSettingPage}" styleClass="nav-link"/>
+                        </li>
+                        <li class="nav-item">
+                            <apex:commandLink value="訂閱管理" action="{!toSubscriptionManagementPage}" styleClass="nav-link "/>
+                        </li>
+                    </ul>
                 </div>
-                <br/>
+            </nav>
+            <div class="card border-light bg-light">   
                 <div align="center" class="letterspacing3px" style="font-size:18px; line-height:1px;">
                     請填寫訂閱資料
                     <hr class="w160px" color="black"/>
