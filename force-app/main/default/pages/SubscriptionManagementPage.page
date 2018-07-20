@@ -89,6 +89,7 @@
                                             <tr>
                                                 <td>訂閱期數：第{!sub.Start_period__c }期-第{!sub.End_period__c }期</td>
                                             </tr>
+                                            <apex:repeat value="{!viewModel.mapRecipients[sub.id]}" var="recipient">
                                             <tr>
                                                 <td>
                                                     <apex:outputPanel rendered="{!currentEditRowId != sub.Id}">
@@ -96,9 +97,9 @@
                                                             <div class="col-auto">
                                                                 收件人:  
                                                             </div>
-                                                            <!--<div class="col-auto">
-                                                                {!sub.Recipient__c}
-                                                            </div>-->
+                                                            <div class="col-auto">
+                                                                {!recipient.Recipient__c}
+                                                            </div>
                                                             <div class="col-auto">
                                                                 ( <apex:commandLink value="變更收件資訊" action="{!changeRecipientInfo}" reRender="form">
                                                                 <apex:param id="getEditRowId" name="getEditRowId" assignTo="{!currentEditRowId}" value="{!sub.Id}" />
@@ -110,41 +111,39 @@
                                                                 地址:
                                                             </div>
                                                             <div class="col-auto">
-                                                                <!--{!sub.Postal_code__c}{!sub.City_picklist__c }{!sub.Area_picklist__c}{!sub.Address__c }-->
+                                                                {!recipient.Postal_code__c}{!recipient.City_picklist__c }{!recipient.Area_picklist__c}{!recipient.Address__c }
                                                             </div>
                                                         </div>
                                                         <div class=" form-row">
                                                             <div class="col-auto">
                                                                 電話:
                                                             </div>
-                                                            <!--<div class="col-auto">
-                                                                {!sub.Tel__c }
-                                                            </div>-->
+                                                            <div class="col-auto">
+                                                                {!recipient.Tel__c }
+                                                            </div>
                                                         </div>
                                                     </apex:outputPanel>
-                                                    <apex:outputPanel rendered="{!currentEditRowId == sub.Id}">
+                                                    <apex:outputPanel rendered="{!currentEditRowId == recipient.Id}">
                                                         <div class="form-group">
                                                             收件者資料
                                                         </div>
-                                                        <!--
                                                         <div class="form-group ">
-                                                            <apex:inputField value="{!sub.Recipient__c}" styleClass="form-control" style="width:66%;" required="true" html-placeholder="收件人名稱"/>
+                                                            <apex:inputField value="{!recipient.Recipient__c}" styleClass="form-control" style="width:66%;" required="true" html-placeholder="收件人名稱"/>
                                                         </div>
                                                         <div class="form-group form-row">
                                                             <div class="col-4">
-                                                                <apex:inputField value="{!sub.City_picklist__c}" styleClass="city_picker form-control" style="height:35px;" required="true"/>
+                                                                <apex:inputField value="{!recipient.City_picklist__c}" styleClass="city_picker form-control" style="height:35px;" required="true"/>
                                                             </div>
                                                             <div>
-                                                                <apex:inputField value="{!sub.Area_picklist__c}" style="height:35px;" required="true"/>
+                                                                <apex:inputField value="{!recipient.Area_picklist__c}" style="height:35px;" required="true"/>
                                                             </div>
                                                         </div>   
                                                         <div class="form-group">
-                                                            <apex:inputField value="{!sub.Address__c}" styleClass="form-control" style="width:66%;" required="true" html-placeholder="詳細地址"/>
+                                                            <apex:inputField value="{!recipient.Address__c}" styleClass="form-control" style="width:66%;" required="true" html-placeholder="詳細地址"/>
                                                         </div>
                                                         <div class="form-group">
-                                                            <apex:inputField value="{!sub.Tel__c}" styleClass="form-control" style="width:66%;" required="true" html-placeholder="電話號碼"/>
+                                                            <apex:inputField value="{!recipient.Tel__c}" styleClass="form-control" style="width:66%;" required="true" html-placeholder="電話號碼"/>
                                                         </div>
-                                                        -->
                                                         <div class="form-group form-row">
                                                             <div class="col-auto">
                                                                 <apex:commandButton value="儲存變更" action="{!submitForm}" style=" color:black;  background-color:#dde2e2; border-width:0px;" styleClass="btn btn-default" reRender="form" oncomplete="afterSubmit()"/>     
@@ -156,6 +155,7 @@
                                                     </apex:outputPanel>       
                                                 </td>
                                             </tr>
+                                            </apex:repeat>
                                             <tr>
                                                 <td>
                                                     <!--最一開始顯示版面-->
