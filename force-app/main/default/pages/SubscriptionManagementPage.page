@@ -102,7 +102,7 @@
                                                             </div>
                                                             <div class="col-auto">
                                                                 ( <apex:commandLink value="變更收件資訊" action="{!changeRecipientInfo}" reRender="form">
-                                                                <apex:param id="getEditRowId" name="getEditRowId" assignTo="{!currentEditRowId}" value="{!sub.Id}" />
+                                                                <apex:param id="getEditRowId" name="getEditRowId" assignTo="{!currentEditRowId}" value="{!recipient.Id}" />
                                                                 </apex:commandLink> )
                                                             </div>
                                                         </div>
