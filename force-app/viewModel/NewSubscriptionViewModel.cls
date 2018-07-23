@@ -26,9 +26,11 @@ public with sharing class NewSubscriptionViewModel {
 			Database.SaveResult dbInsertResult = Database.insert(subscriptionToInsert);
             updateResult = dbInsertResult.isSuccess();
             
-            if (updateResult)
+            if (updateResult) {
+                SubscriptionGMOPaymentBean__c subLinkToPayment = new SubscriptionGMOPaymentBean__c(SubscriptionId__c = subscriptionToInsert.Id, GMOPaymentBeanId__c = gmoPaymentBean.Id);
                 for (SubscriptionRecipient__c recipient : recipients)
                     recipient.ParentSubscription__c = subscriptionToInsert.Id;
+            }
 
             List<Database.SaveResult> dbInsertRecipientsResults = Database.insert(recipients);
             for (Database.SaveResult dbInsertRecipientsResult : dbInsertRecipientsResults)

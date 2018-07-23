@@ -7,6 +7,7 @@ public with sharing class SubscriptionManagementViewModel {
         if (userId != null) {
             mapRecipients = new Map<String,List<SubscriptionRecipient__c>>();
             subscriptions = SubscriptionModel.getSubscriptionsByUserId(userId);
+            
             for (Subscription__c subscription : subscriptions) {
                 List<SubscriptionRecipient__c> recipients = [SELECT Tel__c, Address__c, Area_picklist__c, City_picklist__c, Postal_code__c, Recipient__c FROM SubscriptionRecipient__c WHERE ParentSubscription__c  = :subscription.Id];
                 mapRecipients.put(subscription.Id, recipients);

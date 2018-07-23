@@ -28,9 +28,9 @@ public class GMOPaymentAPI {
         GMOPaymentBean__c beanAPIResponse = (GMOPaymentBean__c) deserializationGMOResponse(response.getBody(), GMOPaymentBean__c.class);
         ApexUtility.mergeSecondObjectIntoFirstObject(gmoPaymentBean, beanAPIResponse);
         
-        if (gmoPaymentBean.result__c == '1' && gmoPaymentBean.trans_code__c != null && !String.isBlank(gmoPaymentBean.trans_code__c)) {
+        if (gmoPaymentBean.result__c == '1' && gmoPaymentBean.trans_code__c != null && !String.isBlank(gmoPaymentBean.trans_code__c))
             return gmoPaymentBean.trans_code__c;
-        }
+
         insert gmoPaymentBean;
         return null;
     }
