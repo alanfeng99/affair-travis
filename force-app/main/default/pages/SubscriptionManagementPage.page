@@ -176,33 +176,10 @@
                                                                 </div>
                                                             </div>
                                                         </apex:outputPanel>
-                                                        <apex:outputPanel rendered="{!IF(sub.Payment_method__c == 'ATM轉帳',true,false)}">
-                                                            <apex:commandLink value="啟用信用卡自動續訂服務" action="{!useAutoOrderPanel}" rendered="{!IF(sub.isReplenish__c == false, true, false)}" reRender="form">
-                                                                <apex:param id="getUseIdByATM" name="getEditRowId" assignTo="{!currentUseRowId}" value="{!sub.Id}" />
-                                                            </apex:commandLink>
+                                                        <apex:outputPanel rendered="{!IF(sub.Payment_method__c != '信用卡',true,false)}">
                                                             <div class="form-row">
                                                                 <div class="col-auto">
-                                                                    <apex:commandLink action="{!toUpdateCreditcardPage}" value="更新信用卡資訊" rendered="{!IF(sub.isReplenish__c == false, false, true)}" reRender="form"/>
-                                                                </div>
-                                                                <div class="col-auto">
-                                                                    <apex:commandLink action="{!stopAutoOrderPanel}" value="取消自動續訂服務" rendered="{!IF(sub.isReplenish__c == true, true, false)}" reRender="form">
-                                                                        <apex:param id="getCancelRowIdByATM" name="getEditRowId" assignTo="{!currentCancelRowId}" value="{!sub.Id}" />
-                                                                    </apex:commandLink>
-                                                                </div>
-                                                            </div>
-                                                        </apex:outputPanel>
-                                                        <apex:outputPanel rendered="{!IF(sub.Payment_method__c == '超商付款',true,false)}">
-                                                            <apex:commandLink value="啟用信用卡自動續訂服務" action="{!useAutoOrderPanel}" rendered="{!IF(sub.isReplenish__c == false, true, false)}" reRender="form">
-                                                                <apex:param id="getUseIdByMarket" name="getEditRowId" assignTo="{!currentUseRowId}" value="{!sub.Id}" />
-                                                            </apex:commandLink>
-                                                            <div class="form-row">
-                                                                <div class="col-auto">
-                                                                    <apex:commandLink action="{!toUpdateCreditcardPage}" value="更新信用卡資訊" rendered="{!IF(sub.isReplenish__c == false, false, true)}" reRender="form"/>
-                                                                </div>
-                                                                <div class="col-auto">
-                                                                    <apex:commandLink action="{!stopAutoOrderPanel}" value="取消自動續訂服務" rendered="{!IF(sub.isReplenish__c == true, true, false)}" reRender="form">
-                                                                        <apex:param id="getCancelRowIdByMarket" name="getEditRowId" assignTo="{!currentCancelRowId}" value="{!sub.Id}" />
-                                                                    </apex:commandLink>
+                                                                    Payment information: <apex:outputField value="sub.paymentInformation"></apex:outputField>
                                                                 </div>
                                                             </div>
                                                         </apex:outputPanel>
