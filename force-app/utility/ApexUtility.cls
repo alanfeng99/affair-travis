@@ -40,9 +40,27 @@ public with sharing class ApexUtility {
         		
         return responseBodyMapped.get('IP');
     }
-
-    public static GMOPaymentBean__c generateGMOPaymentBean(Account__c account, Subscription__c subscription, CreditCardBean creditCardBean) {
+    
+    public static GMOPaymentBean__c generateGMOPaymentBeanForCancel(Account__c account, Subscription__c subscription) {
         GMOPaymentBean__c gmoPaymentBean = generateGMOPaymentBean(account, subscription);
+        gmoPaymentBean.process_code__c = Constants.PROCESS_CODE_DELETE_CREDIT_CARD;
+        return gmoPaymentBean;
+    }
+
+    public static GMOPaymentBean__c generateGMOPaymentBeanForChange(Account__c account, Subscription__c subscription, CreditCardBean creditCardBean) {
+        GMOPaymentBean__c gmoPaymentBean = generateGMOPaymentBean(account, subscription);
+        gmoPaymentBean.process_code__c = Constants.PROCESS_CODE_DELETE_CREDIT_CARD;
+        
+        gmoPaymentBean.card_number__c = creditCardBean.cc;
+        gmoPaymentBean.expire_year__c = creditCardBean.expireYear;
+        gmoPaymentBean.expire_month__c = creditCardBean.expireMonth;
+        gmoPaymentBean.security_code__c = creditCardBean.cvc;
+        
+        return gmoPaymentBean;
+    }
+    
+    public static GMOPaymentBean__c generateGMOPaymentBeanForPayment(Account__c account, Subscription__c subscription, CreditCardBean creditCardBean) {
+        GMOPaymentBean__c gmoPaymentBean = generateGMOPaymentBeanForPayment(account, subscription);
         
         if (account.credit_card_number__c == null) {
             gmoPaymentBean.card_number__c = creditCardBean.cc;
@@ -54,11 +72,17 @@ public with sharing class ApexUtility {
         return gmoPaymentBean;
     }
 
+    public static GMOPaymentBean__c generateGMOPaymentBeanForPayment(Account__c account, Subscription__c subscription) {
+        GMOPaymentBean__c gmoPaymentBean = generateGMOPaymentBean(account, subscription);
+        gmoPaymentBean.process_code__c = GMOPaymentAPI.generateProcessCode(subscription.Payment_method__c);
+        
+        return gmoPaymentBean;
+    }
+
     public static GMOPaymentBean__c generateGMOPaymentBean(Account__c account, Subscription__c subscription) {
         GMOPaymentBean__c gmoPaymentBean = new GMOPaymentBean__c();
 
         gmoPaymentBean.st_code__c = GMOPaymentAPI.generateStCode(subscription.Payment_method__c);
-        gmoPaymentBean.process_code__c = GMOPaymentAPI.generateProcessCode(subscription.Payment_method__c);
         gmoPaymentBean.contract_code__c = System.Label.GMOPAYMENT_CONTRACT_CODE;
         gmoPaymentBean.user_id__c = account.Id;
         gmoPaymentBean.user_name__c = account.LastName__c;

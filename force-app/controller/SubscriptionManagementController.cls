@@ -40,7 +40,7 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
     
     public PageReference stopAutoOrderService() {
         updatedCreditcard = false;
-        currentCancelRowId = '';  
+        currentCancelRowId = '';
         update viewModel.subscriptions;
         
         return null;
@@ -55,7 +55,7 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
         currentUseRowId = '';
         
         PageReference page = new Pagereference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/UpdateCreditcardPage');
-        page.getParameters().put('subscriptionId',subIdForUpdateCredit);
+        page.getParameters().put('subscriptionId', subIdForUpdateCredit);
       	return page;
     }
 

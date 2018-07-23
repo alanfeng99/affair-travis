@@ -28,33 +28,51 @@ global class ExecutePaymentEveryDay implements Schedulable {
     }
 
     public void checkDailyPaymentForEveryUsers() {
+        List<Subscription__c> subscriptions = [SELECT ID, Start_period__c, End_period__c, Program__c, Amount__c, CustomAccount__c FROM Subscription__c WHERE Payment_method__c = '信用卡' AND isReplenish__c = true];
+        List<Product2> products = [SELECT Id, EndDate__c, ProductCode FROM Product2];
+        List<SubscriptionProgram__c> programs = [SELECT Order_Period__c FROM SubscriptionProgram__c];
         List<Account__c> accounts = [SELECT Id, LastName__c, Email__c FROM Account__c];
-        if (accounts.size() <= 0)
+        
+        if (subscriptions.size() <= 0)
             return;
-
-        for (Account__c account : accounts) {
-            List<Subscription__c> subscriptions = [SELECT ID, Start_period__c, End_period__c, Program__c, Amount__c FROM Subscription__c WHERE CustomAccount__c = :account.Id];
-            if (subscriptions.size() > 0) {
-                for (Subscription__c subscription : subscriptions) {
-                    if (subscription.Payment_method__c == '信用卡') {
-                        List<Product2> products = [SELECT Id, EndDate__c FROM Product2 WHERE ProductCode = :String.valueOf(subscription.End_period__c)];
-                        if (products.size() == 1) {
-                            Date dateNow = Date.today();
-                            Date productEndDate = Date.valueOf(products.get(0).EndDate__c);
-                            if (dateNow >= productEndDate) {
-                                GMOPaymentBean__c gmoPaymentBean = ApexUtility.generateGMOPaymentBean(account, subscription);
-                                GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(gmoPaymentBean);
-                                gmoPaymentAPI.executePayment();
-                                
-                                SubscriptionProgram__c program = [SELECT Order_Period__c FROM SubscriptionProgram__c WHERE ID = :subscription.Program__c];
-                                subscription.Start_period__c = subscription.End_period__c + 1;
-                                subscription.End_period__c += program.Order_Period__c;
-                                update subscription;
-                            }
-                        }
-                    }
-                }
+        
+        for (Subscription__c subscription : subscriptions) {
+            Product2 product = findEndSubscriptionProduct(products, String.valueOf(subscription.End_period__c));
+            Date dateNow = Date.today();
+            Date productEndDate = Date.valueOf(product.EndDate__c);
+            
+            if (dateNow >= productEndDate) {
+                Account__c account = findAccount(accounts, subscription.CustomAccount__c);
+                GMOPaymentBean__c gmoPaymentBean = ApexUtility.generateGMOPaymentBeanForPayment(account, subscription);
+                GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(gmoPaymentBean);
+                gmoPaymentAPI.directPayment();
+                
+                SubscriptionProgram__c program = findProgram(programs, subscription.Program__c);
+                subscription.Start_period__c = subscription.End_period__c + 1;
+                subscription.End_period__c += program.Order_Period__c;
+                update subscription;
             }
         }
+    }
+
+    public Product2 findEndSubscriptionProduct(List<Product2> products, String endPeriod) {
+        for (Product2 product : products)
+            if (product.ProductCode == endPeriod)
+                return product;
+        return null;
+    }
+
+    public SubscriptionProgram__c findProgram(List<SubscriptionProgram__c> programs, String programId) {
+        for (SubscriptionProgram__c program : programs)
+            if (program.Id == programId)
+                return program;
+        return null;
+    }
+
+    public Account__c findAccount(List<Account__c> accounts, String accountId) {
+        for (Account__c account : accounts)
+            if (account.Id == accountId)
+                return account;
+        return null;
     }
 }

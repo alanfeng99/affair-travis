@@ -16,7 +16,7 @@ public class GMOPaymentAPI {
         return request;
     }
 
-    public String executePayment() {
+    public String directPayment() {
         HttpRequest request = prepareRequest(System.Label.ENDPOINT_DIRECT_PAYMENT);
 
         gmoPaymentBean = addCommonGMOPaymentBeanValues(gmoPaymentBean);
@@ -156,7 +156,7 @@ public class GMOPaymentAPI {
 
     public static String generateProcessCode(String paymentMethod) {
         if (paymentMethod == '信用卡')
-            return '2';
-        return '1';
+            return Constants.PROCESS_CODE_REGISTER_CREDIT_CARD;
+        return Constants.PROCESS_CODE_ONE_TIME;
     }
 }

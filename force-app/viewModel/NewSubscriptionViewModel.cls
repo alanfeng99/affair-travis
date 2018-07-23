@@ -11,9 +11,9 @@ public with sharing class NewSubscriptionViewModel {
     public Boolean newSubscription(Subscription__c subscriptionToInsert, List<SubscriptionRecipient__c> recipients) {
         Boolean updateResult = true;  
         try {
-            GMOPaymentBean__c gmoPaymentBean = ApexUtility.generateGMOPaymentBean(account, subscriptionToInsert, creditCardBean);
+            GMOPaymentBean__c gmoPaymentBean = ApexUtility.generateGMOPaymentBeanForPayment(account, subscriptionToInsert, creditCardBean);
             GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(gmoPaymentBean);
-            String transCode = gmoPaymentAPI.executePayment();
+            String transCode = gmoPaymentAPI.directPayment();
             
             if (transCode == null) {
                 errorMessage = 'Payment went wrong.';
@@ -21,6 +21,8 @@ public with sharing class NewSubscriptionViewModel {
             }
 
             GMOPaymentCheckOrderResultBean checkOrderResult = gmoPaymentAPI.checkOrder(System.Label.GMOPAYMENT_CONTRACT_CODE, transCode);
+            subscriptionToInsert.PaymentInformation__c = checkOrderResult.GlobalPayment_result.other_01;
+
 			Database.SaveResult dbInsertResult = Database.insert(subscriptionToInsert);
             updateResult = dbInsertResult.isSuccess();
             
