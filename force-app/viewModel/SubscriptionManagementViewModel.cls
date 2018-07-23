@@ -16,7 +16,6 @@ public with sharing class SubscriptionManagementViewModel {
     }
 
     public Boolean submit() {
-        //TODO 必填檢查?
         List<Database.UpsertResult> results = Database.upsert(subscriptions);
         for (Database.UpsertResult result : results)
             if (!result.isSuccess())

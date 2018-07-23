@@ -21,8 +21,7 @@ public with sharing class NewSubscriptionViewModel {
             }
 
             GMOPaymentCheckOrderResultBean checkOrderResult = gmoPaymentAPI.checkOrder(System.Label.GMOPAYMENT_CONTRACT_CODE, transCode);
-
-            Database.SaveResult dbInsertResult = Database.insert(subscriptionToInsert);
+			Database.SaveResult dbInsertResult = Database.insert(subscriptionToInsert);
             updateResult = dbInsertResult.isSuccess();
             
             if (updateResult)

@@ -2,7 +2,7 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
 
     public SubscriptionManagementViewModel viewModel {get; set;}
 
-    public String currentEditRowId {get; set;} // input 收件人版面
+    public String currentEditRowId {get; set;}
     public String currentUseRowId {get; set;}
     public String currentCancelRowId {get; set;}
     public String subIdForUpdateCredit {get; set;}
@@ -20,7 +20,7 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
             String accountId = accountIdCookie.getValue();
         	viewModel = new SubscriptionManagementViewModel(accountId);  
             orderSucceed = ApexPages.currentPage().getParameters().get('orderSucceed') == 'true';
-            updatedCreditcard =  ApexPages.currentpage().getparameters().get('updateCreditcard') == 'true';
+            updatedCreditcard = ApexPages.currentpage().getparameters().get('updateCreditcard') == 'true';
         }
     }
 
@@ -34,12 +34,10 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
         return null;
     }
 
-    //在原本PaymentPanel上點選停止自動續訂commanLink
     public PageReference stopAutoOrderPanel() {
         return null;
     }
     
-    //在stopAutoOrderPanel上點選停止自動續訂commanButton
     public PageReference stopAutoOrderService() {
         updatedCreditcard = false;
         currentCancelRowId = '';  
@@ -48,12 +46,10 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
         return null;
     }
     
-    //在原本PaymentPanel上點選使用自動續訂commanLink
     public PageReference useAutoOrderPanel() {
         return null;
     }
     
-    //在useAutoOrderPanel上點選使用自動續訂commanButton
     public PageReference useAutoOrderService() {
         subIdForUpdateCredit = currentUseRowId;
         currentUseRowId = '';

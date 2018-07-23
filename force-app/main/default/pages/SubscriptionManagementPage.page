@@ -223,7 +223,6 @@
                                                         <div class="form-group form-row">
                                                             <div class="col-auto">
                                                                 <apex:commandButton value="停止自動續訂" action="{!stopAutoOrderService}" reRender="form" styleClass="btn btn-default" style=" color:black;  background-color:#dde2e2; border-width:0px;" >
-                                                                    <apex:param name="stopAuto" value="false" assignTo="{!sub.isReplenish__c}" />
                                                                 </apex:commandButton>
                                                             </div>
                                                             <div class="col-auto">

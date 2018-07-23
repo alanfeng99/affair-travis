@@ -49,13 +49,13 @@
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
     <enableReports>true</enableReports>
-    <enableSearch>true</enableSearch>
+    <enableSearch>false</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <label>帳戶</label>
+    <label>GMOPaymentCheckOrderResultBean</label>
     <nameField>
-        <displayFormat>{000000}</displayFormat>
-        <label>帳戶</label>
+        <displayFormat>{YYYY}{MM}{DD}-{0}</displayFormat>
+        <label>GMOPaymentCheckOrderResultBean Name</label>
         <trackHistory>false</trackHistory>
         <type>AutoNumber</type>
     </nameField>
