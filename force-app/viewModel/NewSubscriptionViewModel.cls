@@ -8,10 +8,19 @@ public with sharing class NewSubscriptionViewModel {
         creditCardBean = new CreditCardBean();
     }
 
-    public Boolean newSubscription(Subscription__c subscriptionToInsert, List<SubscriptionRecipient__c> recipients) {
+    public Boolean newSubscription(List<Subscription__c> subscriptionInsertList) {
         Boolean updateResult = true;  
         try {
-            GMOPaymentBean__c gmoPaymentBean = ApexUtility.generateGMOPaymentBeanForPayment(account, subscriptionToInsert, creditCardBean);
+            Subscription__c firstSub = subscriptionInsertList.get(0);
+            SubscriptionProgram__c program = [SELECT ProgramId__c, ProgramName__c FROM SubscriptionProgram__c WHERE ID = :firstSub.Program__c];
+            
+            Order order = new Order();
+            order.paymentMethod = firstSub.Payment_method__c;
+            order.itemCode = program.ProgramId__c;
+            order.itemName = program.ProgramName__c;
+            order.totalPrice = String.valueOf(firstSub.Amount__c * subscriptionInsertList.size());
+            
+            GMOPaymentBean__c gmoPaymentBean = ApexUtility.generateGMOPaymentBeanForPayment(account, order, creditCardBean);
             GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(gmoPaymentBean);
             String transCode = gmoPaymentAPI.directPayment();
             
@@ -21,24 +30,22 @@ public with sharing class NewSubscriptionViewModel {
             }
 
             GMOPaymentCheckOrderResultBean checkOrderResult = gmoPaymentAPI.checkOrder(System.Label.GMOPAYMENT_CONTRACT_CODE, transCode);
-            subscriptionToInsert.PaymentInformation__c = checkOrderResult.GlobalPayment_result.other_01;
+            for (Subscription__c sub : subscriptionInsertList)
+                sub.PaymentInformation__c = checkOrderResult.GlobalPayment_result.other_01;
 
-			Database.SaveResult dbInsertResult = Database.insert(subscriptionToInsert);
-            updateResult = dbInsertResult.isSuccess();
+			List<Database.SaveResult> results = Database.insert(subscriptionInsertList);
+            for (Database.SaveResult result : results) 
+                if (result.isSuccess() == false) 
+                    updateResult = false;
             
             if (updateResult) {
-                SubscriptionGMOPaymentBean__c subLinkToPayment = new SubscriptionGMOPaymentBean__c(SubscriptionId__c = subscriptionToInsert.Id, GMOPaymentBeanId__c = gmoPaymentBean.Id);
-                for (SubscriptionRecipient__c recipient : recipients)
-                    recipient.ParentSubscription__c = subscriptionToInsert.Id;
+                for (Subscription__c sub : subscriptionInsertList)
+                    SubscriptionGMOPaymentBean__c subLinkToPayment = new SubscriptionGMOPaymentBean__c(SubscriptionId__c = sub.Id, GMOPaymentBeanId__c = gmoPaymentBean.Id);
+
             }
 
-            List<Database.SaveResult> dbInsertRecipientsResults = Database.insert(recipients);
-            for (Database.SaveResult dbInsertRecipientsResult : dbInsertRecipientsResults)
-                if (!dbInsertRecipientsResult.isSuccess())
-                    updateResult = false;
-
             if (updateResult)
-                if (subscriptionToInsert.Payment_Method__c == '信用卡' && creditCardBean.cc != null && !String.isBlank(creditCardBean.cc))
+                if (order.paymentMethod == '信用卡' && creditCardBean.cc != null && !String.isBlank(creditCardBean.cc))
                     account.credit_card_number__c = CreditcardUtility.hideCreditCardNumber(creditCardBean.cc);
             
             return updateResult;   

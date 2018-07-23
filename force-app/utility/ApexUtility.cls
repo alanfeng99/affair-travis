@@ -41,14 +41,14 @@ public with sharing class ApexUtility {
         return responseBodyMapped.get('IP');
     }
     
-    public static GMOPaymentBean__c generateGMOPaymentBeanForCancel(Account__c account, Subscription__c subscription) {
-        GMOPaymentBean__c gmoPaymentBean = generateGMOPaymentBean(account, subscription);
+    public static GMOPaymentBean__c generateGMOPaymentBeanForCancel(Account__c account, Order order) {
+        GMOPaymentBean__c gmoPaymentBean = generateGMOPaymentBean(account, order);
         gmoPaymentBean.process_code__c = Constants.PROCESS_CODE_DELETE_CREDIT_CARD;
         return gmoPaymentBean;
     }
 
-    public static GMOPaymentBean__c generateGMOPaymentBeanForChange(Account__c account, Subscription__c subscription, CreditCardBean creditCardBean) {
-        GMOPaymentBean__c gmoPaymentBean = generateGMOPaymentBean(account, subscription);
+    public static GMOPaymentBean__c generateGMOPaymentBeanForChange(Account__c account, Order order, CreditCardBean creditCardBean) {
+        GMOPaymentBean__c gmoPaymentBean = generateGMOPaymentBean(account, order);
         gmoPaymentBean.process_code__c = Constants.PROCESS_CODE_DELETE_CREDIT_CARD;
         
         gmoPaymentBean.card_number__c = creditCardBean.cc;
@@ -59,8 +59,8 @@ public with sharing class ApexUtility {
         return gmoPaymentBean;
     }
     
-    public static GMOPaymentBean__c generateGMOPaymentBeanForPayment(Account__c account, Subscription__c subscription, CreditCardBean creditCardBean) {
-        GMOPaymentBean__c gmoPaymentBean = generateGMOPaymentBeanForPayment(account, subscription);
+    public static GMOPaymentBean__c generateGMOPaymentBeanForPayment(Account__c account, Order order, CreditCardBean creditCardBean) {
+        GMOPaymentBean__c gmoPaymentBean = generateGMOPaymentBeanForPayment(account, order);
         
         if (account.credit_card_number__c == null) {
             gmoPaymentBean.card_number__c = creditCardBean.cc;
@@ -72,28 +72,27 @@ public with sharing class ApexUtility {
         return gmoPaymentBean;
     }
 
-    public static GMOPaymentBean__c generateGMOPaymentBeanForPayment(Account__c account, Subscription__c subscription) {
-        GMOPaymentBean__c gmoPaymentBean = generateGMOPaymentBean(account, subscription);
-        gmoPaymentBean.process_code__c = GMOPaymentAPI.generateProcessCode(subscription.Payment_method__c);
+    public static GMOPaymentBean__c generateGMOPaymentBeanForPayment(Account__c account, Order order) {
+        GMOPaymentBean__c gmoPaymentBean = generateGMOPaymentBean(account, order);
+        gmoPaymentBean.process_code__c = GMOPaymentAPI.generateProcessCode(order.paymentMethod);
         
         return gmoPaymentBean;
     }
 
-    public static GMOPaymentBean__c generateGMOPaymentBean(Account__c account, Subscription__c subscription) {
+    public static GMOPaymentBean__c generateGMOPaymentBean(Account__c account, Order order) {
         GMOPaymentBean__c gmoPaymentBean = new GMOPaymentBean__c();
 
-        gmoPaymentBean.st_code__c = GMOPaymentAPI.generateStCode(subscription.Payment_method__c);
+        gmoPaymentBean.st_code__c = GMOPaymentAPI.generateStCode(order.paymentMethod);
         gmoPaymentBean.contract_code__c = System.Label.GMOPAYMENT_CONTRACT_CODE;
         gmoPaymentBean.user_id__c = account.Id;
         gmoPaymentBean.user_name__c = account.LastName__c;
         gmoPaymentBean.user_mail_add__c = account.Email__c;
         gmoPaymentBean.card_holder_name__c = account.LastName__c;
         gmoPaymentBean.ip_address__c = ApexUtility.getUserIPAddress();
-        SubscriptionProgram__c program = [SELECT ProgramId__c, ProgramName__c FROM SubscriptionProgram__c WHERE ID = :subscription.Program__c];
-        gmoPaymentBean.item_code__c = program.ProgramId__c;
-        gmoPaymentBean.item_name__c = program.ProgramName__c;
+        gmoPaymentBean.item_code__c = order.itemCode;
+        gmoPaymentBean.item_name__c = order.itemName;
         gmoPaymentBean.order_number__c = ApexUtility.generateRandomNumeric(4) + Datetime.now().format('yyyyMMddHHmmss');
-        gmoPaymentBean.item_price__c = String.valueOf(subscription.Amount__c);
+        gmoPaymentBean.item_price__c = order.totalPrice;
 
         return gmoPaymentBean;
     }
