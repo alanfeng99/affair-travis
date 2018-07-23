@@ -472,6 +472,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>SubscriptionGMOPaymentBean__c.GMOPaymentBeanId__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>SubscriptionGMOPaymentBean__c.SubscriptionId__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>SubscriptionProgram__c.Order_Period__c</field>
         <readable>true</readable>
     </fieldPermissions>
