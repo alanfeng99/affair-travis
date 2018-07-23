@@ -106,8 +106,8 @@ public with sharing class LoginController extends ApexBaseController {
 
     public void saveLoginCookies(Account__c realAccount) {
         String token = AccountModel.saveToken(realAccount);
-        Cookie authToken = new Cookie(Label.COOKIE_AUTH_TOKEN, token, null, -1, false);
-        Cookie accountId = new Cookie(label.COOKIE_ACCOUNT_ID, realAccount.Id, null, -1, false);
+        Cookie authToken = new Cookie(Label.COOKIE_AUTH_TOKEN, token, null, Constants.COOKIE_DURATION, false);
+        Cookie accountId = new Cookie(label.COOKIE_ACCOUNT_ID, realAccount.Id, null, Constants.COOKIE_DURATION, false);
         ApexPages.currentPage().setCookies(new Cookie[]{authToken, accountId});
     }
 
