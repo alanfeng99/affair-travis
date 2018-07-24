@@ -159,13 +159,16 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             addMessage(ApexPages.Severity.ERROR, System.Label.Msg_ProgramEmpty);
             return null;
         }
+        firstSubscription.Payment_method__c = paymentMethod;
+        
         newSubscriptionInsertList();
+        
 
         if (!checkField()) 
             return null;
         
         insertSubscriptionPriceAndProgram();
-        if (viewModel.newSubscription(subscriptionInsertList)) {
+        if (viewModel.newSubscription(subscriptionInsertList, programId)) {
             PageReference page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/SubscriptionManagementPage');
             page.getParameters().put('orderSucceed','true');
             page.setRedirect(true);
@@ -205,7 +208,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
 
    private void insertSubscriptionPriceAndProgram() {
         List<SubscriptionProgram__c> programs = SubscriptionModel.getProgramById(programId);
-        subscriptionInsertList.clear();
+        
         for (Subscription__c sub : tempSubscriptions) {
             sub.Start_period__c = startPeriod;
             sub.End_period__c = startPeriod + programs.get(0).Order_Period__c - 1;
