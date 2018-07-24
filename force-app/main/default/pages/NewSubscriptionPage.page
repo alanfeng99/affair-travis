@@ -17,7 +17,9 @@
     <body class="bg-light" >
         <apex:form id="form">
             <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
-                <a class="navbar-brand letterspacing3px fontsize20px" href="#">週刊編集</a>
+                <a class="navbar-brand" href="#">
+                    <apex:image url="{!$Resource.Logo}" styleClass="w110px h40px"/>
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
