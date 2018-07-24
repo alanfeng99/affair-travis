@@ -48,7 +48,7 @@ global class ExecutePaymentEveryDay implements Schedulable {
                 order.paymentMethod = subscription.Payment_method__c;
                 order.itemCode = program.ProgramId__c;
                 order.itemName = program.ProgramName__c;
-                order.totalPrice = subscription.Amount__c;
+                order.totalPrice = String.valueOf(subscription.Amount__c);
                 GMOPaymentBean__c gmoPaymentBean = ApexUtility.generateGMOPaymentBeanForPayment(account, order);
                 GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(gmoPaymentBean);
                 gmoPaymentAPI.directPayment();
