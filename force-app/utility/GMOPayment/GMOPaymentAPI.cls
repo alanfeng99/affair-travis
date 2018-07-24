@@ -47,6 +47,18 @@ public class GMOPaymentAPI {
         return (GMOPaymentCheckOrderResultBean) deserializationGMOResponse(response.getBody(), GMOPaymentCheckOrderResultBean.class);
     }
 
+    public Boolean cancelPayment(String contract_code, String trans_code) {
+        HttpRequest request = prepareRequest(System.Label.ENDPOINT_CANCEL_PAYMENT);
+        String requestBody = buildGMOPaymentBodyForCheckOrder(contract_code, trans_code);
+        request.setBody(requestBody);
+        Http http = new Http();
+        HttpResponse response = http.send(request);
+
+        insert gmoPaymentBean;
+
+        return response.getBody().contains('result result="1"');
+    }
+
     public GMOPaymentBean__c addCommonGMOPaymentBeanValues(GMOPaymentBean__c gmoPaymentBeanParam) {
         gmoPaymentBeanParam.version__c = '1';
         gmoPaymentBeanParam.character_code__c = 'UTF-8';
@@ -145,11 +157,13 @@ public class GMOPaymentAPI {
     }
 
     public static String generateStCode(String paymentMethod) {
-        if (paymentMethod == '信用卡')
+        if (paymentMethod == Constants.PAYMENT_METHOD_CREDIT_CARD)
             return Constants.ST_CODE_CREDIT_CARD_PAYMENT;
-        if (paymentMethod == '超商付款')
+
+        if (paymentMethod == Constants.PAYMENT_METHOD_SUPER_PAYMENT)
             return Constants.ST_CODE_SUPER_PAYMENT;
-        if (paymentMethod == 'ATM轉帳')
+
+        if (paymentMethod == Constants.PAYMENT_METHOD_ATM)
             return Constants.ST_CODE_ATM;
         return Constants.ST_CODE_NOTHING;
     }

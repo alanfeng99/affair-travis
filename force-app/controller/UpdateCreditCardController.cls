@@ -1,34 +1,29 @@
 public with sharing class UpdateCreditCardController extends ApexBaseController {
     public UpdateCreditCardViewModel viewModel {get; set;}
-    private Account__c tempAccount {get; set;}
     public List<SelectOption> year {get; set;}
-    public String subscriptionId {get; set;} 
-
+    
     public UpdateCreditCardController() {
 		Cookie accountIdCookie = ApexPages.currentPage().getCookies().get(Label.COOKIE_ACCOUNT_ID);
         
         if (accountIdCookie != null) {
             String accountId = accountIdCookie.getValue();
-        	subscriptionId = ApexPages.currentpage().getparameters().get('subscriptionId');
-            viewModel = new UpdateCreditCardViewModel(accountId);  
-            tempAccount = viewModel.account.clone();
+        	viewModel = new UpdateCreditCardViewModel(accountId);
         }    
     }
 
     public Pagereference updateCreditcard() {
-        if (checkField()) {
-            if (viewModel.cc != null && !String.isBlank(viewModel.cc))
-                viewModel.account.credit_card_number__c = viewModel.cc.substring(0,4) + '****' + viewModel.cc.substring(viewModel.cc.length()-4, viewModel.cc.length());
-
-            if(viewModel.updateAccount()) 
-                if(updateReplenish()) {
-                    addMessage(ApexPages.Severity.INFO, System.Label.Msg_UpdateCompleted);
-                    PageReference page = ApexUtility.toPage('SubscriptionManagementPage');
-                    page.getParameters().put('updateCreditcard','true');
-                    return page;    
-                }     
-        }      
-        return null;
+        if (!checkField())
+            return null;
+            
+        if(!viewModel.updateSubscription()) {
+            addMessage(ApexPages.Severity.ERROR, 'Problem.');
+            return null; 
+        }
+        
+        addMessage(ApexPages.Severity.INFO, System.Label.Msg_UpdateCompleted);
+        PageReference page = ApexUtility.toPage('SubscriptionManagementPage');
+        page.getParameters().put('updateCreditcard','true');
+        return page;    
     }
 
     public Pagereference cancel() {
@@ -55,34 +50,23 @@ public with sharing class UpdateCreditCardController extends ApexBaseController 
     }
 
     private Boolean checkField() {
-        if (viewModel.cc == null || viewModel.expireMonth == null ||
-                viewModel.expireYear == null || viewModel.expireYear == '' ||
-                viewModel.expireMonth == '' || viewModel.cvc == null){
+        if (viewModel.creditCardBean.cc == null || viewModel.creditCardBean.expireMonth == null ||
+                viewModel.creditCardBean.expireYear == null || viewModel.creditCardBean.expireYear == '' ||
+                viewModel.creditCardBean.expireMonth == '' || viewModel.creditCardBean.cvc == null){
             addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckAll);
             return false;
         } 
 
-        if (!CreditcardUtility.isCreditCardPattenMatching(viewModel.cc)) {
+        if (!CreditcardUtility.isCreditCardPattenMatching(viewModel.creditCardBean.cc)) {
             addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckNumber);
             return false;
         } 
 
-        if (!CreditcardUtility.isCVCPattenMatching(viewModel.cvc)) {
+        if (!CreditcardUtility.isCVCPattenMatching(viewModel.creditCardBean.cvc)) {
             addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckCVC);
             return false;
         }
 
-        return true;
-    }
-    
-    private boolean updateReplenish() {
-        for(Subscription__c sub : viewModel.subscriptions) {
-            if(sub.id == subscriptionId) {
-                sub.isReplenish__c = true;
-                if(!viewModel.updateSubscription(sub))
-                    return false; 
-            }
-        }
         return true;
     }
 }

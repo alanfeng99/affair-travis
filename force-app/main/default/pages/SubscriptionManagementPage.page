@@ -179,7 +179,7 @@
                                                         <apex:outputPanel rendered="{!IF(sub.Payment_method__c != '信用卡',true,false)}">
                                                             <div class="form-row">
                                                                 <div class="col-auto">
-                                                                    Payment information: <apex:outputField value="{!sub.PaymentInformation__c}"></apex:outputField>
+                                                                    Payment information:<br/> <apex:outputField value="{!sub.PaymentInformation__c}"></apex:outputField>
                                                                 </div>
                                                             </div>
                                                         </apex:outputPanel>

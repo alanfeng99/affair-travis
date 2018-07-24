@@ -49,7 +49,7 @@ public with sharing class ApexUtility {
 
     public static GMOPaymentBean__c generateGMOPaymentBeanForChange(Account__c account, Order order, CreditCardBean creditCardBean) {
         GMOPaymentBean__c gmoPaymentBean = generateGMOPaymentBean(account, order);
-        gmoPaymentBean.process_code__c = Constants.PROCESS_CODE_DELETE_CREDIT_CARD;
+        gmoPaymentBean.process_code__c = Constants.PROCESS_CODE_CHANGE_CREDIT_CARD;
         
         gmoPaymentBean.card_number__c = creditCardBean.cc;
         gmoPaymentBean.expire_year__c = creditCardBean.expireYear;
