@@ -8,8 +8,8 @@
             "Name": "第一期",
             "ProductCode": "1",
             "PicturePath__c": "https://assets.tetrapak.com/static/publishingimages/find-by-food/rollup/cones-ice-cream.jpg",
-            "EndDate__c": "2018-07-24",
-            "StartDate__c": "2018-10-24"
+            "EndDate__c": "2018-10-24",
+            "StartDate__c": "2018-07-24"
         },
         {
             "attributes": {
@@ -19,8 +19,8 @@
             "Name": "第二期",
             "ProductCode": "2",
             "PicturePath__c": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnLMrNlgTimdFcqC1Jychc6oggVQ63f5WBSFMD1wnBwnzGHf92Fg",
-            "EndDate__c": "2018-10-25",
-            "StartDate__c": "2018-12-25"
+            "EndDate__c": "2018-12-25",
+            "StartDate__c": "2018-10-25"
         }
     ]
 }
