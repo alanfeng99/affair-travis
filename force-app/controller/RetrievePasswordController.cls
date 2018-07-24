@@ -1,5 +1,4 @@
 public with sharing class RetrievePasswordController extends ApexBaseController {
-    
     public Account__c account {get; set;}
     
     public RetrievePasswordController() {
