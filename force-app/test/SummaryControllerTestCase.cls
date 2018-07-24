@@ -17,6 +17,12 @@ public with sharing class SummaryControllerTestCase {
         System.assertEquals('午安', controller.greetingWord);
     }
 
+    public static testMethod void testTurn_To_NewSubscriptionPage() {
+        SummaryController controller = new SummaryController();
+        Pagereference page = controller.toNewSubscriptionPage();
+        System.assertNotEquals(null, page);
+    }
+
     public static testMethod void testTurn_To_SummaryPage() {
         SummaryController controller = new SummaryController();
         Pagereference page = controller.toSummaryPage();
@@ -39,5 +45,7 @@ public with sharing class SummaryControllerTestCase {
         Pagereference page = controller.logOut();
         System.assertNotEquals(null, page);
     }
+
+  
     
 }
