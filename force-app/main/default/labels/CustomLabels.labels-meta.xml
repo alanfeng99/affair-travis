@@ -257,4 +257,11 @@
         <shortDescription>ENDPOINT_CHECK_ORDER</shortDescription>
         <value>/payment/cgi/order/check_order.cgi</value>
     </labels>
+    <labels>
+        <fullName>ENDPOINT_CANCEL_PAYMENT</fullName>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>ENDPOINT_CANCEL_PAYMENT</shortDescription>
+        <value>/payment/api/cancel_payment.cgi</value>
+    </labels>
 </CustomLabels>

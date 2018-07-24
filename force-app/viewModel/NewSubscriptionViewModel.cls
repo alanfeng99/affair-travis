@@ -25,7 +25,7 @@ public with sharing class NewSubscriptionViewModel {
             String transCode = gmoPaymentAPI.directPayment();
             
             if (transCode == null) {
-                errorMessage = 'Payment went wrong.';
+                errorMessage = '付款失敗，請稍後再試';
                 return false;
             }
 
@@ -38,15 +38,18 @@ public with sharing class NewSubscriptionViewModel {
                 if (result.isSuccess() == false) 
                     updateResult = false;
             
-            if (updateResult) {
+            if (updateResult)
                 for (Subscription__c sub : subscriptionInsertList)
                     SubscriptionGMOPaymentBean__c subLinkToPayment = new SubscriptionGMOPaymentBean__c(SubscriptionId__c = sub.Id, GMOPaymentBeanId__c = gmoPaymentBean.Id);
 
-            }
-
-            if (updateResult)
-                if (order.paymentMethod == '信用卡' && creditCardBean.cc != null && !String.isBlank(creditCardBean.cc))
+            if (updateResult) {
+                if (order.paymentMethod == '信用卡' && creditCardBean.cc != null && !String.isBlank(creditCardBean.cc)) {
                     account.credit_card_number__c = CreditcardUtility.hideCreditCardNumber(creditCardBean.cc);
+                    update account;
+                }
+            }
+                
+                    
             
             return updateResult;   
         } catch (DmlException ex) {

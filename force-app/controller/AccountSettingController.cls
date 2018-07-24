@@ -11,6 +11,7 @@ public with sharing class AccountSettingController extends ApexBaseController {
     public Boolean isChangeEmail {get; set;}
     public Boolean isChangePassword {get; set;}
     public Boolean ifChangeEmail {get; set;}
+    public Boolean updatedCreditCard {get; set;} 
 
     public String facebookUserEmail {get; set;}
     public String facebookUserID {get; set;}
@@ -26,7 +27,8 @@ public with sharing class AccountSettingController extends ApexBaseController {
         if (accountIdCookie != null) {
             String accountId = accountIdCookie.getValue();
         	viewModel = new AccountSettingViewModel(accountId);
-            initAccounts();  
+            initAccounts();
+            updatedCreditCard = ApexPages.currentpage().getparameters().get('updatedCreditCard') == 'true';
         }  
 
         showView('Main');
@@ -160,6 +162,10 @@ public with sharing class AccountSettingController extends ApexBaseController {
         cloneAccount();
         initAccounts();
         return null;
+    }
+
+    public PageReference changeCreditCard() {
+        return ApexUtility.toPage('UpdateCreditcardPage');
     }
 
     private void cloneAccount() {
