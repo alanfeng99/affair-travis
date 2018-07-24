@@ -29,10 +29,12 @@ public with sharing class RegisterController extends ApexBaseController {
 
         Account__c accountCreated = AccountModel.createAccountByEmail(viewModel.account.Email__c);
         
-        if (accountCreated == null) {
-            addMessage(ApexPages.Severity.ERROR, System.Label.Msg_AccountAlreadyExist); 
-            return false;
-        }
+        // Jin: no need to check here
+        // if (accountCreated == null) {
+        //     addMessage(ApexPages.Severity.ERROR, System.Label.Msg_AccountAlreadyExist); 
+        //     return false;
+        // }
+        
         viewModel.account = accountCreated;
 
         if (EmailUtility.sendEmail(viewModel.account.Email__c, 'AccountActivation'))
