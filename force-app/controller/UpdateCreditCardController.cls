@@ -21,13 +21,13 @@ public with sharing class UpdateCreditCardController extends ApexBaseController 
         }
         
         addMessage(ApexPages.Severity.INFO, System.Label.Msg_UpdateCompleted);
-        PageReference page = ApexUtility.toPage('SubscriptionManagementPage');
-        page.getParameters().put('updateCreditcard','true');
+        PageReference page = ApexUtility.toPage('AccountSettingPage');
+        page.getParameters().put('updateCreditcard', 'true');
         return page;    
     }
 
     public Pagereference cancel() {
-        return ApexUtility.toPage('SubscriptionManagementPage');
+        return ApexUtility.toPage('AccountSettingPage');
     }
 
     public List<SelectOption> getCreditcard_Year (){
