@@ -24,8 +24,10 @@ public with sharing class SummaryController extends ApexBaseController  {
 
     public void greetingChange() {
         Integer timeForGreeting = Integer.valueOf(System.now().format('k'));
-        if(timeForGreeting < 17) 
+        if(6 < timeForGreeting && timeForGreeting < 12) 
             greetingWord = '早安';
+        else if (12 <  timeForGreeting && timeForGreeting < 18)
+            greetingWord = '午安';
         else 
             greetingWord = '晚安';
         
