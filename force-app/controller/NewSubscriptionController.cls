@@ -209,10 +209,10 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
    private void insertSubscriptionPriceAndProgram() {
         List<SubscriptionProgram__c> programs = SubscriptionModel.getProgramById(programId);
         
-        for (Subscription__c sub : tempSubscriptions) {
+        for (Subscription__c sub : subscriptionInsertList) {
             sub.Start_period__c = startPeriod;
             sub.End_period__c = startPeriod + programs.get(0).Order_Period__c - 1;
-            sub.Amount__c = programPrice;      
+            sub.Amount__c = programs.get(0).Price__c;   
             sub.Program__c = programs.get(0).id;
             sub.CustomAccount__c = viewModel.account.Id;
         }
