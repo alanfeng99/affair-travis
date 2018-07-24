@@ -176,10 +176,20 @@
                                                                 </div>
                                                             </div>
                                                         </apex:outputPanel>
-                                                        <apex:outputPanel rendered="{!IF(sub.Payment_method__c != '信用卡',true,false)}">
+                                                        <apex:outputPanel rendered="{!IF(sub.Payment_method__c == '超商付款',true,false)}">
                                                             <div class="form-row">
                                                                 <div class="col-auto">
-                                                                    Payment information:<br/> <apex:outputField value="{!sub.PaymentInformation__c}"></apex:outputField>
+                                                                    付款代碼:
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <apex:outputField value="{!sub.PaymentInformation__c}"></apex:outputField>
+                                                                </div>
+                                                            </div>
+                                                        </apex:outputPanel>
+                                                        <apex:outputPanel rendered="{!IF(sub.Payment_method__c == 'ATM轉帳',true,false)}">
+                                                            <div class="form-row">
+                                                                <div class="col-auto">
+                                                                    轉帳號碼:<br/> <apex:outputField value="{!sub.PaymentInformation__c}"></apex:outputField>
                                                                 </div>
                                                             </div>
                                                         </apex:outputPanel>

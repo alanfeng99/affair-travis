@@ -201,7 +201,7 @@
                                                 <td>
                                                     <div class="form-row">
                                                         <div class="col-auto">
-                                                            更新信用卡資訊：
+                                                            信用卡：
                                                         </div>
                                                         <div class="col-auto">
                                                             {!viewModel.account.credit_card_number__c}

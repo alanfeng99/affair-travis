@@ -35,7 +35,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-auto">
-                                        Your current card number is:
+                                        您現在的信用卡號碼為:
                                     </div>
                                     <div class="col-auto">
                                         {!viewModel.account.credit_card_number__c}

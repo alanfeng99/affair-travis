@@ -25,7 +25,7 @@ public with sharing class NewSubscriptionViewModel {
             String transCode = gmoPaymentAPI.directPayment();
             
             if (transCode == null) {
-                errorMessage = 'Payment went wrong.';
+                errorMessage = '付款失敗，請稍後再試';
                 return false;
             }
 
