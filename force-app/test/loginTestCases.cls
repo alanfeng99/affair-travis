@@ -21,6 +21,18 @@ public class loginTestCases {
 
     }
 
+    public static testMethod void testCheckGoogleAuthentication_Return_Null() {
+        LoginController controller = new LoginController();
+        Pagereference page = controller.checkGoogleAuthentication();
+        System.assertEquals(null, page);
+    }
+
+    public static testMethod void testCheckFacebookAuthentication_Return_Null() {
+        LoginController controller = new LoginController();
+        Pagereference page = controller.checkFacebookAuthentication();
+        System.assertEquals(null, page);
+    }
+
     public static testMethod void testCheckAuthentication_CheckLogin_Success() {
         
         //Prepare env
@@ -148,5 +160,60 @@ public class loginTestCases {
         Pagereference page = controller.checkAuthentication();
         Pagereference pageAutoLoginFail = controller.checkAutoLogin();
         System.assertEquals(null, pageAutoLoginFail);
+    }
+
+    public static testMethod void testLoginWithFacebook_tokenHasNull_ReturnNull() {
+        LoginController controller = new LoginController();
+        Pagereference page = controller.loginWithFacebook();
+        System.assertEquals(null, page);
+    }
+
+    public static testMethod void testLoginWithFacebook_Login_Success_Return_Not_Null() {
+        LoginController controller = new LoginController();
+        controller.facebookUserEmail = 'alan@gmail.com';
+        controller.facebookUserName = 'alan';
+        controller.facebookUserToken = '123';
+        controller.facebookUserID = '222';
+        Pagereference page = controller.loginWithFacebook();
+        System.assertNotEquals(null, page);
+    }
+
+    public static testMethod void testLoginWithFacebook_Login_Success_Account_Already_Exist_Return_Not_Null() {
+        Account__c account = new Account__c();
+        account.Email__c = 'alan@gmail.com';
+        insert account;
+        LoginController controller = new LoginController();
+        controller.facebookUserEmail = 'alan@gmail.com';
+        controller.facebookUserName = 'alan';
+        controller.facebookUserToken = '123';
+        Pagereference page = controller.loginWithFacebook();
+        System.assertNotEquals(null, page);
+    }
+
+    public static testMethod void testLoginWithGoogle_tokenHasNull_Return_Null() {
+        LoginController controller = new LoginController();
+        Pagereference page = controller.loginWithGoogle();
+        System.assertEquals(null, page);
+    }
+
+    public static testMethod void testLoginWithGoogle_Login_Success_Return_Not_Null() {
+        LoginController controller = new LoginController();
+        controller.googleUserEmail = 'alan@gmail.com';
+        controller.googleUserName = 'alan';
+        controller.googleUserID = '123';
+        Pagereference page = controller.loginWithGoogle();
+        System.assertNotEquals(null, page);
+    }
+
+    public static testMethod void testLoginWithGoogle_Login_Success_Account_Already_Exist_Return_Not_Null() {
+        Account__c account = new Account__c();
+        account.Email__c = 'alan@gmail.com';
+        insert account;
+        LoginController controller = new LoginController();
+        controller.googleUserEmail = 'alan@gmail.com';
+        controller.googleUserName = 'alan';
+        controller.googleUserID = '123';
+        Pagereference page = controller.loginWithGoogle();
+        System.assertNotEquals(null, page);
     }
 }
