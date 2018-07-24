@@ -7,12 +7,15 @@ public with sharing class LoginController extends ApexBaseController {
     public String googleUserName {get; set;}
     public String googleUserEmail {get; set;}
     public String googleUserID {get; set;}
+    public Boolean isLogout {get; set;}
 
    
     public LoginController() {
         String logout = ApexPages.currentPage().getParameters().get('logout');
-        if (logout != null && logout == 'true')
+        if (logout != null && logout == 'true') {
             AuthUtility.deleteAuthCookies();
+            isLogout = true;
+        }
         viewModel = new LoginViewModel();
     }
 
