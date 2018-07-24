@@ -42,6 +42,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         isChooseCreditcard = false;
         showProgramResult = false;
         showErrorForNullProgram = false;
+        subscriptionInsertList = new List<Subscription__c>();
     }
 
     public PageReference newSubscription() {
