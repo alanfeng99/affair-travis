@@ -8,11 +8,11 @@ public with sharing class NewSubscriptionViewModel {
         creditCardBean = new CreditCardBean();
     }
 
-    public Boolean newSubscription(List<Subscription__c> subscriptionInsertList) {
+    public Boolean newSubscription(List<Subscription__c> subscriptionInsertList, String programId) {
         Boolean updateResult = true;  
         try {
             Subscription__c firstSub = subscriptionInsertList.get(0);
-            SubscriptionProgram__c program = [SELECT ProgramId__c, ProgramName__c FROM SubscriptionProgram__c WHERE ID = :firstSub.Program__c];
+            SubscriptionProgram__c program = [SELECT ProgramId__c, ProgramName__c FROM SubscriptionProgram__c WHERE ProgramId__c = :programId];
             
             Order order = new Order();
             order.paymentMethod = firstSub.Payment_method__c;

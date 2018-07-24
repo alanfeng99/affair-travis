@@ -28,8 +28,6 @@
                             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{!viewModel.account.LastName__c}</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown01">
                                 <apex:commandLink action="{!logOut}" value="登出" styleClass="dropdown-item"/>
-                                <!-- <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a> -->
                             </div>
                         </li>
                         <li class="nav-item ">
