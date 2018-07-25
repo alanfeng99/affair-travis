@@ -5,10 +5,7 @@ public with sharing class SummaryControllerTestCase {
         insert account;
         String accountId = account.Id;
         
-        Cookie authToken = new Cookie(Label.COOKIE_AUTH_TOKEN, '20180725', null, Constants.COOKIE_DURATION, false);
-        Cookie cookieAccountId = new Cookie(label.COOKIE_ACCOUNT_ID, account.Id, null, Constants.COOKIE_DURATION, false);
-
-        SummaryController controller = new SummaryController(cookieAccountId);
+        SummaryController controller = new SummaryController(accountId);
         controller.viewModel = new SummaryViewModel(accountId);
         Account__c account2 = controller.getAccount();
         System.assertNotEquals(null, account2);
