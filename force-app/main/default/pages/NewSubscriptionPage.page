@@ -14,6 +14,23 @@
         <link rel="stylesheet" href="{!$Resource.MediaqueryCSS}"/>
     	<apex:stylesheet value="{!$Resource.TemplateCSS}"/>
     </head>
+
+    <style>
+        select {
+            display: block;
+            width: 100%;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+    </style>
+
     <body class="bg-light" >
         <apex:form id="form">
             <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
@@ -95,11 +112,11 @@
                                 <div class="form-group">
                                     <apex:inputField value="{!tempSub.Recipient__c}"  styleClass="form-control w100 h40px" html-placeholder="收件人名稱"/>    
                                 </div>   
-                                <div class="form-row form-group" style="font-size:14px;" id="address">
-                                    <div class="col-6">
+                                <div class="form-row form-group area-picker-parent" style="font-size:14px;" id="address">
+                                    <div class="col-6 city-picklist-parent">
                                         <apex:inputField value="{!tempSub.City_picklist__c}" styleClass="form-control h40px"/>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6 area-picklist-parent">
                                         <apex:inputField value="{!tempSub.Area_picklist__c}" styleClass="form-control h40px" />
                                     </div>    
                                 </div>
@@ -213,5 +230,16 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
     
+    <script>
+        $j = jQuery.noConflict();
+        $(document).ready(function() {
+            $(function() {
+                $j('.area-picker-parent').find('select').addClass('form-control');
+            });
+        });
+        $j('.area-picker-parent:nth-child(2)').on('change', function(){
+            $j('.area-picker-parent').find('select').addClass('form-control');
+        });
+    </script>
     
 </apex:page>
