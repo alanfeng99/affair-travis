@@ -22,12 +22,17 @@ public with sharing class UpdateCreditCardViewModel {
             
         GMOPaymentBean__c gmoPaymentBean = ApexUtility.generateGMOPaymentBeanForChange(account, order, creditCardBean);
         GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(gmoPaymentBean);
-        String transCode = gmoPaymentAPI.directPayment();
+        gmoPaymentBean = gmoPaymentAPI.directPayment();
+
+        String transCode = null;
+        if (gmoPaymentBean.result__c == '1' && gmoPaymentBean.trans_code__c != null && !String.isBlank(gmoPaymentBean.trans_code__c))
+            transCode = gmoPaymentBean.trans_code__c;
 
         if (transCode == null)
             return false;
 
         Boolean cancelPaymentResult = gmoPaymentAPI.cancelPayment(System.Label.GMOPAYMENT_CONTRACT_CODE, transCode);
+        insert gmoPaymentBean;
 
         if (!cancelPaymentResult)
             return false;

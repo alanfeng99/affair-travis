@@ -22,14 +22,21 @@ public with sharing class NewSubscriptionViewModel {
             
             GMOPaymentBean__c gmoPaymentBean = ApexUtility.generateGMOPaymentBeanForPayment(account, order, creditCardBean);
             GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(gmoPaymentBean);
-            String transCode = gmoPaymentAPI.directPayment();
+            gmoPaymentBean = gmoPaymentAPI.directPayment();
             
+            String transCode = null;
+            if (gmoPaymentBean.result__c == '1' && gmoPaymentBean.trans_code__c != null && !String.isBlank(gmoPaymentBean.trans_code__c))
+                transCode = gmoPaymentBean.trans_code__c;
+
             if (transCode == null) {
                 errorMessage = '付款失敗，請稍後再試';
                 return false;
             }
 
             GMOPaymentCheckOrderResultBean checkOrderResult = gmoPaymentAPI.checkOrder(System.Label.GMOPAYMENT_CONTRACT_CODE, transCode);
+
+            insert gmoPaymentBean;
+
             for (Subscription__c sub : subscriptionInsertList)
                 sub.PaymentInformation__c = checkOrderResult.GlobalPayment_result.other_01;
 

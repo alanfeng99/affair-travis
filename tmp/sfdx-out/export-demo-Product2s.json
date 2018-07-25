@@ -8,8 +8,8 @@
             "Name": "第一期",
             "ProductCode": "1",
             "PicturePath__c": "https://assets.tetrapak.com/static/publishingimages/find-by-food/rollup/cones-ice-cream.jpg",
-            "EndDate__c": "2018-10-24",
-            "StartDate__c": "2018-07-24"
+            "StartDate__c": "2018-07-24",
+            "EndDate__c": "2018-10-24"
         },
         {
             "attributes": {
@@ -19,8 +19,42 @@
             "Name": "第二期",
             "ProductCode": "2",
             "PicturePath__c": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnLMrNlgTimdFcqC1Jychc6oggVQ63f5WBSFMD1wnBwnzGHf92Fg",
-            "EndDate__c": "2018-12-25",
-            "StartDate__c": "2018-10-25"
+            "StartDate__c": "2018-10-25",
+            "EndDate__c": "2018-12-25"
+            
+        },
+        {
+            "attributes": {
+                "type": "Product2",
+                "referenceId": "Product2Ref3"
+            },
+            "Name": "第三期",
+            "ProductCode": "3",
+            "PicturePath__c": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnLMrNlgTimdFcqC1Jychc6oggVQ63f5WBSFMD1wnBwnzGHf92Fg",
+            "StartDate__c": "2018-12-26",
+            "EndDate__c": "2018-01-25"
+        },
+        {
+            "attributes": {
+                "type": "Product2",
+                "referenceId": "Product2Ref4"
+            },
+            "Name": "第四期",
+            "ProductCode": "4",
+            "PicturePath__c": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnLMrNlgTimdFcqC1Jychc6oggVQ63f5WBSFMD1wnBwnzGHf92Fg",
+            "StartDate__c": "2018-01-26",
+            "EndDate__c": "2018-02-25"
+        },
+        {
+            "attributes": {
+                "type": "Product2",
+                "referenceId": "Product2Ref5"
+            },
+            "Name": "第五期",
+            "ProductCode": "5",
+            "PicturePath__c": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnLMrNlgTimdFcqC1Jychc6oggVQ63f5WBSFMD1wnBwnzGHf92Fg",
+            "StartDate__c": "2018-02-26",
+            "EndDate__c": "2018-03-25"
         }
     ]
 }

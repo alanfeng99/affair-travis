@@ -16,7 +16,7 @@ public class GMOPaymentAPI {
         return request;
     }
 
-    public String directPayment() {
+    public GMOPaymentBean__c directPayment() {
         HttpRequest request = prepareRequest(System.Label.ENDPOINT_DIRECT_PAYMENT);
 
         gmoPaymentBean = addCommonGMOPaymentBeanValues(gmoPaymentBean);
@@ -28,11 +28,7 @@ public class GMOPaymentAPI {
         GMOPaymentBean__c beanAPIResponse = (GMOPaymentBean__c) deserializationGMOResponse(response.getBody(), GMOPaymentBean__c.class);
         ApexUtility.mergeSecondObjectIntoFirstObject(gmoPaymentBean, beanAPIResponse);
         
-        if (gmoPaymentBean.result__c == '1' && gmoPaymentBean.trans_code__c != null && !String.isBlank(gmoPaymentBean.trans_code__c))
-            return gmoPaymentBean.trans_code__c;
-
-        insert gmoPaymentBean;
-        return null;
+        return gmoPaymentBean;
     }
 
     public GMOPaymentCheckOrderResultBean checkOrder(String contract_code, String trans_code) {
@@ -41,8 +37,6 @@ public class GMOPaymentAPI {
         request.setBody(requestBody);
         Http http = new Http();
         HttpResponse response = http.send(request);
-        
-        insert gmoPaymentBean;
         
         return (GMOPaymentCheckOrderResultBean) deserializationGMOResponse(response.getBody(), GMOPaymentCheckOrderResultBean.class);
     }
