@@ -222,6 +222,22 @@
         <value>此信箱不存在</value>
     </labels>
     <labels>
+        <fullName>Msg_SaveSuccess</fullName>
+        <categories>Messages</categories>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>Msg_儲存成功</shortDescription>
+        <value>儲存成功</value>
+    </labels>
+    <labels>
+        <fullName>Msg_SaveFail</fullName>
+        <categories>Messages</categories>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>Msg_儲存失敗</shortDescription>
+        <value>儲存失敗</value>
+    </labels>
+    <labels>
         <fullName>Msg_EmailSendFail</fullName>
         <categories>Messages</categories>
         <language>zh_TW</language>
@@ -229,6 +245,23 @@
         <shortDescription>Msg_信件傳送失敗</shortDescription>
         <value>電子郵件傳送失敗</value>
     </labels>
+    <labels>
+        <fullName>Msg_PayFail</fullName>
+        <categories>Messages</categories>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>Msg_付款失敗</shortDescription>
+        <value>付款失敗，請稍後再試</value>
+    </labels>
+    <labels>
+        <fullName>Msg_CreditcardUploadFail</fullName>
+        <categories>Messages</categories>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>Msg_信用卡資訊更新失敗</shortDescription>
+        <value>信用卡資訊尚未更新，請稍後再試</value>
+    </labels>
+    
     <labels>
         <fullName>GMOPAYMENT_CONTRACT_CODE</fullName>
         <language>zh_TW</language>

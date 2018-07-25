@@ -16,7 +16,7 @@ public with sharing class UpdateCreditCardController extends ApexBaseController 
             return null;
             
         if(!viewModel.updateSubscription()) {
-            addMessage(ApexPages.Severity.ERROR, '信用卡資訊尚未更新，請稍後再試');
+            addMessage(ApexPages.Severity.ERROR, System.Label.Msg_CreditcardUploadFail);
             return null; 
         }
         

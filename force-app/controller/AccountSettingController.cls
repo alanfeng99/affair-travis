@@ -56,23 +56,23 @@ public with sharing class AccountSettingController extends ApexBaseController {
 
     private Boolean checkPasswordFormat() {
         if (!AuthUtility.checkPassword(viewModel.account.Email__c, viewModel.account.Password__c, accountOld.Password__c)) {
-            addMessage(Apexpages.Severity.ERROR, '您輸入的舊密碼有誤');
+            addMessage(Apexpages.Severity.ERROR, System.Label.Msg_Password_Old);
             return false;
         }
         if (accountNew.Password__c == null) {
-            addMessage(Apexpages.Severity.ERROR, '請輸入密碼');
+            addMessage(Apexpages.Severity.ERROR, System.Label.Msg_PasswordEmpty);
             return false;
         }
         if (!checkPasswordLength(accountNew)) {
-            addMessage(Apexpages.Severity.ERROR, '新密碼長度不符');            
+            addMessage(Apexpages.Severity.ERROR, System.Label.Msg_Password_New);            
             return false;
         }
         if (!PasswordUtility.checkPasswordHasEnglish(accountNew.Password__c)) {
-            addMessage(Apexpages.Severity.ERROR, '密碼至少需要一個數字和英文');            
+            addMessage(Apexpages.Severity.ERROR, System.Label.Msg_PasswordFormat);            
             return false;
         }
         if (accountVerify.Password__c == null) {
-            addMessage(Apexpages.Severity.ERROR, '請輸入驗證碼');    
+            addMessage(Apexpages.Severity.ERROR, System.Label.Msg_ValidationEmpty);    
             return false;
         }
         if (!accountNew.Password__c.equals(accountVerify.Password__c)) {
@@ -92,7 +92,7 @@ public with sharing class AccountSettingController extends ApexBaseController {
 
     public Pagereference submitName() {
         if (viewModel.account.LastName__c == null) 
-            addMessage(Apexpages.Severity.ERROR, '請輸入暱稱');
+            addMessage(Apexpages.Severity.ERROR, System.Label.Msg_NameEmpty);
         else {
             if(viewModel.updateName()) {
                 addMessage(Apexpages.Severity.INFO, System.Label.Msg_UpdateCompleted);
@@ -104,7 +104,7 @@ public with sharing class AccountSettingController extends ApexBaseController {
 
     public Pagereference submitEmail() {
         if (viewModel.account.Email__c == null) 
-            addMessage(Apexpages.Severity.ERROR, '請輸入信箱');
+            addMessage(Apexpages.Severity.ERROR, System.Label.Msg_EmailEmpty);
         else {
             if (viewModel.updateEmail()) {
                 addMessage(Apexpages.Severity.INFO, System.Label.Msg_UpdateCompleted);
@@ -118,7 +118,7 @@ public with sharing class AccountSettingController extends ApexBaseController {
                 return page;
             }
 
-            addMessage(Apexpages.Severity.ERROR, '帳號已存在');
+            addMessage(Apexpages.Severity.ERROR, System.Label.Msg_AccountAlreadyExist);
         }
         return null;
     }
