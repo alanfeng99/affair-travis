@@ -1,11 +1,10 @@
 @isTest
 public class GMOPaymentAPITest {
-    public GMOPaymentBean__c buildGMOPaymentBean() {
+    public static GMOPaymentBean__c buildGMOPaymentBean() {
         GMOPaymentBean__c gmoPaymentBean = new GMOPaymentBean__c();
 
         gmoPaymentBean.contract_code__c = '10081070';
         gmoPaymentBean.version__c = '1';
-        gmoPaymentBean.character_code__c = 'UTF-8';
         gmoPaymentBean.process_code__c = '1';
         gmoPaymentBean.user_id__c = 'test0001';
         gmoPaymentBean.user_name__c = 'Yamada Tarou';
@@ -30,5 +29,20 @@ public class GMOPaymentAPITest {
         gmoPaymentBean.add_info1__c = '1';
 
         return gmoPaymentBean;
+    }
+
+    public static testMethod void testAddCommonGMOPaymentBeanValues() {
+        GMOPaymentBean__c gmoPaymentBean = buildGMOPaymentBean();
+        GMOPaymentAPI api = new GMOPaymentAPI(gmoPaymentBean);
+        gmoPaymentBean = api.addCommonGMOPaymentBeanValues(gmoPaymentBean);
+
+        System.assertEquals('UTF-8', gmoPaymentBean.character_code__c);
+    }
+
+    public static testMethod void testBuildGMOPaymentBodyForDirectPayment() {
+        GMOPaymentBean__c gmoPaymentBean = buildGMOPaymentBean();
+        GMOPaymentAPI api = new GMOPaymentAPI(gmoPaymentBean);
+        String actual = api.buildGMOPaymentBodyForDirectPayment(gmoPaymentBean);
+        System.assert(actual.length() > 0);
     }
 }
