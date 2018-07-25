@@ -9,8 +9,6 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
 
     public Boolean updatedCreditcard {get; set;} 
     public Boolean orderSucceed {get; set;}
-
-    private String page {get; set;} 
     private List<Subscription__c> originalSubscriptions;
 
     public SubscriptionManagementController() {
@@ -24,12 +22,18 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
         }
     }
 
+    public SubscriptionManagementController(String accountId) {            
+        viewModel = new SubscriptionManagementViewModel(accountId);  
+        orderSucceed = ApexPages.currentPage().getParameters().get('orderSucceed') == 'true';
+        updatedCreditcard = ApexPages.currentpage().getparameters().get('updateCreditcard') == 'true';      
+    }
+
     public Pagereference submitForm() {
         if (viewModel.submit()) {
             currentEditRowId = '';
-            addMessage(ApexPages.Severity.INFO, '儲存成功');
+            addMessage(ApexPages.Severity.INFO, System.label.Msg_SaveSuccess);
         } else {
-            addMessage(ApexPages.Severity.ERROR, '儲存失敗');
+            addMessage(ApexPages.Severity.ERROR, System.label.Msg_SaveFail);
         }
         return null;
     }
@@ -60,7 +64,6 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
     }
 
     public PageReference changeRecipientInfo(){
-        
         originalSubscriptions = viewModel.subscriptions.deepClone(true);
         return null;
     }
