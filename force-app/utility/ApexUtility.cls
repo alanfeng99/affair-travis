@@ -27,7 +27,7 @@ public with sharing class ApexUtility {
         return randomAlphaNumeric;
     }
 
-     public static String getUserIPAddress() {
+    public static String getUserIPAddress() {
         HttpRequest req = new HttpRequest();
         req.setMethod('GET');
         req.setHeader('content-type', 'application/json');
