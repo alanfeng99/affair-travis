@@ -22,7 +22,7 @@ public with sharing class ChangePasswordController extends ApexBaseController {
     }
 
     private Boolean checkPassword() {
-        if (!PasswordUtility.checkPasswordHasEnglish(viewModel.account.Password__c)) {
+        if (!PasswordUtility.checkPasswordFormat(viewModel.account.Password__c)) {
             clearPassword();
             addMessage(ApexPages.Severity.ERROR, System.Label.Msg_PasswordFormat);
             return false;

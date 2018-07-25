@@ -35,6 +35,15 @@ public with sharing class AccountSettingController extends ApexBaseController {
         ifChangeEmail = false;     
     }
 
+    public AccountSettingController(String accountId) {
+        viewModel = new AccountSettingViewModel(accountId);
+        initAccounts();
+        updatedCreditCard = ApexPages.currentpage().getparameters().get('updatedCreditCard') == 'true';      
+
+        showView('Main');
+        ifChangeEmail = false;     
+    }
+
     private void initAccounts() {
         accountVerify = new Account__c();
         accountOld = new Account__c();
@@ -59,35 +68,28 @@ public with sharing class AccountSettingController extends ApexBaseController {
             addMessage(Apexpages.Severity.ERROR, System.Label.Msg_Password_Old);
             return false;
         }
+
         if (accountNew.Password__c == null) {
             addMessage(Apexpages.Severity.ERROR, System.Label.Msg_PasswordEmpty);
             return false;
         }
-        if (!checkPasswordLength(accountNew)) {
-            addMessage(Apexpages.Severity.ERROR, System.Label.Msg_Password_New);            
-            return false;
-        }
-        if (!PasswordUtility.checkPasswordHasEnglish(accountNew.Password__c)) {
+        
+        if (!PasswordUtility.checkPasswordFormat(accountNew.Password__c)) {
             addMessage(Apexpages.Severity.ERROR, System.Label.Msg_PasswordFormat);            
             return false;
         }
+
         if (accountVerify.Password__c == null) {
             addMessage(Apexpages.Severity.ERROR, System.Label.Msg_ValidationEmpty);    
             return false;
         }
+        
         if (!accountNew.Password__c.equals(accountVerify.Password__c)) {
             addMessage(Apexpages.Severity.ERROR, System.Label.Msg_Password_Inconsistent); 
             return false;
         }
 
         return true;    
-    }
-
-    private Boolean checkPasswordLength(Account__c account) {
-        if (account.Password__c.length() < 8)
-            return false; 
-        
-        return true;
     }
 
     public Pagereference submitName() {
