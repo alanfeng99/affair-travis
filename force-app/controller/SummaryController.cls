@@ -9,15 +9,17 @@ public with sharing class SummaryController extends ApexBaseController  {
         if (accountIdCookie != null) {
             String accountId = accountIdCookie.getValue();
         	viewModel = new SummaryViewModel(accountId);
-            Account__c account = viewModel.getAccount();   
-            greetingChange();
+            Account__c account = viewModel.getAccount();
+            Integer timeForGreeting = Integer.valueOf(System.now().format('k'));   
+            greetingChange(timeForGreeting);
         }    
     }
 
     public SummaryController(String accountId) {
         viewModel = new SummaryViewModel(accountId);
-        Account__c account = viewModel.getAccount();   
-        greetingChange();
+        Account__c account = viewModel.getAccount();
+        Integer timeForGreeting = Integer.valueOf(System.now().format('k'));
+        greetingChange(timeForGreeting);
     }
 
     public Account__c getAccount() {
@@ -28,8 +30,7 @@ public with sharing class SummaryController extends ApexBaseController  {
         return viewModel.getSubscriptions();
     }
 
-    public void greetingChange() {
-        Integer timeForGreeting = Integer.valueOf(System.now().format('k'));
+    public void greetingChange(Integer timeForGreeting) {
         if(6 < timeForGreeting && timeForGreeting < 12) 
             greetingWord = '早安';
         else if (12 <  timeForGreeting && timeForGreeting < 18)
