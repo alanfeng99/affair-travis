@@ -4,6 +4,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     public List<Subscription__c> tempSubscriptions {get; set;}
     public List<SelectOption> year {get; set;}
     public Subscription__c firstSubscription {get; set;}
+    public Subscription__c newSubscription;
     public String salesForceIP {get; set;}
     public String programId {get; set;}
     public String paymentMethod {get; set;}
@@ -16,8 +17,6 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     public Boolean isChooseCreditcard {get; set;}
     public Boolean showProgramResult {get; set;}
     public Boolean showErrorForNullProgram {get; set;}
-
-    private String accountId {get; set;}
     
     public NewSubscriptionController() {
 
@@ -38,6 +37,20 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         pageInit();
     }
 
+    public NewSubscriptionController(String accountId) {
+        viewModel = new NewSubscriptionViewModel(accountId);
+        tempSubscriptions = new List<Subscription__c>();
+        
+        firstSubscription = new Subscription__c(CustomAccount__c = accountId);
+        firstSubscription.Index__c = 1;
+        tempSubscriptions.add(firstSubscription);
+
+        viewModel.creditCardBean.cvc = '';
+        calculateSize();
+    
+        pageInit();
+    }
+
     private void pageInit() {
         isChooseCreditcard = false;
         showProgramResult = false;
@@ -50,9 +63,9 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             showErrorForNullProgram = true;
             return null;
         }
-        Subscription__c subscription = new Subscription__c(CustomAccount__c = viewModel.account.Id);
-        subscription.Index__c = tempSubscriptions.size() + 1;
-        tempSubscriptions.add(subscription);
+        newSubscription = new Subscription__c(CustomAccount__c = viewModel.account.Id);
+        newSubscription.Index__c = tempSubscriptions.size() + 1;
+        tempSubscriptions.add(newSubscription);
         
         calculateSize();
         programPriceDecide();
@@ -88,7 +101,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         return null;
     }
 
-     public List<Product2> getProgramInfo() {
+     public List<Product2> getProductInfo() {
         return ProductModel.getProduct(); 
     }
     

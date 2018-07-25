@@ -29,7 +29,7 @@ public with sharing class NewSubscriptionViewModel {
                 transCode = gmoPaymentBean.trans_code__c;
 
             if (transCode == null) {
-                errorMessage = '付款失敗，請稍後再試';
+                errorMessage = System.label.Msg_PayFail;
                 return false;
             }
 

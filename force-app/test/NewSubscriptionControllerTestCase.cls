@@ -15,15 +15,47 @@ public with sharing class NewSubscriptionControllerTestCase {
         System.assertEquals(true, controller.showErrorForNullProgram);
     }
 
-    // public static testMethod void deleteSubscription_deleteRowId_0_Size_0() {
-    //     NewSubscriptionController controller = new NewSubscriptionController();
-    //     Account__c account =  new Account__c(Email__c = 'jin@4idps.com');
-    //     insert account;
-    //     controller.viewModel.account.id = account.id;
-    //     controller.newSubscription();
-    //     controller.deleteRowId = 1;
-    //     System.assertEquals(1, controller.tempSubscriptions.size());
-    // }
+    public static testMethod void testNewSubscription_ProgramId_Not_Null() {
+        Account__c account = new Account__c(Email__c = 'jin@222.com');
+        insert account;
+        SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, ProgramName__c = 'a');
+        insert program;
+        
+        NewSubscriptionController controller = new NewSubscriptionController(account.id);
+        controller.programId = program.ProgramId__c;
+        //controller.viewModel.account.id = account.id;
+        PageReference page = controller.newSubscription();
+        System.assertNotEquals(null, controller.newSubscription);
+        System.assertEquals(2, controller.newSubscription.Index__c);
+        System.assertEquals(2, controller.subscriptionSize);
+        System.assertEquals(null, page);
+
+    }
+
+    public static testMethod void deleteSubscription_deleteRowId_0_Size_0() {
+        Account__c account =  new Account__c(Email__c = 'jin@4idps.com');
+        insert account;
+        NewSubscriptionController controller = new NewSubscriptionController(account.id);
+        controller.deleteRowId = 1;
+        Pagereference page = controller.deleteSubscription();
+        System.assertEquals(0, controller.tempSubscriptions.size());
+        System.assertEquals(null, page);
+    }
+
+    public static testMethod void testProgramPriceDecide() {
+        SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, ProgramName__c = 'a');
+        insert program;
+        NewSubscriptionController controller = new NewSubscriptionController();
+        controller.programId = program.ProgramId__c;
+        controller.subscriptionSize = 1;
+        Pagereference page = controller.programPriceDecide();
+        System.assertEquals(400, controller.programPrice);
+        System.assertEquals('a', controller.programName);
+        System.assertEquals(400, controller.programTotalPrice);
+        System.assertEquals(true, controller.showProgramResult);
+        System.assertEquals(false, controller.showErrorForNullProgram);
+        System.assertEquals(null, page);
+    }
 
     public static testMethod void testCreditcard_Year_Selection() {
         NewSubscriptionController controller = new NewSubscriptionController();
@@ -42,6 +74,19 @@ public with sharing class NewSubscriptionControllerTestCase {
         List<SelectOption> options = controller.getProductRadioButton();
         Integer size = options.size();
         System.assertEquals(1, size);
+    }
+
+    public static testMethod void testGetProductInfo() {
+        Product2 product = new Product2(Name = '草', ProductCode = '2', StartDate__c = Date.valueOf(System.now())-1, 
+            EndDate__c = Date.valueOf(System.now())+8);
+        Product2 product2 = new Product2(Name = '花', ProductCode = '3', StartDate__c = Date.valueOf(System.now())+9, 
+        EndDate__c = Date.valueOf(System.now())+20);
+        
+        insert product;
+        insert product2;
+        NewSubscriptionController controller = new NewSubscriptionController();
+        List<Product2> products = controller.getProductInfo();
+        System.assertNotEquals(null, products);
     }
 
     public static testMethod void testGetProductRadioButton() {
@@ -87,6 +132,106 @@ public with sharing class NewSubscriptionControllerTestCase {
         Pagereference page = controller.chooseCreditCard();
         System.assertEquals(false, controller.isChooseCreditcard);
         System.assertEquals(null, page);
+    }
+
+    public static testMethod void testSubmitForm_ProgramId_Null_Return_Msg() {
+        NewSubscriptionController controller = new NewSubscriptionController();
+        Pagereference page = controller.submitForm();
+        System.assertEquals(controller.baseErrorMessage, System.Label.Msg_ProgramEmpty);
+    }
+
+    public static testMethod void testSubmitForm_CheckField_StartPeriod_Null_Return_False() {
+        SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, ProgramName__c = 'a');
+        insert program;
+        Account__c account =  new Account__c(Email__c = 'jin@4idps.com');
+        insert account;
+        NewSubscriptionController controller = new NewSubscriptionController(account.Id);
+        controller.programId = program.ProgramId__c;
+        controller.paymentMethod = 'ATM';
+
+        Pagereference page = controller.submitForm();
+        System.assertEquals(1, controller.subscriptionInsertList.size());
+        System.assertEquals('ATM', controller.firstSubscription.Payment_method__c);
+        System.assertEquals(controller.baseErrorMessage, System.Label.Msg_PeriodEmpty);
+    }
+
+    public static testMethod void testSubmitForm_CheckField_Reciepient_Null_Return_False() {
+        SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, ProgramName__c = 'a');
+        insert program;
+        Account__c account =  new Account__c(Email__c = 'jin@4idps.com');
+        insert account;
+        NewSubscriptionController controller = new NewSubscriptionController(account.Id);
+        controller.programId = program.ProgramId__c;
+        controller.paymentMethod = 'ATM';
+        controller.startPeriod = 2;
+
+        Pagereference page = controller.submitForm();
+        System.assertEquals(controller.baseErrorMessage, System.Label.Msg_RecipientInfoEmpty);
+    }
+
+    public static testMethod void testSubmitForm_CheckField_Reciepient_Not_Null_Tel_Format_Wrong_Return_False() {
+        SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, ProgramName__c = 'a');
+        insert program;
+        Account__c account =  new Account__c(Email__c = 'jin@4idps.com');
+        insert account;
+        NewSubscriptionController controller = new NewSubscriptionController(account.Id);
+        controller.programId = program.ProgramId__c;
+        controller.paymentMethod = 'ATM';
+        controller.startPeriod = 2;
+        
+        controller.firstSubscription.Recipient__c = 'jin';
+        controller.firstSubscription.City_picklist__c = '台北市';
+        controller.firstSubscription.Area_picklist__c = '松山區';
+        controller.firstSubscription.Address__c = '123';
+        controller.firstSubscription.Tel__c = '1212121';
+    
+
+        Pagereference page = controller.submitForm();
+        System.assertNotEquals(controller.baseErrorMessage, System.Label.Msg_RecipientInfoEmpty);
+        System.assertEquals(controller.baseErrorMessage, System.Label.Msg_PhoneFormat);
+    }
+
+    public static testMethod void testSubmitForm_CheckField_Tel_Format_Right_Paymentmethod_Null_Return_False() {
+        SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, ProgramName__c = 'a');
+        insert program;
+        Account__c account =  new Account__c(Email__c = 'jin@4idps.com');
+        insert account;
+        NewSubscriptionController controller = new NewSubscriptionController(account.Id);
+        controller.programId = program.ProgramId__c;
+        controller.startPeriod = 2;
+        
+        controller.firstSubscription.Recipient__c = 'jin';
+        controller.firstSubscription.City_picklist__c = '台北市';
+        controller.firstSubscription.Area_picklist__c = '松山區';
+        controller.firstSubscription.Address__c = '123';
+        controller.firstSubscription.Tel__c = '0987777888';
+    
+
+        Pagereference page = controller.submitForm();
+        System.assertNotEquals(controller.baseErrorMessage, System.Label.Msg_PhoneFormat);
+        System.assertEquals(controller.baseErrorMessage, System.Label.Msg_PaymentEmpty);
+    }
+
+    public static testMethod void testSubmitForm_CheckField_Creditcard_Info_Not_Complete_Return_False() {
+        SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, ProgramName__c = 'a');
+        insert program;
+        Account__c account =  new Account__c(Email__c = 'jin@4idps.com');
+        insert account;
+        NewSubscriptionController controller = new NewSubscriptionController(account.Id);
+        controller.programId = program.ProgramId__c;
+        controller.paymentMethod = '信用卡';
+        controller.startPeriod = 2;
+        
+        controller.firstSubscription.Recipient__c = 'jin';
+        controller.firstSubscription.City_picklist__c = '台北市';
+        controller.firstSubscription.Area_picklist__c = '松山區';
+        controller.firstSubscription.Address__c = '123';
+        controller.firstSubscription.Tel__c = '0987777888';
+    
+
+        Pagereference page = controller.submitForm();
+        System.assertNotEquals(controller.baseErrorMessage, System.Label.Msg_PaymentEmpty);
+        System.assertEquals(controller.baseErrorMessage, System.Label.Msg_Creditcard_CheckAll);
     }
 
     public static testMethod void testTurn_To_UpdateCreditcardPage() {

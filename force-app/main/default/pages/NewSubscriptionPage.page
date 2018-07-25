@@ -64,9 +64,9 @@
                         起始期數
                     </div>
                     <div class="form-row">
-                        <apex:repeat value="{!ProgramInfo}" var="program"> 
+                        <apex:repeat value="{!ProductInfo}" var="product"> 
                     	<div class="col">
-                            <apex:image url="{!program.PicturePath__c}" styleClass="w120px h160px"/>
+                            <apex:image url="{!product.PicturePath__c}" styleClass="w120px h160px"/>
                         </div>
                     </apex:repeat>
                     </div>
