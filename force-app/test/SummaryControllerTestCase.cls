@@ -1,14 +1,17 @@
 @isTest
 public with sharing class SummaryControllerTestCase {
     public static testMethod void testGetAccount() {
-        // Account__c account = new Account__c(Email__c = 'jin@4idps.com');
-        // insert account;
+        Account__c account = new Account__c(Email__c = 'jin@4idps.com');
+        insert account;
+        String accountId = account.Id;
         
-        // String accountId = account.Id;
-        // SummaryController controller = new SummaryController();
-        // controller.viewModel = new SummaryViewModel(accountId);
-        // Account__c account2 = controller.getAccount();
-        // System.assertNotEquals(null, account2);
+        Cookie authToken = new Cookie(Label.COOKIE_AUTH_TOKEN, '20180725', null, Constants.COOKIE_DURATION, false);
+        Cookie cookieAccountId = new Cookie(label.COOKIE_ACCOUNT_ID, account.Id, null, Constants.COOKIE_DURATION, false);
+
+        SummaryController controller = new SummaryController(cookieAccountId);
+        controller.viewModel = new SummaryViewModel(accountId);
+        Account__c account2 = controller.getAccount();
+        System.assertNotEquals(null, account2);
     }
 
     public static testMethod void testGreetringChange_GoodMorning() {

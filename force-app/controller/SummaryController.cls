@@ -2,9 +2,10 @@ public with sharing class SummaryController extends ApexBaseController  {
 
     public SummaryViewModel viewModel {get; set;}
     public String greetingWord {get; set;}
+    public Cookie accountIdCookie {get; set;}
 
     public SummaryController() {
-        Cookie accountIdCookie = ApexPages.currentPage().getCookies().get(Label.COOKIE_ACCOUNT_ID);
+        accountIdCookie = ApexPages.currentPage().getCookies().get(Label.COOKIE_ACCOUNT_ID);
         
         if (accountIdCookie != null) {
             String accountId = accountIdCookie.getValue();
@@ -12,6 +13,17 @@ public with sharing class SummaryController extends ApexBaseController  {
             Account__c account = viewModel.getAccount();   
             greetingChange();
         }    
+    }
+
+    public SummaryController(Cookie cookie) {
+        accountIdCookie = cookie;
+        
+        if (accountIdCookie != null) {
+            String accountId = accountIdCookie.getValue();
+        	viewModel = new SummaryViewModel(accountId);
+            Account__c account = viewModel.getAccount();   
+            greetingChange();
+        }
     }
 
     public Account__c getAccount() {
