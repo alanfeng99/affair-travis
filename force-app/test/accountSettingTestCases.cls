@@ -202,7 +202,7 @@ public  class accountSettingTestCases {
         AccountSettingController controller = new AccountSettingController(account.id);
         Pagereference page = controller.submitEmail();
         System.assertEquals(null, page); 
-        System.assertEquals(controller.baseErrorMessage, System.Label.Msg_EmailEmpty);
+        System.assertEquals(System.Label.Msg_AccountAlreadyExist, controller.baseErrorMessage);
     }
 
     public static testMethod void testSubmitEmail_Email_Not_Null_Return_Msg() {
@@ -211,7 +211,7 @@ public  class accountSettingTestCases {
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.viewModel.account.Email__c = 'jin@ggg.com';
         Pagereference page = controller.submitEmail();
-        System.assertEquals(null, page); 
+        System.assertNotEquals(null, page);
         System.assertNotEquals(controller.baseErrorMessage, System.Label.Msg_EmailEmpty);
     }
 
