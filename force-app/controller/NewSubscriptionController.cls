@@ -17,7 +17,6 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     public Boolean isChooseCreditcard {get; set;}
     public Boolean showProgramResult {get; set;}
     public Boolean showErrorForNullProgram {get; set;}
-    public Boolean isSubmitButtonDisabled {get; set;}
     
     public NewSubscriptionController() {
 
@@ -169,7 +168,6 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     }
 
     public Pagereference submitForm() {
-        isSubmitButtonDisabled = true;
         if (programId == null) {
             addMessage(ApexPages.Severity.ERROR, System.Label.Msg_ProgramEmpty);
             return null;
@@ -179,23 +177,19 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         newSubscriptionInsertList();
         
 
-        if (!checkField()) {
-            isSubmitButtonDisabled = false;
+        if (!checkField()) 
             return null;
-        }
         
         insertSubscriptionPriceAndProgram();
-
         if (viewModel.newSubscription(subscriptionInsertList, programId)) {
             PageReference page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/SubscriptionManagementPage');
             page.getParameters().put('orderSucceed','true');
             page.setRedirect(true);
-            isSubmitButtonDisabled = false;
         	return page;
         } else {
             addMessage(ApexPages.Severity.INFO, viewModel.errorMessage);
         }
-        isSubmitButtonDisabled = false;
+        
         return null;
     }
 
