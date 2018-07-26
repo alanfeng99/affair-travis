@@ -1,4 +1,4 @@
-<apex:page controller="UpdateCreditCardController" docType="html-5.0"  applyHtmlTag="true" standardStylesheets="false" showHeader="false">
+<apex:page controller="UpdateCreditCardController" docType="html-5.0" cache="false" applyHtmlTag="true" standardStylesheets="false" showHeader="false">
     <!-- Begin Default Content REMOVE THIS -->
     <head>
         <title>UpdateCreditCardPage</title>
