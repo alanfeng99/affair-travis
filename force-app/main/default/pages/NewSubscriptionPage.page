@@ -203,7 +203,7 @@
                                 </div>    
                                 <hr class="field-w100" color="#00ace6"/>
                             </apex:outputPanel>
-                            <apex:commandButton value="確認訂閱" action="{!submitForm}" reRender="form" style="width:120px; color:white; background-color:#585e5d; border-width:0px;" styleClass="btn"/>                      
+                            <apex:commandButton value="確認訂閱" action="{!submitForm}" reRender="form" disabled="{!isSubmitButtonDisabled}" style="width:120px; color:white; background-color:#585e5d; border-width:0px;" styleClass="btn"/>                      
                         </div> 
                     </div>
                     <div style="height:100px;"/>
