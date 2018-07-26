@@ -1,8 +1,4 @@
 public with sharing class SubscriptionModel {
-    public SubscriptionModel() {
-
-    }
-
     public static List<Subscription__c> getSubscriptionsByUserId(String userId) {
         return [Select Id, Program__r.Order_Period__c, Recipient__c, City_picklist__c, Area_picklist__c, Postal_code__c, Address__c,
         Program__r.ProgramName__c, Program__c, Name, Amount__c, Start_period__c, End_Period__c, Payment_method__c, 

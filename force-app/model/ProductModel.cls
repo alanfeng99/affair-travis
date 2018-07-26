@@ -1,8 +1,4 @@
 public with sharing class ProductModel {
-    public ProductModel() {
-
-    }
-
     public static List<Product2> getProduct() {
         Date now = Date.valueOf(System.now().format('yyyy-MM-dd'));
         List<Product2> currentProducts = [SELECT id, Name, ProductCode, PicturePath__c, StartDate__c, EndDate__c FROM Product2 WHERE StartDate__c <= :now and EndDate__c >= :now];
