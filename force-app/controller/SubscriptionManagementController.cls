@@ -86,7 +86,7 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
     }
 
     private void rollbackSubscription() {
-        /*
+        
         for (Subscription__c subscription : viewModel.subscriptions) 
             for (Subscription__c originalSubscription : originalSubscriptions) 
                 if (subscription.Id == originalSubscription.Id) {
@@ -96,7 +96,6 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
                     subscription.Area_pickList__c = originalSubscription.Area_pickList__c;
                     subscription.Tel__c = originalSubscription.Tel__c;
                 }
-                */
     }
 
     public Pagereference toUpdateCreditcardPage() {    

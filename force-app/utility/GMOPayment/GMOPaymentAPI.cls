@@ -48,8 +48,6 @@ public class GMOPaymentAPI {
         Http http = new Http();
         HttpResponse response = http.send(request);
 
-        insert gmoPaymentBean;
-
         return response.getBody().contains('result result="1"');
     }
 

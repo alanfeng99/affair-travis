@@ -127,7 +127,7 @@ public with sharing class LoginController extends ApexBaseController {
     }
 
     public Pagereference loginWithFacebook() {
-        if (facebookUserToken == null)
+        if (facebookUserEmail == null)
             return null;
         
         Account__c accountCreated = AccountModel.createAccountByFacebook(facebookUserEmail, facebookUserName);
