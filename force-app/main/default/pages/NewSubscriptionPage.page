@@ -61,7 +61,8 @@
                     </ul>
                 </div>
             </nav>
-            <div class="card border-light bg-light">   
+            <div class="card border-light bg-light">  
+                <br/> 
                 <div align="center" class="letterspacing3px" style="font-size:18px; line-height:1px;">
                     請填寫訂閱資料
                     <hr class="w160px" color="black"/>
