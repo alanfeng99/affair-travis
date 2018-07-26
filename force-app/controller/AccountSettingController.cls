@@ -207,47 +207,4 @@ public with sharing class AccountSettingController extends ApexBaseController {
         Cookie accountId = new Cookie(label.COOKIE_ACCOUNT_ID, realAccount.Id, null, Constants.COOKIE_DURATION, false);
         ApexPages.currentPage().setCookies(new Cookie[]{authToken, accountId});
     }
-
-    public PageReference loginWithFacebook() {
-        if (facebookUserToken == null)
-            return null;
-        
-        Account__c accountCreated = AccountModel.createAccountByFacebook(facebookUserEmail, facebookUserName);
-        Account__c accountSF = null;
-        if (accountCreated == null) {
-            accountSF = AccountModel.getAccountByEmail(facebookUserEmail);
-            if (accountSF.FacebookEmail__c == null) {
-                accountSF.FacebookEmail__c = facebookUserEmail;
-                upsert accountSF;
-            }
-        } else {
-            accountSF = accountCreated;
-        }
-
-        saveLoginCookies(accountSF);
-        return null;
-        
-    }
-
-    public Pagereference loginWithGoogle() {
-        if (googleUserEmail == null)
-            return null;
-        
-        Account__c accountCreated = AccountModel.createAccountByGoogle(googleUserEmail, googleUserName);
-        Account__c accountSF = null;
-        if (accountCreated == null) {
-            accountSF = AccountModel.getAccountByEmail(googleUserEmail);
-            if (accountSF.GoogleEmail__c == null) {
-                accountSF.GoogleEmail__c = googleUserEmail;
-                upsert accountSF;
-            }
-        } else {
-            accountSF = accountCreated;
-        }
-
-        saveLoginCookies(accountSF);
-        return null;
-        
-    }
-
 }

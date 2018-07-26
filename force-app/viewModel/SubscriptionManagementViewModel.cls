@@ -9,6 +9,14 @@ public with sharing class SubscriptionManagementViewModel {
             account = AccountModel.getAccountById(userId);
         }
     }
+    
+    public Boolean submit(Subscription__c subscription) {
+        Database.UpsertResult result = Database.upsert(subscription);
+        if (!result.isSuccess())
+            return false;
+
+        return true;
+    }
 
     public Boolean submit() {
         List<Database.UpsertResult> results = Database.upsert(subscriptions);

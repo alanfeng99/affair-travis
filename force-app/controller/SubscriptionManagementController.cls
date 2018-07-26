@@ -54,13 +54,17 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
         return null;
     }
     
-    public PageReference useAutoOrderService() {
+        public PageReference useAutoOrderService() {
         subIdForUpdateCredit = currentUseRowId;
         currentUseRowId = '';
         
-        PageReference page = new Pagereference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/UpdateCreditcardPage');
-        page.getParameters().put('subscriptionId', subIdForUpdateCredit);
-      	return page;
+        for(Subscription__c sub : viewModel.subscriptions) 
+            if (sub.id  == subIdForUpdateCredit) {
+                sub.isReplenish__c = true;
+                viewModel.submit(sub);
+            }
+        
+        return null;
     }
 
     public PageReference changeRecipientInfo(){

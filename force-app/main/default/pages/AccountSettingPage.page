@@ -20,7 +20,7 @@
         </head>
         <body class="bg-light">
             <script>
-                function onSuccess(googleUser) {
+            /*function onSuccess(googleUser) {
                     var url = new URL(window.location.href);
                     var logout = url.searchParams.get("logout");
                     var profile = googleUser.getBasicProfile();
@@ -81,23 +81,23 @@
                     js = d.createElement(s); js.id = id;
                     js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=220395842018721&autoLogAppEvents=1';
                     fjs.parentNode.insertBefore(js, fjs);
-                    }(document, 'script', 'facebook-jssdk'));
+                    }(document, 'script', 'facebook-jssdk'));*/
             </script>
-            <apex:form>
+            <!--<apex:form >
                 <apex:actionFunction action="{!loginWithGoogle}" name="loginWithGoogleJS" rerender="showname">
                     <apex:param name="googleUserEmail" value="" assignTo="{!googleUserEmail}"/>
                     <apex:param name="googleUserID" value="" assignTo="{!googleUserID}"/>
                     <apex:param name="googleUserName" value="" assignTo="{!googleUserName}"/>
                 </apex:actionFunction>
             </apex:form>
-            <apex:form>
+            <apex:form >
                 <apex:actionFunction action="{!loginWithFacebook}" name="loginWithFacebookJS" rerender="showname">
                     <apex:param name="facebookUserEmail" value="" assignTo="{!facebookUserEmail}"/>
                     <apex:param name="facebookUserID" value="" assignTo="{!facebookUserID}"/>
                     <apex:param name="facebookUserName" value="" assignTo="{!facebookUserName}"/>
                     <apex:param name="facebookUserToken" value="" assignTo="{!facebookUserToken}"/>
                 </apex:actionFunction>
-            </apex:form>
+            </apex:form>-->
             <apex:form id="form"> 
                 <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top border-bottom">
                     <a class="navbar-brand" href="#">

@@ -32,6 +32,7 @@ public with sharing class AccountModel {
 
     public static void lockAccountForThreeTimes(Account__c account) {
         account.Locked__c = true;
+        account.PasswordRetry__c = 0;
         update account;
     }
 
