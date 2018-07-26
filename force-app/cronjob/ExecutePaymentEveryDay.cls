@@ -29,7 +29,7 @@ global class ExecutePaymentEveryDay implements Schedulable {
     }
 
     public void checkDailyPaymentForEveryUsers() {
-        List<Subscription__c> subscriptions = [SELECT Payment_method__c, Start_period__c, End_period__c, Program__c, Amount__c, CustomAccount__c FROM Subscription__c WHERE Payment_method__c = '信用卡' AND isReplenish__c = true];
+        List<Subscription__c> subscriptions = [SELECT Payment_method__c, Start_period__c, End_period__c, Program__c, Amount__c, CustomAccount__c FROM Subscription__c WHERE Payment_method__c = :Constants.PAYMENT_METHOD_CREDIT_CARD AND isReplenish__c = true];
         List<Product2> products = [SELECT EndDate__c, ProductCode FROM Product2];
         List<SubscriptionProgram__c> programs = [SELECT Order_Period__c, ProgramId__c, ProgramName__c FROM SubscriptionProgram__c];
         List<Account__c> accounts = [SELECT LastName__c, Email__c FROM Account__c];
