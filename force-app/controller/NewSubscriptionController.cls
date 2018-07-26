@@ -159,7 +159,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     }
 
     public Pagereference chooseCreditCard() {
-        if (paymentMethod == Constants.PAYMENT_METHOD_CREDIT_CARD)
+        if (paymentMethod == '信用卡')
             isChooseCreditcard = true;
         else 
             isChooseCreditcard = false;
@@ -181,6 +181,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             return null;
         
         insertSubscriptionPriceAndProgram();
+        ifCreditcardThenTurnIsReplenishTrue(subscriptionInsertList);
         if (viewModel.newSubscription(subscriptionInsertList, programId)) {
             PageReference page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/SubscriptionManagementPage');
             page.getParameters().put('orderSucceed','true');
@@ -192,6 +193,14 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         
         return null;
     }
+    
+    private void ifCreditcardThenTurnIsReplenishTrue(List<Subscription__c> subscriptions) {
+        for(Subscription__c sub : subscriptions) {
+            if (sub.Payment_method__c == '信用卡') {
+                sub.isReplenish__c = true;
+            }
+        }
+    } 
 
     private void calculateSize() {
         subscriptionSize = tempSubscriptions.size();
@@ -255,7 +264,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
                 return false;
             }
                 
-            if (sub.Payment_method__c == Constants.PAYMENT_METHOD_CREDIT_CARD) 
+            if (sub.Payment_method__c == '信用卡') 
                 return isFieldFilledWhenChoosenCard();   
         }
         return true; 

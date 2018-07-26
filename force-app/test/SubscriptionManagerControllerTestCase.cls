@@ -43,7 +43,7 @@ public with sharing class SubscriptionManagerControllerTestCase {
         Pagereference page = controller.useAutoOrderService();
         System.assertEquals('123', controller.subIdForUpdateCredit);
         System.assertEquals('', controller.currentUseRowId);
-        System.assertNotEquals(null, page);
+        System.assertEquals(null, page);
     }
 
     public static testMethod void testChangeRecipientInfo() {
