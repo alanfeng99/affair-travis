@@ -54,7 +54,7 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
         return null;
     }
     
-        public PageReference useAutoOrderService() {
+    public PageReference useAutoOrderService() {
         subIdForUpdateCredit = currentUseRowId;
         currentUseRowId = '';
         
