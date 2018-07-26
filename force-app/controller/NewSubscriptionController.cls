@@ -159,7 +159,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     }
 
     public Pagereference chooseCreditCard() {
-        if (paymentMethod == '信用卡')
+        if (paymentMethod == Constants.PAYMENT_METHOD_CREDIT_CARD)
             isChooseCreditcard = true;
         else 
             isChooseCreditcard = false;
@@ -255,7 +255,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
                 return false;
             }
                 
-            if (sub.Payment_method__c == '信用卡') 
+            if (sub.Payment_method__c == Constants.PAYMENT_METHOD_CREDIT_CARD) 
                 return isFieldFilledWhenChoosenCard();   
         }
         return true; 

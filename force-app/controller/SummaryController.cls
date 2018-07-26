@@ -32,11 +32,11 @@ public with sharing class SummaryController extends ApexBaseController  {
 
     public void greetingChange(Integer timeForGreeting) {
         if(6 < timeForGreeting && timeForGreeting < 12) 
-            greetingWord = '早安';
+            greetingWord = System.Label.GREET_MORNING;
         else if (12 <  timeForGreeting && timeForGreeting < 18)
-            greetingWord = '午安';
+            greetingWord = System.Label.GREET_AFTERNOON;
         else 
-            greetingWord = '晚安';
+            greetingWord = System.Label.GREET_NIGHT;
         
     }
     

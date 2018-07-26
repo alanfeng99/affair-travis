@@ -261,6 +261,31 @@
         <shortDescription>Msg_信用卡資訊更新失敗</shortDescription>
         <value>信用卡資訊尚未更新，請稍後再試</value>
     </labels>
+
+    <labels>
+        <fullName>GREET_MORNING</fullName>
+        <categories>Messages</categories>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>GREET_MORNING</shortDescription>
+        <value>早安</value>
+    </labels>
+    <labels>
+        <fullName>GREET_AFTERNOON</fullName>
+        <categories>Messages</categories>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>GREET_AFTERNOON</shortDescription>
+        <value>午安</value>
+    </labels>
+    <labels>
+        <fullName>GREET_NIGHT</fullName>
+        <categories>Messages</categories>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>GREET_NIGHT</shortDescription>
+        <value>晚安</value>
+    </labels>
     
     <labels>
         <fullName>GMOPAYMENT_CONTRACT_CODE</fullName>
