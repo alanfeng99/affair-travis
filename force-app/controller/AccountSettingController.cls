@@ -13,14 +13,6 @@ public with sharing class AccountSettingController extends ApexBaseController {
     public Boolean ifChangeEmail {get; set;}
     public Boolean updatedCreditCard {get; set;} 
 
-    public String facebookUserEmail {get; set;}
-    public String facebookUserID {get; set;}
-    public String facebookUserName {get; set;}
-    public String facebookUserToken {get; set;}
-    public String googleUserName {get; set;}
-    public String googleUserEmail {get; set;}
-    public String googleUserID {get; set;}
-    
     public AccountSettingController() {
         Cookie accountIdCookie = ApexPages.currentPage().getCookies().get(Label.COOKIE_ACCOUNT_ID);
         

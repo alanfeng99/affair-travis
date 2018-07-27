@@ -63,18 +63,6 @@ public with sharing class UpdateCreditCardControllerTestCase {
         System.assertEquals(null, page);
     }
 
-    public static testMethod void testCheckField_Return_True() {
-        Account__c account = new Account__c(Email__c = 'jin@aaa.com');
-        insert account;
-        UpdateCreditCardController controller = new UpdateCreditCardController(account.id);
-        controller.viewModel.creditCardBean.cc = '4168613664325412';
-        controller.viewModel.creditCardBean.expireYear = '2018';
-        controller.viewModel.creditCardBean.expireMonth = '5';
-        controller.viewModel.creditCardBean.cvc = '222';
-        Pagereference page = controller.updateCreditcard();
-        System.assertEquals(null, page);
-    }
-
     public static testMethod void testCreditcard_Year_Selection() {
         UpdateCreditCardController controller = new UpdateCreditCardController();
         List<SelectOption> year = controller.getCreditcard_Year();

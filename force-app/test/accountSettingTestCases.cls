@@ -1,6 +1,5 @@
 @isTest
 public  class accountSettingTestCases {
-    
     public static testMethod void testAccountSettingCustructor() {
         Account__c account = new Account__c(Email__c = 'jin@fff.com');
         insert account;
