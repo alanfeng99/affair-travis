@@ -155,19 +155,17 @@
                                 </span>
                             </div>
 
-                            <apex:outputPanel style="{!IF(isLogout == true, 'display:none', 'display:block')}">
-                                <!-- Facebook button -->
-                                <div class="form-group">
-                                    <div id="fbLogin" class="fb-login-button" data-max-rows="1" data-size="large" data-scope="public_profile,email"
-                                    data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" width="340"></div>
-                                </div>
+                            <!-- Facebook button -->
+                            <div class="form-group">
+                                <div id="fbLogin" class="fb-login-button" data-max-rows="1" data-size="large" data-scope="public_profile,email"
+                                data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" width="340"></div>
+                            </div>
+                        
+                            <!-- Google button -->
+                            <div class="form-group">
+                                <div id="my-signin2" class="g-signin2" data-onsuccess="onSignIn"></div>  
+                            </div>
                             
-                                <!-- Google button -->
-                                <div class="form-group">
-                                    <div id="my-signin2" class="g-signin2" data-onsuccess="onSignIn"></div>  
-                                </div>
-                            </apex:outputPanel>
-
                             <hr width="90%;"/>
                                      <small style="color:red"><apex:messages /></small>
                                     
