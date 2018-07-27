@@ -11,6 +11,10 @@ public with sharing class UpdateCreditCardController extends ApexBaseController 
         }    
     }
 
+    public UpdateCreditCardController(String accountId) {
+        viewModel = new UpdateCreditCardViewModel(accountId);   
+    }
+
     public Pagereference updateCreditcard() {
         if (!checkField())
             return null;

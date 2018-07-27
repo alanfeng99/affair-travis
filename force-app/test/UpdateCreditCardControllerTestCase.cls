@@ -6,6 +6,75 @@ public with sharing class UpdateCreditCardControllerTestCase {
         System.assertNotEquals(null, page);
     }
 
+    public static testMethod void testCreditcard_Info_null_Return_Null() {
+        Account__c account = new Account__c(Email__c = 'jin@aaa.com');
+        insert account;
+        UpdateCreditCardController controller = new UpdateCreditCardController(account.id);
+        Pagereference page = controller.updateCreditcard();
+        controller.viewModel.creditCardBean.expireYear = '';
+        System.assertEquals(null, page);
+    }
+
+    public static testMethod void testCreditcard_ExpireMonth_null_Return_Null() {
+        Account__c account = new Account__c(Email__c = 'jin@aaa.com');
+        insert account;
+        UpdateCreditCardController controller = new UpdateCreditCardController(account.id);
+        controller.viewModel.creditCardBean.cc = '123';
+        controller.viewModel.creditCardBean.expireYear = '2018';
+        controller.viewModel.creditCardBean.expireMonth = '';
+        Pagereference page = controller.updateCreditcard();
+        System.assertEquals(null, page);
+    }
+
+    public static testMethod void testCreditcard_CVC_null_Return_Null() {
+        Account__c account = new Account__c(Email__c = 'jin@aaa.com');
+        insert account;
+        UpdateCreditCardController controller = new UpdateCreditCardController(account.id);
+        controller.viewModel.creditCardBean.cc = '123';
+        controller.viewModel.creditCardBean.expireYear = '2018';
+        controller.viewModel.creditCardBean.expireMonth = '5';
+        Pagereference page = controller.updateCreditcard();
+        System.assertEquals(null, page);
+    }
+
+    public static testMethod void testCreditcardPatternMatching_Wrong_Return_Null() {
+        Account__c account = new Account__c(Email__c = 'jin@aaa.com');
+        insert account;
+        UpdateCreditCardController controller = new UpdateCreditCardController(account.id);
+        controller.viewModel.creditCardBean.cc = '123';
+        controller.viewModel.creditCardBean.expireYear = '2018';
+        controller.viewModel.creditCardBean.expireMonth = '5';
+        controller.viewModel.creditCardBean.cvc = '222';
+        Pagereference page = controller.updateCreditcard();
+        System.assertEquals(controller.baseErrorMessage, System.Label.Msg_Creditcard_CheckNumber);
+        System.assertEquals(null, page);
+    }
+
+    public static testMethod void testCVCPatternMatching_Wrong_Return_Null() {
+        Account__c account = new Account__c(Email__c = 'jin@aaa.com');
+        insert account;
+        UpdateCreditCardController controller = new UpdateCreditCardController(account.id);
+        controller.viewModel.creditCardBean.cc = '4168613664325412';
+        controller.viewModel.creditCardBean.expireYear = '2018';
+        controller.viewModel.creditCardBean.expireMonth = '5';
+        controller.viewModel.creditCardBean.cvc = '22';
+        Pagereference page = controller.updateCreditcard();
+        System.assertEquals(controller.baseErrorMessage, System.Label.Msg_Creditcard_CheckCVC);
+        System.assertEquals(null, page);
+    }
+
+    public static testMethod void testCheckField_Return_True() {
+        Account__c account = new Account__c(Email__c = 'jin@aaa.com');
+        insert account;
+        UpdateCreditCardController controller = new UpdateCreditCardController(account.id);
+        controller.viewModel.creditCardBean.cc = '4168613664325412';
+        controller.viewModel.creditCardBean.expireYear = '2018';
+        controller.viewModel.creditCardBean.expireMonth = '5';
+        controller.viewModel.creditCardBean.cvc = '222';
+        Pagereference page = controller.updateCreditcard();
+        System.assertEquals(null, page);
+    }
+
     public static testMethod void testCreditcard_Year_Selection() {
         UpdateCreditCardController controller = new UpdateCreditCardController();
         List<SelectOption> year = controller.getCreditcard_Year();
