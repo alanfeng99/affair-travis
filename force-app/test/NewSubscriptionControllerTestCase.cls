@@ -89,6 +89,15 @@ public with sharing class NewSubscriptionControllerTestCase {
         System.assertNotEquals(null, products);
     }
 
+    public static testMethod void testGetProductInfo_NextProduct_Null() {
+        Product2 product = new Product2(Name = '草', ProductCode = '2', StartDate__c = Date.valueOf(System.now())-1, 
+            EndDate__c = Date.valueOf(System.now())+8);
+        insert product;
+        NewSubscriptionController controller = new NewSubscriptionController();
+        List<Product2> products = controller.getProductInfo();
+        System.assertEquals(null, products);
+    }
+
     public static testMethod void testGetProductRadioButton() {
         Product2 product = new Product2(Name = '草', ProductCode = '2', StartDate__c = Date.valueOf(System.now())-1, 
             EndDate__c = Date.valueOf(System.now())+8);

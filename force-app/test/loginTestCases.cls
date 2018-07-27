@@ -1,5 +1,15 @@
 @isTest
 public class loginTestCases {
+    
+    public static testMethod void testCheckAuthentication_Password_Null() {
+        Account__c account = new Account__c(Email__c = 'jin@444.com');
+        insert account;
+        LoginController controller = new LoginController();
+        Pagereference page = controller.checkAuthentication();
+        System.assertEquals(null, page);
+        System.assertEquals(controller.baseErrorMessage, System.Label.Msg_Login_AccountPasswordEmpty);
+    }
+
     public static testMethod void testCheckAuthenticationSucceed() {
         
         //Prepare env
