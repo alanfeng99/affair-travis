@@ -57,15 +57,12 @@
                             </li>
                         </ul>
                     </div>
-                </nav>
-                
+                </nav>  
                 <div class="card  border-light bg-light " >
                     <div class="card-header bg-white">                  
-                        <div align="center" style="line-height:20px;">
-                            
-                            
-                            <div class="letterspacing3px" style="font-size:20px;">訂閱管理</div><br/>
-                            <div style="font-size:12px;">查看訂閱明細，變更修改付款、收件資料</div>
+                        <div align="center" class="lineheight22px">
+                            <div class="letterspacing3px fontsize20px">訂閱管理</div><br/>
+                            <div class="fontsize12px">查看訂閱明細，變更修改付款、收件資料</div>
                         </div>
                     </div>
                     <apex:outputPanel rendered="{!orderSucceed}">
@@ -75,7 +72,7 @@
                     <apex:outputPanel rendered="{!updatedCreditcard}"> 
                         <small class="form-text text-danger text-center" >信用卡資訊已完成新增(變更)，訂閱到期時將會透過此信用卡繳款</small>
                     </apex:outputPanel>
-                    <div class="card-body " style="line-height:25px; font-size:14px;" > 
+                    <div class="card-body fontsize14px" > 
                         <div class="container"> 
                             <div class="form-row">
                                 <div class="col-0 col-sm-1 col-md-2 col-lg-3 col-xl-3"/>
@@ -129,21 +126,21 @@
                                                             收件者資料
                                                         </div>
                                                         <div class="form-group ">
-                                                            <apex:inputField value="{!sub.Recipient__c}" styleClass="form-control" style="width:66%;" required="true" html-placeholder="收件人名稱"/>
+                                                            <apex:inputField value="{!sub.Recipient__c}" styleClass="form-control w66" required="true" html-placeholder="收件人名稱"/>
                                                         </div>
                                                         <div class="form-group form-row">
                                                             <div class="col-4">
-                                                                <apex:inputField value="{!sub.City_picklist__c}" styleClass="city_picker form-control" style="height:35px;" required="true"/>
+                                                                <apex:inputField value="{!sub.City_picklist__c}" styleClass="city_picker form-control h40px" required="true"/>
                                                             </div>
                                                             <div>
-                                                                <apex:inputField value="{!sub.Area_picklist__c}" style="height:35px;" required="true"/>
+                                                                <apex:inputField value="{!sub.Area_picklist__c}" required="true" styleClass="h40px"/>
                                                             </div>
                                                         </div>   
                                                         <div class="form-group">
-                                                            <apex:inputField value="{!sub.Address__c}" styleClass="form-control" style="width:66%;" required="true" html-placeholder="詳細地址"/>
+                                                            <apex:inputField value="{!sub.Address__c}" styleClass="form-control w66" required="true" html-placeholder="詳細地址"/>
                                                         </div>
                                                         <div class="form-group">
-                                                            <apex:inputField value="{!sub.Tel__c}" styleClass="form-control" style="width:66%;" required="true" html-placeholder="電話號碼"/>
+                                                            <apex:inputField value="{!sub.Tel__c}" styleClass="form-control w66" required="true" html-placeholder="電話號碼"/>
                                                         </div>
                                                         <div class="form-group form-row">
                                                             <div class="col-auto">

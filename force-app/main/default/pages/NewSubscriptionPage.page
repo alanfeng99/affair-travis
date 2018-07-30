@@ -113,7 +113,7 @@
                                 <div class="form-group">
                                     <apex:inputField value="{!tempSub.Recipient__c}"  styleClass="form-control w100 h40px" html-placeholder="收件人名稱"/>    
                                 </div>   
-                                <div class="form-row form-group area-picker-parent" style="font-size:14px;" id="address">
+                                <div class="form-row form-group area-picker-parent fontsize14px" id="address">
                                     <div class="col-6 city-picklist-parent">
                                         <apex:inputField value="{!tempSub.City_picklist__c}" styleClass="form-control h40px"/>
                                     </div>
@@ -214,7 +214,7 @@
                                 </div>    
                                 <hr class="w100" color="#00ace6"/>
                             </apex:outputPanel>
-                            <apex:commandButton value="確認訂閱" action="{!submitForm}" reRender="form" onclick="this.onclick=function(){return false;}" style="color:white; background-color:#585e5d; border-width:0px;" styleClass="btn w120px h40px"/>                      
+                            <apex:commandButton value="確認訂閱" action="{!submitForm}" reRender="form" onclick="this.onclick=function(){return false;}"  styleClass="btn btn-main"/>                      
                         </div> 
                     </div>
                 </div> 

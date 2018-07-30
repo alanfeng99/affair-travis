@@ -32,7 +32,8 @@ h1 {
 
 /* BODY */
 .title {  
-    font-size:30px;  
+    font-size:30px;
+    line-height:22px;  
 }
 
 .title span {
@@ -77,6 +78,10 @@ h1 {
   	width:100%; 
 }
 
+.w66 {
+    width:66%; 
+}
+
 .w110px {
     width:110px; 
 }
@@ -113,12 +118,20 @@ h1 {
     line-height:22px;
 }
 
+.lineheight30px {
+    line-height:30px;
+}
+
 .lineheight40px {
     line-height:40px;
 }
 
 .lineheight55px {
     line-height:55px;
+}
+
+.underline {
+    text-decoration: underline;
 }
 
 /* Button */
@@ -142,7 +155,15 @@ h1 {
     color: #fff;
     background-color: #55acee;
     border-color: rgba(0,0,0,0.2);
-}   
+}  
+
+.btn-main {
+    color:white; 
+    background-color:#585e5d; 
+    border-width:0px;
+    height:40px;
+    width:120px;
+}
 
 .list-inline-item{
     font-size:15px;
