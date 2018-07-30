@@ -52,21 +52,20 @@
                 
                 <div class="card  border-light bg-light ">
                     <div class="card-header bg-white">                  
-                        <div align="center" style="line-height:20px;">
-                           
-                            <div class="letterspacing3px" style="font-size:20px;">
+                        <div align="center" class="lineheight22px">
+                            <div class="letterspacing3px fontsize20px">
                                 {!greetingWord}，<apex:outputText value="{!Account.LastName__c}"/>
                             </div><br/>
-                            <div style="font-size:12px;">{!viewModel.year}年{!viewModel.month}月{!viewModel.day}日註冊成為會員</div>
+                            <div class="fontsize12px">{!viewModel.year}年{!viewModel.month}月{!viewModel.day}日註冊成為會員</div>
                         </div>
                     </div>
                     
-                    <div class="card-body " style="line-height:25px; font-size:14px;"> 
+                    <div class="card-body fontsize14px"> 
                         <div class="container"> 
                             <div class="form-row">
                                 <div class="col-1 col-sm-2 col-md-3 col-lg-3"/>
                                 <div class="col-10 col-sm-8 col-md-6 col-lg-6">
-                                    <div class="form-group" style="font-size:15px;">
+                                    <div class="form-group fontsize15px">
                                         帳戶資訊
                                     </div>
                                     <table class="table  table-bordered" style="background-color:white">
@@ -103,7 +102,7 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <div class="form-group" style="font-size:15px;">
+                                    <div class="form-group fontsize15px">
                                         訂閱資訊
                                     </div>
                                     <apex:pageBlock >
@@ -163,7 +162,7 @@
                 </div>   
             </apex:form>   
             <div class="footer text-muted text-right">
-                <hr style="width:100%"/>
+                <hr class="w100"/>
                 <p>
                     The Affairs Mediuum Ltd. 編集者新聞社有限公司
                 </p>
