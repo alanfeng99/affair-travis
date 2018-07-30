@@ -15,10 +15,27 @@ public with sharing class ChangePasswordController extends ApexBaseController {
         if(checkPassword()) {
             if(viewModel.submit()) {
                 addMessage(ApexPages.Severity.INFO, System.Label.Msg_UpdateCompleted);
-                return AuthUtility.logOut();
+                saveLoginCookies(viewModel.account);
+                return ApexUtility.toPage('SummaryPage');
             }
         }
         return null;
+    }
+
+    public Pagereference checkAutoLogin() {
+        Cookie authToken = ApexPages.currentPage().getCookies().get(Label.COOKIE_AUTH_TOKEN);
+        Cookie accountId = ApexPages.currentPage().getCookies().get(Label.COOKIE_ACCOUNT_ID);
+        if (authToken != null && accountId != null) {
+            return ApexUtility.toPage('SummaryPage');
+        }
+        return null;
+    }
+
+    public void saveLoginCookies(Account__c realAccount) {
+        String token = AccountModel.saveToken(realAccount);
+        Cookie authToken = new Cookie(Label.COOKIE_AUTH_TOKEN, token, null, Constants.COOKIE_DURATION, false);
+        Cookie accountId = new Cookie(label.COOKIE_ACCOUNT_ID, realAccount.Id, null, Constants.COOKIE_DURATION, false);
+        ApexPages.currentPage().setCookies(new Cookie[]{authToken, accountId});
     }
 
     private Boolean checkPassword() {
@@ -34,7 +51,7 @@ public with sharing class ChangePasswordController extends ApexBaseController {
             return false;           
         }
         return true;
-    }   
+    }  
 
     private void clearPassword() {
         viewModel.account.Password__c = '';

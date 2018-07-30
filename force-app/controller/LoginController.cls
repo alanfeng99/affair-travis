@@ -100,9 +100,7 @@ public with sharing class LoginController extends ApexBaseController {
         Cookie accountId = ApexPages.currentPage().getCookies().get(Label.COOKIE_ACCOUNT_ID);
         if (authToken != null && accountId != null) {
             addMessage(Apexpages.Severity.INFO, '登入成功:' + viewModel.sessionString);
-            Pagereference page = new Pagereference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/SummaryPage');
-            page.setRedirect(true);
-            return page;
+            return ApexUtility.toPage('SummaryPage');
         }
         return null;
     }
@@ -121,9 +119,7 @@ public with sharing class LoginController extends ApexBaseController {
 
     public Pagereference loginSuccessRedirectionPage() {
         addMessage(Apexpages.Severity.INFO, '登入成功:' + viewModel.sessionString);
-        Pagereference page = new Pagereference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/SummaryPage');
-        page.setRedirect(true);
-        return page;
+        return ApexUtility.toPage('SummaryPage');
     }
 
     public Pagereference loginWithFacebook() {
