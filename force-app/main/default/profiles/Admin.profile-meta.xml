@@ -25,7 +25,15 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>ApexUtilityTestCases</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>AuthUtility</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>AuthUtilityTestCases</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -109,6 +117,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>NewSubscriptionControllerTestCase</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>NewSubscriptionViewModel</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -129,7 +141,15 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>RegisterControllerTestCase</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>RegisterResultController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>RegisterResultControllerTestCase</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -142,6 +162,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>RetrievePasswordController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>RetrievePasswordControllerTestCase</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -169,11 +193,23 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>SubscriptionManagerControllerTestCase</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>SubscriptionManagerViewModelTestCase</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>SubscriptionModel</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>SummaryController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>SummaryControllerTestCase</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -193,7 +229,15 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>TestUtility</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>UpdateCreditCardController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>UpdateCreditCardControllerTestCase</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -252,11 +296,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Account__c.FacebookEmail__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Account__c.FirstName__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -515,9 +554,14 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
+        <field>Subscription__c.Address_Invoice__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Subscription__c.Address__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -607,11 +651,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Subscription__c.Start_period__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Subscription__c.Subscription_item__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -860,11 +899,23 @@
         <enabled>true</enabled>
     </pageAccesses>
     <tabVisibilities>
+        <tab>Account__c</tab>
+        <visibility>Hidden</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>Address__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
         <tab>GMOPaymentBean__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
         <tab>SubscriptionGMOPaymentBean__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>Subscription__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <userLicense>Salesforce</userLicense>
