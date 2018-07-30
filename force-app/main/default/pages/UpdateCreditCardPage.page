@@ -18,10 +18,10 @@
         <apex:form id="form">
             <div class="card border-light bg-light">   
                 <div class="card-header bg-white ">
-                    <b class="letterspacing3px" style="font-size:20px;">週刊編集</b> {!viewModel.account.LastName__c}
-                    <hr style="width:100%"/>
-                    <div class="letterspacing3px" align="center" style="font-size:20px;">信用卡資訊更新</div><br/>
-                    <div align="center" style="font-size:12px;">信用卡資訊新增、變更</div>
+                    <b class="letterspacing3px fontsize20px">週刊編集</b> {!viewModel.account.LastName__c}
+                    <hr class="w100"/>
+                    <div class="letterspacing3px fontsize20px" align="center">信用卡資訊更新</div><br/>
+                    <div align="center" class="fontsize12px">信用卡資訊新增、變更</div>
                 </div>
                 <div class="card-body container" style="max-width:500px;">
                     <div class="form-group" style="font-size:15px;">
@@ -43,16 +43,16 @@
                                </div>
                                
                                 <div class="form-group">
-                                     <apex:input value="{!viewModel.creditCardBean.cc}" styleClass="form-control" style="width:60%" html-placeholder="信用卡號"/>
+                                     <apex:input value="{!viewModel.creditCardBean.cc}" styleClass="form-control h40px"  style="width:60%" html-placeholder="信用卡號"/>
                                 </div>
                                 <div class="form-group form-row">
                                     <div class="col-auto">
-                                            <apex:selectList value="{!viewModel.creditCardBean.expireMonth}" size="1" styleClass="form-control" style="height:35px;">
+                                            <apex:selectList value="{!viewModel.creditCardBean.expireMonth}" size="1" styleClass="form-control h40px">
                                                 <apex:selectOptions value="{!Creditcard_Month}"/>
                                             </apex:selectList>
                                     </div>
                                     <div class="col-auto">
-                                        <apex:selectList value="{!viewModel.creditCardBean.expireYear}" size="1" styleClass="form-control" style="height:35px;">
+                                        <apex:selectList value="{!viewModel.creditCardBean.expireYear}" size="1" styleClass="form-control h40px">
                                             <apex:selectOptions value="{!Creditcard_Year}"/>
                                         </apex:selectList>
                                     </div>
@@ -62,18 +62,18 @@
                                 </div>
                                	<div class="form-group form-row">
                                     <div class="col-auto">
-                                        <apex:input value="{!viewModel.creditCardBean.cvc}" styleClass="form-control" html-placeholder="CVC" style="width:70px;"/>
+                                        <apex:input value="{!viewModel.creditCardBean.cvc}" styleClass="form-control h40px" html-placeholder="CVC" style="width:70px;"/>
                                     </div>
-                                    <div class="col-auto" style="font-size:14px;">
+                                    <div class="col-auto fontsize14px" >
                                         卡片背面後3碼
                                     </div>
                                 </div>
                         		<div class="form-group form-row">
-                                    <div class="col-8" style="font-size:14px;">
+                                    <div class="col-8 fontsize14px">
                                         <div class="form-group">
                                             信用卡訂閱提醒
                                         </div>
-                                        <div style="line-height:22px;">
+                                        <div class="lineheight22px">
                                             當您點選『確認更新』送出後，表示您同意我們
                                         透過更新後的信用卡在您訂閱到期時自動續訂付
                                         款，您可以隨時取消自動續訂服務。 
@@ -87,16 +87,16 @@
                                 <br/>
                                 <div class="form-group form-row">
                                     <div class="col" align="right">
-                                    	<apex:commandButton value="返回" action="{!cancel}" reRender="form" style="width:100px; color:white; background-color:#585e5d; border-width:0px;" styleClass="btn"/>                            
+                                    	<apex:commandButton value="返回" action="{!cancel}" reRender="form" styleClass="btn btn-main"/>                            
                                     </div>
                                     <div class="col" align="left">
-                                    	<apex:commandButton value="確定更新" action="{!updateCreditcard}" reRender="form" style="width:100px; color:white; background-color:#585e5d; border-width:0px;" styleClass="btn"/>                            
+                                    	<apex:commandButton value="確定更新" action="{!updateCreditcard}" reRender="form" styleClass="btn btn-main"/>                            
                                     </div>                           	 
                                 </div>
                             </td>
                         </tr>
                     </table>
-                    <div style="line-height:20px;">
+                    <div class="lineheight22px">
                         <small >為確保網路交易安全，編集者新聞社有限公司不會保留訂閱戶的信用卡資料，全權委託日本<br/>
                         最大電子支付公司『GMO Payment Gateway,Inc.』之海外子公司香港商技慕必紀綱<br/>
                         關有限公司台北分公司負責，採用最嚴密安全方式作個資情報管理，敬請安心使用。</small>

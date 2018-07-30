@@ -126,7 +126,7 @@
                                                             收件者資料
                                                         </div>
                                                         <div class="form-group ">
-                                                            <apex:inputField value="{!sub.Recipient__c}" styleClass="form-control w66" required="true" html-placeholder="收件人名稱"/>
+                                                            <apex:inputField value="{!sub.Recipient__c}" styleClass="form-control" style="width:66%" required="true" html-placeholder="收件人名稱"/>
                                                         </div>
                                                         <div class="form-group form-row">
                                                             <div class="col-4">
@@ -137,14 +137,14 @@
                                                             </div>
                                                         </div>   
                                                         <div class="form-group">
-                                                            <apex:inputField value="{!sub.Address__c}" styleClass="form-control w66" required="true" html-placeholder="詳細地址"/>
+                                                            <apex:inputField value="{!sub.Address__c}" styleClass="form-control" style="width:66%" required="true" html-placeholder="詳細地址"/>
                                                         </div>
                                                         <div class="form-group">
-                                                            <apex:inputField value="{!sub.Tel__c}" styleClass="form-control w66" required="true" html-placeholder="電話號碼"/>
+                                                            <apex:inputField value="{!sub.Tel__c}" styleClass="form-control" style="width:66%" required="true" html-placeholder="電話號碼"/>
                                                         </div>
                                                         <div class="form-group form-row">
                                                             <div class="col-auto">
-                                                                <apex:commandButton value="儲存變更" action="{!submitForm}" style=" color:black;  background-color:#dde2e2; border-width:0px;" styleClass="btn btn-default" reRender="form" oncomplete="afterSubmit()"/>     
+                                                                <apex:commandButton value="儲存變更" action="{!submitForm}" styleClass="btn btn-savechange" reRender="form" oncomplete="afterSubmit()"/>     
                                                             </div>
                                                             <div class="col-auto">
                                                                 <apex:commandLink value="取消" action="{!cancelChange}" reRender="form"/>     
@@ -206,7 +206,7 @@
                                                         </div>
                                                         <div class="form-group form-row">
                                                             <div class="col-auto">
-                                                                <apex:commandButton value="停止自動續訂" action="{!stopAutoOrderService}" reRender="form" styleClass="btn btn-default" style=" color:black;  background-color:#dde2e2; border-width:0px;" >
+                                                                <apex:commandButton value="停止自動續訂" action="{!stopAutoOrderService}" reRender="form" styleClass="btn btn-savechange" >
                                                                     <apex:param name="stopAuto" value="false" assignTo="{!sub.isReplenish__c}" />
                                                                 </apex:commandButton>
                                                             </div>
@@ -250,7 +250,7 @@
                 </div>   
             </apex:form>   
             <div class="footer text-muted text-right">
-                <hr style="width:100%"/>
+                <hr class="w100"/>
                 <p>
                     The Affairs Mediuum Ltd. 編集者新聞社有限公司
                 </p>
