@@ -17,6 +17,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     public Boolean isChooseCreditcard {get; set;}
     public Boolean showProgramResult {get; set;}
     public Boolean showErrorForNullProgram {get; set;}
+    public Boolean isInvoice {get; set;}
     
     public NewSubscriptionController() {
 
@@ -163,6 +164,15 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             isChooseCreditcard = true;
         else 
             isChooseCreditcard = false;
+       
+        return null;
+    }
+
+    public Pagereference chooseInvoice() {
+        if (firstSubscription.isInvoice__c)
+            isInvoice = true;
+        else 
+            isInvoice = false;
        
         return null;
     }
