@@ -151,7 +151,7 @@
                                     第一次使用週刊編集？
                                 </span>
                                 <span>
-                                    <a href="/apex/RegisterPage" style="text-decoration: underline;">建立新帳號 </a>
+                                    <a href="/apex/RegisterPage" class="underline">建立新帳號 </a>
                                 </span>
                             </div>
 
@@ -176,8 +176,8 @@
                                 <apex:inputSecret value="{!viewModel.account.Password__c}" html-placeholder="密碼" styleClass="form-control w100 h50px" />
                             </div>
                             <div align="right">
-                                <a href="/apex/RetrievePasswordPage" style="color:#585e5d; text-decoration: underline;">忘記密碼?</a> <br/>
-                                <apex:commandButton value="登入" action="{!checkAuthentication}" reRender="form" style="width:120px; color:white; background-color:#585e5d; border-width:0px;" styleClass="btn h40px"/>                        
+                                <a href="/apex/RetrievePasswordPage" class="underline" style="color:#585e5d">忘記密碼?</a> <br/>
+                                <apex:commandButton value="登入" action="{!checkAuthentication}" reRender="form"  styleClass="btn btn-main"/>                        
                             </div>  
                         </div>
                
