@@ -422,11 +422,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Subscription__c.Subscription_item__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Subscription__c.Subscription_status__c</field>
         <readable>true</readable>
     </fieldPermissions>

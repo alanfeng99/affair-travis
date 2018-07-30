@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Index__c</fullName>
     <externalId>false</externalId>
-    <label>電話</label>
+    <label>順位</label>
     <precision>5</precision>
     <required>false</required>
     <scale>0</scale>
