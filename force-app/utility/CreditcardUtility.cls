@@ -13,6 +13,6 @@ public with sharing class CreditcardUtility {
     }
 
     public static String hideCreditCardNumber(String creditCardNumber) {
-        return creditCardNumber.substring(0,4) + '****' + creditCardNumber.substring(creditCardNumber.length()-4, creditCardNumber.length());
+        return '****' + creditCardNumber.substring(creditCardNumber.length()-4, creditCardNumber.length());
     }
 }
