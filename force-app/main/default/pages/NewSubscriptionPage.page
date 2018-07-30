@@ -63,11 +63,11 @@
             </nav>
             <div class="card border-light bg-light">  
                 <br/> 
-                <div align="center" class="letterspacing3px" style="font-size:18px; line-height:1px;">
+                <div align="center" class="letterspacing3px fontsize18px lineheight1px">
                     請填寫訂閱資料
                     <hr class="w160px" color="black"/>
                 </div>
-                <div class="card-body container" style="max-width:320px;">
+                <div class="card-body container" style=" max-width:320px">
                     <div class="fontsize14px">
                         選擇訂閱方案
                     </div>
@@ -95,7 +95,7 @@
                     </div>
                    
                     <apex:repeat value="{!tempSubscriptions}" var="tempSub">
-                        <hr width="310px;"/>
+                        <hr class="w100"/>
                         <small style="color:red"><apex:outputText rendered="{!showErrorForNullProgram}">請優先選擇訂閱方案，方能新增收件人</apex:outputText></small>
                         <div>
                             <div class="row fontsize14px" >
@@ -130,41 +130,41 @@
                             </apex:outputPanel>   
                         </div>
                     </apex:repeat>
-                    <hr width="310px;"/>
-                    <div style="font-size:14px;">
+                    <hr class="w100"/>
+                    <div class="fontsize14px">
                         付款方式
                     </div>
                     <div>
-                        <apex:selectRadio value="{!paymentMethod }" style="width:100%" >
+                        <apex:selectRadio value="{!paymentMethod }" styleClass="w100">
                             <apex:selectOptions value="{!paymentOptions}"/>
                             <apex:actionSupport action="{!chooseCreditCard}" event="onchange" reRender="form"/>
                         </apex:selectRadio>
                     </div>
                     <apex:outputPanel rendered="{!IF(AND(isChooseCreditCard, viewModel.account.credit_card_number__c == null), true, false)}">
                         <div class="form-group">
-                            <apex:input value="{!viewModel.creditCardBean.cc }" html-placeholder="信用卡號" styleClass="form-control w100" />                            
+                            <apex:input value="{!viewModel.creditCardBean.cc }" html-placeholder="信用卡號" styleClass="form-control w100 h40px"/>                            
                         </div>    
                         <div class="form-group form-row">
                             <div class="col-5">
-                                <apex:selectList value="{!viewModel.creditCardBean.expireMonth}" size="1" styleClass="form-control" style="height:35px;">
+                                <apex:selectList value="{!viewModel.creditCardBean.expireMonth}" size="1" styleClass="form-control h40px">
                                     <apex:selectOptions value="{!Creditcard_Month}"/>
                                 </apex:selectList>
                             </div>
                             <div class="col-5">
-                                <apex:selectList value="{!viewModel.creditCardBean.expireYear}" size="1" styleClass="form-control" style="height:35px;">
+                                <apex:selectList value="{!viewModel.creditCardBean.expireYear}" size="1" styleClass="form-control h40px">
                                     <apex:selectOptions value="{!Creditcard_Year}"/>
                                 </apex:selectList>
                             </div>
-                            <div style="font-size:14px;">
+                            <div class="fontsize14px">
                                 到期日    
                             </div>
                             
                         </div>
                         <div class="form-group row">
                             <div class="col-4">
-                                <apex:input value="{!viewModel.creditCardBean.cvc  }" html-placeholder="CVC" styleClass="form-control w100"/>                                 
+                                <apex:input value="{!viewModel.creditCardBean.cvc  }" html-placeholder="CVC" styleClass="form-control w100 h40px"/>                                 
                             </div>
-                            <div  style="font-size:14px;">
+                            <div class="fontsize14px">
                                 卡片背面後 3 碼
                             </div>
                             
@@ -175,14 +175,16 @@
                             <apex:outputField value="{!viewModel.account.credit_card_number__c}"></apex:outputField>
                         </div>
                     </apex:outputPanel>
-                    <div style="font-size:14px;">
-                        信用卡訂閱提醒<br/>
-                        <div style="line-height:25px;">當您點選『確認訂閱』送出後，表示您同意我們收取本次的訂閱費用，並在訂閱到期時自動續訂付款，您可以隨時取消自動續訂服務。</div>
-                    </div>
-                    <hr width="310px;"/>
+                    <apex:outputPanel rendered="{!IF(isChooseCreditCard, true, false)}">
+                        <div class="fontsize14px">
+                            信用卡訂閱提醒<br/>
+                            <div style="line-height:25px;">當您點選『確認訂閱』送出後，表示您同意我們收取本次的訂閱費用，並在訂閱到期時自動續訂付款，您可以隨時取消自動續訂服務。</div>
+                        </div>
+                    </apex:outputPanel>
+                    <hr class="w100"/>
                     <div class="form-group">
                         <apex:inputCheckbox value="{!firstSubscription.isInvoice__c }" id="Invoice"/>
-                        <label class="form-check-label" for="Invoice" style="font-size:14px; letter-spacing:1px;">
+                        <label class="form-check-label fontsize14px letterspacing1px" for="Invoice">
                             開立發票證明  
                         </label>
                     </div>  
@@ -192,27 +194,26 @@
                     <div class="form-group">
                         <apex:inputField value="{!firstSubscription.Company_name__c  }" html-placeholder="公司抬頭" styleClass="form-control w100" />                            
                     </div>    
-                    <hr width="310px;"/>
+                    <hr class="w100"/>
                     <small><apex:messages style="color:red"/></small>
                     
                     <div class="form-row form-group">
                         <div class="col-md-1 col-sm-1 col-1"/>
-                        <div class="col-md-11 col-sm-11 col-11" align="right" style="line-height:1px;">
+                        <div class="col-md-11 col-sm-11 col-11 lineheight1px" align="right">
                             <apex:outputPanel rendered="{!showProgramResult}"> 
-                                <div style="color:#00ace6; font-size:14px;">
+                                <div class="fontsize14px" style="color:#00ace6;">
                                     {!programName}x {!subscriptionSize}，訂閱金額共：{!programTotalPrice}元
                                 </div>    
-                                <hr class="field-w100" color="#00ace6"/>
+                                <hr class="w100" color="#00ace6"/>
                             </apex:outputPanel>
-                            <apex:commandButton value="確認訂閱" action="{!submitForm}" reRender="form" onclick="this.onclick=function(){return false;}" style="width:120px; color:white; background-color:#585e5d; border-width:0px;" styleClass="btn"/>                      
+                            <apex:commandButton value="確認訂閱" action="{!submitForm}" reRender="form" onclick="this.onclick=function(){return false;}" style="color:white; background-color:#585e5d; border-width:0px;" styleClass="btn w120px h40px"/>                      
                         </div> 
                     </div>
-                    <div style="height:100px;"/>
                 </div> 
             </div>         
         </apex:form>   
         <div class="footer text-muted text-right">
-            <hr style="width:100%"/>
+            <hr class="w100"/>
             <p>
                 The Affairs Mediuum Ltd. 編集者新聞社有限公司
             </p>

@@ -43,6 +43,10 @@ h1 {
     letter-spacing:3px;
 }
 
+.letterspacing2px {
+    letter-spacing:2px;
+}
+
 .letterspacing1px {
     letter-spacing:1px;
 }
@@ -101,6 +105,10 @@ h1 {
     height:160px;
 }
 
+.lineheight1px {
+    line-height:1px;
+}
+
 .lineheight22px {
     line-height:22px;
 }
@@ -112,7 +120,6 @@ h1 {
 .lineheight55px {
     line-height:55px;
 }
-
 
 /* Button */
 .btn-social {
