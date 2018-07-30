@@ -75,6 +75,10 @@
                 <behavior>Edit</behavior>
                 <field>Address_Invoice__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Testshowinfo__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

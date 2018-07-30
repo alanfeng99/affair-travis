@@ -61,6 +61,9 @@
     </nameField>
     <searchLayouts>
         <customTabListAdditionalFields>isReplenish__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>CustomAccount__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Program__c</lookupDialogsAdditionalFields>
+        <searchResultsAdditionalFields>CustomAccount__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
