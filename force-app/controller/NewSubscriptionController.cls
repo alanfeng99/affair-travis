@@ -97,7 +97,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         List<SubscriptionProgram__c> programs = SubscriptionModel.getProgramById(programId);
         if (programId != null) {
             programPrice = programs.get(0).Price__c;   
-            programName = programs.get(0).ProgramName__c;
+            programName = programs.get(0).Name;
             programTotalPrice = programPrice * subscriptionSize;
             showProgramResult = true;
             showErrorForNullProgram = false;
@@ -157,7 +157,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('', '--- 請選擇 ---'));
         for (SubscriptionProgram__c program : SubscriptionModel.getProgram()) 
-            options.add(new SelectOption(program.ProgramId__c, program.ProgramName__c));
+            options.add(new SelectOption(program.ProgramId__c, program.Name));
         
         return options;
     }

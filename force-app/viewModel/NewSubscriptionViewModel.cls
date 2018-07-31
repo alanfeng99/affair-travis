@@ -13,12 +13,12 @@ public with sharing class NewSubscriptionViewModel {
         Boolean updateResult = true;  
         try {
             Subscription__c firstSub = subscriptionInsertList.get(0);
-            SubscriptionProgram__c program = [SELECT ProgramId__c, ProgramName__c FROM SubscriptionProgram__c WHERE ProgramId__c = :programId];
+            SubscriptionProgram__c program = [SELECT ProgramId__c, Name FROM SubscriptionProgram__c WHERE ProgramId__c = :programId];
             
             Order order = new Order();
             order.paymentMethod = firstSub.Payment_method__c;
             order.itemCode = program.ProgramId__c;
-            order.itemName = program.ProgramName__c;
+            order.itemName = program.Name;
             order.totalPrice = String.valueOf(firstSub.Amount__c * subscriptionInsertList.size());
             
             gmoPaymentBean = ApexUtility.generateGMOPaymentBeanForPayment(account, order, creditCardBean);

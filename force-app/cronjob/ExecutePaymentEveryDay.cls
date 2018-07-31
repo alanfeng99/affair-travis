@@ -31,7 +31,7 @@ global class ExecutePaymentEveryDay implements Schedulable {
     public void checkDailyPaymentForEveryUsers() {
         List<Subscription__c> subscriptions = [SELECT Payment_method__c, Start_period__c, End_period__c, Program__c, Amount__c, CustomAccount__c FROM Subscription__c WHERE Payment_method__c = :Constants.PAYMENT_METHOD_CREDIT_CARD AND isReplenish__c = true];
         List<Product2> products = [SELECT EndDate__c, ProductCode FROM Product2];
-        List<SubscriptionProgram__c> programs = [SELECT Order_Period__c, ProgramId__c, ProgramName__c FROM SubscriptionProgram__c];
+        List<SubscriptionProgram__c> programs = [SELECT Order_Period__c, ProgramId__c, Name FROM SubscriptionProgram__c];
         List<Account__c> accounts = [SELECT LastName__c, Email__c FROM Account__c];
 
         List<Subscription__c> subscriptionsToUpdate = new List<Subscription__c>();
@@ -53,7 +53,7 @@ global class ExecutePaymentEveryDay implements Schedulable {
                 Order order = new Order();
                 order.paymentMethod = subscription.Payment_method__c;
                 order.itemCode = program.ProgramId__c;
-                order.itemName = program.ProgramName__c;
+                order.itemName = program.Name;
                 order.totalPrice = String.valueOf(subscription.Amount__c);
                 GMOPaymentBean__c gmoPaymentBean = ApexUtility.generateGMOPaymentBeanForPayment(account, order);
                 GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(gmoPaymentBean);

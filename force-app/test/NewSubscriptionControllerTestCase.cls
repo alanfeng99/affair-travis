@@ -18,7 +18,7 @@ public with sharing class NewSubscriptionControllerTestCase {
     public static testMethod void testNewSubscription_ProgramId_Not_Null() {
         Account__c account = new Account__c(Email__c = 'jin@222.com');
         insert account;
-        SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, ProgramName__c = 'a');
+        SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
         
         NewSubscriptionController controller = new NewSubscriptionController(account.id);
@@ -43,7 +43,7 @@ public with sharing class NewSubscriptionControllerTestCase {
     }
 
     public static testMethod void testProgramPriceDecide() {
-        SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, ProgramName__c = 'a');
+        SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
         NewSubscriptionController controller = new NewSubscriptionController();
         controller.programId = program.ProgramId__c;
@@ -120,7 +120,7 @@ public with sharing class NewSubscriptionControllerTestCase {
     }
 
     public static testMethod void testProgramSelction() {
-        SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramName__c = 'a', ProgramId__c = '1');
+        SubscriptionProgram__c program = new SubscriptionProgram__c(Name = 'a', ProgramId__c = '1');
         insert program;
         NewSubscriptionController controller = new NewSubscriptionController();
         List<SelectOption> options = controller.getProgramSelection();
@@ -150,7 +150,7 @@ public with sharing class NewSubscriptionControllerTestCase {
     }
 
     public static testMethod void testSubmitForm_CheckField_StartPeriod_Null_Return_False() {
-        SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, ProgramName__c = 'a');
+        SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
         Account__c account =  new Account__c(Email__c = 'jin@4idps.com');
         insert account;
@@ -165,7 +165,7 @@ public with sharing class NewSubscriptionControllerTestCase {
     }
 
     public static testMethod void testSubmitForm_CheckField_Reciepient_Null_Return_False() {
-        SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, ProgramName__c = 'a');
+        SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
         Account__c account =  new Account__c(Email__c = 'jin@4idps.com');
         insert account;
@@ -179,7 +179,7 @@ public with sharing class NewSubscriptionControllerTestCase {
     }
 
     public static testMethod void testSubmitForm_CheckField_Reciepient_Not_Null_Tel_Format_Wrong_Return_False() {
-        SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, ProgramName__c = 'a');
+        SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
         Account__c account =  new Account__c(Email__c = 'jin@4idps.com');
         insert account;
@@ -201,7 +201,7 @@ public with sharing class NewSubscriptionControllerTestCase {
     }
 
     public static testMethod void testSubmitForm_CheckField_Tel_Format_Right_Paymentmethod_Null_Return_False() {
-        SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, ProgramName__c = 'a');
+        SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
         Account__c account =  new Account__c(Email__c = 'jin@4idps.com');
         insert account;
@@ -222,7 +222,7 @@ public with sharing class NewSubscriptionControllerTestCase {
     }
 
     public static testMethod void testSubmitForm_CheckField_Creditcard_Info_Not_Complete_Return_False() {
-        SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, ProgramName__c = 'a');
+        SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
         Account__c account =  new Account__c(Email__c = 'jin@4idps.com');
         insert account;

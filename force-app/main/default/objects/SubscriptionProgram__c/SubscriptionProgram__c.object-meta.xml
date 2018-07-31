@@ -54,9 +54,8 @@
     <enableStreamingApi>true</enableStreamingApi>
     <label>訂閱方案</label>
     <nameField>
-        <displayFormat>{000000}</displayFormat>
         <label>訂閱方案名稱</label>
-        <type>AutoNumber</type>
+        <type>Text</type>
     </nameField>
     <searchLayouts/>
     <sharingModel>ReadWrite</sharingModel>
