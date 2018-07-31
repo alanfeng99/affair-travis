@@ -1,0 +1,104 @@
+<apex:page   docType="html-5.0"  applyHtmlTag="true" standardStylesheets="false" showHeader="false">
+    <!-- Begin Default Content REMOVE THIS -->
+    <html lang="en">    
+        <head>
+            <title>MarketPaymentResultPage</title>
+            <!-- Required meta tags -->
+            <meta charset="utf-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+            <!-- Bootstrap CSS -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+                  crossorigin="anonymous"/>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+            <!-- FontsStyle CSS -->
+            <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/cwtexyen.css"/>   
+            <apex:stylesheet value="{!$Resource.TemplateCSS}"/>
+        </head>
+        
+        <body class="bg-light">
+            <apex:form >              
+                <div class="card  border-light bg-light ">   
+                    <div class="card-header bg-white">
+                        <div align="left">
+                            <b class="letterspacing3px">週刊編集 |</b> area43
+                        </div>
+                    </div>
+                    <div class="card-body fontsize14px">
+                        <div class="container" style="max-width:400px;">
+                            <div class="form-group">
+                                <div>感謝您的訂閱！</div>
+                                <div>您的超商繳款編號是：</div>
+                            </div>
+                            <div class="fontsize34px form-group" style="color:red">
+                                NW 13 1232 2323 3232
+                            </div>
+                            <hr class="w100"/>
+                            <div class="form-row">
+                                <div class="col-auto">
+                                    交易金額：
+                                </div>
+                                <div class="col-auto" style="color:#00ace6;">
+                                    800 元
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-auto">
+                                    繳費期限：
+                                </div>
+                                <div class="col-auto" style="color:#00ace6;">
+                                    2018/9/10
+                                </div>
+                            </div>             
+                            <hr class="w100"/>
+                            <div style="color:red">
+                                注意事項：
+                            </div>   
+                            <div class="form-group">
+                                <div>
+                                    ∙ 記下畫面上顯示的16未繳款編號（拍照或截圖）
+                                </div>
+                                <div>
+                                    ∙ 至便利商店印出繳費單到櫃檯繳費
+                                </div>
+                                <div>
+                                    (欲了解各便利商店繳費操作流程，請點選以下圖示)
+                                </div>                  
+                            </div>
+                            <hr class="w100"/>
+                            <div class="form-group">
+                                <div>
+                                    - 付款成功後，系統將自動對帳，無需再告知匯款資料
+                                </div>
+                                <div>
+                                    - 請於 3 天內完成繳費，若是超過期限該繳費代碼將會失效
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="form-group form-row">
+                            
+                        </div>
+                    </div>        
+                </div>   
+            </apex:form>   
+            <div class="footer text-muted text-right">
+                <hr class="w100"/>
+                <p >
+                    The Affairs Mediuum Ltd. 編集者新聞社有限公司
+                </p>
+            </div>     
+        </body>
+        
+        
+        <!-- End Default Content REMOVE THIS -->
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    </html>  
+    
+</apex:page>
