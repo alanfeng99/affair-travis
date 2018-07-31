@@ -109,5 +109,33 @@ public with sharing class ApexUtility {
         }
         return object1;
     }
+
+    public static SObject copyFirstObjectValuesIntoSecondObject(SObject object1, SObject object2) {
+        if (object1 == null || object2 == null)
+            return null;
+        
+        for(SObjectField field : object1.getSObjectType().getDescribe().fields.getMap().values()) {
+            try {
+                String fieldObject1 = String.valueOf(field);
+                Object opp1Field = object1.get(fieldObject1);
+
+                String fieldObject2 = null;
+                String[] fieldObject2Possible = new String[] {fieldObject1, fieldObject1 + '__c', fieldObject1.removeEnd('__c')};
+                Boolean object2HasKey = false;
+                for (Integer i = 0; i < fieldObject2Possible.size(); i++) {
+                    if (object2.getSObjectType().getDescribe().fields.getMap().containsKey(fieldObject2Possible[i])) {
+                        fieldObject2 = fieldObject2Possible[i];
+                        break;
+                    }
+                }
+                
+                if (opp1Field != null && fieldObject2 != null)
+                    object2.put(fieldObject2, opp1Field);
+            } catch (SObjectException ex) {
+                throw ex;
+            }
+        }
+	    return object2;
+    }
     
 }
