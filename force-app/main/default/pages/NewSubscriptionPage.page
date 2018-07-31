@@ -245,8 +245,8 @@
     
     <script>
         $j = jQuery.noConflict();
-        $(document).ready(function() {
-            $(function() {
+        $j(document).ready(function() {
+            $j(function() {
                 $j('.area-picker-parent').find('select').addClass('form-control');
             });
         });
