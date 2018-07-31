@@ -23,7 +23,6 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     public Boolean isInvoice {get; set;}
     
     public NewSubscriptionController() {
-
         Cookie accountIdCookie = ApexPages.currentPage().getCookies().get(Label.COOKIE_ACCOUNT_ID);
         
         if (accountIdCookie != null) {
@@ -253,6 +252,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             clone_Subscription.Postal_code__c = sub.Postal_code__c;
             clone_Subscription.City_pickList__c = sub.City_pickList__c;
             clone_Subscription.Tel__c = sub.Tel__c;
+            clone_Subscription.Email__c = sub.Email__c;
 
             subscriptionInsertList.add(clone_Subscription);
         }
@@ -279,7 +279,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         
         for (Subscription__c sub : subscriptionInsertList) {
             if (sub.Recipient__c == null || sub.City_picklist__c == null || sub.Area_picklist__c == null || 
-                    sub.Address__c == null || sub.Tel__c == null ) {
+                    sub.Address__c == null || sub.Tel__c == null || sub.Email__c == null ) {
                 addMessage(ApexPages.Severity.ERROR, System.Label.Msg_RecipientInfoEmpty);
                 return false;
             }
