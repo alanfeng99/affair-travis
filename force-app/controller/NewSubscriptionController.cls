@@ -9,6 +9,9 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     public String programId {get; set;}
     public String paymentMethod {get; set;}
     public String programName {get; set;}
+    public String city {get; set;}
+    public String area {get; set;}
+    public String zipcode {get; set;}
     public Integer subscriptionSize {get; set;}
     public Integer startPeriod {get; set;}
     public Decimal programTotalPrice {get; set;}
@@ -177,6 +180,12 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         return null;
     }
 
+    public Pagereference zipcodeShow() {
+        for(Subscription__c tempSub : tempSubscriptions) 
+            tempSub.Postal_code__c = AddressModel.getZipCodeByArea(tempSub.City_picklist__c, tempSub.Area_picklist__c);  
+        return null; 
+    }
+
     public Pagereference submitForm() {
         if (programId == null) {
             addMessage(ApexPages.Severity.ERROR, System.Label.Msg_ProgramEmpty);
@@ -193,23 +202,34 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         insertSubscriptionPriceAndProgram();
         ifCreditcardThenTurnIsReplenishTrue(subscriptionInsertList);
         if (viewModel.newSubscription(subscriptionInsertList, programId)) {
-            PageReference page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/SubscriptionManagementPage');
-            page.getParameters().put('orderSucceed','true');
-            page.setRedirect(true);
-        	return page;
+        	return paymentMethodTurnPage(paymentMethod);
         } else {
             addMessage(ApexPages.Severity.INFO, viewModel.errorMessage);
         }
         
         return null;
     }
+
+    private Pagereference paymentMethodTurnPage(String method) {
+        PageReference page;
+
+        if (method == '信用卡') 
+            page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/CreditcardPaymentResultPage');
+        else if (method == 'ATM轉帳')
+            page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/MarketPaymentResultPage');
+        else 
+            page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/ATMPaymentResultPage');
+        
+        page.getParameters().put('orderSucceed','true');
+        page.getParameters().put('ordernumber', viewModel.gmoPaymentBean.order_number__c);
+        page.setRedirect(true);
+        return page;
+    }
     
     private void ifCreditcardThenTurnIsReplenishTrue(List<Subscription__c> subscriptions) {
-        for(Subscription__c sub : subscriptions) {
-            if (sub.Payment_method__c == '信用卡') {
+        for(Subscription__c sub : subscriptions) 
+            if (sub.Payment_method__c == '信用卡') 
                 sub.isReplenish__c = true;
-            }
-        }
     } 
 
     private void calculateSize() {

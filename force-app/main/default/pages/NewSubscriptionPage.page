@@ -118,11 +118,14 @@
                                         <apex:inputField value="{!tempSub.City_picklist__c}" styleClass="form-control h40px"/>
                                     </div>
                                     <div class="col-6 area-picklist-parent">
-                                        <apex:inputField value="{!tempSub.Area_picklist__c}" styleClass="form-control h40px" />
+                                        <apex:inputField value="{!tempSub.Area_picklist__c}" styleClass="form-control h40px">
+                                            <apex:actionSupport event="onchange" action="{!zipcodeShow}" reRender="form" id="zipcodeshow"/>
+                                        </apex:inputField>
                                     </div>    
                                 </div>
-                                <div class="form-group">
-                                    <apex:inputField value="{!tempSub.Address__c }" styleClass="form-control w100 h40px" html-placeholder="地址" />
+                                <div class="form-group form-row w100">
+                                    <apex:outputText value="{!IF(tempSub.Postal_code__c != null, tempSub.Postal_code__c, '000')}" styleClass="col-2"/>
+                                    <apex:inputField value="{!tempSub.Address__c }" styleClass="form-control w100 h40px col-10" html-placeholder="地址" />
                                 </div>
                                 <div class="form-group">
                                     <apex:inputField value="{!tempSub.Tel__c }" styleClass="form-control w100 h40px" html-placeholder="電話" />                        	
