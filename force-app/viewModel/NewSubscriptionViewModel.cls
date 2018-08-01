@@ -55,8 +55,6 @@ public with sharing class NewSubscriptionViewModel {
                     update account;
                 }
             }
-                
-                    
             
             return updateResult;   
         } catch (DmlException ex) {
