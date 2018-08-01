@@ -179,7 +179,7 @@
         <language>zh_TW</language>
         <protected>true</protected>
         <shortDescription>Msg_電話格式</shortDescription>
-        <value>請確認電話是否正確</value>
+        <value>市話請輸入區碼 例如02-23513750</value>
     </labels>
      <labels>
         <fullName>Msg_EmailFormat</fullName>
