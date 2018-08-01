@@ -572,6 +572,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Subscription__c.AccountStandard__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Subscription__c.Address_Invoice__c</field>
         <readable>true</readable>
     </fieldPermissions>
