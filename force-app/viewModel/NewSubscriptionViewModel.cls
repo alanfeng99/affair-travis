@@ -47,8 +47,10 @@ public with sharing class NewSubscriptionViewModel {
                     updateResult = false;
             
             if (updateResult)
-                for (Subscription__c sub : subscriptionInsertList)
-                    SubscriptionGMOPaymentBean__c subLinkToPayment = new SubscriptionGMOPaymentBean__c(SubscriptionId__c = sub.Id, GMOPaymentBeanId__c = gmoPaymentBean.Id);
+                for (Subscription__c sub : subscriptionInsertList) {
+                    SubscriptionGMOPaymentBean__c subLinkToPayment = new SubscriptionGMOPaymentBean__c(SubscriptionId__c = sub.Id, GMOPaymentBeanId__c = gmoPaymentBean.order_number__c);
+                    insert subLinkToPayment;
+                }
 
             if (updateResult) {
                 if (order.paymentMethod == '信用卡' && creditCardBean.cc != null && !String.isBlank(creditCardBean.cc)) {

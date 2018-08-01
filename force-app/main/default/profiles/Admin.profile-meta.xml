@@ -145,6 +145,14 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>PaymentResultController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>PaymentResultViewModel</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>ProductModel</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -463,11 +471,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>GMOPaymentBean__c.mode__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>GMOPaymentBean__c.order_number__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -886,6 +889,10 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
+        <apexPage>PaymentResultPage</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>RegisterPage</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
@@ -963,6 +970,10 @@
     </tabVisibilities>
     <tabVisibilities>
         <tab>SubscriptionGMOPaymentBean__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>SubscriptionProgram__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>

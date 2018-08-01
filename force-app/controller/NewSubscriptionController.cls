@@ -210,16 +210,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     }
 
     private Pagereference paymentMethodTurnPage(String method) {
-        PageReference page;
-
-        if (method == '信用卡') 
-            page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/CreditcardPaymentResultPage');
-        else if (method == 'ATM轉帳')
-            page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/MarketPaymentResultPage');
-        else 
-            page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/ATMPaymentResultPage');
-        
-        page.getParameters().put('orderSucceed','true');
+        PageReference page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/PaymentResultPage');  
         page.getParameters().put('ordernumber', viewModel.gmoPaymentBean.order_number__c);
         page.setRedirect(true);
         return page;
