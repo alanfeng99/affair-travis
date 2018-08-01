@@ -2,6 +2,7 @@ public with sharing class NewSubscriptionViewModel {
     public Account__c account {get; set;}
     public String errorMessage {get; set;}
     public CreditCardBean creditCardBean {get; set; }
+    public GMOPaymentBean__c gmoPaymentBean {get; set;}
     
     public NewSubscriptionViewModel(String accountId) {
         account = AccountModel.getAccountById(accountId);
@@ -12,15 +13,15 @@ public with sharing class NewSubscriptionViewModel {
         Boolean updateResult = true;  
         try {
             Subscription__c firstSub = subscriptionInsertList.get(0);
-            SubscriptionProgram__c program = [SELECT ProgramId__c, ProgramName__c FROM SubscriptionProgram__c WHERE ProgramId__c = :programId];
+            SubscriptionProgram__c program = [SELECT ProgramId__c, Name FROM SubscriptionProgram__c WHERE ProgramId__c = :programId];
             
             Order order = new Order();
             order.paymentMethod = firstSub.Payment_method__c;
             order.itemCode = program.ProgramId__c;
-            order.itemName = program.ProgramName__c;
+            order.itemName = program.Name;
             order.totalPrice = String.valueOf(firstSub.Amount__c * subscriptionInsertList.size());
             
-            GMOPaymentBean__c gmoPaymentBean = ApexUtility.generateGMOPaymentBeanForPayment(account, order, creditCardBean);
+            gmoPaymentBean = ApexUtility.generateGMOPaymentBeanForPayment(account, order, creditCardBean);
             GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(gmoPaymentBean);
             gmoPaymentBean = gmoPaymentAPI.directPayment();
             

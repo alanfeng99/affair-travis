@@ -7,7 +7,7 @@
             },
             "Price__c": 400,
             "ProgramId__c": "five",
-            "ProgramName__c": "5期400元",
+            "Name": "5期400元",
             "Order_Period__c": 5
         },
         {
@@ -17,7 +17,7 @@
             },
             "Price__c": 800,
             "ProgramId__c": "ten",
-            "ProgramName__c": "10期800元",
+            "Name": "10期800元",
             "Order_Period__c": 10
         },
         {
@@ -27,7 +27,7 @@
             },
             "Price__c": 1600,
             "ProgramId__c": "twenty",
-            "ProgramName__c": "20期1600元",
+            "Name": "20期1600元",
             "Order_Period__c": 20
         }
     ]

@@ -83,7 +83,7 @@
                                         </div>
                                         <table class="table  table-bordered" style="background-color:white">
                                             <tr>
-                                                <td>週刊編集：{!sub.Program__r.ProgramName__c }</td>
+                                                <td>週刊編集：{!sub.Program__r.Name }</td>
                                             </tr>
                                             <tr>
                                                 <td>訂閱期數：第{!sub.Start_period__c }期-第{!sub.End_period__c }期</td>

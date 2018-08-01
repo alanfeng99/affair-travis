@@ -9,6 +9,9 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     public String programId {get; set;}
     public String paymentMethod {get; set;}
     public String programName {get; set;}
+    public String city {get; set;}
+    public String area {get; set;}
+    public String zipcode {get; set;}
     public Integer subscriptionSize {get; set;}
     public Integer startPeriod {get; set;}
     public Decimal programTotalPrice {get; set;}
@@ -20,7 +23,6 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     public Boolean isInvoice {get; set;}
     
     public NewSubscriptionController() {
-
         Cookie accountIdCookie = ApexPages.currentPage().getCookies().get(Label.COOKIE_ACCOUNT_ID);
         
         if (accountIdCookie != null) {
@@ -94,7 +96,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         List<SubscriptionProgram__c> programs = SubscriptionModel.getProgramById(programId);
         if (programId != null) {
             programPrice = programs.get(0).Price__c;   
-            programName = programs.get(0).ProgramName__c;
+            programName = programs.get(0).Name;
             programTotalPrice = programPrice * subscriptionSize;
             showProgramResult = true;
             showErrorForNullProgram = false;
@@ -154,7 +156,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('', '--- 請選擇 ---'));
         for (SubscriptionProgram__c program : SubscriptionModel.getProgram()) 
-            options.add(new SelectOption(program.ProgramId__c, program.ProgramName__c));
+            options.add(new SelectOption(program.ProgramId__c, program.Name));
         
         return options;
     }
@@ -177,6 +179,12 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         return null;
     }
 
+    public Pagereference zipcodeShow() {
+        for(Subscription__c tempSub : tempSubscriptions) 
+            tempSub.Postal_code__c = AddressModel.getZipCodeByArea(tempSub.City_picklist__c, tempSub.Area_picklist__c);  
+        return null; 
+    }
+
     public Pagereference submitForm() {
         if (programId == null) {
             addMessage(ApexPages.Severity.ERROR, System.Label.Msg_ProgramEmpty);
@@ -193,23 +201,34 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         insertSubscriptionPriceAndProgram();
         ifCreditcardThenTurnIsReplenishTrue(subscriptionInsertList);
         if (viewModel.newSubscription(subscriptionInsertList, programId)) {
-            PageReference page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/SubscriptionManagementPage');
-            page.getParameters().put('orderSucceed','true');
-            page.setRedirect(true);
-        	return page;
+        	return paymentMethodTurnPage(paymentMethod);
         } else {
             addMessage(ApexPages.Severity.INFO, viewModel.errorMessage);
         }
         
         return null;
     }
+
+    private Pagereference paymentMethodTurnPage(String method) {
+        PageReference page;
+
+        if (method == '信用卡') 
+            page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/CreditcardPaymentResultPage');
+        else if (method == 'ATM轉帳')
+            page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/MarketPaymentResultPage');
+        else 
+            page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/ATMPaymentResultPage');
+        
+        page.getParameters().put('orderSucceed','true');
+        page.getParameters().put('ordernumber', viewModel.gmoPaymentBean.order_number__c);
+        page.setRedirect(true);
+        return page;
+    }
     
     private void ifCreditcardThenTurnIsReplenishTrue(List<Subscription__c> subscriptions) {
-        for(Subscription__c sub : subscriptions) {
-            if (sub.Payment_method__c == '信用卡') {
+        for(Subscription__c sub : subscriptions) 
+            if (sub.Payment_method__c == '信用卡') 
                 sub.isReplenish__c = true;
-            }
-        }
     } 
 
     private void calculateSize() {
@@ -233,6 +252,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             clone_Subscription.Postal_code__c = sub.Postal_code__c;
             clone_Subscription.City_pickList__c = sub.City_pickList__c;
             clone_Subscription.Tel__c = sub.Tel__c;
+            clone_Subscription.Email__c = sub.Email__c;
 
             subscriptionInsertList.add(clone_Subscription);
         }
@@ -259,7 +279,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         
         for (Subscription__c sub : subscriptionInsertList) {
             if (sub.Recipient__c == null || sub.City_picklist__c == null || sub.Area_picklist__c == null || 
-                    sub.Address__c == null || sub.Tel__c == null ) {
+                    sub.Address__c == null || sub.Tel__c == null || sub.Email__c == null ) {
                 addMessage(ApexPages.Severity.ERROR, System.Label.Msg_RecipientInfoEmpty);
                 return false;
             }
