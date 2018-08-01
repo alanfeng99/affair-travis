@@ -287,13 +287,15 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             if (!checkPhoneFormat(sub.Tel__c)){
                 addMessage(ApexPages.Severity.ERROR, System.Label.Msg_PhoneFormat);
                 return false;
-            }
-            
+            } 
+        }
+
+        for (Subscription__c sub : subscriptionInsertList) {        
             if (sub.Payment_method__c == null) {
                 addMessage(ApexPages.Severity.ERROR, System.Label.Msg_PaymentEmpty);
                 return false;
             }
-                
+            
             if (sub.Payment_method__c == '信用卡') 
                 return isFieldFilledWhenChoosenCard();   
         }
@@ -317,8 +319,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
                 addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckNumber);
                 return false;
             }
-        }    
-        
+        }      
         return true;
     }
 
