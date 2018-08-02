@@ -199,6 +199,7 @@ public class loginTestCases {
         Account account = new Account();
         account.PersonEmail = 'alan@gmail.com';
         account.LastName = 'Alan';
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         LoginController controller = new LoginController();
         controller.facebookUserEmail = 'alan@gmail.com';
@@ -227,6 +228,7 @@ public class loginTestCases {
         Account account = new Account();
         account.PersonEmail = 'alan@gmail.com';
         account.LastName = 'Alan';
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         LoginController controller = new LoginController();
         controller.googleUserEmail = 'alan@gmail.com';

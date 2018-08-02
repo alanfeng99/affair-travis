@@ -21,7 +21,6 @@ public  class ChangePasswordTestCases {
 
     public static testMethod void testPasswordFormat_Wrong_Return_False() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ggg.com'];
-        //insert account;
         Test.setCurrentPage(Page.RegisterResultPage);
         ApexPages.currentPage().getParameters().put('id',account.id);
         ChangePasswordController controller = new ChangePasswordController();
@@ -33,7 +32,6 @@ public  class ChangePasswordTestCases {
 
     public static testMethod void testPasswordFormat_Right() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ggg.com'];
-        //insert account;
         Test.setCurrentPage(Page.RegisterResultPage);
         ApexPages.currentPage().getParameters().put('id',account.id);
         ChangePasswordController controller = new ChangePasswordController();
@@ -45,7 +43,6 @@ public  class ChangePasswordTestCases {
 
     public static testMethod void testVerifyPassword_Not_Same_Return_False() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ggg.com'];
-        //insert account;
         Test.setCurrentPage(Page.RegisterResultPage);
         ApexPages.currentPage().getParameters().put('id',account.id);
         ChangePasswordController controller = new ChangePasswordController();
@@ -60,7 +57,6 @@ public  class ChangePasswordTestCases {
 
     public static testMethod void testVerifyPassword_Same() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ggg.com'];
-        // insert account;
         Test.setCurrentPage(Page.RegisterResultPage);
         ApexPages.currentPage().getParameters().put('id',account.id);
         ChangePasswordController controller = new ChangePasswordController();
@@ -73,7 +69,6 @@ public  class ChangePasswordTestCases {
 
     public static testMethod void testCheckPassword_Success() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ggg.com'];
-        // insert account;
         Test.setCurrentPage(Page.RegisterResultPage);
         ApexPages.currentPage().getParameters().put('id',account.id);
         ChangePasswordController controller = new ChangePasswordController();
