@@ -1,7 +1,8 @@
 @isTest
 public with sharing class SummaryControllerTestCase {
     public static testMethod void testGetAccount() {
-        Account account = new Account(PersonEmail = 'jin@4idps.com');
+        Account account = new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         String accountId = account.Id;
         
@@ -12,7 +13,8 @@ public with sharing class SummaryControllerTestCase {
     }
 
     public static testMethod void testGetSubscriptions() {
-        Account account = new Account(PersonEmail = 'jin@4idps.com');
+        Account account = new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         SummaryController controller = new SummaryController(account.id);
         List<Subscription__c> sub = controller.getSubscriptions();
@@ -70,7 +72,8 @@ public with sharing class SummaryControllerTestCase {
     }
 
     public static testMethod void testViewModel_GetSumOfSubscription() {
-        Account account = new Account(PersonEmail = 'jin@4idps.com');
+        Account account = new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         SummaryController controller = new SummaryController(account.id);
         Integer size = controller.viewModel.getSumOfSubscription();

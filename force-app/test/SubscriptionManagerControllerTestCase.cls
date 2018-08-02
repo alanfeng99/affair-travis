@@ -1,7 +1,15 @@
 @isTest
 public with sharing class SubscriptionManagerControllerTestCase {
+    @testSetup
+    public static void createAccountForTest() {
+        Account account = new Account(PersonEmail = 'jin@ifpa.com', LastName = 'Jin');
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        
+        insert account;
+    }
+
     public static testMethod void testSunmitForm() {
-        Account account = new Account(PersonEmail = 'jin@ifpa.com');
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ifpa.com'];
         insert account;
         SubscriptionManagementController controller = new SubscriptionManagementController(account.id);
         Pagereference page = controller.submitForm();
@@ -10,15 +18,14 @@ public with sharing class SubscriptionManagerControllerTestCase {
     }
     
     public static testMethod void testStopAutoOrderPanel() {
-        Account account = new Account(PersonEmail = 'jin@ifpa.com');
-        insert account;
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ifpa.com'];
         SubscriptionManagementController controller = new SubscriptionManagementController(account.id);
         Pagereference page = controller.stopAutoOrderPanel();
         System.assertEquals(null, page);
     }
 
     public static testMethod void testStopAutoOrderService() {
-        Account account = new Account(PersonEmail = 'jin@ifpa.com');
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ifpa.com'];
         insert account;
         SubscriptionManagementController controller = new SubscriptionManagementController(account.id);
         Pagereference page = controller.stopAutoOrderService();
@@ -28,7 +35,7 @@ public with sharing class SubscriptionManagerControllerTestCase {
     }
 
     public static testMethod void testUseAutoOrderPanel() {
-        Account account = new Account(PersonEmail = 'jin@ifpa.com');
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ifpa.com'];
         insert account;
         SubscriptionManagementController controller = new SubscriptionManagementController(account.id);
         Pagereference page = controller.useAutoOrderPanel();
@@ -36,7 +43,7 @@ public with sharing class SubscriptionManagerControllerTestCase {
     }
 
     public static testMethod void testUseAutoOrderService() {
-        Account account = new Account(PersonEmail = 'jin@ifpa.com');
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ifpa.com'];
         insert account;
         SubscriptionManagementController controller = new SubscriptionManagementController(account.id);
         controller.currentUseRowId = '123';
@@ -47,7 +54,7 @@ public with sharing class SubscriptionManagerControllerTestCase {
     }
 
     public static testMethod void testChangeRecipientInfo() {
-        Account account = new Account(PersonEmail = 'jin@ifpa.com');
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ifpa.com'];
         insert account;
         SubscriptionManagementController controller = new SubscriptionManagementController(account.id);
         Pagereference page = controller.changeRecipientInfo();
@@ -55,7 +62,7 @@ public with sharing class SubscriptionManagerControllerTestCase {
     }
 
     public static testMethod void testCancelReturn() {
-        Account account = new Account(PersonEmail = 'jin@ifpa.com');
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ifpa.com'];
         insert account;
         SubscriptionManagementController controller = new SubscriptionManagementController(account.id);
         Pagereference page = controller.cancelReturn();
@@ -65,7 +72,7 @@ public with sharing class SubscriptionManagerControllerTestCase {
     }
 
     public static testMethod void testcancelChange() {
-        Account account = new Account(PersonEmail = 'jin@ifpa.com');
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ifpa.com'];
         insert account;
         SubscriptionManagementController controller = new SubscriptionManagementController(account.id);
         Pagereference page = controller.cancelChange();
@@ -74,7 +81,7 @@ public with sharing class SubscriptionManagerControllerTestCase {
     }
 
     public static testMethod void testAfterSubmit() {
-        Account account = new Account(PersonEmail = 'jin@ifpa.com');
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ifpa.com'];
         insert account;
         SubscriptionManagementController controller = new SubscriptionManagementController(account.id);
         Pagereference page = controller.afterSubmit();

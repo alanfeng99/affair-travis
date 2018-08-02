@@ -1,7 +1,8 @@
 @isTest
 public with sharing class TestSubscriptionModel {
     public static testMethod void testGetSubscriptionsByUserId() {
-        Account account = new Account(PersonEmail = 'jin@4idps.com');
+        Account account = new Account(PersonEmail = 'jin@4idps.com', LastName = 'Alan');
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
        
         Subscription__c sub = new Subscription__c(AccountStandard__c = account.Id);
        
