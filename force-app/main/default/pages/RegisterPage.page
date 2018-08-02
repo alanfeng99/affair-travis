@@ -39,7 +39,7 @@
                     </div>
                     <hr class="w100"/>
                     
-                    <apex:inputText value="{!viewModel.account.Email__c}" html-placeholder="請輸入 E-mail 電子信箱" styleClass="form-control w100 h50px" />
+                    <apex:input value="{!viewModel.email}" html-placeholder="請輸入 E-mail 電子信箱" styleClass="form-control w100 h50px" />
                      <small style="color:red;"><apex:messages /></small>
                     <div align="center" style="font-size:12px;">
                         送出建立帳號時，代表您同意我們的服務條款和隱私政策

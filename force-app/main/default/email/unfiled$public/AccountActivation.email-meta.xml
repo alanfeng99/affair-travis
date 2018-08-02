@@ -7,12 +7,12 @@
     <name>帳號啟用信</name>
     <style>formalLetter</style>
     <subject>帳號啟用信</subject>
-    <textOnly>您好 {!Account__c.Email__c}：
+    <textOnly>您好 {!Account.PersonEmail}：
 這是一封帳號啟用信件。
 
 請點選下列網址以驗證帳號：
 
-{!$Label.SITE_URL}/apex/SetupPasswordPage?id={!Account__c.Id}
+{!$Label.SITE_URL}/apex/SetupPasswordPage?id={!Account.Id}
 Affairs 編集者新聞社有限公司</textOnly>
     <type>html</type>
     <uiType>Aloha</uiType>

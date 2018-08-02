@@ -1,5 +1,6 @@
 public with sharing class RegisterViewModel {
-    public Account__c account {get; set;}
+    public Account account {get; set;}
+    public String email {get; set;}
 
     public enum RegisterType {
         Email,
@@ -8,6 +9,6 @@ public with sharing class RegisterViewModel {
     }
 
     public RegisterViewModel() {
-        account = new Account__c();
+        account = new Account();
     }
 }

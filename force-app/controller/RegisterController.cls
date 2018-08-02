@@ -10,6 +10,7 @@ public with sharing class RegisterController extends ApexBaseController {
             PageReference page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/RegisterResultPage');
             page.getParameters().put('id', viewModel.account.Id);
             page.setRedirect(true);
+            AuthUtility.deleteAuthCookies();
             
             return page;
         }
@@ -17,27 +18,21 @@ public with sharing class RegisterController extends ApexBaseController {
     }
 
     public Boolean registerByEmail() {
-        if (!EmailUtility.emailFormatValidation(viewModel.account.Email__c)) { 
+        if (!EmailUtility.emailFormatValidation(viewModel.email)) { 
             addMessage(ApexPages.Severity.ERROR, System.Label.Msg_EmailFormat);  
             return false;
         }
 
-        if (AccountModel.getAccountByEmail(viewModel.account.Email__c) != null) {
+        if (AccountModel.getAccountByEmail(viewModel.email) != null) {
             addMessage(ApexPages.Severity.ERROR, System.Label.Msg_AccountAlreadyExist); 
             return false;
         }
 
-        Account__c accountCreated = AccountModel.createAccountByEmail(viewModel.account.Email__c);
-        
-        // Jin: no need to check here
-        // if (accountCreated == null) {
-        //     addMessage(ApexPages.Severity.ERROR, System.Label.Msg_AccountAlreadyExist); 
-        //     return false;
-        // }
-        
+        Account accountCreated = AccountModel.createAccountByEmail(viewModel.email);
+                
         viewModel.account = accountCreated;
 
-        if (EmailUtility.sendEmail(viewModel.account.Email__c, 'AccountActivation'))
+        if (EmailUtility.sendEmail(viewModel.email, 'AccountActivation'))
             return true;
         
         addMessage(ApexPages.Severity.ERROR, System.Label.Msg_EmailSendFail); 

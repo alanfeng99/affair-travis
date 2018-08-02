@@ -32,7 +32,7 @@
                         <div class="container lineheight40px" style="max-width:300px;">
                             <div>系統已經將驗證信件寄到此電子信箱中：</div>
                             <div style="color:#00ace6; " >
-                                <apex:outputText value="{!viewModel.account.Email__c}"/>
+                                <apex:outputText value="{!viewModel.account.PersonEmail}"/>
                             </div>             
                             <div>
                                 請查看您的收件匣，並點選驗證信中的驗證連結，完成帳號的登錄。

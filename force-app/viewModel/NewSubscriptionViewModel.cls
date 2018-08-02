@@ -1,5 +1,5 @@
 public with sharing class NewSubscriptionViewModel {
-    public Account__c account {get; set;}
+    public Account account {get; set;}
     public String errorMessage {get; set;}
     public CreditCardBean creditCardBean {get; set; }
     public GMOPaymentBean__c gmoPaymentBean {get; set;}

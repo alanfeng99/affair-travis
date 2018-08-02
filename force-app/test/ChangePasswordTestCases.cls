@@ -2,7 +2,7 @@
 public  class ChangePasswordTestCases {
     
     public static testMethod void testConstructor() {
-        Account__c account = new Account__c(Email__c = 'jin@ggg.com');
+        Account account = new Account(PersonEmail = 'jin@ggg.com');
         insert account;
         Test.setCurrentPage(Page.RegisterResultPage);
         ApexPages.currentPage().getParameters().put('id',account.id);
@@ -13,7 +13,7 @@ public  class ChangePasswordTestCases {
     }
 
     public static testMethod void testPasswordFormat_Wrong_Return_False() {
-        Account__c account = new Account__c(Email__c = 'jin@ggg.com');
+        Account account = new Account(PersonEmail = 'jin@ggg.com');
         insert account;
         Test.setCurrentPage(Page.RegisterResultPage);
         ApexPages.currentPage().getParameters().put('id',account.id);
@@ -25,7 +25,7 @@ public  class ChangePasswordTestCases {
     }
 
     public static testMethod void testPasswordFormat_Right() {
-        Account__c account = new Account__c(Email__c = 'jin@ggg.com');
+        Account account = new Account(PersonEmail = 'jin@ggg.com');
         insert account;
         Test.setCurrentPage(Page.RegisterResultPage);
         ApexPages.currentPage().getParameters().put('id',account.id);
@@ -37,7 +37,7 @@ public  class ChangePasswordTestCases {
     }
 
     public static testMethod void testVerifyPassword_Not_Same_Return_False() {
-        Account__c account = new Account__c(Email__c = 'jin@ggg.com');
+        Account account = new Account(PersonEmail = 'jin@ggg.com');
         insert account;
         Test.setCurrentPage(Page.RegisterResultPage);
         ApexPages.currentPage().getParameters().put('id',account.id);
@@ -52,7 +52,7 @@ public  class ChangePasswordTestCases {
     }
 
     public static testMethod void testVerifyPassword_Same() {
-        Account__c account = new Account__c(Email__c = 'jin@ggg.com');
+        Account account = new Account(PersonEmail = 'jin@ggg.com');
         insert account;
         Test.setCurrentPage(Page.RegisterResultPage);
         ApexPages.currentPage().getParameters().put('id',account.id);
@@ -65,7 +65,7 @@ public  class ChangePasswordTestCases {
     }
 
     public static testMethod void testCheckPassword_Success() {
-        Account__c account = new Account__c(Email__c = 'jin@ggg.com');
+        Account account = new Account(PersonEmail = 'jin@ggg.com');
         insert account;
         Test.setCurrentPage(Page.RegisterResultPage);
         ApexPages.currentPage().getParameters().put('id',account.id);

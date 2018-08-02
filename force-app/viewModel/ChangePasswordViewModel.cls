@@ -1,5 +1,6 @@
 public with sharing class ChangePasswordViewModel {
-    public Account__c account {get; set;}   
+    public Account account {get; set;}
+    public String password {get; set;} 
 
     public ChangePasswordViewModel(String accountId) {
         account = AccountModel.getAccountById(accountId);
@@ -7,6 +8,7 @@ public with sharing class ChangePasswordViewModel {
 
     public Boolean submit() {
         account.Active__c = true;
+        account.Password__c = password;
         return AccountModel.updateAccount(account);
     }
 }

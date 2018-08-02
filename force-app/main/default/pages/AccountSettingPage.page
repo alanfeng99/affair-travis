@@ -110,7 +110,7 @@
                     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{!viewModel.account.LastName__c}</a>
+                                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{!viewModel.account.LastName}</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                                     <apex:commandLink action="{!logOut}" value="登出" styleClass="dropdown-item"/>
                                     <!-- <a class="dropdown-item" href="#">Another action</a>
@@ -146,7 +146,7 @@
                         <div class="container" style="max-width:400px;"> 
           
                                     <div class="form-group" style="font-size:15px;">
-                                        你目前使用 {!viewModel.account.Email__c } 做為登入信箱。
+                                        你目前使用 {!viewModel.account.PersonEmail } 做為登入信箱。
                                     </div>
                                     <apex:outputText style="font-color:red; font-size:12px;" rendered="{!ifChangeEmail}">您已更改電子郵件，請至信箱重新認證帳號</apex:outputText>
                                     <small><apex:messages style="color:red"/></small>
@@ -159,7 +159,7 @@
                                                             暱稱：
                                                         </div>
                                                         <div class="col-auto">
-                                                            {!viewModel.account.LastName__c} 
+                                                            {!viewModel.account.LastName} 
                                                         </div>
                                                         <div class="col-auto">
                                                             <apex:commandLink value="變更" action="{!changeName}" reRender="form"/>  
@@ -174,7 +174,7 @@
                                                             信箱：
                                                         </div>
                                                         <div class="col-auto">
-                                                            {!viewModel.account.Email__c}
+                                                            {!viewModel.account.PersonEmail}
                                                         </div>
                                                         <div class="col-auto">
                                                             <apex:commandLink value="變更" action="{!changeEmail}" reRender="form"/>  
@@ -222,7 +222,7 @@
                                                         請輸入新的暱稱 
                                                     </div>
                                                     <div class="form-group">
-                                                        <apex:inputField value="{!viewModel.account.LastName__c}" style="width:60%" html-placeholder="暱稱"/>
+                                                        <apex:input value="{!viewModel.newLastName}" style="width:60%" html-placeholder="暱稱"/>
                                                     </div>
                                                     
                                                     <div class="form-group form-row">
@@ -246,7 +246,7 @@
                                                             暱稱：
                                                         </div>
                                                         <div class="col-auto">
-                                                            {!viewModel.account.LastName__c} 
+                                                            {!viewModel.account.LastName} 
                                                         </div>
                                                         <div class="col-auto">
                                                             <apex:commandLink value="變更" action="{!changeName}"/>  
@@ -261,7 +261,7 @@
                                                         <small>Email 信箱變更後需要再重新驗證已確認信箱無誤</small>
                                                     </div>  
                                                     <div class="form-group">
-                                                        <apex:inputField value="{!viewModel.account.Email__c}" html-placeholder="電子信箱" style="width:200px;"/>
+                                                        <apex:input value="{!viewModel.newEmail}" html-placeholder="電子信箱" style="width:200px;"/>
                                                     </div>
                                                     <div class="form-group form-row">
                                                         <div class="col-auto">
@@ -284,7 +284,7 @@
                                                             暱稱：
                                                         </div>
                                                         <div class="col-auto">
-                                                            {!viewModel.account.LastName__c} 
+                                                            {!viewModel.account.LastName} 
                                                         </div>
                                                         <div class="col-auto">
                                                             <apex:commandLink value="變更" action="{!changeName}"/>  
@@ -299,7 +299,7 @@
                                                             信箱：
                                                         </div>
                                                         <div class="col-auto">
-                                                            {!viewModel.account.Email__c} 
+                                                            {!viewModel.account.PersonEmail} 
                                                         </div>
                                                         <div class="col-auto">
                                                             <apex:commandLink value="變更" action="{!changeEmail}"/>  

@@ -4,7 +4,7 @@ public with sharing class SubscriptionModel {
         Program__r.Name, Program__c, Name, Amount__c, Start_period__c, End_Period__c, Payment_method__c, Address_Invoice__c,
         Payment_status__c, Company_name__c, isInvoice__c, isReplenish__c, memberInfo__c, Not_received__c, Note__c, 
         Order_date__c, Tel__c, Payment_date__c, Subscription_status__c, Tax_No__c, PaymentInformation__c, Email__c
-        FROM Subscription__c where CustomAccount__c = :userId];
+        FROM Subscription__c where AccountStandard__c = :userId];
     }
     
     public static List<SubscriptionProgram__c> getProgram() {

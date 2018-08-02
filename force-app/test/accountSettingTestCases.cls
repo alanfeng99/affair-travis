@@ -1,7 +1,7 @@
 @isTest
 public  class accountSettingTestCases {
     public static testMethod void testAccountSettingCustructor() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com');
+        Account account = new Account(PersonEmail = 'jin@fff.com');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         System.assertNotEquals(null, controller.accountVerify);
@@ -12,7 +12,7 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testCheckPasswordFormat_OldPassword_Wrong_Return_False() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer');
+        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234';
@@ -22,7 +22,7 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testCheckPasswordFormat_OldPassword_Right() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer');
+        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234qwer';
@@ -32,7 +32,7 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testCheckPasswordFormat_NewPassword_Null_Return_False() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer');
+        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234qwer';
@@ -43,7 +43,7 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testCheckPasswordFormat_NewPassword_Not_Null_Return_False() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer');
+        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234qwer';
@@ -55,7 +55,7 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testCheckPasswordFormat_NewPassword_Format_Wrong_NoNumber_Return_False() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer');
+        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234qwer';
@@ -67,7 +67,7 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testCheckPasswordFormat_NewPassword_Format_Wrong_NoLetter_Return_False() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer');
+        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234qwer';
@@ -79,7 +79,7 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testCheckPasswordFormat_NewPassword_Format_Length_Wrong_Return_False() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer');
+        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234qwer';
@@ -91,7 +91,7 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testCheckPasswordFormat_NewPassword_Format_Right() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer');
+        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234qwer';
@@ -103,7 +103,7 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testCheckPasswordFormat_accountVerify_Null_Return_False() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer');
+        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234qwer';
@@ -115,7 +115,7 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testCheckPasswordFormat_accountVerify_Not_Null_Return_False() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer');
+        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234qwer';
@@ -128,7 +128,7 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testCheckPasswordFormat_accountVerify_Not_Same_For_NewAccount_Return_False() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer');
+        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234qwer';
@@ -141,7 +141,7 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testCheckPasswordFormat_Right() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer');
+        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234qwer';
@@ -154,7 +154,7 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testSubmitName_LastName_Null_Return_Msg() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer');
+        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
 
@@ -164,7 +164,7 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testSubmitName_LastName_Not_Null_Return_Msg() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer', LastName__c = 'jin');
+        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer', LastName = 'jin');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
 
@@ -175,20 +175,20 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testViewModel_UpdateEmail_Email_Exist() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer');
+        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
-        controller.viewModel.account.Email__c = 'jin@fff.com';
+        controller.viewModel.account.PersonEmail = 'jin@fff.com';
         
         Boolean updateEmail = controller.viewModel.updateEmail();
         System.assertEquals(false, updateEmail);
     }
 
     public static testMethod void testViewModel_UpdateEmai() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer');
+        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
-        controller.viewModel.account.Email__c = 'jin@ggg.com';
+        controller.viewModel.account.PersonEmail = 'jin@ggg.com';
         
         Boolean updateEmail = controller.viewModel.updateEmail();
         System.assertEquals(true, updateEmail);
@@ -196,7 +196,7 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testSubmitEmail_Email_Null_Return_Msg() {
-       Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer');
+       Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         Pagereference page = controller.submitEmail();
@@ -205,27 +205,27 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testSubmitEmail_Email_Not_Null_Return_Msg() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer');
+        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
-        controller.viewModel.account.Email__c = 'jin@ggg.com';
+        controller.viewModel.account.PersonEmail = 'jin@ggg.com';
         Pagereference page = controller.submitEmail();
         System.assertNotEquals(null, page);
         System.assertNotEquals(controller.baseErrorMessage, System.Label.Msg_EmailEmpty);
     }
 
     public static testMethod void testSubmitEmial_UpdateEmail_Fail_Return_Msg() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer');
+        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
-        controller.viewModel.account.Email__c = 'jin@fff.com';
+        controller.viewModel.account.PersonEmail = 'jin@fff.com';
         Pagereference page = controller.submitEmail();
         System.assertEquals(controller.baseErrorMessage, System.Label.Msg_AccountAlreadyExist);
         System.assertEquals(null, page); 
     }
 
     public static testMethod void testChagneName() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer');
+        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         Pagereference page = controller.changeName();
@@ -234,7 +234,7 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testChagneEmail() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer');
+        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         Pagereference page = controller.changeEmail();
@@ -243,7 +243,7 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testChagnePassword() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer');
+        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         Pagereference page = controller.changePassword();
@@ -252,20 +252,12 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testChangeCreditCard() {
-        Account__c account = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer');
+        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer');
         insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         Pagereference page = controller.changeCreditCard();
         System.assertNotEquals(null, page); 
     }
-
-    // public static testMethod void testCancelChange() {
-    //     Account__c tempAccount = new Account__c(Email__c = 'jin@fff.com', Password__c = '1234qwer', LastName__c = 'jin');
-    //     insert tempAccount;
-    //     AccountSettingController controller = new AccountSettingController(tempAccount.id);
-    //     controller.cancelChange();
-    //     System.assertEquals(true, controller.isMainShow); 
-    // }
 
     public static testMethod void testTurn_To_SummaryPage() {
         AccountSettingController controller = new AccountSettingController();
@@ -289,73 +281,4 @@ public  class accountSettingTestCases {
         Pagereference page = controller.logOut();
         System.assertNotEquals(null, page);
     }
-
-    // public static testMethod void testLoginWithFacebook_tokenHasNull_ReturnNull() {
-    //     Account__c account = new Account__c();
-    //     account.Email__c = 'alan@gmail.com';
-    //     insert account;
-    //     AccountSettingController controller = new AccountSettingController(account.id);
-    //     Pagereference page = controller.loginWithFacebook();
-    //     System.assertEquals(null, page);
-    // }
-
-    // public static testMethod void testLoginWithFacebook_Login_Success_Return_Not_Null() {
-    //     Account__c account = new Account__c();
-    //     account.Email__c = 'alan@gmail.com';
-    //     insert account;
-    //     AccountSettingController controller = new AccountSettingController(account.id);
-    //     controller.facebookUserEmail = 'alan@gmail.com';
-    //     controller.facebookUserName = 'alan';
-    //     controller.facebookUserToken = '123';
-    //     controller.facebookUserID = '222';
-    //     Pagereference page = controller.loginWithFacebook();
-    //     System.assertEquals(null, page);
-    // }
-
-    // public static testMethod void testLoginWithFacebook_Login_Success_Account_Already_Exist_Return_Not_Null() {
-    //     Account__c account = new Account__c();
-    //     account.Email__c = 'alan@gmail.com';
-    //     insert account;
-    //     AccountSettingController controller = new AccountSettingController(account.id);
-    //     controller.facebookUserEmail = 'alan@gmail.com';
-    //     controller.facebookUserName = 'alan';
-    //     controller.facebookUserToken = '123';
-    //     Pagereference page = controller.loginWithFacebook();
-    //     System.assertEquals(null, page);
-    // }
-
-    // public static testMethod void testLoginWithGoogle_tokenHasNull_Return_Null() {
-    //     Account__c account = new Account__c();
-    //     account.Email__c = 'alan@gmail.com';
-    //     insert account;
-    //     AccountSettingController controller = new AccountSettingController(account.id);
-    //     Pagereference page = controller.loginWithGoogle();
-    //     System.assertEquals(null, page);
-    // }
-
-    // public static testMethod void testLoginWithGoogle_Login_Success_Return_Not_Null() {
-    //     Account__c account = new Account__c();
-    //     account.Email__c = 'alan@gmail.com';
-    //     insert account;
-    //     AccountSettingController controller = new AccountSettingController(account.id);
-    //     controller.googleUserEmail = 'alan@gmail.com';
-    //     controller.googleUserName = 'alan';
-    //     controller.googleUserID = '123';
-    //     Pagereference page = controller.loginWithGoogle();
-    //     System.assertEquals(null, page);
-    // }
-
-    // public static testMethod void testLoginWithGoogle_Login_Success_Account_Already_Exist_Return_Not_Null() {
-    //     Account__c account = new Account__c();
-    //     account.Email__c = 'alan@gmail.com';
-    //     insert account;
-    //     AccountSettingController controller = new AccountSettingController(account.id);
-    //     controller.googleUserEmail = 'alan@gmail.com';
-    //     controller.googleUserName = 'alan';
-    //     controller.googleUserID = '123';
-    //     Pagereference page = controller.loginWithGoogle();
-    //     System.assertEquals(null, page);
-    // }
-
-
 }

@@ -29,10 +29,10 @@ global class ExecutePaymentEveryDay implements Schedulable {
     }
 
     public void checkDailyPaymentForEveryUsers() {
-        List<Subscription__c> subscriptions = [SELECT Payment_method__c, Start_period__c, End_period__c, Program__c, Amount__c, CustomAccount__c FROM Subscription__c WHERE Payment_method__c = :Constants.PAYMENT_METHOD_CREDIT_CARD AND isReplenish__c = true];
+        List<Subscription__c> subscriptions = [SELECT Payment_method__c, Start_period__c, End_period__c, Program__c, Amount__c, AccountStandard__c FROM Subscription__c WHERE Payment_method__c = :Constants.PAYMENT_METHOD_CREDIT_CARD AND isReplenish__c = true];
         List<Product2> products = [SELECT EndDate__c, ProductCode FROM Product2];
         List<SubscriptionProgram__c> programs = [SELECT Order_Period__c, ProgramId__c, Name FROM SubscriptionProgram__c];
-        List<Account__c> accounts = [SELECT LastName__c, Email__c FROM Account__c];
+        List<Account> accounts = [SELECT LastName, PersonEmail FROM Account];
 
         List<Subscription__c> subscriptionsToUpdate = new List<Subscription__c>();
         List<GMOPaymentBean__c> gmoPaymentBeansToInsert = new List<GMOPaymentBean__c>();
@@ -48,7 +48,7 @@ global class ExecutePaymentEveryDay implements Schedulable {
             Date productEndDate = Date.valueOf(product.EndDate__c);
             
             if (dateNow >= productEndDate) {
-                Account__c account = findAccount(accounts, subscription.CustomAccount__c);
+                Account account = findAccount(accounts, subscription.AccountStandard__c);
                 SubscriptionProgram__c program = findProgram(programs, subscription.Program__c);
                 Order order = new Order();
                 order.paymentMethod = subscription.Payment_method__c;
@@ -84,8 +84,8 @@ global class ExecutePaymentEveryDay implements Schedulable {
         return null;
     }
 
-    public Account__c findAccount(List<Account__c> accounts, String accountId) {
-        for (Account__c account : accounts)
+    public Account findAccount(List<Account> accounts, String accountId) {
+        for (Account account : accounts)
             if (account.Id == accountId)
                 return account;
         return null;

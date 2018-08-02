@@ -1,9 +1,9 @@
 @isTest
 public with sharing class TestSubscriptionModel {
     public static testMethod void testGetSubscriptionsByUserId() {
-        Account__c account = new Account__c(Email__c = 'jin@4idps.com');
+        Account account = new Account(PersonEmail = 'jin@4idps.com');
        
-        Subscription__c sub = new Subscription__c(CustomAccount__c = account.Id);
+        Subscription__c sub = new Subscription__c(AccountStandard__c = account.Id);
        
         List<Subscription__c> subs = SubscriptionModel.getSubscriptionsByUserId(account.Id);
         System.assertNotEquals(null, subs);
@@ -24,9 +24,9 @@ public with sharing class TestSubscriptionModel {
     }
 
     public static testMethod void testGetUniqueSubscriptionById_Success() {
-        Account__c account = new Account__c(Email__c = 'jin@rrr.com');
+        Account account = new Account(PersonEmail = 'jin@rrr.com');
         insert account;
-        Subscription__c subscription = new Subscription__c(CustomAccount__c = account.id);
+        Subscription__c subscription = new Subscription__c(AccountStandard__c = account.id);
         insert subscription;
         Subscription__c sub = SubscriptionModel.getUniqueSubscriptionById(subscription.id);
         System.assertNotEquals(null, sub);

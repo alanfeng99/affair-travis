@@ -18,7 +18,7 @@
         <apex:form id="form">
             <div class="card border-light bg-light">   
                 <div class="card-header bg-white ">
-                    <b class="letterspacing3px fontsize20px">週刊編集</b> {!viewModel.account.LastName__c}
+                    <b class="letterspacing3px fontsize20px">週刊編集</b> {!viewModel.account.LastName}
                     <hr class="w100"/>
                     <div class="letterspacing3px fontsize20px" align="center">信用卡資訊更新</div><br/>
                     <div align="center" class="fontsize12px">信用卡資訊新增、變更</div>

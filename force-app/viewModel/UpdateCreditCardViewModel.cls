@@ -1,5 +1,5 @@
 public with sharing class UpdateCreditCardViewModel {
-    public Account__c account {get; set;}
+    public Account account {get; set;}
     public List<Subscription__c> subscriptions {get; set;}
     public CreditCardBean creditCardBean {get; set;}
 

@@ -1,5 +1,5 @@
 public with sharing class SummaryViewModel {
-    private Account__c account;
+    private Account account;
     private List<Subscription__c> subscriptions;
     
     public String year {get; set;}
@@ -18,7 +18,7 @@ public with sharing class SummaryViewModel {
 
     }
     
-    public Account__c getAccount() {
+    public Account getAccount() {
         return account;
     }
 
