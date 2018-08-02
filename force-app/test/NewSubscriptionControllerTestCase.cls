@@ -35,7 +35,7 @@ public with sharing class NewSubscriptionControllerTestCase {
 
     public static testMethod void deleteSubscription_deleteRowId_0_Size_0() {
         Account account =  new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
-        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         NewSubscriptionController controller = new NewSubscriptionController(account.id);
         controller.deleteRowId = 1;
@@ -133,7 +133,7 @@ public with sharing class NewSubscriptionControllerTestCase {
         SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
         Account account =  new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
-        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         NewSubscriptionController controller = new NewSubscriptionController(account.Id);
         controller.programId = program.ProgramId__c;
@@ -149,7 +149,7 @@ public with sharing class NewSubscriptionControllerTestCase {
         SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
         Account account =  new Account(PersonEmail = 'jin@4idps.com', LstName = 'Jin');
-        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         NewSubscriptionController controller = new NewSubscriptionController(account.Id);
         controller.programId = program.ProgramId__c;
@@ -164,7 +164,7 @@ public with sharing class NewSubscriptionControllerTestCase {
         SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
         Account account =  new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
-        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         NewSubscriptionController controller = new NewSubscriptionController(account.Id);
         controller.programId = program.ProgramId__c;
@@ -188,7 +188,7 @@ public with sharing class NewSubscriptionControllerTestCase {
         SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
         Account account =  new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
-        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         NewSubscriptionController controller = new NewSubscriptionController(account.Id);
         controller.programId = program.ProgramId__c;
@@ -210,7 +210,7 @@ public with sharing class NewSubscriptionControllerTestCase {
         SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
         Account account =  new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
-        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         NewSubscriptionController controller = new NewSubscriptionController(account.Id);
         controller.programId = program.ProgramId__c;
