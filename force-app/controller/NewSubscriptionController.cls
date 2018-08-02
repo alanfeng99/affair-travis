@@ -275,10 +275,11 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
                 return false;
             }
 
-            if (!checkPhoneFormat(sub.Tel__c)){
-                addMessage(ApexPages.Severity.ERROR, System.Label.Msg_PhoneFormat);
-                return false;
-            } 
+            if (sub.Tel__c != null)
+                if (!checkPhoneFormat(sub.Tel__c)){
+                    addMessage(ApexPages.Severity.ERROR, System.Label.Msg_PhoneFormat);
+                    return false;
+                } 
         }
 
         for (Subscription__c sub : subscriptionInsertList) {        

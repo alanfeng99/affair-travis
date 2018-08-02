@@ -5,9 +5,6 @@ public with sharing class PaymentResultController {
     public String paymentMethod {get; set;}
     public String other_01 {get; set;}
     public String expirationDate {get; set;}
-    public String year {get; set;}
-    public String month {get; set;}
-    public String day {get; set;}
 
     public PaymentResultController() {
         String orderId = Apexpages.currentPage().getParameters().get('ordernumber');
@@ -22,10 +19,7 @@ public with sharing class PaymentResultController {
             
             if (other_01.length() == 16) 
                 other_01 = other_01.substring(0, 4) +' '+ other_01.substring(4, 8)+ ' ' + other_01.substring(8, 12) + ' ' + other_01.substring(12, 16);
-            expirationDate = Datetime.now().format('yyyy/MM/dd');
-            year = System.now().format('Y');
-            month = System.now().format('M');
-            day = System.now().format('d') + 2;
+            expirationDate = (Datetime.now().addDays(2)).format('yyyy/MM/dd') ;
         } else {
             subGMOPaymentBean = viewModel.getSubGMOPaymentBean(orderId);
             subscription = SubscriptionModel.getUniqueSubscriptionById(subGMOPaymentBean.SubscriptionId__c);
