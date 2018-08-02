@@ -2,7 +2,7 @@ public with sharing class PaymentResultViewModel {
     public GMOPaymentBean__c gmoPaymentBean {get; set;}
 
     public PaymentResultViewModel(String orderId) {
-        gmoPaymentBean = [SELECT trans_code__c, order_number__c, item_price__c, item_name__c, st_code__c 
+        gmoPaymentBean = [SELECT trans_code__c, order_number__c, item_price__c, item_name__c, st_code__c, user_id__c 
                         FROM GMOPaymentBean__c WHERE order_number__c = :orderId];
     }
 
@@ -11,5 +11,10 @@ public with sharing class PaymentResultViewModel {
                             WHERE GMOPaymentBeanId__c = :orderId];
 
         return subGMOPaymentBean;
+    }
+
+    public Account getAccount(String accountId) {
+        Account account = AccountModel.getAccountById(accountId);
+        return account;
     }
 }

@@ -18,11 +18,34 @@
         <body class="bg-light">
             <apex:form >              
                 <div class="card  border-light bg-light ">   
-                    <div class="card-header bg-white">
-                        <div align="left">
-                            <b class="letterspacing3px">週刊編集 |</b> area43
+                    <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
+                        <a class="navbar-brand" href="#">
+                            <apex:image url="{!$Resource.Logo}" styleClass="w110px h40px"/>
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        
+                        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{!account.LastName}</a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                        <apex:commandLink action="{!logOut}" value="登出" styleClass="dropdown-item"/>
+                                    </div>
+                                </li>
+                                <li class="nav-item ">
+                                    <apex:commandLink value="總覽" action="{!toSummaryPage}" styleClass="nav-link"/>   
+                                </li>
+                                <li class="nav-item">
+                                    <apex:commandLink value="帳戶設定" action="{!toAccountSettingPage}" styleClass="nav-link"/>
+                                </li>
+                                <li class="nav-item">
+                                    <apex:commandLink value="訂閱管理" action="{!toSubscriptionManagementPage}" styleClass="nav-link "/>
+                                </li>
+                            </ul>
                         </div>
-                    </div>
+                    </nav>
                     <div class="card-body fontsize14px">
                         <apex:outputPanel rendered="{!paymentMethod == '信用卡'}">
                             <div class="container" style="max-width:400px;">
@@ -55,11 +78,18 @@
                                     </div>
                                 </div>     
                                 <hr class="w100"/>
-                            <br/>
-                            </div>
-                            <div class="form-group form-row">
-                                
-                            </div>
+                                <div align="right">
+                                    <div class="form-row" >
+                                        <div class="col-3"></div>
+                                        <div class="col-auto">
+                                            <apex:commandButton action="{!toSummaryPage}" value="帳戶管理" styleClass="btn btn-main"/>
+                                        </div>
+                                        <div class="col-auto">
+                                            <apex:commandButton action="{!logOut}" value="登出" styleClass="btn btn-main"/>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>  
                         </apex:outputPanel>
                         <apex:outputPanel rendered="{!paymentMethod == 'ATM轉帳'}">
                             <div class="container" style="max-width:460px;">
@@ -139,19 +169,27 @@
                                         </div>
                                     </div>
                                     <hr class="w100"/>
+                                    <div align="right">
+                                        <div class="form-row" >
+                                            <div class="col-3"></div>
+                                            <div class="col-auto">
+                                                    <apex:commandButton value="列印此頁" styleClass="btn btn-main" onclick="printFunc();return false;"/>
+                                            </div>
+                                            <div class="col-auto">
+                                                <apex:commandButton action="{!toSummaryPage}" value="帳戶管理" styleClass="btn btn-main"/>
+                                            </div>
+                                        </div> 
+                                    </div>
                                 </div>
-                                <br/>
-                                <div class="form-group form-row">
-                                    
-                                </div>
+                                
                         </apex:outputPanel>
                         <apex:outputPanel rendered="{!paymentMethod == '超商付款'}">
                             <div class="container" style="max-width:400px;">
-                                    <div class="form-group">
+                                <div class="form-group">
                                         <div>感謝您的訂閱！</div>
                                         <div>您的超商繳款編號是：</div>
-                                    </div>      
-                                    <div class="fontsize34px form-group" style="color:red">
+                                </div>      
+                                <div class="fontsize34px form-group" style="color:red">
                                         {!other_01}
                                     </div>
                                     <hr class="w100"/>
@@ -231,14 +269,29 @@
                                             - 請於 3 天內完成繳費，若是超過期限該繳費代碼將會失效
                                         </div>
                                     </div>
+                                    <hr class="w100"/>
+                                    <div align="right">
+                                        <div class="form-row" >
+                                            <div class="col-3"></div>
+                                            <div class="col-auto">
+                                                <apex:commandButton value="列印此頁" styleClass="btn btn-main" onclick="printFunc();return false;"/>
+                                            </div>
+                                            <div class="col-auto">
+                                                <apex:commandButton action="{!toSummaryPage}" value="帳戶管理" styleClass="btn btn-main"/>
+                                            </div>
+                                        </div> 
+                                    </div>   
                                 </div>
-                                <br/>
-                                <div class="form-group form-row">
-                                    
-                                </div>
+                                                    
                         </apex:outputPanel>
                     </div>        
-                </div>   
+                </div>  
+                <script>
+                    function printFunc(){
+                        window.print();
+                    }
+                </script>
+                     
             </apex:form>   
             <div class="footer text-muted text-right">
                 <hr class="w100"/>

@@ -1,14 +1,45 @@
 public with sharing class PaymentResultController {
-    public PaymentResultViewModel viewModel {get; set;}
     public SubscriptionGMOPaymentBean__c subGMOPaymentBean {get; set;}
+    public PaymentResultViewModel viewModel {get; set;}
     public Subscription__c subscription {get; set;}
+    public Account account {get; set;}
     public String paymentMethod {get; set;}
     public String other_01 {get; set;}
     public String expirationDate {get; set;}
 
     public PaymentResultController() {
-        String orderId = Apexpages.currentPage().getParameters().get('ordernumber');
-        viewModel = new PaymentResultViewModel(orderId);
+        Cookie accountIdCookie = ApexPages.currentPage().getCookies().get(Label.COOKIE_ACCOUNT_ID);
+
+        if (accountIdCookie != null) {
+            String accountId = accountIdCookie.getValue();
+            String orderId = Apexpages.currentPage().getParameters().get('ordernumber');
+            viewModel = new PaymentResultViewModel(orderId);
+            account = viewModel.getAccount(accountId);
+            getPaymentResultInfo(orderId);
+        }  
+    }
+
+    public Pagereference toUpdateCreditcardPage() {    
+      	return ApexUtility.toPage('UpdateCreditcardPage');
+    }
+
+    public PageReference toSummaryPage() {
+        return ApexUtility.toPage('SummaryPage');
+    }
+    
+    public PageReference toAccountSettingPage() {
+    	return ApexUtility.toPage('AccountSettingPage');
+    }
+    
+    public PageReference toSubscriptionManagementPage() {
+    	return ApexUtility.toPage('SubscriptionManagementPage');
+    }
+    
+    public PageReference logOut() {  
+        return AuthUtility.logOut();
+    } 
+
+    private void getPaymentResultInfo(String orderId) {
         GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(viewModel.gmoPaymentBean);
         paymentMethod = GMOPaymentAPI.getPaymentMethodFromStCode(viewModel.gmoPaymentBean.st_code__c);
         GMOPaymentCheckOrderResultBean checkOrderResult = gmoPaymentAPI.checkOrder(System.Label.GMOPAYMENT_CONTRACT_CODE, viewModel.gmoPaymentBean.trans_code__c);
