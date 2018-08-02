@@ -160,6 +160,18 @@ public class GMOPaymentAPI {
         return Constants.ST_CODE_NOTHING;
     }
 
+    public String getPaymentMethodFromStCode(String stCode) {
+        if (stCode == Constants.ST_CODE_CREDIT_CARD_PAYMENT)
+            return Constants.PAYMENT_METHOD_CREDIT_CARD;
+
+        if (stCode == Constants.ST_CODE_SUPER_PAYMENT)
+            return Constants.PAYMENT_METHOD_SUPER_PAYMENT;
+
+        if (stCode == Constants.ST_CODE_ATM)
+            return Constants.PAYMENT_METHOD_ATM;
+        return '';
+    }
+
     public static String generateProcessCode(String paymentMethod) {
         if (paymentMethod == '信用卡')
             return Constants.PROCESS_CODE_REGISTER_CREDIT_CARD;

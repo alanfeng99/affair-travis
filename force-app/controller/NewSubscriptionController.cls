@@ -2,6 +2,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     public NewSubscriptionViewModel viewModel {get; set;} 
     public List<Subscription__c> subscriptionInsertList {get; set;}
     public List<Subscription__c> tempSubscriptions {get; set;}
+    public Product2 product {get; set;}
     public List<SelectOption> year {get; set;}
     public Subscription__c firstSubscription {get; set;}
     public Subscription__c newSubscription;
@@ -9,11 +10,9 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     public String programId {get; set;}
     public String paymentMethod {get; set;}
     public String programName {get; set;}
-    public String city {get; set;}
-    public String area {get; set;}
-    public String zipcode {get; set;}
+    public String productCdoe {get; set;}
     public Integer subscriptionSize {get; set;}
-    public Integer startPeriod {get; set;}
+    public String startPeriod {get; set;}
     public Decimal programTotalPrice {get; set;}
     public Decimal programPrice {get; set;}
     public Decimal deleteRowId {get; set;}
@@ -59,6 +58,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         showProgramResult = false;
         showErrorForNullProgram = false;
         subscriptionInsertList = new List<Subscription__c>();
+        product = ProductModel.getCurrentProduct(); 
     }
 
     public PageReference newSubscription() {
@@ -104,21 +104,16 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         return null;
     }
 
-     public List<Product2> getProductInfo() {
-        return ProductModel.getProduct(); 
-    }
-    
     public List<SelectOption> getProductRadioButton() {
         List<SelectOption> options = new List<SelectOption>();
-        List<Product2> products = ProductModel.getProduct();
+        List<Product2> products = ProductModel.getCurrentProductAndNextOne();
         if (products == null) {
             options.add(new SelectOption('No product', 'No product'));
             return options;
         }
-        
-        for (Product2 product : products) 
-        	options.add(new SelectOption(product.ProductCode, product.Name));    
 
+        options.add(new SelectOption(products.get(0).ProductCode, '當期'));    
+        options.add(new SelectOption(products.get(1).ProductCode, '下期'));    
         return options;
     }
     
@@ -179,6 +174,11 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         return null;
     }
 
+    public Pagereference pictureShow() {
+        productCdoe = startPeriod;
+        return null;
+    }
+
     public Pagereference zipcodeShow() {
         for(Subscription__c tempSub : tempSubscriptions) 
             tempSub.Postal_code__c = AddressModel.getZipCodeByArea(tempSub.City_picklist__c, tempSub.Area_picklist__c);  
@@ -210,16 +210,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
     }
 
     private Pagereference paymentMethodTurnPage(String method) {
-        PageReference page;
-
-        if (method == '信用卡') 
-            page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/CreditcardPaymentResultPage');
-        else if (method == 'ATM轉帳')
-            page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/MarketPaymentResultPage');
-        else 
-            page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/ATMPaymentResultPage');
-        
-        page.getParameters().put('orderSucceed','true');
+        PageReference page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/PaymentResultPage');  
         page.getParameters().put('ordernumber', viewModel.gmoPaymentBean.order_number__c);
         page.setRedirect(true);
         return page;
@@ -262,8 +253,8 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         List<SubscriptionProgram__c> programs = SubscriptionModel.getProgramById(programId);
         
         for (Subscription__c sub : subscriptionInsertList) {
-            sub.Start_period__c = startPeriod;
-            sub.End_period__c = startPeriod + programs.get(0).Order_Period__c - 1;
+            sub.Start_period__c = Integer.valueOf(startPeriod);
+            sub.End_period__c = Integer.valueOf(startPeriod) + programs.get(0).Order_Period__c - 1;
             sub.Amount__c = programs.get(0).Price__c;   
             sub.Program__c = programs.get(0).id;
             sub.AccountStandard__c = viewModel.account.Id;
@@ -279,21 +270,24 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         
         for (Subscription__c sub : subscriptionInsertList) {
             if (sub.Recipient__c == null || sub.City_picklist__c == null || sub.Area_picklist__c == null || 
-                    sub.Address__c == null || sub.Tel__c == null || sub.Email__c == null ) {
+                    sub.Address__c == null || sub.Email__c == null ) {
                 addMessage(ApexPages.Severity.ERROR, System.Label.Msg_RecipientInfoEmpty);
                 return false;
             }
 
-            if (!checkPhoneFormat(sub.Tel__c)){
-                addMessage(ApexPages.Severity.ERROR, System.Label.Msg_PhoneFormat);
-                return false;
-            }
-            
+            if (sub.Tel__c != null)
+                if (!checkPhoneFormat(sub.Tel__c)){
+                    addMessage(ApexPages.Severity.ERROR, System.Label.Msg_PhoneFormat);
+                    return false;
+                } 
+        }
+
+        for (Subscription__c sub : subscriptionInsertList) {        
             if (sub.Payment_method__c == null) {
                 addMessage(ApexPages.Severity.ERROR, System.Label.Msg_PaymentEmpty);
                 return false;
             }
-                
+            
             if (sub.Payment_method__c == '信用卡') 
                 return isFieldFilledWhenChoosenCard();   
         }
@@ -317,13 +311,12 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
                 addMessage(ApexPages.Severity.ERROR, System.Label.Msg_Creditcard_CheckNumber);
                 return false;
             }
-        }    
-        
+        }      
         return true;
     }
 
     private Boolean checkPhoneFormat(String phone) {
-        Pattern MyPattern = Pattern.compile('[0-9]{8,12}');
+        Pattern MyPattern = Pattern.compile('09[0-9]{8}|(02|03|037|04|049|05|06|07|08|082|0826|0836|089)-[0-9]{5,8}');
         Matcher MyMatcher = MyPattern.matcher(phone);
 
         return MyMatcher.matches();

@@ -1,5 +1,5 @@
 public with sharing class ProductModel {
-    public static List<Product2> getProduct() {
+    public static List<Product2> getCurrentProductAndNextOne() {
         Date now = Date.valueOf(System.now().format('yyyy-MM-dd'));
         List<Product2> currentProducts = [SELECT id, Name, ProductCode, PicturePath__c, StartDate__c, EndDate__c FROM Product2 WHERE StartDate__c <= :now and EndDate__c >= :now];
         if (currentProducts.size() <= 0)
@@ -18,5 +18,14 @@ public with sharing class ProductModel {
         productShow.add(nextProduct);
         
         return productShow;
+    }
+
+    public static Product2 getCurrentProduct() {
+        Date now = Date.valueOf(System.now().format('yyyy-MM-dd'));
+        List<Product2> currentProducts = [SELECT id, Name, ProductCode, PicturePath__c, StartDate__c, EndDate__c FROM Product2 WHERE StartDate__c <= :now and EndDate__c >= :now];
+        if (currentProducts.size() <= 0)
+            return null;
+            
+        return currentProducts.get(0);
     }
 }
