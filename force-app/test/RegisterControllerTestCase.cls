@@ -12,6 +12,8 @@ public with sharing class RegisterControllerTestCase {
         String email = 'jin@ccc.com';
         Account account = new Account();
         account.PersonEmail = email;
+        account.LastName = 'Jin';
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         RegisterController controller = new RegisterController();
         controller.viewModel.account.PersonEmail = email;

@@ -198,6 +198,8 @@ public class loginTestCases {
     public static testMethod void testLoginWithFacebook_Login_Success_Account_Already_Exist_Return_Not_Null() {
         Account account = new Account();
         account.PersonEmail = 'alan@gmail.com';
+        account.LastName = 'Alan';
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         LoginController controller = new LoginController();
         controller.facebookUserEmail = 'alan@gmail.com';
@@ -225,6 +227,8 @@ public class loginTestCases {
     public static testMethod void testLoginWithGoogle_Login_Success_Account_Already_Exist_Return_Not_Null() {
         Account account = new Account();
         account.PersonEmail = 'alan@gmail.com';
+        account.LastName = 'Alan';
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         LoginController controller = new LoginController();
         controller.googleUserEmail = 'alan@gmail.com';

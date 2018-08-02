@@ -9,8 +9,6 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testAccountSettingCustructor() {
-        Account account = new Account(PersonEmail = 'jin@fff.com');
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         System.assertNotEquals(null, controller.accountVerify);
         System.assertNotEquals(null, controller.accountOld);
@@ -21,7 +19,6 @@ public  class accountSettingTestCases {
 
     public static testMethod void testCheckPasswordFormat_OldPassword_Wrong_Return_False() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234';
         Pagereference page = controller.submitPassword();
@@ -31,7 +28,6 @@ public  class accountSettingTestCases {
 
     public static testMethod void testCheckPasswordFormat_OldPassword_Right() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234qwer';
         Pagereference page = controller.submitPassword();
@@ -41,7 +37,6 @@ public  class accountSettingTestCases {
 
     public static testMethod void testCheckPasswordFormat_NewPassword_Null_Return_False() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234qwer';
 
@@ -52,7 +47,6 @@ public  class accountSettingTestCases {
 
     public static testMethod void testCheckPasswordFormat_NewPassword_Not_Null_Return_False() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234qwer';
         controller.accountNew.Password__c = 'qwertyui';
@@ -64,7 +58,6 @@ public  class accountSettingTestCases {
 
     public static testMethod void testCheckPasswordFormat_NewPassword_Format_Wrong_NoNumber_Return_False() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234qwer';
         controller.accountNew.Password__c = 'qwertyui';
@@ -76,7 +69,6 @@ public  class accountSettingTestCases {
 
     public static testMethod void testCheckPasswordFormat_NewPassword_Format_Wrong_NoLetter_Return_False() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234qwer';
         controller.accountNew.Password__c = '12345678';
@@ -88,7 +80,6 @@ public  class accountSettingTestCases {
 
     public static testMethod void testCheckPasswordFormat_NewPassword_Format_Length_Wrong_Return_False() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234qwer';
         controller.accountNew.Password__c = '123qwe';
@@ -100,7 +91,6 @@ public  class accountSettingTestCases {
 
     public static testMethod void testCheckPasswordFormat_NewPassword_Format_Right() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234qwer';
         controller.accountNew.Password__c = '12345qwert';
@@ -112,7 +102,6 @@ public  class accountSettingTestCases {
 
     public static testMethod void testCheckPasswordFormat_accountVerify_Null_Return_False() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234qwer';
         controller.accountNew.Password__c = '12345qwert';
@@ -124,7 +113,6 @@ public  class accountSettingTestCases {
 
     public static testMethod void testCheckPasswordFormat_accountVerify_Not_Null_Return_False() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234qwer';
         controller.accountNew.Password__c = '12345qwert';
@@ -137,7 +125,6 @@ public  class accountSettingTestCases {
 
     public static testMethod void testCheckPasswordFormat_accountVerify_Not_Same_For_NewAccount_Return_False() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234qwer';
         controller.accountNew.Password__c = '12345qwert';
@@ -150,7 +137,6 @@ public  class accountSettingTestCases {
 
     public static testMethod void testCheckPasswordFormat_Right() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.accountOld.Password__c = '1234qwer';
         controller.accountNew.Password__c = '12345qwert';
@@ -163,7 +149,6 @@ public  class accountSettingTestCases {
 
     public static testMethod void testSubmitName_LastName_Null_Return_Msg() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
 
         Pagereference page = controller.submitName();
@@ -173,7 +158,6 @@ public  class accountSettingTestCases {
 
     public static testMethod void testSubmitName_LastName_Not_Null_Return_Msg() {
         Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer', LastName = 'jin');
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
 
         Pagereference page = controller.submitName();
@@ -184,7 +168,6 @@ public  class accountSettingTestCases {
 
     public static testMethod void testViewModel_UpdateEmail_Email_Exist() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.viewModel.account.PersonEmail = 'jin@fff.com';
         
@@ -194,7 +177,6 @@ public  class accountSettingTestCases {
 
     public static testMethod void testViewModel_UpdateEmai() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.viewModel.account.PersonEmail = 'jin@ggg.com';
         
@@ -204,8 +186,7 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testSubmitEmail_Email_Null_Return_Msg() {
-       Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
-        insert account;
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
         AccountSettingController controller = new AccountSettingController(account.id);
         Pagereference page = controller.submitEmail();
         System.assertEquals(null, page); 
@@ -214,7 +195,6 @@ public  class accountSettingTestCases {
 
     public static testMethod void testSubmitEmail_Email_Not_Null_Return_Msg() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.viewModel.account.PersonEmail = 'jin@ggg.com';
         Pagereference page = controller.submitEmail();
@@ -224,7 +204,6 @@ public  class accountSettingTestCases {
 
     public static testMethod void testSubmitEmial_UpdateEmail_Fail_Return_Msg() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         controller.viewModel.account.PersonEmail = 'jin@fff.com';
         Pagereference page = controller.submitEmail();
@@ -234,7 +213,6 @@ public  class accountSettingTestCases {
 
     public static testMethod void testChagneName() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         Pagereference page = controller.changeName();
         System.assertEquals(true, controller.isChangeName);
@@ -243,7 +221,6 @@ public  class accountSettingTestCases {
 
     public static testMethod void testChagneEmail() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         Pagereference page = controller.changeEmail();
         System.assertEquals(true, controller.isChangeEmail);
@@ -252,7 +229,6 @@ public  class accountSettingTestCases {
 
     public static testMethod void testChagnePassword() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         Pagereference page = controller.changePassword();
         System.assertEquals(true, controller.isChangePassword);
@@ -261,7 +237,6 @@ public  class accountSettingTestCases {
 
     public static testMethod void testChangeCreditCard() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
-        insert account;
         AccountSettingController controller = new AccountSettingController(account.id);
         Pagereference page = controller.changeCreditCard();
         System.assertNotEquals(null, page); 

@@ -148,7 +148,7 @@ public with sharing class NewSubscriptionControllerTestCase {
     public static testMethod void testSubmitForm_CheckField_Reciepient_Null_Return_False() {
         SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
-        Account account =  new Account(PersonEmail = 'jin@4idps.com', LstName = 'Jin');
+        Account account =  new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
         account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         NewSubscriptionController controller = new NewSubscriptionController(account.Id);

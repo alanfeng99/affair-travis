@@ -10,7 +10,6 @@ public with sharing class SubscriptionManagerControllerTestCase {
 
     public static testMethod void testSunmitForm() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ifpa.com'];
-        insert account;
         SubscriptionManagementController controller = new SubscriptionManagementController(account.id);
         Pagereference page = controller.submitForm();
         System.assertEquals('', controller.currentEditRowId);
@@ -26,7 +25,6 @@ public with sharing class SubscriptionManagerControllerTestCase {
 
     public static testMethod void testStopAutoOrderService() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ifpa.com'];
-        insert account;
         SubscriptionManagementController controller = new SubscriptionManagementController(account.id);
         Pagereference page = controller.stopAutoOrderService();
         System.assertEquals(false, controller.updatedCreditcard);
@@ -36,7 +34,6 @@ public with sharing class SubscriptionManagerControllerTestCase {
 
     public static testMethod void testUseAutoOrderPanel() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ifpa.com'];
-        insert account;
         SubscriptionManagementController controller = new SubscriptionManagementController(account.id);
         Pagereference page = controller.useAutoOrderPanel();
         System.assertEquals(null, page);
@@ -44,7 +41,6 @@ public with sharing class SubscriptionManagerControllerTestCase {
 
     public static testMethod void testUseAutoOrderService() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ifpa.com'];
-        insert account;
         SubscriptionManagementController controller = new SubscriptionManagementController(account.id);
         controller.currentUseRowId = '123';
         Pagereference page = controller.useAutoOrderService();
@@ -55,7 +51,6 @@ public with sharing class SubscriptionManagerControllerTestCase {
 
     public static testMethod void testChangeRecipientInfo() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ifpa.com'];
-        insert account;
         SubscriptionManagementController controller = new SubscriptionManagementController(account.id);
         Pagereference page = controller.changeRecipientInfo();
         System.assertEquals(null, page);
@@ -63,7 +58,6 @@ public with sharing class SubscriptionManagerControllerTestCase {
 
     public static testMethod void testCancelReturn() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ifpa.com'];
-        insert account;
         SubscriptionManagementController controller = new SubscriptionManagementController(account.id);
         Pagereference page = controller.cancelReturn();
         System.assertEquals('', controller.currentUseRowId);
@@ -73,7 +67,6 @@ public with sharing class SubscriptionManagerControllerTestCase {
 
     public static testMethod void testcancelChange() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ifpa.com'];
-        insert account;
         SubscriptionManagementController controller = new SubscriptionManagementController(account.id);
         Pagereference page = controller.cancelChange();
         System.assertEquals('', controller.currentEditRowId);
@@ -82,7 +75,6 @@ public with sharing class SubscriptionManagerControllerTestCase {
 
     public static testMethod void testAfterSubmit() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ifpa.com'];
-        insert account;
         SubscriptionManagementController controller = new SubscriptionManagementController(account.id);
         Pagereference page = controller.afterSubmit();
         System.assertEquals(0, controller.viewModel.subscriptions.size());
