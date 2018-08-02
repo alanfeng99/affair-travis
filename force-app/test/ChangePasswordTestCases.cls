@@ -10,7 +10,6 @@ public  class ChangePasswordTestCases {
     
     public static testMethod void testConstructor() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ggg.com'];
-        //insert account;
         Test.setCurrentPage(Page.RegisterResultPage);
         ApexPages.currentPage().getParameters().put('id',account.id);
         ChangePasswordController controller = new ChangePasswordController();
