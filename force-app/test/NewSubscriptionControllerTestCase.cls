@@ -110,7 +110,7 @@ public with sharing class NewSubscriptionControllerTestCase {
         List<SelectOption> options = controller.getProductRadioButton();
         Integer size = options.size();
         System.assertEquals(2, size);
-        System.assertEquals('草', options.get(0).getLabel());
+        System.assertEquals('當期', options.get(0).getLabel());
     }
 
     public static testMethod void testPaymentOption() {
@@ -192,7 +192,8 @@ public with sharing class NewSubscriptionControllerTestCase {
         controller.firstSubscription.City_picklist__c = '台北市';
         controller.firstSubscription.Area_picklist__c = '松山區';
         controller.firstSubscription.Address__c = '123';
-        controller.firstSubscription.Tel__c = '1212121';
+        controller.firstSubscription.Tel__c = '123';
+        controller.firstSubscription.Email__c = 'jin@4idps.com';
     
 
         Pagereference page = controller.submitForm();
@@ -214,8 +215,8 @@ public with sharing class NewSubscriptionControllerTestCase {
         controller.firstSubscription.Area_picklist__c = '松山區';
         controller.firstSubscription.Address__c = '123';
         controller.firstSubscription.Tel__c = '0987777888';
+        controller.firstSubscription.Email__c = 'jin@4idps.com';
     
-
         Pagereference page = controller.submitForm();
         System.assertNotEquals(controller.baseErrorMessage, System.Label.Msg_PhoneFormat);
         System.assertEquals(controller.baseErrorMessage, System.Label.Msg_PaymentEmpty);
@@ -236,6 +237,7 @@ public with sharing class NewSubscriptionControllerTestCase {
         controller.firstSubscription.Area_picklist__c = '松山區';
         controller.firstSubscription.Address__c = '123';
         controller.firstSubscription.Tel__c = '0987777888';
+        controller.firstSubscription.Email__c = 'jin@4ifps.com';
     
 
         Pagereference page = controller.submitForm();
