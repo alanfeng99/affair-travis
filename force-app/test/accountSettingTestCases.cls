@@ -9,8 +9,7 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testAccountSettingCustructor() {
-        Account account = new Account(LastName = 'Alan',PersonEmail = 'jin@fff.com');
-        insert account;
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
         AccountSettingController controller = new AccountSettingController(account.id);
         System.assertNotEquals(null, controller.accountVerify);
         System.assertNotEquals(null, controller.accountOld);

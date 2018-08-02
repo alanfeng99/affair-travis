@@ -26,7 +26,6 @@ public with sharing class TestSubscriptionModel {
 
     public static testMethod void testGetUniqueSubscriptionById_Success() {
         Account account = new Account(PersonEmail = 'jin@rrr.com');
-        insert account;
         Subscription__c subscription = new Subscription__c(AccountStandard__c = account.id);
         insert subscription;
         Subscription__c sub = SubscriptionModel.getUniqueSubscriptionById(subscription.id);
