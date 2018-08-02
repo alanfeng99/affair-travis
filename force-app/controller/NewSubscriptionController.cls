@@ -276,7 +276,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             }
 
             if (sub.Tel__c != null)
-                if (!checkPhoneFormat(sub.Tel__c)){
+                if (!ApexUtility.checkPhoneFormat(sub.Tel__c)){
                     addMessage(ApexPages.Severity.ERROR, System.Label.Msg_PhoneFormat);
                     return false;
                 } 
@@ -313,13 +313,6 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             }
         }      
         return true;
-    }
-
-    private Boolean checkPhoneFormat(String phone) {
-        Pattern MyPattern = Pattern.compile('09[0-9]{8}|(02|03|037|04|049|05|06|07|08|082|0826|0836|089)-[0-9]{5,8}');
-        Matcher MyMatcher = MyPattern.matcher(phone);
-
-        return MyMatcher.matches();
     }
 
     public Pagereference toUpdateCreditcardPage() {    

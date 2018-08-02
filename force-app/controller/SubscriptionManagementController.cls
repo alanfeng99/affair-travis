@@ -29,11 +29,13 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
     }
 
     public Pagereference submitForm() {
-        if (viewModel.submit()) {
-            currentEditRowId = '';
-            addMessage(ApexPages.Severity.INFO, System.label.Msg_SaveSuccess);
-        } else {
-            addMessage(ApexPages.Severity.ERROR, System.label.Msg_SaveFail);
+        if (checkField()) {
+            if (viewModel.submit()) {
+                currentEditRowId = '';
+                addMessage(ApexPages.Severity.INFO, System.label.Msg_SaveSuccess);
+            } else {
+                addMessage(ApexPages.Severity.ERROR, System.label.Msg_SaveFail);
+            }
         }
         return null;
     }
@@ -89,8 +91,25 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
         return null;
     }
 
+    private Boolean checkField() {
+        for (Subscription__c sub : viewModel.subscriptions) {
+            if (sub.Recipient__c == null || sub.City_picklist__c == null || sub.Area_picklist__c == null || 
+                    sub.Address__c == null || sub.Email__c == null ) {
+                addMessage(ApexPages.Severity.ERROR, System.Label.Msg_RecipientInfoEmpty);
+                return false;
+            }
+
+            if (sub.Tel__c != null)
+                if (!ApexUtility.checkPhoneFormat(sub.Tel__c)){
+                    addMessage(ApexPages.Severity.ERROR, System.Label.Msg_PhoneFormat);
+                    return false;
+                } 
+        }
+
+        return true;
+    }
+
     private void rollbackSubscription() {
-        
         for (Subscription__c subscription : viewModel.subscriptions) 
             for (Subscription__c originalSubscription : originalSubscriptions) 
                 if (subscription.Id == originalSubscription.Id) {
@@ -98,7 +117,8 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
                     subscription.City_pickList__c = originalSubscription.City_pickList__c;
                     subscription.Address__c = originalSubscription.Address__c;
                     subscription.Area_pickList__c = originalSubscription.Area_pickList__c;
-                    subscription.Tel__c = originalSubscription.Tel__c;
+                    if (subscription.Tel__c != null)
+                        subscription.Tel__c = originalSubscription.Tel__c;
                 }
     }
 

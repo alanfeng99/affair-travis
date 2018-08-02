@@ -122,7 +122,7 @@
                                 <div class="form-row form-group area-picker-parent fontsize14px" id="address">
                                     <small style="color:red" class="col-1">*</small>
                                     <div class="col-4 city-picklist-parent">
-                                        <apex:inputField value="{!tempSub.City_picklist__c}" styleClass="form-control h40px" style="padding:0px"/>
+                                        <apex:inputField value="{!tempSub.City_picklist__c}" styleClass="form-control h40px"/>
                                     </div>
                                     <div class="col-4 area-picklist-parent">
                                         <apex:inputField value="{!tempSub.Area_picklist__c}" styleClass="form-control h40px">
@@ -242,7 +242,6 @@
                     </div>
                 </div> 
             </div>         
-            <apex:actionFunction action="{!zipcodeShow}" name="zipcodeShowJS" reRender="showname"></apex:actionFunction>
         </apex:form>
         <div class="footer text-muted text-right">
             <hr class="w100"/>
@@ -268,31 +267,19 @@
         $j = jQuery.noConflict();
         $j(document).ready(function() {
             $j(function() {
-                console.log('test document ready');
                 $j('.area-picker-parent').find('select').addClass('form-control');
             });
         });
         $j('.area-picker-parent:nth-child(2)').on('change', function(){
-            console.log('test change city');
-            $j('.area-picker-parent').find('select').addClass('form-control');
-            zipcodeShowJS();
+            $j('.area-picker-parent').find('select').addClass('form-control');  
         });
 
-        $j('.area-picklist-parent > span > select').on('change', function(){
-            console.log('test change area');
-            zipcodeShowJS();
-        });
-        $j('.postal-code-picklist-parent > input').on('change', function(){
-            $j('.area-picker-parent').find('select').addClass('form-control');
-        });
-
-        function zipcodeShowTmpJS() {
-            zipcodeShowJS();
-            $j('.area-picker-parent').find('select').addClass('form-control');
-        }
-        
-        
-        
+        // $j('.area-picklist-parent > span > select').on('change', function(){
+        //     console.log('test change area');
+        // });
+        // $j('.postal-code-picklist-parent > input').on('change', function(){
+        //     $j('.area-picker-parent').find('select').addClass('form-control');
+        // });      
     </script>
     
 </apex:page>

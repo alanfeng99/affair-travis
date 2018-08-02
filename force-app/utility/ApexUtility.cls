@@ -5,6 +5,13 @@ public with sharing class ApexUtility {
     	return page;  
     }
 
+    public static Boolean checkPhoneFormat(String phone) {
+        Pattern MyPattern = Pattern.compile('09[0-9]{8}|(02|03|037|04|049|05|06|07|08|082|0826|0836|089)-[0-9]{5,8}');
+        Matcher MyMatcher = MyPattern.matcher(phone);
+
+        return MyMatcher.matches();
+    }
+
     public static String generateRandomAlphaNumeric(Integer size) {
         final String chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
         String randomAlphaNumeric = '';
