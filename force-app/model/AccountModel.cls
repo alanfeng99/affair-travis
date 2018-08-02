@@ -1,10 +1,10 @@
 public with sharing class AccountModel {
     public static Account getAccountById(String userId) {
-        return [Select Active__c, Locked__c, PersonEmail, PasswordRetry__c, AccountNumber, LastName, Password__c, JoinDate__c, GoogleEmail__c, FacebookEmail__c, credit_card_number__c from Account where Id = :userId];
+        return [Select Active__c, Account_ID__c, Locked__c, PersonEmail, PasswordRetry__c, AccountNumber, LastName, Password__c, JoinDate__c, GoogleEmail__c, FacebookEmail__c, credit_card_number__c from Account where Id = :userId];
     }
 
     public static Account getAccountByEmail(String email) {
-        List<Account> accounts = [Select Id, PasswordRetry__c, Locked__c, AccountNumber, Active__c, PersonEmail, LastName, Password__c, GoogleEmail__c, FacebookEmail__c from Account where PersonEmail = :email];
+        List<Account> accounts = [Select Id, PasswordRetry__c, Account_ID__c, Locked__c, AccountNumber, Active__c, PersonEmail, LastName, Password__c, GoogleEmail__c, FacebookEmail__c from Account where PersonEmail = :email];
         if (accounts.size() == 1) {
             return accounts.get(0);
         } else { 
@@ -13,7 +13,7 @@ public with sharing class AccountModel {
     }
 
     public static Account getAccountByGoogleEmail(String googleEmail) {
-        List<Account> accounts = [Select Id, PasswordRetry__c, Locked__c, AccountNumber, Active__c, PersonEmail, LastName, Password__c, GoogleEmail__c, FacebookEmail__c from Account where GoogleEmail__c = :googleEmail OR PersonEmail = :googleEmail];
+        List<Account> accounts = [Select Id, PasswordRetry__c, Account_ID__c, Locked__c, AccountNumber, Active__c, PersonEmail, LastName, Password__c, GoogleEmail__c, FacebookEmail__c from Account where GoogleEmail__c = :googleEmail OR PersonEmail = :googleEmail];
         if (accounts.size() > 0) {
             return accounts.get(0);
         } else { 
@@ -22,7 +22,7 @@ public with sharing class AccountModel {
     }
 
     public static Account getAccountByFacebookEmail(String facebookEmail) {
-        List<Account> accounts = [Select Id, PasswordRetry__c, Locked__c, AccountNumber, Active__c, PersonEmail, LastName, Password__c, GoogleEmail__c, FacebookEmail__c from Account where FacebookEmail__c = :facebookEmail OR PersonEmail = :facebookEmail];
+        List<Account> accounts = [Select Id, PasswordRetry__c, Account_ID__c, Locked__c, AccountNumber, Active__c, PersonEmail, LastName, Password__c, GoogleEmail__c, FacebookEmail__c from Account where FacebookEmail__c = :facebookEmail OR PersonEmail = :facebookEmail];
         if (accounts.size() > 0) {
             return accounts.get(0);
         } else { 

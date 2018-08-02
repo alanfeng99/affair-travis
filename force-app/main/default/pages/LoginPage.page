@@ -146,45 +146,41 @@
                     請先登入
                 </div>
                 <div class="card-body container lineheight40px" style="max-width:380px;">
-                            <div class="fontsize14px">
-                                <span>
-                                    第一次使用週刊編集？
-                                </span>
-                                <span>
-                                    <a href="/apex/RegisterPage" class="underline">建立新帳號 </a>
-                                </span>
-                            </div>
-
-                            <!-- Facebook button -->
-                            <div class="form-group">
-                                <div id="fbLogin" class="fb-login-button" data-max-rows="1" data-size="large" data-scope="public_profile,email"
-                                data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" width="340"></div>
-                            </div>
-                        
-                            <!-- Google button -->
-                            <div class="form-group">
-                                <div id="my-signin2" class="g-signin2" data-onsuccess="onSignIn"></div>  
-                            </div>
+                    <div class="fontsize14px">
+                        <span>
+                            第一次使用週刊編集？
+                        </span>
+                        <span>
+                            <a href="/apex/RegisterPage" class="underline">建立新帳號 </a>
+                        </span>
+                    </div>
+                    <!-- Facebook button -->
+                    <div class="form-group">
+                        <div id="fbLogin" class="fb-login-button" data-max-rows="1" data-size="large" data-scope="public_profile,email"
+                        data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" width="340"></div>
+                    </div>
+                    <!-- Google button -->
+                    <div class="form-group">
+                        <div id="my-signin2" class="g-signin2" data-onsuccess="onSignIn"></div>  
+                    </div>        
+                    <hr width="90%;"/>
+                                <small style="color:red"><apex:messages /></small>
                             
-                            <hr width="90%;"/>
-                                     <small style="color:red"><apex:messages /></small>
-                                    
-                            <div class="form-group">
-                                <apex:inputField value="{!viewModel.account.PersonEmail}" html-placeholder="電子信箱" styleClass="form-control w100 h50px" />                            
-                            </div>    
-                            <div class="form-group">
-                                <apex:inputSecret value="{!viewModel.account.Password__c}" html-placeholder="密碼" styleClass="form-control w100 h50px" />
-                            </div>
-                            <div align="right">
-                                <a href="/apex/RetrievePasswordPage" class="underline" style="color:#585e5d">忘記密碼?</a> <br/>
-                                <apex:commandButton value="登入" action="{!checkAuthentication}" reRender="form"  styleClass="btn btn-main"/>                        
-                            </div>  
-                        </div>
-               
+                    <div class="form-group">
+                        <apex:inputField value="{!viewModel.account.PersonEmail}" html-placeholder="電子信箱" styleClass="form-control w100 h50px" />                            
+                    </div>    
+                    <div class="form-group">
+                        <apex:inputSecret value="{!viewModel.account.Password__c}" html-placeholder="密碼" styleClass="form-control w100 h50px" />
+                    </div>
+                    <div align="right">
+                        <a href="/apex/RetrievePasswordPage" class="underline" style="color:#585e5d">忘記密碼?</a> <br/>
+                        <apex:commandButton value="登入" action="{!checkAuthentication}" reRender="form"  styleClass="btn btn-main"/>                        
+                    </div>  
+                </div>
             </div>         
         </apex:form>   
         <div class="footer text-muted text-right">
-            <hr style="width:100%"/>
+            <hr class="w100"/>
             <p>
                 The Affairs Mediuum Ltd. 編集者新聞社有限公司
             </p>
