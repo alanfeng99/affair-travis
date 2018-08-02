@@ -15,7 +15,8 @@ public with sharing class RetrievePasswordControllerTestCase {
     }
 
     public static testMethod void testSubmit_Success() {
-        Account account = new Account(PersonEmail = 'jin@4idps.com');
+        Account account = new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
+        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         RetrievePasswordController controller = new RetrievePasswordController();
         controller.account.PersonEmail = 'jin@4idps.com';

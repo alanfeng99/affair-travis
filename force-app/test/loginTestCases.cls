@@ -2,7 +2,8 @@
 public class loginTestCases {
     
     public static testMethod void testCheckAuthentication_Password_Null() {
-        Account account = new Account(PersonEmail = 'jin@444.com');
+        Account account = new Account(PersonEmail = 'jin@444.com', LastName = 'Jin');
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         LoginController controller = new LoginController();
         Pagereference page = controller.checkAuthentication();
@@ -16,6 +17,7 @@ public class loginTestCases {
         String password = '1234';
         String email = 'alan.feng@4idps.com';
         Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email, Active__c = true);
+        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert preAccount;
 
         //Test constructor
@@ -49,6 +51,7 @@ public class loginTestCases {
         String password = '1234';
         String email = 'alan.feng@4idps.com';
         Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email, Active__c = true);
+        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert preAccount;
 
         //Test constructor
@@ -72,6 +75,7 @@ public class loginTestCases {
         String password = '1234';
         String email = 'alan.feng@4idps.com';
         Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email);
+        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert preAccount;
 
         //Test constructor
@@ -93,6 +97,7 @@ public class loginTestCases {
         String password = '1234';
         String email = 'alan.feng@4idps.com';
         Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email,Active__c = true, Locked__c = true);
+        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert preAccount;
 
         //Test constructor
@@ -114,6 +119,7 @@ public class loginTestCases {
         String password = '1234';
         String email = 'alan.feng@4idps.com';
         Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email,Active__c = true);
+        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert preAccount;
 
         //Test constructor
@@ -134,6 +140,7 @@ public class loginTestCases {
         String password = '1234';
         String email = 'alan.feng@4idps.com';
         Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email,Active__c = true);
+        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert preAccount;
 
         //Test constructor

@@ -1,8 +1,15 @@
 @isTest
 public  class ChangePasswordTestCases {
+    @testSetup
+    public static void createAccountForTest() {
+        Account account = new Account(PersonEmail = 'jin@ggg.com', LastName = 'Jin');
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        
+        insert account;
+    }
     
     public static testMethod void testConstructor() {
-        Account account = new Account(PersonEmail = 'jin@ggg.com');
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ggg.com'];
         insert account;
         Test.setCurrentPage(Page.RegisterResultPage);
         ApexPages.currentPage().getParameters().put('id',account.id);
@@ -13,7 +20,7 @@ public  class ChangePasswordTestCases {
     }
 
     public static testMethod void testPasswordFormat_Wrong_Return_False() {
-        Account account = new Account(PersonEmail = 'jin@ggg.com');
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ggg.com'];
         insert account;
         Test.setCurrentPage(Page.RegisterResultPage);
         ApexPages.currentPage().getParameters().put('id',account.id);
@@ -25,7 +32,7 @@ public  class ChangePasswordTestCases {
     }
 
     public static testMethod void testPasswordFormat_Right() {
-        Account account = new Account(PersonEmail = 'jin@ggg.com');
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ggg.com'];
         insert account;
         Test.setCurrentPage(Page.RegisterResultPage);
         ApexPages.currentPage().getParameters().put('id',account.id);
@@ -37,7 +44,7 @@ public  class ChangePasswordTestCases {
     }
 
     public static testMethod void testVerifyPassword_Not_Same_Return_False() {
-        Account account = new Account(PersonEmail = 'jin@ggg.com');
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ggg.com'];
         insert account;
         Test.setCurrentPage(Page.RegisterResultPage);
         ApexPages.currentPage().getParameters().put('id',account.id);
@@ -52,7 +59,7 @@ public  class ChangePasswordTestCases {
     }
 
     public static testMethod void testVerifyPassword_Same() {
-        Account account = new Account(PersonEmail = 'jin@ggg.com');
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ggg.com'];
         insert account;
         Test.setCurrentPage(Page.RegisterResultPage);
         ApexPages.currentPage().getParameters().put('id',account.id);
@@ -65,7 +72,7 @@ public  class ChangePasswordTestCases {
     }
 
     public static testMethod void testCheckPassword_Success() {
-        Account account = new Account(PersonEmail = 'jin@ggg.com');
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ggg.com'];
         insert account;
         Test.setCurrentPage(Page.RegisterResultPage);
         ApexPages.currentPage().getParameters().put('id',account.id);

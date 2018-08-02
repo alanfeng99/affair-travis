@@ -16,7 +16,8 @@ public with sharing class NewSubscriptionControllerTestCase {
     }
 
     public static testMethod void testNewSubscription_ProgramId_Not_Null() {
-        Account account = new Account(PersonEmail = 'jin@222.com');
+        Account account = new Account(PersonEmail = 'jin@222.com', LastName = 'Jin');
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
@@ -33,7 +34,8 @@ public with sharing class NewSubscriptionControllerTestCase {
     }
 
     public static testMethod void deleteSubscription_deleteRowId_0_Size_0() {
-        Account account =  new Account(PersonEmail = 'jin@4idps.com');
+        Account account =  new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
+        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         NewSubscriptionController controller = new NewSubscriptionController(account.id);
         controller.deleteRowId = 1;
@@ -75,28 +77,6 @@ public with sharing class NewSubscriptionControllerTestCase {
         Integer size = options.size();
         System.assertEquals(1, size);
     }
-
-    // public static testMethod void testGetProductInfo() {
-    //     Product2 product = new Product2(Name = '草', ProductCode = '2', StartDate__c = Date.valueOf(System.now())-1, 
-    //         EndDate__c = Date.valueOf(System.now())+8);
-    //     Product2 product2 = new Product2(Name = '花', ProductCode = '3', StartDate__c = Date.valueOf(System.now())+9, 
-    //     EndDate__c = Date.valueOf(System.now())+20);
-        
-    //     insert product;
-    //     insert product2;
-    //     NewSubscriptionController controller = new NewSubscriptionController();
-    //     List<Product2> products = controller.getProductInfo();
-    //     System.assertNotEquals(null, products);
-    // }
-
-    // public static testMethod void testGetProductInfo_NextProduct_Null() {
-    //     Product2 product = new Product2(Name = '草', ProductCode = '2', StartDate__c = Date.valueOf(System.now())-1, 
-    //         EndDate__c = Date.valueOf(System.now())+8);
-    //     insert product;
-    //     NewSubscriptionController controller = new NewSubscriptionController();
-    //     List<Product2> products = controller.getProductInfo();
-    //     System.assertEquals(null, products);
-    // }
 
     public static testMethod void testGetProductRadioButton() {
         Product2 product = new Product2(Name = '草', ProductCode = '2', StartDate__c = Date.valueOf(System.now())-1, 
@@ -152,7 +132,8 @@ public with sharing class NewSubscriptionControllerTestCase {
     public static testMethod void testSubmitForm_CheckField_StartPeriod_Null_Return_False() {
         SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
-        Account account =  new Account(PersonEmail = 'jin@4idps.com');
+        Account account =  new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
+        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         NewSubscriptionController controller = new NewSubscriptionController(account.Id);
         controller.programId = program.ProgramId__c;
@@ -167,7 +148,8 @@ public with sharing class NewSubscriptionControllerTestCase {
     public static testMethod void testSubmitForm_CheckField_Reciepient_Null_Return_False() {
         SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
-        Account account =  new Account(PersonEmail = 'jin@4idps.com');
+        Account account =  new Account(PersonEmail = 'jin@4idps.com', LstName = 'Jin');
+        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         NewSubscriptionController controller = new NewSubscriptionController(account.Id);
         controller.programId = program.ProgramId__c;
@@ -181,7 +163,8 @@ public with sharing class NewSubscriptionControllerTestCase {
     public static testMethod void testSubmitForm_CheckField_Reciepient_Not_Null_Tel_Format_Wrong_Return_False() {
         SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
-        Account account =  new Account(PersonEmail = 'jin@4idps.com');
+        Account account =  new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
+        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         NewSubscriptionController controller = new NewSubscriptionController(account.Id);
         controller.programId = program.ProgramId__c;
@@ -204,7 +187,8 @@ public with sharing class NewSubscriptionControllerTestCase {
     public static testMethod void testSubmitForm_CheckField_Tel_Format_Right_Paymentmethod_Null_Return_False() {
         SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
-        Account account =  new Account(PersonEmail = 'jin@4idps.com');
+        Account account =  new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
+        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         NewSubscriptionController controller = new NewSubscriptionController(account.Id);
         controller.programId = program.ProgramId__c;
@@ -225,7 +209,8 @@ public with sharing class NewSubscriptionControllerTestCase {
     public static testMethod void testSubmitForm_CheckField_Creditcard_Info_Not_Complete_Return_False() {
         SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
-        Account account =  new Account(PersonEmail = 'jin@4idps.com');
+        Account account =  new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
+        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         NewSubscriptionController controller = new NewSubscriptionController(account.Id);
         controller.programId = program.ProgramId__c;

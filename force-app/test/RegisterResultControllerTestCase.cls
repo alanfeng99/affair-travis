@@ -1,7 +1,8 @@
 @isTest
 public with sharing class RegisterResultControllerTestCase {
     public static testMethod void testGetAccount_Info() {
-        Account account = new Account(PersonEmail = 'jin@4idps.com');
+        Account account = new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
+        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         Test.setCurrentPage(Page.RegisterResultPage);
         ApexPages.currentPage().getParameters().put('id',account.id);
@@ -10,7 +11,8 @@ public with sharing class RegisterResultControllerTestCase {
     }
 
     public static testMethod void testViewModel_Get_Account() {
-        Account account = new Account(PersonEmail = 'jin@4idps.com');
+        Account account = new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
+        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         Test.setCurrentPage(Page.RegisterResultPage);
         ApexPages.currentPage().getParameters().put('id',account.id);
