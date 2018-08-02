@@ -1,13 +1,13 @@
 public with sharing class RetrievePasswordController extends ApexBaseController {
-    public Account__c account {get; set;}
+    public Account account {get; set;}
     
     public RetrievePasswordController() {
-        account = new Account__c();
+        account = new Account();
     }
 
     public Pagereference submit() {
-        if (account.Email__c != null) {
-            if (EmailUtility.sendEmail(account.Email__c, 'PasswordReset') == true) {
+        if (account.PersonEmail != null) {
+            if (EmailUtility.sendEmail(account.PersonEmail, 'PasswordReset') == true) {
                 turnActiveFalse(account);
                 PageReference page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/RetrievePasswordResultPage');
                 page.setRedirect(true);
@@ -20,8 +20,8 @@ public with sharing class RetrievePasswordController extends ApexBaseController 
         return null;
     }
 
-    private void turnActiveFalse(Account__c account) {
-        Account__c realAccount = AccountModel.getAccountByEmail(account.Email__c);
+    private void turnActiveFalse(Account account) {
+        Account realAccount = AccountModel.getAccountByEmail(account.PersonEmail);
         
         realAccount.Active__c = false;
         update realAccount;

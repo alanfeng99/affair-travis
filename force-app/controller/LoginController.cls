@@ -20,12 +20,12 @@ public with sharing class LoginController extends ApexBaseController {
     }
 
     public Pagereference checkAuthentication() {
-        if(viewModel.account.Password__c == null || viewModel.account.Email__c == null) {
+        if(viewModel.account.Password__c == null || viewModel.account.PersonEmail == null) {
             addMessage(Apexpages.Severity.WARNING, System.Label.Msg_Login_AccountPasswordEmpty);
             return null;
         }
 
-        Account__c realAccount = AccountModel.getAccountByEmail(viewModel.account.Email__c);
+        Account realAccount = AccountModel.getAccountByEmail(viewModel.account.PersonEmail);
         if (!isAccountAndPasswordValid(realAccount))
             return null;
 
@@ -46,19 +46,19 @@ public with sharing class LoginController extends ApexBaseController {
         viewModel.account.Password__c = '';
     }
     
-    private Decimal loginFail(Account__c realAccount) {
+    private Decimal loginFail(Account realAccount) {
         realAccount.PasswordRetry__c ++;
         return realAccount.PasswordRetry__c;
     }
 
-    private Boolean isAccountAndPasswordValid(Account__c realAccount) {
+    private Boolean isAccountAndPasswordValid(Account realAccount) {
         if (realAccount == null)
             return resultAccountNotExisting();
         if (!realAccount.Active__c)
             return resultAccountNotActive();
         if (realAccount.Locked__c)
             return resultAccountLocked();
-        if (!AuthUtility.checkPassword(realAccount.Email__c, realAccount.Password__c, viewModel.account.Password__c))
+        if (!AuthUtility.checkPassword(realAccount.PersonEmail, realAccount.Password__c, viewModel.account.Password__c))
             return resultAccountPasswordNotCorrect(realAccount);
 
         return true;
@@ -82,7 +82,7 @@ public with sharing class LoginController extends ApexBaseController {
         return false;
     }
 
-    private Boolean resultAccountPasswordNotCorrect(Account__c realAccount) {
+    private Boolean resultAccountPasswordNotCorrect(Account realAccount) {
         if(realAccount.PasswordRetry__c < 2) {
             addMessage(Apexpages.Severity.WARNING, System.Label.Msg_Login_LockedRemind);
             loginFail(realAccount);
@@ -105,14 +105,14 @@ public with sharing class LoginController extends ApexBaseController {
         return null;
     }
 
-    public void saveLoginCookies(Account__c realAccount) {
+    public void saveLoginCookies(Account realAccount) {
         String token = AccountModel.saveToken(realAccount);
         Cookie authToken = new Cookie(Label.COOKIE_AUTH_TOKEN, token, null, Constants.COOKIE_DURATION, false);
         Cookie accountId = new Cookie(label.COOKIE_ACCOUNT_ID, realAccount.Id, null, Constants.COOKIE_DURATION, false);
         ApexPages.currentPage().setCookies(new Cookie[]{authToken, accountId});
     }
 
-    public void resetPasswordRetryToZero(Account__c realAccount) {
+    public void resetPasswordRetryToZero(Account realAccount) {
         realAccount.PasswordRetry__c = 0;
         update realAccount;
     }
@@ -126,12 +126,13 @@ public with sharing class LoginController extends ApexBaseController {
         if (facebookUserEmail == null)
             return null;
         
-        Account__c accountCreated = AccountModel.createAccountByFacebook(facebookUserEmail, facebookUserName);
-        Account__c accountSF = null;
+        Account accountCreated = AccountModel.createAccountByFacebook(facebookUserEmail, facebookUserName);
+        Account accountSF = null;
         if (accountCreated == null) {
             accountSF = AccountModel.getAccountByFacebookEmail(facebookUserEmail);
             if (accountSF.FacebookEmail__c == null) {
                 accountSF.FacebookEmail__c = facebookUserEmail;
+                
                 upsert accountSF;
             }
         } else {
@@ -147,8 +148,8 @@ public with sharing class LoginController extends ApexBaseController {
         if (googleUserEmail == null)
             return null;
         
-        Account__c accountCreated = AccountModel.createAccountByGoogle(googleUserEmail, googleUserName);
-        Account__c accountSF = null;
+        Account accountCreated = AccountModel.createAccountByGoogle(googleUserEmail, googleUserName);
+        Account accountSF = null;
         if (accountCreated == null) {
             accountSF = AccountModel.getAccountByGoogleEmail(googleUserEmail);
             if (accountSF.GoogleEmail__c == null) {

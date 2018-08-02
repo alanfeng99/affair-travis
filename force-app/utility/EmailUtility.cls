@@ -9,7 +9,7 @@ public with sharing class EmailUtility {
     }
 
     public static Boolean sendEmail(String email, String name) {
-        Account__c account = AccountModel.getAccountByEmail(email);
+        Account account = AccountModel.getAccountByEmail(email);
         if(account == null) {
             return false;
         }

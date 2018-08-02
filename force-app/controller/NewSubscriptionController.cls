@@ -30,7 +30,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             viewModel = new NewSubscriptionViewModel(accountId);
             tempSubscriptions = new List<Subscription__c>();
             
-            firstSubscription = new Subscription__c(CustomAccount__c = accountId);
+            firstSubscription = new Subscription__c(AccountStandard__c = accountId);
             firstSubscription.Index__c = 1;
             tempSubscriptions.add(firstSubscription);
 
@@ -44,7 +44,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
         viewModel = new NewSubscriptionViewModel(accountId);
         tempSubscriptions = new List<Subscription__c>();
         
-        firstSubscription = new Subscription__c(CustomAccount__c = accountId);
+        firstSubscription = new Subscription__c(AccountStandard__c = accountId);
         firstSubscription.Index__c = 1;
         tempSubscriptions.add(firstSubscription);
 
@@ -66,7 +66,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             showErrorForNullProgram = true;
             return null;
         }
-        newSubscription = new Subscription__c(CustomAccount__c = viewModel.account.Id);
+        newSubscription = new Subscription__c(AccountStandard__c = viewModel.account.Id);
         newSubscription.Index__c = tempSubscriptions.size() + 1;
         tempSubscriptions.add(newSubscription);
         
@@ -266,7 +266,7 @@ public with sharing class NewSubscriptionController extends ApexBaseController {
             sub.End_period__c = startPeriod + programs.get(0).Order_Period__c - 1;
             sub.Amount__c = programs.get(0).Price__c;   
             sub.Program__c = programs.get(0).id;
-            sub.CustomAccount__c = viewModel.account.Id;
+            sub.AccountStandard__c = viewModel.account.Id;
         }
         
     }

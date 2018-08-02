@@ -1,18 +1,18 @@
 @isTest
 public with sharing class SummaryControllerTestCase {
     public static testMethod void testGetAccount() {
-        Account__c account = new Account__c(Email__c = 'jin@4idps.com');
+        Account account = new Account(PersonEmail = 'jin@4idps.com');
         insert account;
         String accountId = account.Id;
         
         SummaryController controller = new SummaryController(accountId);
         controller.viewModel = new SummaryViewModel(accountId);
-        Account__c account2 = controller.getAccount();
+        Account account2 = controller.getAccount();
         System.assertNotEquals(null, account2);
     }
 
     public static testMethod void testGetSubscriptions() {
-        Account__c account = new Account__c(Email__c = 'jin@4idps.com');
+        Account account = new Account(PersonEmail = 'jin@4idps.com');
         insert account;
         SummaryController controller = new SummaryController(account.id);
         List<Subscription__c> sub = controller.getSubscriptions();
@@ -70,7 +70,7 @@ public with sharing class SummaryControllerTestCase {
     }
 
     public static testMethod void testViewModel_GetSumOfSubscription() {
-        Account__c account = new Account__c(Email__c = 'jin@4idps.com');
+        Account account = new Account(PersonEmail = 'jin@4idps.com');
         insert account;
         SummaryController controller = new SummaryController(account.id);
         Integer size = controller.viewModel.getSumOfSubscription();

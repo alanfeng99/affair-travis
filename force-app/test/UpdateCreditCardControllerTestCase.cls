@@ -7,7 +7,7 @@ public with sharing class UpdateCreditCardControllerTestCase {
     }
 
     public static testMethod void testCreditcard_Info_null_Return_Null() {
-        Account__c account = new Account__c(Email__c = 'jin@aaa.com');
+        Account account = new Account(PersonEmail = 'jin@aaa.com');
         insert account;
         UpdateCreditCardController controller = new UpdateCreditCardController(account.id);
         Pagereference page = controller.updateCreditcard();
@@ -16,7 +16,7 @@ public with sharing class UpdateCreditCardControllerTestCase {
     }
 
     public static testMethod void testCreditcard_ExpireMonth_null_Return_Null() {
-        Account__c account = new Account__c(Email__c = 'jin@aaa.com');
+        Account account = new Account(PersonEmail = 'jin@aaa.com');
         insert account;
         UpdateCreditCardController controller = new UpdateCreditCardController(account.id);
         controller.viewModel.creditCardBean.cc = '123';
@@ -27,7 +27,7 @@ public with sharing class UpdateCreditCardControllerTestCase {
     }
 
     public static testMethod void testCreditcard_CVC_null_Return_Null() {
-        Account__c account = new Account__c(Email__c = 'jin@aaa.com');
+        Account account = new Account(PersonEmail = 'jin@aaa.com');
         insert account;
         UpdateCreditCardController controller = new UpdateCreditCardController(account.id);
         controller.viewModel.creditCardBean.cc = '123';
@@ -38,7 +38,7 @@ public with sharing class UpdateCreditCardControllerTestCase {
     }
 
     public static testMethod void testCreditcardPatternMatching_Wrong_Return_Null() {
-        Account__c account = new Account__c(Email__c = 'jin@aaa.com');
+        Account account = new Account(PersonEmail = 'jin@aaa.com');
         insert account;
         UpdateCreditCardController controller = new UpdateCreditCardController(account.id);
         controller.viewModel.creditCardBean.cc = '123';
@@ -51,7 +51,7 @@ public with sharing class UpdateCreditCardControllerTestCase {
     }
 
     public static testMethod void testCVCPatternMatching_Wrong_Return_Null() {
-        Account__c account = new Account__c(Email__c = 'jin@aaa.com');
+        Account account = new Account(PersonEmail = 'jin@aaa.com');
         insert account;
         UpdateCreditCardController controller = new UpdateCreditCardController(account.id);
         controller.viewModel.creditCardBean.cc = '4168613664325412';

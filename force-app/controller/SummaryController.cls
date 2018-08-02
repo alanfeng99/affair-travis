@@ -9,7 +9,7 @@ public with sharing class SummaryController extends ApexBaseController  {
         if (accountIdCookie != null) {
             String accountId = accountIdCookie.getValue();
         	viewModel = new SummaryViewModel(accountId);
-            Account__c account = viewModel.getAccount();
+            Account account = viewModel.getAccount();
             Integer timeForGreeting = Integer.valueOf(System.now().format('k'));   
             greetingChange(timeForGreeting);
         }    
@@ -17,12 +17,12 @@ public with sharing class SummaryController extends ApexBaseController  {
 
     public SummaryController(String accountId) {
         viewModel = new SummaryViewModel(accountId);
-        Account__c account = viewModel.getAccount();
+        Account account = viewModel.getAccount();
         Integer timeForGreeting = Integer.valueOf(System.now().format('k'));
         greetingChange(timeForGreeting);
     }
 
-    public Account__c getAccount() {
+    public Account getAccount() {
         return viewModel.getAccount();
     }
 

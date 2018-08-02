@@ -2,7 +2,7 @@
 public class loginTestCases {
     
     public static testMethod void testCheckAuthentication_Password_Null() {
-        Account__c account = new Account__c(Email__c = 'jin@444.com');
+        Account account = new Account(PersonEmail = 'jin@444.com');
         insert account;
         LoginController controller = new LoginController();
         Pagereference page = controller.checkAuthentication();
@@ -15,7 +15,7 @@ public class loginTestCases {
         //Prepare env
         String password = '1234';
         String email = 'alan.feng@4idps.com';
-        Account__c preAccount = new Account__c(LastName__c = 'Alan', Password__c = password, Email__c = email, Active__c = true);
+        Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email, Active__c = true);
         insert preAccount;
 
         //Test constructor
@@ -23,9 +23,9 @@ public class loginTestCases {
         System.assertNotEquals(null, controller.viewModel.account);
         
         //Test function
-        Account__c account = controller.viewModel.account;
+        Account account = controller.viewModel.account;
         account.Password__c = password;
-        account.Email__c = email;
+        account.PersonEmail = email;
         Pagereference page = controller.checkAuthentication();
         System.assertNotEquals(null, page);
 
@@ -48,7 +48,7 @@ public class loginTestCases {
         //Prepare env
         String password = '1234';
         String email = 'alan.feng@4idps.com';
-        Account__c preAccount = new Account__c(LastName__c = 'Alan', Password__c = password, Email__c = email, Active__c = true);
+        Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email, Active__c = true);
         insert preAccount;
 
         //Test constructor
@@ -56,9 +56,9 @@ public class loginTestCases {
         System.assertNotEquals(null, controller.viewModel.account);
         
         //Test function
-        Account__c account = controller.viewModel.account;
+        Account account = controller.viewModel.account;
         account.Password__c = password;
-        account.Email__c = email;
+        account.PersonEmail = email;
         controller.checkAuthentication();
         Pagereference page = controller.checkAutoLogin();
         System.assertNotEquals(null, page);
@@ -71,16 +71,16 @@ public class loginTestCases {
         //Prepare env
         String password = '1234';
         String email = 'alan.feng@4idps.com';
-        Account__c preAccount = new Account__c(LastName__c = 'Alan', Password__c = password, Email__c = email);
+        Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email);
         insert preAccount;
 
         //Test constructor
         LoginController controller = new LoginController();
         
         //Test function
-        Account__c account = controller.viewModel.account;
+        Account account = controller.viewModel.account;
         account.Password__c = password;
-        account.Email__c = email;
+        account.PersonEmail = email;
         Pagereference page = controller.checkAuthentication();
 
         System.assertEquals(controller.baseErrorMessage, System.Label.Msg_Login_AccountNotVerify);
@@ -92,16 +92,16 @@ public class loginTestCases {
         //Prepare env
         String password = '1234';
         String email = 'alan.feng@4idps.com';
-        Account__c preAccount = new Account__c(LastName__c = 'Alan', Password__c = password, Email__c = email,Active__c = true, Locked__c = true);
+        Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email,Active__c = true, Locked__c = true);
         insert preAccount;
 
         //Test constructor
         LoginController controller = new LoginController();
         
         //Test function
-        Account__c account = controller.viewModel.account;
+        Account account = controller.viewModel.account;
         account.Password__c = password;
-        account.Email__c = email;
+        account.PersonEmail = email;
         Pagereference page = controller.checkAuthentication();
 
         System.assertEquals(controller.baseErrorMessage, System.Label.Msg_Login_AccountLocked);
@@ -113,16 +113,16 @@ public class loginTestCases {
         //Prepare env
         String password = '1234';
         String email = 'alan.feng@4idps.com';
-        Account__c preAccount = new Account__c(LastName__c = 'Alan', Password__c = password, Email__c = email,Active__c = true);
+        Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email,Active__c = true);
         insert preAccount;
 
         //Test constructor
         LoginController controller = new LoginController();
         
         //Test function
-        Account__c account = controller.viewModel.account;
+        Account account = controller.viewModel.account;
         account.Password__c = '4567';
-        account.Email__c = email;
+        account.PersonEmail = email;
         Pagereference page = controller.checkAuthentication();
 
         System.assertEquals(controller.baseErrorMessage, System.Label.Msg_Login_LockedRemind);
@@ -133,16 +133,16 @@ public class loginTestCases {
         //Prepare env
         String password = '1234';
         String email = 'alan.feng@4idps.com';
-        Account__c preAccount = new Account__c(LastName__c = 'Alan', Password__c = password, Email__c = email,Active__c = true);
+        Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email,Active__c = true);
         insert preAccount;
 
         //Test constructor
         LoginController controller = new LoginController();
         
         //Test function
-        Account__c account = controller.viewModel.account;
+        Account account = controller.viewModel.account;
         account.Password__c = '4567';
-        account.Email__c = email;
+        account.PersonEmail = email;
         
         controller.checkAuthentication();
         controller.checkAuthentication();
@@ -154,9 +154,9 @@ public class loginTestCases {
     public static testMethod void testCheckAuthenticationFailed() {
         LoginController controller = new LoginController();
         //Test function
-        Account__c account = controller.viewModel.account;
+        Account account = controller.viewModel.account;
         account.Password__c = 'abcedtest';
-        account.Email__c = 'alan.feng@4idps.com';
+        account.PersonEmail = 'alan.feng@4idps.com';
         Pagereference page = controller.checkAuthentication();
         System.assertEquals(null, page);
     }
@@ -164,9 +164,9 @@ public class loginTestCases {
     public static testMethod void testCheckAuthenticationFailed_AutoLoginFail() {
         LoginController controller = new LoginController();
         //Test function
-        Account__c account = controller.viewModel.account;
+        Account account = controller.viewModel.account;
         account.Password__c = 'abcedtest';
-        account.Email__c = 'alan.feng@4idps.com';
+        account.PersonEmail = 'alan.feng@4idps.com';
         Pagereference page = controller.checkAuthentication();
         Pagereference pageAutoLoginFail = controller.checkAutoLogin();
         System.assertEquals(null, pageAutoLoginFail);
@@ -189,8 +189,8 @@ public class loginTestCases {
     }
 
     public static testMethod void testLoginWithFacebook_Login_Success_Account_Already_Exist_Return_Not_Null() {
-        Account__c account = new Account__c();
-        account.Email__c = 'alan@gmail.com';
+        Account account = new Account();
+        account.PersonEmail = 'alan@gmail.com';
         insert account;
         LoginController controller = new LoginController();
         controller.facebookUserEmail = 'alan@gmail.com';
@@ -216,8 +216,8 @@ public class loginTestCases {
     }
 
     public static testMethod void testLoginWithGoogle_Login_Success_Account_Already_Exist_Return_Not_Null() {
-        Account__c account = new Account__c();
-        account.Email__c = 'alan@gmail.com';
+        Account account = new Account();
+        account.PersonEmail = 'alan@gmail.com';
         insert account;
         LoginController controller = new LoginController();
         controller.googleUserEmail = 'alan@gmail.com';

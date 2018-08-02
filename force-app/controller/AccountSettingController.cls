@@ -1,10 +1,10 @@
 public with sharing class AccountSettingController extends ApexBaseController {
     
     public AccountSettingViewModel viewModel {get; set;}
-    public Account__c accountOld {get; set;}
-    public Account__c accountNew {get; set;} 
-    public Account__c accountVerify {get; set;} 
-    private Account__c tempAccount {get; set;}
+    public Account accountOld {get; set;}
+    public Account accountNew {get; set;} 
+    public Account accountVerify {get; set;} 
+    private Account tempAccount {get; set;}
 
     public Boolean isMainShow {get; set;}
     public Boolean isChangeName {get; set;}
@@ -37,9 +37,9 @@ public with sharing class AccountSettingController extends ApexBaseController {
     }
 
     private void initAccounts() {
-        accountVerify = new Account__c();
-        accountOld = new Account__c();
-        accountNew = new Account__c();
+        accountVerify = new Account();
+        accountOld = new Account();
+        accountNew = new Account();
     }
 
     public Pagereference submitPassword() {
@@ -56,7 +56,7 @@ public with sharing class AccountSettingController extends ApexBaseController {
     }
 
     private Boolean checkPasswordFormat() {
-        if (!AuthUtility.checkPassword(viewModel.account.Email__c, viewModel.account.Password__c, accountOld.Password__c)) {
+        if (!AuthUtility.checkPassword(viewModel.account.PersonEmail, viewModel.account.Password__c, accountOld.Password__c)) {
             addMessage(Apexpages.Severity.ERROR, System.Label.Msg_Password_Old);
             return false;
         }
@@ -85,7 +85,7 @@ public with sharing class AccountSettingController extends ApexBaseController {
     }
 
     public Pagereference submitName() {
-        if (viewModel.account.LastName__c == null) 
+        if (viewModel.newLastName == null) 
             addMessage(Apexpages.Severity.ERROR, System.Label.Msg_NameEmpty);
         else {
             if(viewModel.updateName()) {
@@ -97,14 +97,14 @@ public with sharing class AccountSettingController extends ApexBaseController {
     }
 
     public Pagereference submitEmail() {
-        if (viewModel.account.Email__c == null) 
+        if (viewModel.newEmail == null) 
             addMessage(Apexpages.Severity.ERROR, System.Label.Msg_EmailEmpty);
         else {
             if (viewModel.updateEmail()) {
                 addMessage(Apexpages.Severity.INFO, System.Label.Msg_UpdateCompleted);
                 showView('Main');
                 ifChangeEmail = true;
-                EmailUtility.sendEmail(viewModel.account.Email__c, 'AccountActivation');
+                EmailUtility.sendEmail(viewModel.newEmail, 'AccountActivation');
                 Pagereference page = new Pagereference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/RegisterResultPage');
                 page.getParameters().put('id', viewModel.account.Id);
                 page.setRedirect(true);
@@ -172,8 +172,8 @@ public with sharing class AccountSettingController extends ApexBaseController {
     }
 
     private void rollbackAccount() {
-        viewModel.account.LastName__c = tempAccount.LastName__c;
-        viewModel.account.Email__c = tempAccount.Email__c;
+        viewModel.account.LastName = tempAccount.LastName;
+        viewModel.account.PersonEmail = tempAccount.PersonEmail;
         viewModel.account.Password__c = tempAccount.Password__c;
     }
     
@@ -193,7 +193,7 @@ public with sharing class AccountSettingController extends ApexBaseController {
         return AuthUtility.logOut();
     }
 
-    public void saveLoginCookies(Account__c realAccount) {
+    public void saveLoginCookies(Account realAccount) {
         String token = AccountModel.saveToken(realAccount);
         Cookie authToken = new Cookie(Label.COOKIE_AUTH_TOKEN, token, null, Constants.COOKIE_DURATION, false);
         Cookie accountId = new Cookie(label.COOKIE_ACCOUNT_ID, realAccount.Id, null, Constants.COOKIE_DURATION, false);

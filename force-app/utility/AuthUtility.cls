@@ -18,6 +18,7 @@ public with sharing class AuthUtility {
     }
 
     public static PageReference logOut() {
+        deleteAuthCookies();
         PageReference page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/LoginPage?logout=true');
         page.setRedirect(true);
         return page;
@@ -33,7 +34,6 @@ public with sharing class AuthUtility {
         if (accountId != null)
             accountId = new Cookie(accountId.getName(), authToken.getValue(), accountId.getPath(), 0, accountId.isSecure());
     
-        System.debug('Test: get cookies loginpage ' + currentPage.getCookies());
         currentPage.setCookies(new Cookie[]{authToken, accountId});
     }
 }

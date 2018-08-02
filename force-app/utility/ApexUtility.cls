@@ -41,13 +41,13 @@ public with sharing class ApexUtility {
         return responseBodyMapped.get('IP');
     }
     
-    public static GMOPaymentBean__c generateGMOPaymentBeanForCancel(Account__c account, Order order) {
+    public static GMOPaymentBean__c generateGMOPaymentBeanForCancel(Account account, Order order) {
         GMOPaymentBean__c gmoPaymentBean = generateGMOPaymentBean(account, order);
         gmoPaymentBean.process_code__c = Constants.PROCESS_CODE_DELETE_CREDIT_CARD;
         return gmoPaymentBean;
     }
 
-    public static GMOPaymentBean__c generateGMOPaymentBeanForChange(Account__c account, Order order, CreditCardBean creditCardBean) {
+    public static GMOPaymentBean__c generateGMOPaymentBeanForChange(Account account, Order order, CreditCardBean creditCardBean) {
         GMOPaymentBean__c gmoPaymentBean = generateGMOPaymentBean(account, order);
         gmoPaymentBean.process_code__c = Constants.PROCESS_CODE_CHANGE_CREDIT_CARD;
         
@@ -59,7 +59,7 @@ public with sharing class ApexUtility {
         return gmoPaymentBean;
     }
     
-    public static GMOPaymentBean__c generateGMOPaymentBeanForPayment(Account__c account, Order order, CreditCardBean creditCardBean) {
+    public static GMOPaymentBean__c generateGMOPaymentBeanForPayment(Account account, Order order, CreditCardBean creditCardBean) {
         GMOPaymentBean__c gmoPaymentBean = generateGMOPaymentBeanForPayment(account, order);
         
         if (account.credit_card_number__c == null) {
@@ -72,22 +72,22 @@ public with sharing class ApexUtility {
         return gmoPaymentBean;
     }
 
-    public static GMOPaymentBean__c generateGMOPaymentBeanForPayment(Account__c account, Order order) {
+    public static GMOPaymentBean__c generateGMOPaymentBeanForPayment(Account account, Order order) {
         GMOPaymentBean__c gmoPaymentBean = generateGMOPaymentBean(account, order);
         gmoPaymentBean.process_code__c = GMOPaymentAPI.generateProcessCode(order.paymentMethod);
         
         return gmoPaymentBean;
     }
 
-    public static GMOPaymentBean__c generateGMOPaymentBean(Account__c account, Order order) {
+    public static GMOPaymentBean__c generateGMOPaymentBean(Account account, Order order) {
         GMOPaymentBean__c gmoPaymentBean = new GMOPaymentBean__c();
 
         gmoPaymentBean.st_code__c = GMOPaymentAPI.generateStCode(order.paymentMethod);
         gmoPaymentBean.contract_code__c = System.Label.GMOPAYMENT_CONTRACT_CODE;
         gmoPaymentBean.user_id__c = account.Id;
-        gmoPaymentBean.user_name__c = account.LastName__c;
-        gmoPaymentBean.user_mail_add__c = account.Email__c;
-        gmoPaymentBean.card_holder_name__c = account.LastName__c;
+        gmoPaymentBean.user_name__c = account.LastName;
+        gmoPaymentBean.user_mail_add__c = account.PersonEmail;
+        gmoPaymentBean.card_holder_name__c = account.LastName;
         gmoPaymentBean.ip_address__c = ApexUtility.getUserIPAddress();
         gmoPaymentBean.item_code__c = order.itemCode;
         gmoPaymentBean.item_name__c = order.itemName;

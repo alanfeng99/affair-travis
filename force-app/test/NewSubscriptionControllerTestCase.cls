@@ -16,7 +16,7 @@ public with sharing class NewSubscriptionControllerTestCase {
     }
 
     public static testMethod void testNewSubscription_ProgramId_Not_Null() {
-        Account__c account = new Account__c(Email__c = 'jin@222.com');
+        Account account = new Account(PersonEmail = 'jin@222.com');
         insert account;
         SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
@@ -33,7 +33,7 @@ public with sharing class NewSubscriptionControllerTestCase {
     }
 
     public static testMethod void deleteSubscription_deleteRowId_0_Size_0() {
-        Account__c account =  new Account__c(Email__c = 'jin@4idps.com');
+        Account account =  new Account(PersonEmail = 'jin@4idps.com');
         insert account;
         NewSubscriptionController controller = new NewSubscriptionController(account.id);
         controller.deleteRowId = 1;
@@ -152,7 +152,7 @@ public with sharing class NewSubscriptionControllerTestCase {
     public static testMethod void testSubmitForm_CheckField_StartPeriod_Null_Return_False() {
         SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
-        Account__c account =  new Account__c(Email__c = 'jin@4idps.com');
+        Account account =  new Account(PersonEmail = 'jin@4idps.com');
         insert account;
         NewSubscriptionController controller = new NewSubscriptionController(account.Id);
         controller.programId = program.ProgramId__c;
@@ -167,7 +167,7 @@ public with sharing class NewSubscriptionControllerTestCase {
     public static testMethod void testSubmitForm_CheckField_Reciepient_Null_Return_False() {
         SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
-        Account__c account =  new Account__c(Email__c = 'jin@4idps.com');
+        Account account =  new Account(PersonEmail = 'jin@4idps.com');
         insert account;
         NewSubscriptionController controller = new NewSubscriptionController(account.Id);
         controller.programId = program.ProgramId__c;
@@ -181,7 +181,7 @@ public with sharing class NewSubscriptionControllerTestCase {
     public static testMethod void testSubmitForm_CheckField_Reciepient_Not_Null_Tel_Format_Wrong_Return_False() {
         SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
-        Account__c account =  new Account__c(Email__c = 'jin@4idps.com');
+        Account account =  new Account(PersonEmail = 'jin@4idps.com');
         insert account;
         NewSubscriptionController controller = new NewSubscriptionController(account.Id);
         controller.programId = program.ProgramId__c;
@@ -203,7 +203,7 @@ public with sharing class NewSubscriptionControllerTestCase {
     public static testMethod void testSubmitForm_CheckField_Tel_Format_Right_Paymentmethod_Null_Return_False() {
         SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
-        Account__c account =  new Account__c(Email__c = 'jin@4idps.com');
+        Account account =  new Account(PersonEmail = 'jin@4idps.com');
         insert account;
         NewSubscriptionController controller = new NewSubscriptionController(account.Id);
         controller.programId = program.ProgramId__c;
@@ -224,7 +224,7 @@ public with sharing class NewSubscriptionControllerTestCase {
     public static testMethod void testSubmitForm_CheckField_Creditcard_Info_Not_Complete_Return_False() {
         SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a');
         insert program;
-        Account__c account =  new Account__c(Email__c = 'jin@4idps.com');
+        Account account =  new Account(PersonEmail = 'jin@4idps.com');
         insert account;
         NewSubscriptionController controller = new NewSubscriptionController(account.Id);
         controller.programId = program.ProgramId__c;

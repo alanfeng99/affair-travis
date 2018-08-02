@@ -29,7 +29,7 @@
                     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{!viewModel.account.LastName__c}</a>
+                                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{!viewModel.account.LastName}</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                                     <apex:commandLink action="{!logOut}" value="登出" styleClass="dropdown-item"/>
                                     <!-- <a class="dropdown-item" href="#">Another action</a>
@@ -54,7 +54,7 @@
                     <div class="card-header bg-white">                  
                         <div align="center" class="lineheight22px">
                             <div class="letterspacing3px fontsize20px">
-                                {!greetingWord}，<apex:outputText value="{!Account.LastName__c}"/>
+                                {!greetingWord}，<apex:outputText value="{!Account.LastName}"/>
                             </div><br/>
                             <div class="fontsize12px">{!viewModel.year}年{!viewModel.month}月{!viewModel.day}日註冊成為會員</div>
                         </div>
@@ -76,7 +76,7 @@
                                                         會員編號：
                                                     </div>
                                                     <div class="col-auto">
-                                                        <apex:outputText value="{!Account.Name}"/>
+                                                        <apex:outputText value="{!Account.AccountNumber}"/>
                                                     </div>
                                                 </div>
                                             </td>
@@ -88,7 +88,7 @@
                                                         會員暱稱：
                                                     </div>
                                                     <div class="col-auto">
-                                                        <apex:outputText value="{!Account.LastName__c}"/>
+                                                        <apex:outputText value="{!Account.LastName}"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
@@ -96,7 +96,7 @@
                                                         註冊信箱：
                                                     </div>
                                                     <div class="col-auto">
-                                                        <apex:outputText value="{!Account.Email__c }"/>
+                                                        <apex:outputText value="{!Account.PersonEmail }"/>
                                                     </div>
                                                 </div>
                                             </td>
