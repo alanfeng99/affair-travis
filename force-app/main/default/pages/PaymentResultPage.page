@@ -226,22 +226,22 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-3">
-                                            <a href="">
+                                            <a href="https://aquarius1.newebpay.com.tw/CashSystemFrontEnd/MMK_PayImage.jsp?imageurl=ibon_pay_L.jpg" target="_blank">
                                                 <image src="{!$Resource.seveneleven}" style="width:80px; height:80px"/>
                                             </a>
                                         </div>
                                         <div class="col-3">
-                                            <a href="">
+                                            <a href="https://aquarius1.newebpay.com.tw/CashSystemFrontEnd/MMK_PayImage.jsp?imageurl=famiport_pay_L.jpg" target="_blank">
                                                 <image src="{!$Resource.familymart}" style="width:80px; height:80px"/>
                                             </a>
                                         </div>
                                         <div class="col-3">
-                                            <a href="">
+                                            <a href="https://aquarius1.newebpay.com.tw/CashSystemFrontEnd/MMK_PayImage.jsp?imageurl=ok-go_pay_L.jpg" target="_blank">
                                                 <image src="{!$Resource.ok}" style="width:80px; height:80px"/>
                                             </a>
                                         </div>
                                         <div class="col-3">
-                                            <a href="">
+                                            <a href="https://aquarius1.newebpay.com.tw/CashSystemFrontEnd/MMK_PayImage.jsp?imageurl=life_et_pay_L.jpg" target="_blank">
                                                 <image src="{!$Resource.hilife}" style="width:80px; height:80px"/>
                                             </a>
                                         </div>    
@@ -269,7 +269,6 @@
                                             - 請於 3 天內完成繳費，若是超過期限該繳費代碼將會失效
                                         </div>
                                     </div>
-                                    <hr class="w100"/>
                                     <div align="right">
                                         <div class="form-row" >
                                             <div class="col-3"></div>

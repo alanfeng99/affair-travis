@@ -76,7 +76,7 @@
                                                         會員編號：
                                                     </div>
                                                     <div class="col-auto">
-                                                        <apex:outputText value="{!Account.AccountNumber}"/>
+                                                        <apex:outputText value="{!Account.Account_ID__c}"/>
                                                     </div>
                                                 </div>
                                             </td>
