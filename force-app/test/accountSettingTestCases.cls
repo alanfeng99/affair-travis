@@ -9,6 +9,7 @@ public  class accountSettingTestCases {
     }
 
     public static testMethod void testAccountSettingCustructor() {
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
         AccountSettingController controller = new AccountSettingController(account.id);
         System.assertNotEquals(null, controller.accountVerify);
         System.assertNotEquals(null, controller.accountOld);
@@ -160,10 +161,11 @@ public  class accountSettingTestCases {
         Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer', LastName = 'jin');
         AccountSettingController controller = new AccountSettingController(account.id);
 
+        controller.viewModel.newLastName = null;
         Pagereference page = controller.submitName();
         System.assertEquals(null, page);
-        System.assertNotEquals(controller.baseErrorMessage, System.Label.Msg_NameEmpty);
-        System.assertEquals(controller.baseErrorMessage, System.Label.Msg_UpdateCompleted);
+        System.assertNotEquals(System.Label.Msg_NameEmpty, controller.baseErrorMessage);
+        System.assertEquals(System.Label.Msg_UpdateCompleted, controller.baseErrorMessage);
     }
 
     public static testMethod void testViewModel_UpdateEmail_Email_Exist() {
@@ -178,7 +180,7 @@ public  class accountSettingTestCases {
     public static testMethod void testViewModel_UpdateEmai() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
         AccountSettingController controller = new AccountSettingController(account.id);
-        controller.viewModel.account.PersonEmail = 'jin@ggg.com';
+        controller.viewModel.newEmail = 'jin@ggg.com';
         
         Boolean updateEmail = controller.viewModel.updateEmail();
         System.assertEquals(true, updateEmail);
@@ -196,10 +198,10 @@ public  class accountSettingTestCases {
     public static testMethod void testSubmitEmail_Email_Not_Null_Return_Msg() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
         AccountSettingController controller = new AccountSettingController(account.id);
-        controller.viewModel.account.PersonEmail = 'jin@ggg.com';
+        controller.viewModel.newEmail = 'jin@ggg.com';
         Pagereference page = controller.submitEmail();
-        System.assertNotEquals(null, page);
-        System.assertNotEquals(controller.baseErrorMessage, System.Label.Msg_EmailEmpty);
+        System.assertNotEquals(null, page); 
+        System.assertNotEquals(System.Label.Msg_EmailEmpty, controller.baseErrorMessage);
     }
 
     public static testMethod void testSubmitEmial_UpdateEmail_Fail_Return_Msg() {
@@ -209,6 +211,15 @@ public  class accountSettingTestCases {
         Pagereference page = controller.submitEmail();
         System.assertEquals(controller.baseErrorMessage, System.Label.Msg_AccountAlreadyExist);
         System.assertEquals(null, page); 
+    }
+
+    public static testMethod void testSubmitEmail_Email_Update_Complete_Return_Msg() {
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
+        AccountSettingController controller = new AccountSettingController(account.id);
+        controller.viewModel.newEmail = 'jin@ggg.com';
+        Pagereference page = controller.submitEmail();
+        System.assertNotEquals(null, page); 
+        System.assertEquals(System.Label.Msg_UpdateCompleted, controller.baseErrorMessage);
     }
 
     public static testMethod void testChagneName() {
