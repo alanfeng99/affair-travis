@@ -151,17 +151,17 @@ public  class accountSettingTestCases {
     public static testMethod void testSubmitName_LastName_Null_Return_Msg() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
         AccountSettingController controller = new AccountSettingController(account.id);
-
+        controller.viewModel.newLastName = null;
         Pagereference page = controller.submitName();
         System.assertEquals(null, page);
-        System.assertEquals(controller.baseErrorMessage, System.Label.Msg_NameEmpty);
+        System.assertEquals(System.Label.Msg_NameEmpty, controller.baseErrorMessage);
     }
 
     public static testMethod void testSubmitName_LastName_Not_Null_Return_Msg() {
-        Account account = new Account(PersonEmail = 'jin@fff.com', Password__c = '1234qwer', LastName = 'jin');
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
         AccountSettingController controller = new AccountSettingController(account.id);
 
-        controller.viewModel.newLastName = null;
+        controller.viewModel.newLastName = 'Alan yo';
         Pagereference page = controller.submitName();
         System.assertEquals(null, page);
         System.assertNotEquals(System.Label.Msg_NameEmpty, controller.baseErrorMessage);
