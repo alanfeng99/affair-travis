@@ -8,7 +8,7 @@ public with sharing class UpdateCreditCardControllerTestCase {
 
     public static testMethod void testCreditcard_Info_null_Return_Null() {
         Account account = new Account(PersonEmail = 'jin@aaa.com', LastName = 'Alan');
-        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         UpdateCreditCardController controller = new UpdateCreditCardController(account.id);
         Pagereference page = controller.updateCreditcard();
@@ -18,7 +18,7 @@ public with sharing class UpdateCreditCardControllerTestCase {
 
     public static testMethod void testCreditcard_ExpireMonth_null_Return_Null() {
         Account account = new Account(PersonEmail = 'jin@aaa.com', LastName = 'Alan');
-        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         UpdateCreditCardController controller = new UpdateCreditCardController(account.id);
         controller.viewModel.creditCardBean.cc = '123';
@@ -30,7 +30,7 @@ public with sharing class UpdateCreditCardControllerTestCase {
 
     public static testMethod void testCreditcard_CVC_null_Return_Null() {
         Account account = new Account(PersonEmail = 'jin@aaa.com', LastName = 'Alan');
-        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         UpdateCreditCardController controller = new UpdateCreditCardController(account.id);
         controller.viewModel.creditCardBean.cc = '123';
@@ -42,7 +42,7 @@ public with sharing class UpdateCreditCardControllerTestCase {
 
     public static testMethod void testCreditcardPatternMatching_Wrong_Return_Null() {
         Account account = new Account(PersonEmail = 'jin@aaa.com', LastName = 'Alan');
-        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         UpdateCreditCardController controller = new UpdateCreditCardController(account.id);
         controller.viewModel.creditCardBean.cc = '123';
@@ -56,7 +56,7 @@ public with sharing class UpdateCreditCardControllerTestCase {
 
     public static testMethod void testCVCPatternMatching_Wrong_Return_Null() {
         Account account = new Account(PersonEmail = 'jin@aaa.com', LastName = 'Alan');
-        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert account;
         UpdateCreditCardController controller = new UpdateCreditCardController(account.id);
         controller.viewModel.creditCardBean.cc = '4168613664325412';
