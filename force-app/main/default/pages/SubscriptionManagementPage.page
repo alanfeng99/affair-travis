@@ -25,6 +25,22 @@
             <apex:stylesheet value="{!$Resource.TemplateCSS}"/>
             
         </head>
+        <style>
+                select {
+                    display: block;
+                    width: 100%;
+                    padding: .375rem .75rem;
+                    font-size: 1rem;
+                    line-height: 1.5;
+                    color: #495057;
+                    background-color: #fff;
+                    background-clip: padding-box;
+                    border: 1px solid #ced4da;
+                    border-radius: .25rem;
+                    height: 34px;
+                    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                }
+            </style>
         <body class="bg-light">
             <apex:form id="form">   
                 <apex:actionFunction name="afterSubmit" action="{!afterSubmit}" reRender="form"/>
@@ -42,8 +58,6 @@
                                 <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{!viewModel.account.LastName}</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                                     <apex:commandLink action="{!logOut}" value="登出" styleClass="dropdown-item"/>
-                                    <!-- <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a> -->
                                 </div>
                             </li>
                             <li class="nav-item ">
@@ -138,7 +152,7 @@
                                                         </div>
                                                         <div class="form-group form-row area-picker-parent">
                                                             <div class="col-4 city-picklist-parent">
-                                                                <apex:inputField value="{!sub.City_picklist__c}" styleClass="city_picker form-control h40px" />
+                                                                <apex:inputField value="{!sub.City_picklist__c}" styleClass="form-control h40px" />
                                                             </div>
                                                             <div class="col-4 area_picker_parent">          
                                                                 <apex:inputField value="{!sub.Area_picklist__c}"  styleClass="h40px form-control"/>
@@ -148,7 +162,7 @@
                                                             <apex:inputField value="{!sub.Address__c}" styleClass="form-control" style="width:66%"  html-placeholder="詳細地址"/>
                                                         </div>
                                                         <div class="form-group">
-                                                            <apex:inputField value="{!sub.Tel__c}" styleClass="form-control" style="width:66%"  html-placeholder="電話號碼"/>
+                                                            <apex:inputField value="{!sub.Tel__c}" styleClass="form-control" style="width:66%"  html-placeholder="電話 (市話請輸入區碼)"/>
                                                         </div>
                                                         <div class="form-group">
                                                             <apex:inputField value="{!sub.Email__c}" styleClass="form-control" style="width:66%"  html-placeholder="電子郵件"/>
