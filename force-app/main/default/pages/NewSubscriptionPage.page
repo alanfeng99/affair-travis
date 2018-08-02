@@ -74,7 +74,7 @@
                     <div class="form-group">
                         <apex:selectList value="{!programId}"  size="1" styleClass="form-control h40px" >
                             <apex:selectOptions value="{!ProgramSelection}" />
-                            <apex:actionSupport event="onchange" action="{!programPriceDecide}" reRender="form"/>     
+                            <apex:actionSupport event="onchange" action="{!programPriceDecide}" reRender="id_ResultPanel"/>     
                         </apex:selectList> 
                         
                     </div>
@@ -85,29 +85,32 @@
                         <div class="col-6">
                             <apex:selectRadio value="{!startPeriod}" layout="pageDirection" >
                                 <apex:selectOptions value="{!ProductRadioButton}"/>
-                                <apex:actionSupport event="onclick" action="{!pictureShow}" reRender="form"/>
+                                <apex:actionSupport event="onclick" action="{!pictureShow}" reRender="id_image"/>
                             </apex:selectRadio>
                         </div>
                         <div class="col-6">
-                            <apex:outputPanel rendered="{!productCdoe == product.ProductCode}" >
-                                <div >
-                                    <apex:image url="{!product.PicturePath__c}" styleClass="w120px h160px"/>
-                                </div>
-                            </apex:outputPanel> 
+                            <apex:panelGroup id="id_image">
+                                <apex:outputPanel rendered="{!productCdoe == product.ProductCode}" >
+                                    <div >
+                                        <apex:image url="{!product.PicturePath__c}" styleClass="w120px h160px"/>
+                                    </div>
+                                </apex:outputPanel>
+                            </apex:panelGroup>   
                         </div>
-                    </div>
-                   
-                    <apex:repeat value="{!tempSubscriptions}" var="tempSub">
-                        <hr class="w100"/>
-                        <small style="color:red"><apex:outputText rendered="{!showErrorForNullProgram}">請優先選擇訂閱方案，方能新增收件人</apex:outputText></small>
-                        <div>
+                    </div>  
+                    <apex:panelGroup id="id_recipient">
+                        <apex:repeat value="{!tempSubscriptions}" var="tempSub">
+                            <hr class="w100"/>
+                            <apex:panelGroup id="id_warn">
+                                    <small style="color:red"><apex:outputText rendered="{!showErrorForNullProgram}">請優先選擇訂閱方案，方能新增收件人</apex:outputText></small>
+                            </apex:panelGroup>                            
                             <div class="form-group form-row fontsize14px" >
                                 <div class="col">
                                     收件者資料 {!tempSub.Index__c}   
                                 </div>
                                 <div class="col" align="right">
-                                    <apex:commandLink value="+ 增訂一份" action="{!newSubscription}" reRender="form" rendered="{!tempSub.Index__c == 1}"/>
-                                    <apex:commandLink value="X 刪除" action="{!deleteSubscription}" reRender="form" rendered="{!tempSub.Index__c != 1}">
+                                    <apex:commandLink value="+ 增訂一份" action="{!newSubscription}"  rendered="{!tempSub.Index__c == 1}"/>
+                                    <apex:commandLink value="X 刪除" action="{!deleteSubscription}"  rendered="{!tempSub.Index__c != 1}">
                                         <apex:param name="deleteSub" assignTo="{!deleteRowId}" value="{!tempSub.Index__c}"/>
                                     </apex:commandLink>
                                 </div>    
@@ -119,17 +122,19 @@
                                 <div class="form-row form-group area-picker-parent fontsize14px" id="address">
                                     <small style="color:red" class="col-1">*</small>
                                     <div class="col-4 city-picklist-parent">
-                                        <apex:inputField value="{!tempSub.City_picklist__c}" styleClass="form-control h40px"/>
+                                        <apex:inputField value="{!tempSub.City_picklist__c}" styleClass="form-control h40px" style="padding:0px"/>
                                     </div>
                                     <div class="col-4 area-picklist-parent">
                                         <apex:inputField value="{!tempSub.Area_picklist__c}" styleClass="form-control h40px">
-                                            <apex:actionSupport event="onchange" action="{!zipcodeShow}" reRender="form" id="zipcodeshow"/>
+                                            <apex:actionSupport event="onchange" action="{!zipcodeShow}" reRender="id_postal" id="zipcodeshow"/>
                                         </apex:inputField>
                                     </div>  
                                     <div class="col-3 postal-code-picklist-parent">
-                                        <apex:inputText value="{!tempSub.Postal_code__c}" styleClass="form-control h40px" disabled="true" style="height:35px; background-color:white"/>
+                                        <apex:panelGroup id="id_postal">
+                                            <apex:inputText value="{!tempSub.Postal_code__c}" styleClass="form-control h40px" disabled="true" style="height:35px; background-color:white"/>
+                                        </apex:panelGroup>                                        
                                     </div>
-                                      
+                                    
                                 </div>
                                 <div class="form-group form-row">
                                     <div class="col-1"/>
@@ -142,9 +147,9 @@
                                 <div class="form-group form-row">
                                     <small style="color:red" class="col-1">*</small><apex:inputField value="{!tempSub.Email__c}" styleClass="col-11 form-control w100 h40px" html-placeholder="電子郵件"/>                        	
                                 </div> 
-                            </apex:outputPanel>   
-                        </div>
-                    </apex:repeat>
+                            </apex:outputPanel>  
+                        </apex:repeat>
+                    </apex:panelGroup> 
                     <hr class="w100"/>
                     <div class="fontsize14px">
                         付款方式
@@ -152,81 +157,86 @@
                     <div>
                         <apex:selectRadio value="{!paymentMethod }" styleClass="w100">
                             <apex:selectOptions value="{!paymentOptions}"/>
-                            <apex:actionSupport action="{!chooseCreditCard}" event="onchange" reRender="form"/>
+                            <apex:actionSupport action="{!chooseCreditCard}" event="onchange" reRender="id_Creditcard"/>
                         </apex:selectRadio>
                     </div>
-                    <apex:outputPanel rendered="{!IF(AND(isChooseCreditCard, viewModel.account.credit_card_number__c == null), true, false)}">
-                        <div class="form-group">
-                            <apex:input value="{!viewModel.creditCardBean.cc }" html-placeholder="信用卡號" styleClass="form-control w100 h40px"/>                            
-                        </div>    
-                        <div class="form-group form-row">
-                            <div class="col-5">
-                                <apex:selectList value="{!viewModel.creditCardBean.expireMonth}" size="1" styleClass="form-control h40px">
-                                    <apex:selectOptions value="{!Creditcard_Month}"/>
-                                </apex:selectList>
-                            </div>
-                            <div class="col-5">
-                                <apex:selectList value="{!viewModel.creditCardBean.expireYear}" size="1" styleClass="form-control h40px">
-                                    <apex:selectOptions value="{!Creditcard_Year}"/>
-                                </apex:selectList>
-                            </div>
-                            <div class="fontsize14px">
-                                到期日    
-                            </div>   
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-4">
-                                <apex:input value="{!viewModel.creditCardBean.cvc  }" html-placeholder="CVC" styleClass="form-control w100 h40px"/>                                 
-                            </div>
-                            <div class="fontsize14px">
-                                卡片背面後 3 碼
+                    <apex:panelGroup id="id_Creditcard">
+                        <apex:outputPanel rendered="{!IF(AND(isChooseCreditCard, viewModel.account.credit_card_number__c == null), true, false)}">
+                            <div class="form-group">
+                                <apex:input value="{!viewModel.creditCardBean.cc }" html-placeholder="信用卡號" styleClass="form-control w100 h40px"/>                            
                             </div>    
-                        </div>
-                    </apex:outputPanel>
-                    <apex:outputPanel rendered="{!IF(AND(isChooseCreditCard, viewModel.account.credit_card_number__c != null), true, false)}">
-                        <div class="form-group">
-                            <apex:outputField value="{!viewModel.account.credit_card_number__c}"></apex:outputField>
-                        </div>
-                    </apex:outputPanel>
-                    <apex:outputPanel rendered="{!IF(isChooseCreditCard, true, false)}">
-                        <div class="fontsize14px">
-                            信用卡訂閱提醒<br/>
-                            <div style="line-height:25px;">當您點選『確認訂閱』送出後，表示您同意我們收取本次的訂閱費用，並在訂閱到期時自動續訂付款，您可以隨時取消自動續訂服務。</div>
-                        </div>
-                    </apex:outputPanel>
+                            <div class="form-group form-row">
+                                <div class="col-5">
+                                    <apex:selectList value="{!viewModel.creditCardBean.expireMonth}" size="1" styleClass="form-control h40px">
+                                        <apex:selectOptions value="{!Creditcard_Month}"/>
+                                    </apex:selectList>
+                                </div>
+                                <div class="col-5">
+                                    <apex:selectList value="{!viewModel.creditCardBean.expireYear}" size="1" styleClass="form-control h40px">
+                                        <apex:selectOptions value="{!Creditcard_Year}"/>
+                                    </apex:selectList>
+                                </div>
+                                <div class="fontsize14px">
+                                    到期日    
+                                </div>   
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-4">
+                                    <apex:input value="{!viewModel.creditCardBean.cvc  }" html-placeholder="CVC" styleClass="form-control w100 h40px"/>                                 
+                                </div>
+                                <div class="fontsize14px">
+                                    卡片背面後 3 碼
+                                </div>    
+                            </div>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!IF(AND(isChooseCreditCard, viewModel.account.credit_card_number__c != null), true, false)}">
+                            <div class="form-group">
+                                <apex:outputField value="{!viewModel.account.credit_card_number__c}"></apex:outputField>
+                            </div>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!IF(isChooseCreditCard, true, false)}">
+                            <div class="fontsize14px">
+                                信用卡訂閱提醒<br/>
+                                <div style="line-height:25px;">當您點選『確認訂閱』送出後，表示您同意我們收取本次的訂閱費用，並在訂閱到期時自動續訂付款，您可以隨時取消自動續訂服務。</div>
+                            </div>
+                        </apex:outputPanel>
+                    </apex:panelGroup>
                     <hr class="w100"/>
                     <div class="form-group">
                         <apex:inputCheckbox value="{!firstSubscription.isInvoice__c }" id="Invoice">
-                            <apex:actionSupport event="onclick" action="{!chooseInvoice}" reRender="form"/>
+                            <apex:actionSupport event="onclick" action="{!chooseInvoice}" reRender="id_invoice"/>
                             <apex:param name="Invoice" assignTo="{!isInvoice}" value="{!firstSubscription.isInvoice__c }"/>
                         </apex:inputCheckbox>
                         <label class="form-check-label fontsize14px letterspacing1px" for="Invoice">
                             開立發票證明  
                         </label>
                     </div> 
-                    <apex:outputPanel rendered="{!isInvoice}">
-                        <div class="form-group">
-                            <apex:inputField value="{!firstSubscription.Tax_No__c}" html-placeholder="統一編號" styleClass="form-control w100 h40px" />                            
-                        </div>  
-                        <div class="form-group">
-                            <apex:inputField value="{!firstSubscription.Company_name__c}" html-placeholder="公司抬頭" styleClass="form-control w100 h40px" />                            
-                        </div>    
-                        <div class="form-group">
-                            <apex:inputField value="{!firstSubscription.Address_Invoice__c}" html-placeholder="發票寄送地址" styleClass="form-control w100 h40px" />                            
-                        </div> 
-                    </apex:outputPanel>
-                    <hr class="w100"/>
+                    <apex:panelGroup id="id_invoice">
+                        <apex:outputPanel rendered="{!isInvoice}">
+                            <div class="form-group">
+                                <apex:inputField value="{!firstSubscription.Tax_No__c}" html-placeholder="統一編號" styleClass="form-control w100 h40px" />                            
+                            </div>  
+                            <div class="form-group">
+                                <apex:inputField value="{!firstSubscription.Company_name__c}" html-placeholder="公司抬頭" styleClass="form-control w100 h40px" />                            
+                            </div>    
+                            <div class="form-group">
+                                <apex:inputField value="{!firstSubscription.Address_Invoice__c}" html-placeholder="發票寄送地址" styleClass="form-control w100 h40px" />                            
+                            </div> 
+                        </apex:outputPanel>
+                        <hr class="w100"/>
+                    </apex:panelGroup>
                     <small><apex:messages style="color:red"/></small>
-                    
                     <div class="form-row form-group">
                         <div class="col-md-1 col-sm-1 col-1"/>
                         <div class="col-md-11 col-sm-11 col-11 lineheight1px" align="right">
-                            <apex:outputPanel rendered="{!showProgramResult}"> 
-                                <div class="fontsize14px" style="color:#00ace6;">
-                                    {!programName}x {!subscriptionSize}，訂閱金額共：{!programTotalPrice}元
-                                </div>    
-                                <hr class="w100" color="#00ace6"/>
-                            </apex:outputPanel>
+                            <apex:panelGroup id="id_ResultPanel">
+                                <apex:outputPanel rendered="{!showProgramResult}"> 
+                                    <div class="fontsize14px" style="color:#00ace6;">
+                                        {!programName}x {!subscriptionSize}，訂閱金額共：{!programTotalPrice}元
+                                    </div>    
+                                    <hr class="w100" color="#00ace6"/>
+                                </apex:outputPanel>
+                            </apex:panelGroup>
                             <apex:commandButton value="確認訂閱" action="{!submitForm}" reRender="form" onclick="this.onclick=function(){return false;}"  styleClass="btn btn-main"/>                      
                         </div> 
                     </div>
