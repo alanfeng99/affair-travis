@@ -331,12 +331,19 @@
                                                         </div>
                                                     </apex:outputPanel>
                                                     <apex:outputPanel rendered="{!IF(viewModel.account.Password__c == null, true, false)}">
-                                                        <div>
-                                                            若要設定密碼，請先登出帳號，
+                                                    <div class="form-group form-row">
+                                                        <div class="col-auto">
+                                                            <div>
+                                                                若要設定密碼，請先登出帳號，
+                                                            </div>
+                                                            <div>
+                                                                點選忘記密碼來設定密碼
+                                                            </div>                                                      
                                                         </div>
-                                                        <div>
-                                                            點選忘記密碼來設定密碼
+                                                        <div class="col-auto">
+                                                            <apex:commandLink value="取消" action="{!cancelChange}" reRender="form"/>     
                                                         </div>
+                                                    </div>    
                                                     </apex:outputPanel>
                                                 </td>
                                             </tr>
