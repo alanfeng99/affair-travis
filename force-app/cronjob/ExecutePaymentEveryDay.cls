@@ -1,7 +1,7 @@
 global class ExecutePaymentEveryDay implements Schedulable {
 
     // Every 1 hour cause Salesforce does not execute more often than hour even if trick possible
-    public static String CRON_EXPR = '0 0 0 ? * * *';
+    public static String CRON_EXPR = '0 10 * * * *';
     /*
     0 0 0 ? * * *	at 12:00 AM every day
     0 0 10 ? * *	at 10.00 AM every day
@@ -17,10 +17,19 @@ global class ExecutePaymentEveryDay implements Schedulable {
     0 0 12 * * ?	at 12:00 PM every day
     0 0 23 * * ? 2016	runs every day at 11:00 PM during the year 2016.
     */
+
+    /*
+    ExecutePaymentEveryDay.scheduleIt('Execute payment 0', '0 0 * * * ?');
+    ExecutePaymentEveryDay.scheduleIt('Execute payment 10', '0 10 * * * ?');
+    ExecutePaymentEveryDay.scheduleIt('Execute payment 20', '0 20 * * * ?');
+    ExecutePaymentEveryDay.scheduleIt('Execute payment 30', '0 30 * * * ?');
+    ExecutePaymentEveryDay.scheduleIt('Execute payment 40', '0 40 * * * ?');
+    ExecutePaymentEveryDay.scheduleIt('Execute payment 50', '0 50 * * * ?');
+	*/
    
-    global static String scheduleIt() {
+    global static String scheduleIt(String name, String cronExpr) {
         ExecutePaymentEveryDay job = new ExecutePaymentEveryDay();
-        return System.schedule('Execute daily payment', CRON_EXPR, job);
+        return System.schedule(name, cronExpr, job);
     }
   
     global void execute(SchedulableContext sc) {
@@ -29,7 +38,7 @@ global class ExecutePaymentEveryDay implements Schedulable {
     }
 
     public void checkDailyPaymentForEveryUsers() {
-        List<Subscription__c> subscriptions = [SELECT Payment_method__c, Start_period__c, End_period__c, Program__c, Amount__c, AccountStandard__c FROM Subscription__c WHERE Payment_method__c = :Constants.PAYMENT_METHOD_CREDIT_CARD AND isReplenish__c = true];
+        List<Subscription__c> subscriptions = [SELECT Payment_method__c, Start_period__c, End_period__c, Program__c, Amount__c, AccountStandard__c FROM Subscription__c WHERE Payment_method__c = :Constants.PAYMENT_METHOD_CREDIT_CARD AND isReplenish__c = true LIMIT 10];
         List<Product2> products = [SELECT EndDate__c, ProductCode FROM Product2];
         List<SubscriptionProgram__c> programs = [SELECT Order_Period__c, ProgramId__c, Name FROM SubscriptionProgram__c];
         List<Account> accounts = [SELECT LastName, PersonEmail FROM Account];
