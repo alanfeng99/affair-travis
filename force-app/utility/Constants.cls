@@ -9,7 +9,7 @@ public class Constants {
     public static String PROCESS_CODE_CHANGE_CREDIT_CARD = '3';
     public static String PROCESS_CODE_DELETE_CREDIT_CARD = '10';
 
-    public static Integer COOKIE_DURATION = -1;
+    public static Integer COOKIE_DURATION = 1200;
 
     public static String PAYMENT_METHOD_CREDIT_CARD = '信用卡';
     public static String PAYMENT_METHOD_SUPER_PAYMENT = '超商付款';

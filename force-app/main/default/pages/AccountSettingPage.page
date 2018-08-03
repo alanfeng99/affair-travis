@@ -23,7 +23,7 @@
             function onSuccess(googleUser) {
                     var url = new URL(window.location.href);
                     var profile = googleUser.getBasicProfile();
-                    linkAccountWithWithGoogleJS(profile.getEmail());
+                    linkAccountWithGoogleJS(profile.getEmail());
                 }
 
                 function onFailure(error) {
@@ -54,7 +54,7 @@
                         var url = new URL(window.location.href);
                         if (response.authResponse != null) {
                             FB.api('/me', { locale: 'en_US', fields: 'name, email' }, function(response) {
-                                linkAccountWithGoogleJS(response.email);
+                                linkAccountWithFacebookJS(response.email);
                             });
                         }
                         
