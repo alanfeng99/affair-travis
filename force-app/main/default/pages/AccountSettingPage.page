@@ -368,11 +368,43 @@
                                                         <div class="form-group">
                                                             <div id="my-signin2" class="g-signin2" data-onsuccess="onSignIn"></div>  
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                            </table>       
-                                        </apex:outputPanel>
-                                    </apex:panelGroup>
+                                                    </div>    
+                                                    </apex:outputPanel>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel >
+                                        <table class="table table-bordered" style="background-color:white" >
+                                            <tr>
+                                                <td>
+                                                    與外部的帳號建立聯結
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <apex:outputPanel rendered="{!IF(viewModel.account.FacebookEmail__c == null, true, false)}">
+                                                        <div class="form-group">
+                                                            <div id="fbLogin" class="fb-login-button" data-max-rows="1" data-size="large" data-scope="public_profile,email"
+                                                            data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" width="340"></div>
+                                                        </div>
+                                                    </apex:outputPanel>
+                                                    <apex:outputPanel rendered="{!IF(viewModel.account.GoogleEmail__c == null, true, false)}">
+                                                        <div class="form-group">
+                                                            <div id="my-signin2" class="g-signin2" data-onsuccess="onSignIn"></div>  
+                                                        </div>
+                                                    </apex:outputPanel>
+                                                    <apex:outputPanel rendered="{!IF(viewModel.account.FacebookEmail__c == null, false, true)}">
+                                                        Facebook: <apex:outputField value="{!viewModel.account.FacebookEmail__c}"/>
+                                                    </apex:outputPanel>
+                                                    <br/>
+                                                    <apex:outputPanel rendered="{!IF(viewModel.account.GoogleEmail__c == null, false, true)}">
+                                                        Google: <apex:outputField value="{!viewModel.account.GoogleEmail__c}"/>
+                                                    </apex:outputPanel>
+                                                </td>
+                                            </tr>
+                                        </table>       
+                                    </apex:outputPanel>
                                 </div>
                                 
                     </div>
