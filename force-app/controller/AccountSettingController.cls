@@ -11,7 +11,10 @@ public with sharing class AccountSettingController extends ApexBaseController {
     public Boolean isChangeEmail {get; set;}
     public Boolean isChangePassword {get; set;}
     public Boolean ifChangeEmail {get; set;}
-    public Boolean updatedCreditCard {get; set;} 
+    public Boolean updatedCreditCard {get; set;}
+
+    public String facebookUserEmail {get; set;}
+    public String googleUserEmail {get; set;}
 
     public AccountSettingController() {
         Cookie accountIdCookie = ApexPages.currentPage().getCookies().get(Label.COOKIE_ACCOUNT_ID);
@@ -198,5 +201,27 @@ public with sharing class AccountSettingController extends ApexBaseController {
         Cookie authToken = new Cookie(Label.COOKIE_AUTH_TOKEN, token, null, Constants.COOKIE_DURATION, false);
         Cookie accountId = new Cookie(label.COOKIE_ACCOUNT_ID, realAccount.Id, null, Constants.COOKIE_DURATION, false);
         ApexPages.currentPage().setCookies(new Cookie[]{authToken, accountId});
+    }
+
+    public Pagereference linkAccountWithGoogle() {
+        if (googleUserEmail == null)
+            addMessage(Apexpages.Severity.ERROR, 'Link Google wrong.');
+
+        viewModel.account.GoogleEmail__c = googleUserEmail;
+        if (!AccountModel.updateAccount(viewModel.account))
+            addMessage(Apexpages.Severity.ERROR, 'Link Google wrong.');
+
+        return null;
+    }
+
+    public Pagereference linkAccountWithFacebook() {
+        if (facebookUserEmail == null)
+            addMessage(Apexpages.Severity.ERROR, 'Link Facebook wrong.');
+
+        viewModel.account.FacebookEmail__c = facebookUserEmail;
+        if (!AccountModel.updateAccount(viewModel.account))
+            addMessage(Apexpages.Severity.ERROR, 'Link Google wrong.');
+
+        return null;
     }
 }
