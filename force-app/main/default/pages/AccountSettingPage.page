@@ -126,8 +126,8 @@
                     <div class="card-header bg-white" style="margin-top: 28px;">                  
                         <div align="center" style="line-height:20px;">
                             <br/><br/>
-                            <div class="letterspacing3px" style="font-size:20px;">帳戶設定</div><br/>
-                            <div style="font-size:12px;">編輯修改你的個人帳號</div>
+                            <div class="letterspacing3px fontsize20px">帳戶設定</div><br/>
+                            <div class="fontsize12px">編輯修改你的個人帳號</div>
                         </div>
                     </div>
                     <apex:outputPanel rendered="{!updatedCreditCard}">
@@ -136,282 +136,261 @@
                     <br/>
                     <div class="card-body " style="line-height:25px; font-size:14px;"> 
                         <div class="container" style="max-width:400px;"> 
-          
-                                    <div class="form-group" style="font-size:15px;">
-                                        你目前使用 {!viewModel.account.PersonEmail } 做為登入信箱。
-                                    </div>
-                                    <apex:outputText style="font-color:red; font-size:12px;" rendered="{!ifChangeEmail}">您已更改電子郵件，請至信箱重新認證帳號</apex:outputText>
-                                    <small><apex:messages style="color:red"/></small>
-                                    <apex:panelGroup id="id_show">
-                                        <apex:outputPanel rendered="{!isMainShow}">
-                                            <table class="table  table-bordered" style="background-color:white">
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-row">
-                                                            <div class="col-auto">
-                                                                暱稱：
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                {!viewModel.account.LastName} 
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <apex:commandLink value="變更" action="{!changeName}" reRender="id_show"/>  
-                                                            </div>
+                            <div class="form-group fontsize15px">
+                                你目前使用 {!viewModel.account.PersonEmail } 做為登入信箱。
+                            </div>
+                            <apex:outputText styleClass="fontsize12px" style="font-color:red;" rendered="{!ifChangeEmail}">您已更改電子郵件，請至信箱重新認證帳號</apex:outputText>
+                            <small><apex:messages style="color:red"/></small>
+                            <apex:panelGroup id="id_show">
+                                <apex:outputPanel rendered="{!isMainShow}">
+                                    <table class="table  table-bordered" style="background-color:white">
+                                        <tr>
+                                            <td>
+                                                <div class="form-row">
+                                                    <div class="col-auto">
+                                                        暱稱：
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        {!viewModel.account.LastName} 
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <apex:commandLink value="變更" action="{!changeName}" reRender="id_show"/>  
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-row">
+                                                    <div class="col-auto">
+                                                        信箱：
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        {!viewModel.account.PersonEmail}
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <apex:commandLink value="變更" action="{!changeEmail}" reRender="id_show"/>  
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-row">
+                                                    <div class="col-auto">
+                                                        密碼：
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        {!viewModel.account.Password__c}
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <apex:commandLink value="變更" action="{!changePassword}" reRender="id_show"/>  
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-row">
+                                                    <div class="col-auto">
+                                                        信用卡：
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        {!viewModel.account.credit_card_number__c}
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <apex:commandLink value="變更" action="{!changeCreditCard}" reRender="id_show"/>  
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>                          
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!isChangeName}">
+                                    <table class="table  table-bordered" style="background-color:white">
+                                        <tr>
+                                            <td>
+                                                <div class="form-group">
+                                                    請輸入新的暱稱 
+                                                </div>
+                                                <div class="form-group">
+                                                    <apex:input value="{!viewModel.newLastName}" style="width:60%" html-placeholder="暱稱"/>
+                                                </div>
+                                                
+                                                <div class="form-group form-row">
+                                                    <div class="col-auto">
+                                                        <apex:commandButton value="儲存變更" action="{!submitName}" reRender="form" styleClass="btn btn-savechange"/>     
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <apex:commandLink value="取消" action="{!cancelChange}" reRender="form"/>     
+                                                    </div>          
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!isChangeEmail}">
+                                    <table class="table  table-bordered" style="background-color:white">
+                                        <tr>
+                                            <td>
+                                                <div class="form-row">
+                                                    <div class="col-auto">
+                                                        暱稱：
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        {!viewModel.account.LastName} 
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <apex:commandLink value="變更" action="{!changeName}" reRender="form"/>  
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-group">
+                                                    請輸入變更後的電子信箱<br/>
+                                                    <small>Email 信箱變更後需要再重新驗證已確認信箱無誤</small>
+                                                </div>  
+                                                <div class="form-group">
+                                                    <apex:input value="{!viewModel.newEmail}" html-placeholder="電子信箱" style="width:200px;"/>
+                                                </div>
+                                                <div class="form-group form-row">
+                                                    <div class="col-auto">
+                                                        <apex:commandButton value="儲存變更" action="{!submitEmail}" styleClass="btn btn-savechange" reRender="form"/>     
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <apex:commandLink value="取消" immediate="true" action="{!cancelChange}" reRender="form"/>     
+                                                    </div>          
+                                                </div>        
+                                            </td>
+                                        </tr>
+                                    </table>   
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!isChangePassword}">
+                                    <table class="table  table-bordered" style="background-color:white">
+                                        <tr>
+                                            <td>
+                                                <div class="form-row">
+                                                    <div class="col-auto">
+                                                        暱稱：
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        {!viewModel.account.LastName} 
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <apex:commandLink value="變更" action="{!changeName}"/>  
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-row">
+                                                    <div class="col-auto">
+                                                        信箱：
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        {!viewModel.account.PersonEmail} 
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <apex:commandLink value="變更" action="{!changeEmail}"/>  
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <apex:outputPanel rendered="{!IF(viewModel.account.Password__c != null, true, false)}">
+                                                    <div >
+                                                        請輸入目前的密碼<br/>
+                                                        <small>請輸入你目前設定的密碼以確認身份</small><br/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <apex:inputSecret value="{!accountOld.Password__c}" style="width:70%" html-placeholder="舊密碼"/><br/>
+                                                    </div>
+                                                    <div >
+                                                        新密碼
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <apex:inputSecret value="{!accountNew.Password__c}" style="width:70%" html-placeholder="新密碼"/><br/>
+                                                    </div>
+                                                    <div >
+                                                        再輸入一次新密碼
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <apex:inputSecret value="{!accountVerify.Password__c}" style="width:70%" html-placeholder="再輸入一次新密碼"/><br/>
+                                                    </div>
+                                                    <div class="form-group form-row">
+                                                        <div class="col-auto">
+                                                            <apex:commandButton value="儲存變更" action="{!submitPassword}" styleClass="btn btn-savechange" reRender="form"/>     
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-row">
-                                                            <div class="col-auto">
-                                                                信箱：
+                                                        <div class="col-auto">
+                                                            <apex:commandLink value="取消" action="{!cancelChange}" reRender="form"/>     
+                                                        </div>       
+                                                    </div>
+                                                </apex:outputPanel>
+                                                <apex:outputPanel rendered="{!IF(viewModel.account.Password__c == null, true, false)}">
+                                                    <div class="form-group form-row">
+                                                        <div class="col-auto">
+                                                            <div>
+                                                                若要設定密碼，請先登出帳號，
                                                             </div>
-                                                            <div class="col-auto">
-                                                                {!viewModel.account.PersonEmail}
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <apex:commandLink value="變更" action="{!changeEmail}" reRender="id_show"/>  
-                                                            </div>
+                                                            <div>
+                                                                點選忘記密碼來設定密碼
+                                                            </div>                                                      
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-row">
-                                                            <div class="col-auto">
-                                                                密碼：
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                {!viewModel.account.Password__c}
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <apex:commandLink value="變更" action="{!changePassword}" reRender="id_show"/>  
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-row">
-                                                            <div class="col-auto">
-                                                                信用卡：
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                {!viewModel.account.credit_card_number__c}
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <apex:commandLink value="變更" action="{!changeCreditCard}" reRender="id_show"/>  
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </table>                          
-                                        </apex:outputPanel>
-                                        <apex:outputPanel rendered="{!isChangeName}">
-                                            <table class="table  table-bordered" style="background-color:white">
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            請輸入新的暱稱 
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <apex:input value="{!viewModel.newLastName}" style="width:60%" html-placeholder="暱稱"/>
-                                                        </div>
-                                                        
-                                                        <div class="form-group form-row">
-                                                            <div class="col-auto">
-                                                                <apex:commandButton value="儲存變更" action="{!submitName}" reRender="form" styleClass="btn btn-savechange"/>     
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <apex:commandLink value="取消" action="{!cancelChange}" reRender="form"/>     
-                                                            </div>          
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </table>   
-                                        </apex:outputPanel>
-                                        <apex:outputPanel rendered="{!isChangeEmail}">
-                                            <table class="table  table-bordered" style="background-color:white">
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-row">
-                                                            <div class="col-auto">
-                                                                暱稱：
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                {!viewModel.account.LastName} 
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <apex:commandLink value="變更" action="{!changeName}" reRender="form"/>  
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            請輸入變更後的電子信箱<br/>
-                                                            <small>Email 信箱變更後需要再重新驗證已確認信箱無誤</small>
-                                                        </div>  
-                                                        <div class="form-group">
-                                                            <apex:input value="{!viewModel.newEmail}" html-placeholder="電子信箱" style="width:200px;"/>
-                                                        </div>
-                                                        <div class="form-group form-row">
-                                                            <div class="col-auto">
-                                                                <apex:commandButton value="儲存變更" action="{!submitEmail}" styleClass="btn btn-savechange" reRender="form"/>     
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <apex:commandLink value="取消" immediate="true" action="{!cancelChange}" reRender="form"/>     
-                                                            </div>          
-                                                        </div>        
-                                                    </td>
-                                                </tr>
-                                            </table>   
-                                        </apex:outputPanel>
-                                        <apex:outputPanel rendered="{!isChangePassword}">
-                                            <table class="table  table-bordered" style="background-color:white">
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-row">
-                                                            <div class="col-auto">
-                                                                暱稱：
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                {!viewModel.account.LastName} 
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <apex:commandLink value="變更" action="{!changeName}"/>  
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-row">
-                                                            <div class="col-auto">
-                                                                信箱：
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                {!viewModel.account.PersonEmail} 
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <apex:commandLink value="變更" action="{!changeEmail}"/>  
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <apex:outputPanel rendered="{!IF(viewModel.account.Password__c != null, true, false)}">
-                                                            <div >
-                                                                請輸入目前的密碼<br/>
-                                                                <small>請輸入你目前設定的密碼以確認身份</small><br/>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <apex:inputSecret value="{!accountOld.Password__c}" style="width:70%" html-placeholder="舊密碼"/><br/>
-                                                            </div>
-                                                            <div >
-                                                                新密碼
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <apex:inputSecret value="{!accountNew.Password__c}" style="width:70%" html-placeholder="新密碼"/><br/>
-                                                            </div>
-                                                            <div >
-                                                                再輸入一次新密碼
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <apex:inputSecret value="{!accountVerify.Password__c}" style="width:70%" html-placeholder="再輸入一次新密碼"/><br/>
-                                                            </div>
-                                                            <div class="form-group form-row">
-                                                                <div class="col-auto">
-                                                                    <apex:commandButton value="儲存變更" action="{!submitPassword}" styleClass="btn btn-savechange" reRender="form"/>     
-                                                                </div>
-                                                                <div class="col-auto">
-                                                                    <apex:commandLink value="取消" action="{!cancelChange}" reRender="form"/>     
-                                                                </div>       
-                                                            </div>
-                                                        </apex:outputPanel>
-                                                        <apex:outputPanel rendered="{!IF(viewModel.account.Password__c == null, true, false)}">
-                                                            <div class="form-group form-row">
-                                                                <div class="col-auto">
-                                                                    <div>
-                                                                        若要設定密碼，請先登出帳號，
-                                                                    </div>
-                                                                    <div>
-                                                                        點選忘記密碼來設定密碼
-                                                                    </div>                                                      
-                                                                </div>
-                                                                <div class="col-auto">
-                                                                    <br/>
-                                                                    <apex:commandLink value="取消" action="{!cancelChange}" reRender="form"/>     
-                                                                </div>
-                                                            </div>    
-                                                        </apex:outputPanel>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </apex:outputPanel>
-                                        <apex:outputPanel >
-                                            <table class="table table-bordered" style="background-color:white" >
-                                                <tr>
-                                                    <td>
-                                                        與外部的帳號建立聯結
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <div id="fbLogin" class="fb-login-button" data-max-rows="1" data-size="large" data-scope="public_profile,email"
-                                                            data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" width="340"></div>
-                                                        </div>
-                                                        
-                                                        <div class="form-group">
-                                                            <div id="my-signin2" class="g-signin2" data-onsuccess="onSignIn"></div>  
+                                                        <div class="col-auto">
+                                                            <br/>
+                                                            <apex:commandLink value="取消" action="{!cancelChange}" reRender="form"/>     
                                                         </div>
                                                     </div>    
-                                                    </apex:outputPanel>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </apex:outputPanel>
-                                    <apex:outputPanel >
-                                        <table class="table table-bordered" style="background-color:white" >
-                                            <tr>
-                                                <td>
-                                                    與外部的帳號建立聯結
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <apex:outputPanel rendered="{!IF(viewModel.account.FacebookEmail__c == null, true, false)}">
-                                                        <div class="form-group">
-                                                            <div id="fbLogin" class="fb-login-button" data-max-rows="1" data-size="large" data-scope="public_profile,email"
-                                                            data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" width="340"></div>
-                                                        </div>
-                                                    </apex:outputPanel>
-                                                    <apex:outputPanel rendered="{!IF(viewModel.account.GoogleEmail__c == null, true, false)}">
-                                                        <div class="form-group">
-                                                            <div id="my-signin2" class="g-signin2" data-onsuccess="onSignIn"></div>  
-                                                        </div>
-                                                    </apex:outputPanel>
-                                                    <apex:outputPanel rendered="{!IF(viewModel.account.FacebookEmail__c == null, false, true)}">
-                                                        Facebook: <apex:outputField value="{!viewModel.account.FacebookEmail__c}"/>
-                                                    </apex:outputPanel>
-                                                    <br/>
-                                                    <apex:outputPanel rendered="{!IF(viewModel.account.GoogleEmail__c == null, false, true)}">
-                                                        Google: <apex:outputField value="{!viewModel.account.GoogleEmail__c}"/>
-                                                    </apex:outputPanel>
-                                                </td>
-                                            </tr>
-                                        </table>       
-                                    </apex:outputPanel>
-                                </div>
-                                
+                                                </apex:outputPanel>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </apex:outputPanel>
+                            </apex:panelGroup>
+                            
+                        </div>   
                     </div>
                 </div>   
+            </apex:form>
+            <apex:form id="form_2">
+                <div align="center">
+                    <table class="table table-bordered" style="background-color:white; max-width:370px;" >
+                        <tr>
+                            <td>
+                                與外部的帳號建立聯結
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputPanel rendered="{!IF(viewModel.account.FacebookEmail__c == null, true, false)}">
+                                    <div class="form-group">
+                                        <div id="fbLogin" class="fb-login-button" data-max-rows="1" data-size="large" data-scope="public_profile,email"
+                                        data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" width="340"></div>
+                                    </div>
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!IF(viewModel.account.GoogleEmail__c == null, true, false)}">
+                                    <div class="form-group">
+                                        <div id="my-signin2" class="g-signin2" data-onsuccess="onSignIn"></div>  
+                                    </div>
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!IF(viewModel.account.FacebookEmail__c == null, false, true)}">
+                                    Facebook: <apex:outputField value="{!viewModel.account.FacebookEmail__c}"/>
+                                </apex:outputPanel>
+                                <br/>
+                                <apex:outputPanel rendered="{!IF(viewModel.account.GoogleEmail__c == null, false, true)}">
+                                    Google: <apex:outputField value="{!viewModel.account.GoogleEmail__c}"/>
+                                </apex:outputPanel>
+                            </td>
+                        </tr>
+                    </table>       
+                </div>            
             </apex:form>   
             <div class="footer text-muted text-right">
-                <hr style="width:100%"/>
+                <hr class="w100"/>
                 <p>
                     The Affairs Mediuum Ltd. 編集者新聞社有限公司
                 </p>
