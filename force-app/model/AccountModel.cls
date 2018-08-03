@@ -30,6 +30,24 @@ public with sharing class AccountModel {
         }
     }
 
+    public static Account getAccountByOnlyGoogleEmail(String googleEmail) {
+        List<Account> accounts = [Select Id, PasswordRetry__c, Account_ID__c, Locked__c, AccountNumber, Active__c, PersonEmail, LastName, Password__c, GoogleEmail__c, FacebookEmail__c from Account where GoogleEmail__c = :googleEmail];
+        if (accounts.size() > 0) {
+            return accounts.get(0);
+        } else { 
+            return null;
+        }
+    }
+
+    public static Account getAccountByOnlyFacebookEmail(String facebookEmail) {
+        List<Account> accounts = [Select Id, PasswordRetry__c, Account_ID__c, Locked__c, AccountNumber, Active__c, PersonEmail, LastName, Password__c, GoogleEmail__c, FacebookEmail__c from Account where FacebookEmail__c = :facebookEmail];
+        if (accounts.size() > 0) {
+            return accounts.get(0);
+        } else { 
+            return null;
+        }
+    }
+
     public static void lockAccountForThreeTimes(Account account) {
         account.Locked__c = true;
         account.PasswordRetry__c = 0;
