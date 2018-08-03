@@ -1,5 +1,6 @@
 public with sharing class LoginController extends ApexBaseController {
     public LoginViewModel viewModel {get; set;}
+    public String loginEmail {get; set;}
     public String facebookUserEmail {get; set;}
     public String facebookUserID {get; set;}
     public String facebookUserName {get; set;}
@@ -20,12 +21,17 @@ public with sharing class LoginController extends ApexBaseController {
     }
 
     public Pagereference checkAuthentication() {
-        if(viewModel.account.Password__c == null || viewModel.account.PersonEmail == null) {
+        if (viewModel.account.Password__c == null || loginEmail == null) {
             addMessage(Apexpages.Severity.WARNING, System.Label.Msg_Login_AccountPasswordEmpty);
             return null;
         }
 
-        Account realAccount = AccountModel.getAccountByEmail(viewModel.account.PersonEmail);
+        // if (EmailUtility.emailFormatValidation(loginEmail)) {
+        //     addMessage(Apexpages.Severity.WARNING, System.Label.Msg_EmailFormat);
+        //     return null;
+        // }
+
+        Account realAccount = AccountModel.getAccountByEmail(loginEmail);
         if (!isAccountAndPasswordValid(realAccount))
             return null;
 
