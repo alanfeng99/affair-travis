@@ -87,7 +87,8 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
     }
 
     public Pagereference afterSubmit() {
-        viewModel.subscriptions = SubscriptionModel.getSubscriptionsByUserId(viewModel.account.Id);
+        if (checkField())
+            viewModel.subscriptions = SubscriptionModel.getSubscriptionsByUserId(viewModel.account.Id);
         return null;
     }
 
