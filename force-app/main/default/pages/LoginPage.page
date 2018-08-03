@@ -6,7 +6,7 @@
         <!-- Required meta tags -->
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-        <meta name="google-signin-client_id" content="96182436003-3882ubjvc2h62m5tp4tso2dluamdtvja.apps.googleusercontent.com" />
+        <meta name="google-signin-client_id" content="460302933995-0dvvjqjl832ttipjg9plbipc5fe49n63.apps.googleusercontent.com" />
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
               crossorigin="anonymous"/>
@@ -72,7 +72,7 @@
             
             window.fbAsyncInit = function() {
                 FB.init({
-                    appId      : '220395842018721',
+                    appId      : '2130092460648420',
                     cookie     : true,
                     xfbml      : true,
                     version    : 'v2.8'
