@@ -26,10 +26,10 @@ public with sharing class LoginController extends ApexBaseController {
             return null;
         }
 
-        // if (EmailUtility.emailFormatValidation(loginEmail)) {
-        //     addMessage(Apexpages.Severity.WARNING, System.Label.Msg_EmailFormat);
-        //     return null;
-        // }
+        if (!EmailUtility.emailFormatValidation(loginEmail)) {
+            addMessage(Apexpages.Severity.WARNING, System.Label.Msg_EmailFormat);
+            return null;
+         }
 
         Account realAccount = AccountModel.getAccountByEmail(loginEmail);
         if (!isAccountAndPasswordValid(realAccount))
