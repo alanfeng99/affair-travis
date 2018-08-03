@@ -88,7 +88,7 @@ public with sharing class AccountSettingController extends ApexBaseController {
     }
 
     public Pagereference submitName() {
-        if (viewModel.newLastName == null) 
+        if (viewModel.newLastName == null || String.isBlank(viewModel.newLastName)) 
             addMessage(Apexpages.Severity.ERROR, System.Label.Msg_NameEmpty);
         else {
             if(viewModel.updateName()) {
@@ -100,7 +100,7 @@ public with sharing class AccountSettingController extends ApexBaseController {
     }
 
     public Pagereference submitEmail() {
-        if (viewModel.newEmail == null) 
+        if (viewModel.newEmail == null || String.isBlank(viewModel.newEmail)) 
             addMessage(Apexpages.Severity.ERROR, System.Label.Msg_EmailEmpty);
         else {
             if (viewModel.updateEmail()) {
