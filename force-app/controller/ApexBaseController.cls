@@ -1,10 +1,5 @@
 public virtual class ApexBaseController {
-
     public String baseErrorMessage {get; set;}
-
-    public ApexBaseController() {
-        
-    }
 
     public virtual void addMessage(ApexPages.Severity severity, String message) {
         baseErrorMessage = message;

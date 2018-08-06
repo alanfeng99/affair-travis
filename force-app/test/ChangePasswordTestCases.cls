@@ -77,4 +77,23 @@ public  class ChangePasswordTestCases {
         System.assertEquals(System.Label.Msg_UpdateCompleted, controller.baseErrorMessage);
         System.assertNotEquals(null, page);
     }
+
+    public static testMethod void testCheckAutoLogin_NoCookie_Return_Null() {
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ggg.com'];
+        Test.setCurrentPage(Page.RegisterResultPage);
+        ApexPages.currentPage().getParameters().put('id',account.id);
+        ChangePasswordController controller = new ChangePasswordController();
+        Pagereference page = controller.checkAutoLogin();
+        System.assertEquals(null, page);
+    }
+
+    public static testMethod void testCheckAutoLogin() {
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@ggg.com'];
+        Test.setCurrentPage(Page.RegisterResultPage);
+        ApexPages.currentPage().getParameters().put('id',account.id);
+        ChangePasswordController controller = new ChangePasswordController();
+        controller.saveLoginCookies(controller.viewModel.account);
+        Pagereference page = controller.checkAutoLogin();
+        System.assertNotEquals(null, page);
+    }
 }
