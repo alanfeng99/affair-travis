@@ -35,6 +35,9 @@ public with sharing class ApexUtility {
     }
 
     public static String getUserIPAddress() {
+        if(Test.isRunningTest()){
+            return '0.0.0.0';
+        }
         HttpRequest req = new HttpRequest();
         req.setMethod('GET');
         req.setHeader('content-type', 'application/json');
@@ -47,7 +50,7 @@ public with sharing class ApexUtility {
         		
         return responseBodyMapped.get('IP');
     }
-    
+
     public static GMOPaymentBean__c generateGMOPaymentBeanForCancel(Account account, Order order) {
         GMOPaymentBean__c gmoPaymentBean = generateGMOPaymentBean(account, order);
         gmoPaymentBean.process_code__c = Constants.PROCESS_CODE_DELETE_CREDIT_CARD;

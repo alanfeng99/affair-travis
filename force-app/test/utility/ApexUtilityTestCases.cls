@@ -57,4 +57,49 @@ public with sharing class ApexUtilityTestCases {
         System.assertNotEquals(null, actual);
         System.assertEquals(objectSource.Email__c, actual.Email);
     }
+
+    @isTest
+    private static void test_generateGMOPaymentBeanForCancel() {
+        Account account = new Account(PersonEmail = 'jin@fff.com', LastName = 'Jin', Password__c = '1234qwer');
+        Order order = new Order();
+        order.paymentMethod = Constants.PAYMENT_METHOD_ATM;
+        order.itemCode = '0';
+        order.itemName = 'Test';
+        order.totalPrice = '0';
+        ApexUtility.generateGMOPaymentBeanForCancel(account, order);
+    }
+
+    @isTest
+    private static void test_generateGMOPaymentBeanForChange() {
+        Account account = new Account(PersonEmail = 'jin@fff.com', LastName = 'Jin', Password__c = '1234qwer');
+        Order order = new Order();
+        order.paymentMethod = Constants.PAYMENT_METHOD_ATM;
+        order.itemCode = '0';
+        order.itemName = 'Test';
+        order.totalPrice = '0';
+        CreditCardBean creditCardBean = new CreditCardBean();
+        creditCardBean.cc = '4123412341234123';
+        creditCardBean.expireYear = '01';
+        creditCardBean.expireMonth = '2020';
+        creditCardBean.cvc = '123';
+
+        ApexUtility.generateGMOPaymentBeanForChange(account, order, creditCardBean);
+    }
+
+    @isTest
+    private static void test_generateGMOPaymentBeanForPayment() {
+        Account account = new Account(PersonEmail = 'jin@fff.com', LastName = 'Jin', Password__c = '1234qwer');
+        Order order = new Order();
+        order.paymentMethod = Constants.PAYMENT_METHOD_ATM;
+        order.itemCode = '0';
+        order.itemName = 'Test';
+        order.totalPrice = '0';
+        CreditCardBean creditCardBean = new CreditCardBean();
+        creditCardBean.cc = '4123412341234123';
+        creditCardBean.expireYear = '01';
+        creditCardBean.expireMonth = '2020';
+        creditCardBean.cvc = '123';
+
+        ApexUtility.generateGMOPaymentBeanForPayment(account, order, creditCardBean);
+    }
 }
