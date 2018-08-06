@@ -7,10 +7,12 @@ public with sharing class PaymentResultViewModel {
     }
 
     public SubscriptionGMOPaymentBean__c getSubGMOPaymentBean(String orderId) {
-        SubscriptionGMOPaymentBean__c subGMOPaymentBean = [SELECT GMOPaymentBeanId__c, SubscriptionId__c FROM SubscriptionGMOPaymentBean__c
+        List<SubscriptionGMOPaymentBean__c> subGMOPaymentBeans = [SELECT GMOPaymentBeanId__c, SubscriptionId__c FROM SubscriptionGMOPaymentBean__c
                             WHERE GMOPaymentBeanId__c = :orderId];
+        if (subGMOPaymentBeans.size() != 1) 
+            return null;
 
-        return subGMOPaymentBean;
+        return subGMOPaymentBeans.get(0);
     }
 
     public Account getAccount(String accountId) {

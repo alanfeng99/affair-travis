@@ -1,5 +1,11 @@
 @isTest
 public class loginTestCases {
+    public static testMethod void testConstructor_LogOut() {
+        Test.setCurrentPage(Page.RegisterResultPage);
+        ApexPages.currentPage().getParameters().put('logout', 'true');
+        LoginController controller = new LoginController();
+        System.assertEquals(true, controller.isLogout);
+    }
     
     public static testMethod void testCheckAuthentication_Password_Null() {
         Account account = new Account(PersonEmail = 'jin@444.com', LastName = 'Jin');

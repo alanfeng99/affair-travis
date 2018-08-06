@@ -78,6 +78,17 @@ public with sharing class NewSubscriptionControllerTestCase {
         System.assertEquals(1, size);
     }
 
+    public static testMethod void testGetProductRadioButton_No_Next_Product() {
+        Product2 product = new Product2(Name = '草', ProductCode = '2', StartDate__c = Date.valueOf(System.now())-1, 
+            EndDate__c = Date.valueOf(System.now())+8);
+        insert product;
+
+        NewSubscriptionController controller = new NewSubscriptionController();
+        List<SelectOption> options = controller.getProductRadioButton();
+        Integer size = options.size();
+        System.assertEquals(1, size);
+    }
+
     public static testMethod void testGetProductRadioButton() {
         Product2 product = new Product2(Name = '草', ProductCode = '2', StartDate__c = Date.valueOf(System.now())-1, 
             EndDate__c = Date.valueOf(System.now())+8);
@@ -121,6 +132,63 @@ public with sharing class NewSubscriptionControllerTestCase {
         Pagereference page = controller.chooseCreditCard();
         System.assertEquals(false, controller.isChooseCreditcard);
         System.assertEquals(null, page);
+    }
+
+    public static testMethod void testChooseInvoice_IsInvoice_True() {
+        Account account =  new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        insert account;
+        
+        NewSubscriptionController controller = new NewSubscriptionController(account.id);
+        controller.firstSubscription.isInvoice__c = true;
+        Pagereference page = controller.chooseInvoice();
+        System.assertEquals(true, controller.isInvoice);
+        System.assertEquals(null, page);
+    }
+
+    public static testMethod void testChooseInvoice_IsInvoice_False() {
+        Account account =  new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        insert account;
+        
+        NewSubscriptionController controller = new NewSubscriptionController(account.id);
+        controller.firstSubscription.isInvoice__c = false;
+        Pagereference page = controller.chooseInvoice();
+        System.assertEquals(false, controller.isInvoice);
+        System.assertEquals(null, page);
+    }
+
+    public static testMethod void testPicutreShow() {
+        Account account =  new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        insert account;
+        
+        NewSubscriptionController controller = new NewSubscriptionController(account.id);
+        controller.startPeriod = '1';
+        Pagereference page = controller.pictureShow();
+        System.assertEquals('1', controller.productCdoe);
+        System.assertEquals(null, page);
+    }
+
+    public static testMethod void testZipcodeShow() {
+        Address__c address = new Address__c(City__c = '台北市', Area__c = '松山區', Zipcode__c = '105');
+        insert address;
+        
+        Account account =  new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
+        account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        insert account;
+        
+        NewSubscriptionController controller = new NewSubscriptionController(account.id);
+        for(Subscription__c tempSub : controller.tempSubscriptions) {
+            tempSub.City_picklist__c = '台北市';
+            tempSub.Area_picklist__c = '松山區';
+        }
+
+        Pagereference page = controller.zipcodeShow();
+        for(Subscription__c tempsub : controller.tempSubscriptions)
+            System.assertEquals('105', tempSub.Postal_code__c);
+
+        System.assertEquals(null, page);    
     }
 
     public static testMethod void testSubmitForm_ProgramId_Null_Return_Msg() {
@@ -229,6 +297,33 @@ public with sharing class NewSubscriptionControllerTestCase {
         System.assertNotEquals(controller.baseErrorMessage, System.Label.Msg_PaymentEmpty);
         System.assertEquals(controller.baseErrorMessage, System.Label.Msg_Creditcard_CheckAll);
     }
+
+    // public static testMethod void testSubmitForm_CheckField_Creditcard_CVC_Format_Wrong_Return_Msg() {
+    //     SubscriptionProgram__c program = new SubscriptionProgram__c(ProgramId__c = '123', Price__c = 400, Name = 'a', Order_Period__c = 3);
+    //     insert program;
+    //     Account account =  new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
+    //     account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+    //     insert account;
+    //     NewSubscriptionController controller = new NewSubscriptionController(account.Id);
+    //     controller.programId = program.ProgramId__c;
+    //     controller.paymentMethod = '信用卡';
+    //     controller.startPeriod = '2';
+    //     controller.viewModel.account.credit_card_number__c = '4277043329970600';
+    //     controller.viewModel.creditCardBean.cc = '4277043329970600';
+    //     controller.viewModel.creditCardBean.expireYear = '2022';
+    //     controller.viewModel.creditCardBean.expireMonth = '11';
+    //     controller.viewModel.creditCardBean.cvc = '1';
+        
+    //     controller.firstSubscription.Recipient__c = 'jin';
+    //     controller.firstSubscription.City_picklist__c = '台北市';
+    //     controller.firstSubscription.Area_picklist__c = '松山區';
+    //     controller.firstSubscription.Address__c = '123';
+    //     controller.firstSubscription.Tel__c = '0987777888';
+    //     controller.firstSubscription.Email__c = 'jin@4ifps.com';
+
+    //     Pagereference page = controller.submitForm();
+    //     System.assertEquals(controller.baseErrorMessage, System.Label.Msg_Creditcard_CheckCVC);
+    // }
 
     public static testMethod void testTurn_To_UpdateCreditcardPage() {
         NewSubscriptionController controller = new NewSubscriptionController();
