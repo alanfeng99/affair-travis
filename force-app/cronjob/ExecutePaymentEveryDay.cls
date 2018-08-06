@@ -1,7 +1,5 @@
 global class ExecutePaymentEveryDay implements Schedulable {
 
-    // Every 1 hour cause Salesforce does not execute more often than hour even if trick possible
-    public static String CRON_EXPR = '0 10 * * * *';
     /*
     0 0 0 ? * * *	at 12:00 AM every day
     0 0 10 ? * *	at 10.00 AM every day
@@ -47,7 +45,7 @@ global class ExecutePaymentEveryDay implements Schedulable {
         List<Subscription__c> subscriptions = 
             [SELECT Payment_method__c, Start_period__c, End_period__c, Program__c, Amount__c, AccountStandard__c
             FROM Subscription__c 
-            WHERE Payment_method__c = :Constants.PAYMENT_METHOD_CREDIT_CARD 
+            WHERE Payment_method__c = :Constants.PAYMENT_METHOD_CREDIT_CARD
             AND isReplenish__c = true 
             AND End_period__c in :productCodes
             LIMIT 10];
@@ -74,17 +72,14 @@ global class ExecutePaymentEveryDay implements Schedulable {
             order.itemCode = program.ProgramId__c;
             order.itemName = program.Name;
             order.totalPrice = String.valueOf(subscription.Amount__c);
-            GMOPaymentBean__c gmoPaymentBean = ApexUtility.generateGMOPaymentBeanForPayment(account, order);
-            GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(gmoPaymentBean);
-
-            gmoPaymentBean = gmoPaymentAPI.directPayment();
-            gmoPaymentBeansToInsert.add(gmoPaymentBean);
+            
+            PaymentCallBatchJob job = new PaymentCallBatchJob(account, order);
+            Database.executeBatch(job);
             
             subscription.Start_period__c = subscription.End_period__c + 1;
             subscription.End_period__c += program.Order_Period__c;
             subscriptionsToUpdate.add(subscription);
         }
-        Database.insert(gmoPaymentBeansToInsert);
         Database.update(subscriptionsToUpdate);
     }
 
