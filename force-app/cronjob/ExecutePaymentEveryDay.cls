@@ -38,10 +38,27 @@ global class ExecutePaymentEveryDay implements Schedulable {
     }
 
     public void checkDailyPaymentForEveryUsers() {
-        List<Subscription__c> subscriptions = [SELECT Payment_method__c, Start_period__c, End_period__c, Program__c, Amount__c, AccountStandard__c FROM Subscription__c WHERE Payment_method__c = :Constants.PAYMENT_METHOD_CREDIT_CARD AND isReplenish__c = true LIMIT 10];
-        List<Product2> products = [SELECT EndDate__c, ProductCode FROM Product2];
+        List<Product2> products = [SELECT ProductCode FROM Product2 where EndDate__c <= TODAY];
+        List<Decimal> productCodes = new List<Decimal>();
+
+        for (Product2 product : products)
+            productCodes.add(Decimal.valueOf(product.ProductCode));
+
+        List<Subscription__c> subscriptions = 
+            [SELECT Payment_method__c, Start_period__c, End_period__c, Program__c, Amount__c, AccountStandard__c
+            FROM Subscription__c 
+            WHERE Payment_method__c = :Constants.PAYMENT_METHOD_CREDIT_CARD 
+            AND isReplenish__c = true 
+            AND End_period__c in :productCodes
+            LIMIT 10];
+        
+        List<Id> accountIds = new List<Id>();
+        for (Subscription__c sub : subscriptions)
+            accountIds.add(sub.AccountStandard__c);
+
+        List<Account> accounts = [SELECT LastName, PersonEmail FROM Account WHERE Id in :accountIds];
+        
         List<SubscriptionProgram__c> programs = [SELECT Order_Period__c, ProgramId__c, Name FROM SubscriptionProgram__c];
-        List<Account> accounts = [SELECT LastName, PersonEmail FROM Account];
 
         List<Subscription__c> subscriptionsToUpdate = new List<Subscription__c>();
         List<GMOPaymentBean__c> gmoPaymentBeansToInsert = new List<GMOPaymentBean__c>();
@@ -50,30 +67,22 @@ global class ExecutePaymentEveryDay implements Schedulable {
             return;
         
         for (Subscription__c subscription : subscriptions) {
-            Product2 product = findEndSubscriptionProduct(products, String.valueOf(subscription.End_period__c));
-            if (product == null)
-                continue;
-            Date dateNow = Date.today();
-            Date productEndDate = Date.valueOf(product.EndDate__c);
-            
-            if (dateNow >= productEndDate) {
-                Account account = findAccount(accounts, subscription.AccountStandard__c);
-                SubscriptionProgram__c program = findProgram(programs, subscription.Program__c);
-                Order order = new Order();
-                order.paymentMethod = subscription.Payment_method__c;
-                order.itemCode = program.ProgramId__c;
-                order.itemName = program.Name;
-                order.totalPrice = String.valueOf(subscription.Amount__c);
-                GMOPaymentBean__c gmoPaymentBean = ApexUtility.generateGMOPaymentBeanForPayment(account, order);
-                GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(gmoPaymentBean);
+            Account account = findAccount(accounts, subscription.AccountStandard__c);
+            SubscriptionProgram__c program = findProgram(programs, subscription.Program__c);
+            Order order = new Order();
+            order.paymentMethod = subscription.Payment_method__c;
+            order.itemCode = program.ProgramId__c;
+            order.itemName = program.Name;
+            order.totalPrice = String.valueOf(subscription.Amount__c);
+            GMOPaymentBean__c gmoPaymentBean = ApexUtility.generateGMOPaymentBeanForPayment(account, order);
+            GMOPaymentAPI gmoPaymentAPI = new GMOPaymentAPI(gmoPaymentBean);
 
-                gmoPaymentBean = gmoPaymentAPI.directPayment();
-                gmoPaymentBeansToInsert.add(gmoPaymentBean);
-                
-                subscription.Start_period__c = subscription.End_period__c + 1;
-                subscription.End_period__c += program.Order_Period__c;
-                subscriptionsToUpdate.add(subscription);
-            }
+            gmoPaymentBean = gmoPaymentAPI.directPayment();
+            gmoPaymentBeansToInsert.add(gmoPaymentBean);
+            
+            subscription.Start_period__c = subscription.End_period__c + 1;
+            subscription.End_period__c += program.Order_Period__c;
+            subscriptionsToUpdate.add(subscription);
         }
         Database.insert(gmoPaymentBeansToInsert);
         Database.update(subscriptionsToUpdate);
