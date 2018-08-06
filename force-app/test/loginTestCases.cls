@@ -11,28 +11,6 @@ public class loginTestCases {
         System.assertEquals(controller.baseErrorMessage, System.Label.Msg_Login_AccountPasswordEmpty);
     }
 
-    public static testMethod void testCheckAuthenticationSucceed() {
-        
-        //Prepare env
-        String password = '1234';
-        String email = 'alan.feng@4idps.com';
-        Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email, Active__c = true);
-        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
-        insert preAccount;
-
-        //Test constructor
-        LoginController controller = new LoginController();
-        System.assertNotEquals(null, controller.viewModel.account);
-        
-        //Test function
-        Account account = controller.viewModel.account;
-        account.Password__c = password;
-        account.PersonEmail = email;
-        Pagereference page = controller.checkAuthentication();
-        System.assertNotEquals(null, page);
-
-    }
-
     public static testMethod void testCheckGoogleAuthentication_Return_Null() {
         LoginController controller = new LoginController();
         Pagereference page = controller.checkGoogleAuthentication();
@@ -45,79 +23,28 @@ public class loginTestCases {
         System.assertEquals(null, page);
     }
 
-    public static testMethod void testCheckAuthentication_CheckLogin_Success() {
-        
-        //Prepare env
-        String password = '1234';
-        String email = 'alan.feng@4idps.com';
-        Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email, Active__c = true);
-        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
-        insert preAccount;
+    // public static testMethod void testCheckAuthentication_CheckLogin_Success() {
+    //     String password = '1234qwer';
+    //     String email = 'jin@4idps.com';
+    //     Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email, Active__c = True);
+    //     preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+    //     insert preAccount;
 
-        //Test constructor
-        LoginController controller = new LoginController();
-        System.assertNotEquals(null, controller.viewModel.account);
-        
-        //Test function
-        Account account = controller.viewModel.account;
-        account.Password__c = password;
-        account.PersonEmail = email;
-        controller.checkAuthentication();
-        Pagereference page = controller.checkAutoLogin();
-        System.assertNotEquals(null, page);
-        System.assert(controller.baseErrorMessage.contains('登入成功'));
-    }
+    //     LoginController controller = new LoginController();
+    //     controller.viewModel.account.Password__c = '1234qwer';
+    //     controller.loginEmail = 'jin@4idps.com';
 
-
-    public static testMethod void testCheckAuthentication_Not_Active() {
-        
-        //Prepare env
-        String password = '1234';
-        String email = 'alan.feng@4idps.com';
-        Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email);
-        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
-        insert preAccount;
-
-        //Test constructor
-        LoginController controller = new LoginController();
-        
-        //Test function
-        Account account = controller.viewModel.account;
-        account.Password__c = password;
-        account.PersonEmail = email;
-        Pagereference page = controller.checkAuthentication();
-
-        System.assertEquals(controller.baseErrorMessage, System.Label.Msg_Login_AccountNotVerify);
-
-    }
-
-    public static testMethod void testCheckAuthentication_Locked() {
-        
-        //Prepare env
-        String password = '1234';
-        String email = 'alan.feng@4idps.com';
-        Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email,Active__c = true, Locked__c = true);
-        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
-        insert preAccount;
-
-        //Test constructor
-        LoginController controller = new LoginController();
-        
-        //Test function
-        Account account = controller.viewModel.account;
-        account.Password__c = password;
-        account.PersonEmail = email;
-        Pagereference page = controller.checkAuthentication();
-
-        System.assertEquals(controller.baseErrorMessage, System.Label.Msg_Login_AccountLocked);
-
-    }
+    //     //Test function
+    //     Pagereference page  = controller.checkAuthentication();
+    //     // = controller.checkAutoLogin();
+    //     System.assertNotEquals(null, page);
+    //     System.assert(controller.baseErrorMessage.contains('登入成功'));
+    // }
 
     public static testMethod void test_CheckAuthentication_Password_Not_Correct() {
-        
         //Prepare env
         String password = '1234';
-        String email = 'alan.feng@4idps.com';
+        String email = 'jin@4idps.com';
         Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email,Active__c = true);
         preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
         insert preAccount;
@@ -128,10 +55,113 @@ public class loginTestCases {
         //Test function
         Account account = controller.viewModel.account;
         account.Password__c = '4567';
-        account.PersonEmail = email;
+        controller.loginEmail = 'jin@4idps.com';
         Pagereference page = controller.checkAuthentication();
 
-        System.assertEquals(controller.baseErrorMessage, System.Label.Msg_Login_LockedRemind);
+        System.assertEquals(System.Label.Msg_Login_LockedRemind, controller.baseErrorMessage);
+    }
+
+    public static testMethod void test_CheckAuthentication_Email_Fomat_Wrong_Return_Null() {
+        LoginController controller = new LoginController();
+        controller.viewModel.account.Password__c = '1234qwer';
+        controller.loginEmail = 'jin';
+        Pagereference page = controller.checkAuthentication();
+        System.assertEquals(System.Label.Msg_EmailFormat, controller.baseErrorMessage);
+        System.assertEquals(null, page);
+    }
+
+    public static testMethod void test_CheckAuthentication_Email_Fromat_Right() {
+        LoginController controller = new LoginController();
+        controller.viewModel.account.Password__c = '1234qwer';
+        controller.loginEmail = 'jin@4idps.com';
+        Pagereference page = controller.checkAuthentication();
+        System.assertNotEquals(System.Label.Msg_EmailFormat, controller.baseErrorMessage);
+    }
+
+    public static testMethod void test_RealAccount_Null_Return_Msg() {
+        LoginController controller = new LoginController();
+        controller.viewModel.account.Password__c = '1234qwer';
+        controller.loginEmail = 'jin@4idps.com';
+        Pagereference page = controller.checkAuthentication();
+        System.assertEquals(System.Label.Msg_AccountNotExist, controller.baseErrorMessage);
+    }
+
+    public static testMethod void test_RealAccount_Null_ClearPassword() {
+        LoginController controller = new LoginController();
+        controller.viewModel.account.Password__c = '1234qwer';
+        controller.loginEmail = 'jin@4idps.com';
+        Pagereference page = controller.checkAuthentication();
+        System.assertEquals('', controller.viewModel.account.Password__c);
+    }
+
+    public static testMethod void test_RealAccount_Not_Null() {
+        String password = '1234qwer';
+        String email = 'jin@4idps.com';
+        Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email,Active__c = true);
+        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        insert preAccount;
+
+        LoginController controller = new LoginController();
+        controller.viewModel.account.Password__c = '1234qwer';
+        controller.loginEmail = 'jin@4idps.com';
+        Pagereference page = controller.checkAuthentication();
+        System.assertNotEquals(System.Label.Msg_AccountNotExist, controller.baseErrorMessage);
+    }
+
+    public static testMethod void test_RealAccount_Active_False_Return_Msg() {
+        String password = '1234qwer';
+        String email = 'jin@4idps.com';
+        Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email);
+        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        insert preAccount;
+
+        LoginController controller = new LoginController();
+        controller.viewModel.account.Password__c = '1234qwer';
+        controller.loginEmail = 'jin@4idps.com';
+        Pagereference page = controller.checkAuthentication();
+        System.assertEquals(System.Label.Msg_Login_AccountNotVerify, controller.baseErrorMessage);
+    }
+
+    public static testMethod void test_RealAccount_Active_True() {
+        String password = '1234qwer';
+        String email = 'jin@4idps.com';
+        Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email, Active__c = true);
+        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        insert preAccount;
+
+        LoginController controller = new LoginController();
+        controller.viewModel.account.Password__c = '1234qwer';
+        controller.loginEmail = 'jin@4idps.com';
+        Pagereference page = controller.checkAuthentication();
+        System.assertNotEquals(System.Label.Msg_Login_AccountNotVerify, controller.baseErrorMessage);
+    }
+
+    public static testMethod void test_RealAccount_Locked_True_Return_Msg() {
+        String password = '1234qwer';
+        String email = 'jin@4idps.com';
+        Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email, Active__c = True, Locked__c = True);
+        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        insert preAccount;
+
+        LoginController controller = new LoginController();
+        controller.viewModel.account.Password__c = '1234qwer';
+        controller.loginEmail = 'jin@4idps.com';
+        Pagereference page = controller.checkAuthentication();
+        System.assertEquals(System.Label.Msg_Login_AccountLocked, controller.baseErrorMessage);
+    }
+
+    public static testMethod void test_RealAccount_Locked_Fasle() {
+        String password = '1234qwer';
+        String email = 'jin@4idps.com';
+        Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email, Active__c = True);
+        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        insert preAccount;
+
+        LoginController controller = new LoginController();
+        controller.viewModel.account.Password__c = '1234qwer';
+        controller.loginEmail = 'jin@4idps.com';
+        Pagereference page = controller.checkAuthentication();
+        System.assertNotEquals(System.Label.Msg_Login_AccountLocked, controller.baseErrorMessage);
     }
 
     public static testMethod void test_CheckAuthentication_Password_Wrong_Lock_Account() {
@@ -149,13 +179,13 @@ public class loginTestCases {
         //Test function
         Account account = controller.viewModel.account;
         account.Password__c = '4567';
-        account.PersonEmail = email;
+        controller.loginEmail = 'alan.feng@4idps.com';
         
         controller.checkAuthentication();
         controller.checkAuthentication();
         controller.checkAuthentication();
 
-        System.assertEquals(controller.baseErrorMessage, System.Label.Msg_Login_AccountLocked);
+        System.assertEquals(System.Label.Msg_Login_AccountLocked, controller.baseErrorMessage);
     }
 
     public static testMethod void testCheckAuthenticationFailed() {
@@ -177,6 +207,21 @@ public class loginTestCases {
         Pagereference page = controller.checkAuthentication();
         Pagereference pageAutoLoginFail = controller.checkAutoLogin();
         System.assertEquals(null, pageAutoLoginFail);
+    }
+
+    public static testMethod void test_CheckAutoLogin_CheckAuthentication_Success() {
+        String password = '1234qwer';
+        String email = 'jin@4idps.com';
+        Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email, Active__c = True);
+        preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
+        insert preAccount;
+
+        LoginController controller = new LoginController();
+        controller.viewModel.account.Password__c = '1234qwer';
+        controller.loginEmail = 'jin@4idps.com';
+        Pagereference page = controller.checkAuthentication();
+        controller.checkAutoLogin();
+        System.assert(controller.baseErrorMessage.contains('登入成功'));
     }
 
     public static testMethod void testLoginWithFacebook_tokenHasNull_ReturnNull() {
