@@ -31,6 +31,21 @@ public class GMOPaymentAPITest {
         return gmoPaymentBean;
     }
 
+    public static String buildDirectPaymentResponse() {
+        return '<?xml version="1.0" encoding="UTF-8" ?>' +
+        '<GlobalPayment_result>' +
+        '    <result result="9" />' +
+        '    <result trans_code="" />' +
+        '    <result err_code="LO01000013" />' +
+        '    <result err_detail="Card%20information%20is%20incorrect%20%28NEWEB%20order%20information%20acquisition%20error%29" />' +
+        '    <result access_url="" />' +
+        '    <result trans_code_hash="" />' +
+        '    <result payment_code="" />' +
+        '    <result mode="" />' +
+        '    <result status="" />' +
+        '</GlobalPayment_result>';
+    }
+
     public static testMethod void testAddCommonGMOPaymentBeanValues() {
         GMOPaymentBean__c gmoPaymentBean = buildGMOPaymentBean();
         GMOPaymentAPI api = new GMOPaymentAPI(gmoPaymentBean);
@@ -45,4 +60,51 @@ public class GMOPaymentAPITest {
         String actual = api.buildGMOPaymentBodyForDirectPayment(gmoPaymentBean);
         System.assert(actual.length() > 0);
     }
+
+    public static testMethod void test_getPaymentMethodFromStCode() {
+        GMOPaymentBean__c gmoPaymentBean = buildGMOPaymentBean();
+        GMOPaymentAPI api = new GMOPaymentAPI(gmoPaymentBean);
+        String actual = api.getPaymentMethodFromStCode(Constants.ST_CODE_CREDIT_CARD_PAYMENT);
+        System.assertEquals(Constants.PAYMENT_METHOD_CREDIT_CARD, actual);
+        
+        actual = api.getPaymentMethodFromStCode(Constants.ST_CODE_ATM);
+        System.assertEquals(Constants.PAYMENT_METHOD_ATM, actual);
+
+        actual = api.getPaymentMethodFromStCode(Constants.ST_CODE_SUPER_PAYMENT);
+        System.assertEquals(Constants.PAYMENT_METHOD_SUPER_PAYMENT, actual);
+
+        actual = api.getPaymentMethodFromStCode(Constants.ST_CODE_NOTHING);
+        System.assertEquals('', actual);
+    }
+
+    public static testMethod void test_generateProcessCode() {
+        String actual = GMOPaymentAPI.generateProcessCode(Constants.PAYMENT_METHOD_CREDIT_CARD);
+        System.assertEquals(Constants.PROCESS_CODE_REGISTER_CREDIT_CARD, actual);
+        
+        actual = GMOPaymentAPI.generateProcessCode(Constants.PAYMENT_METHOD_SUPER_PAYMENT);
+        System.assertEquals(Constants.PROCESS_CODE_ONE_TIME, actual);
+    }
+
+    public static testMethod void test_generateStCode() {
+        String actual = GMOPaymentAPI.generateStCode(Constants.PAYMENT_METHOD_CREDIT_CARD);
+        System.assertEquals(Constants.ST_CODE_CREDIT_CARD_PAYMENT, actual);
+        
+        actual = GMOPaymentAPI.generateStCode(Constants.PAYMENT_METHOD_ATM);
+        System.assertEquals(Constants.ST_CODE_ATM, actual);
+
+        actual = GMOPaymentAPI.generateStCode(Constants.PAYMENT_METHOD_SUPER_PAYMENT);
+        System.assertEquals(Constants.ST_CODE_SUPER_PAYMENT, actual);
+
+        actual = GMOPaymentAPI.generateStCode('');
+        System.assertEquals(Constants.ST_CODE_NOTHING, actual);
+    }
+
+    public static testMethod void test_deserializationGMOResponse() {
+        GMOPaymentBean__c gmoPaymentBean = buildGMOPaymentBean();
+        GMOPaymentAPI api = new GMOPaymentAPI(gmoPaymentBean);
+        GMOPaymentBean__c beanAPIResponse = (GMOPaymentBean__c) api.deserializationGMOResponse(buildDirectPaymentResponse(), GMOPaymentBean__c.class);
+        String actual = beanAPIResponse.result__c;
+        System.assertEquals('9', actual);
+    }
+    
 }

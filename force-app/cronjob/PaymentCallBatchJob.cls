@@ -17,7 +17,7 @@ public with sharing class PaymentCallBatchJob implements Database.Batchable<SObj
 
         insert gmoPaymentBean;
         
-        String query = 'SELECT Id FROM GMOPaymentBean__c where Id = ' + gmoPaymentAPI.Id;
+        String query = 'SELECT Id From account';
         return Database.getQueryLocator(query);
 
         
