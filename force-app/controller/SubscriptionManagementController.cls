@@ -28,7 +28,7 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
         updatedCreditcard = ApexPages.currentpage().getparameters().get('updateCreditcard') == 'true';      
     }
 
-    public Pagereference submitForm() {
+    public PageReference submitForm() {
         if (checkField()) {
             if (viewModel.submit()) {
                 currentEditRowId = '';
@@ -60,7 +60,7 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
         subIdForUpdateCredit = currentUseRowId;
         currentUseRowId = '';
         
-        for(Subscription__c sub : viewModel.subscriptions) 
+        for (Subscription__c sub : viewModel.subscriptions) 
             if (sub.id  == subIdForUpdateCredit) {
                 sub.isReplenish__c = true;
                 viewModel.submit(sub);

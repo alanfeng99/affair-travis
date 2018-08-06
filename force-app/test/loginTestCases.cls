@@ -29,24 +29,6 @@ public class loginTestCases {
         System.assertEquals(null, page);
     }
 
-    // public static testMethod void testCheckAuthentication_CheckLogin_Success() {
-    //     String password = '1234qwer';
-    //     String email = 'jin@4idps.com';
-    //     Account preAccount = new Account(LastName = 'Alan', Password__c = password, PersonEmail = email, Active__c = True);
-    //     preAccount.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
-    //     insert preAccount;
-
-    //     LoginController controller = new LoginController();
-    //     controller.viewModel.account.Password__c = '1234qwer';
-    //     controller.loginEmail = 'jin@4idps.com';
-
-    //     //Test function
-    //     Pagereference page  = controller.checkAuthentication();
-    //     // = controller.checkAutoLogin();
-    //     System.assertNotEquals(null, page);
-    //     System.assert(controller.baseErrorMessage.contains('登入成功'));
-    // }
-
     public static testMethod void test_CheckAuthentication_Password_Not_Correct() {
         //Prepare env
         String password = '1234';
