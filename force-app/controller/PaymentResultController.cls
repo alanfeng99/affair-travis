@@ -14,7 +14,8 @@ public with sharing class PaymentResultController {
             String accountId = accountIdCookie.getValue();
             String orderId = Apexpages.currentPage().getParameters().get('ordernumber');
             viewModel = new PaymentResultViewModel(orderId);
-            account = viewModel.getAccount(accountId);
+            if (viewModel.gmoPaymentBean != null)
+                account = viewModel.getAccount(accountId);
             getPaymentResultInfo(orderId);
         }  
     }
@@ -53,7 +54,8 @@ public with sharing class PaymentResultController {
             expirationDate = (Datetime.now().addDays(2)).format('yyyy/MM/dd') ;
         } else {
             subGMOPaymentBean = viewModel.getSubGMOPaymentBean(orderId);
-            subscription = SubscriptionModel.getUniqueSubscriptionById(subGMOPaymentBean.SubscriptionId__c);
+            if (subGMOPaymentBean != null) 
+                subscription = SubscriptionModel.getUniqueSubscriptionById(subGMOPaymentBean.SubscriptionId__c);
         }
     }
 }
