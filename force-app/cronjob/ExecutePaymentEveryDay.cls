@@ -1,30 +1,5 @@
 global class ExecutePaymentEveryDay implements Schedulable {
 
-    /*
-    0 0 0 ? * * *	at 12:00 AM every day
-    0 0 10 ? * *	at 10.00 AM every day
-    0 0 10 * * ?	at 10.00 AM every day
-    0 0 10 * * ? *	at 10.00 AM every day
-    0 0 15 ? * * *	at 3:00 PM every day
-    0 0-5 15 * * ?	Every minute starting at 3:00 PM and ending at 3:05 PM, every day
-    0 15 17 ? * MON-FRI	at 5:15 PM every Monday, Tuesday, Wednesday, Thursday and Friday
-    0 15 10 15 * ?	at 5:15 PM on the 15th day of every month
-    0 15 17 ? * 6#3	at 5:15 PM on the third Friday of every month
-    0 0 18 ? * 6L	runs the last Friday of every month at 6:00 PM.
-    ‘0 30 * * * *’;	every 30 minutes
-    0 0 12 * * ?	at 12:00 PM every day
-    0 0 23 * * ? 2016	runs every day at 11:00 PM during the year 2016.
-    */
-
-    /*
-    ExecutePaymentEveryDay.scheduleIt('Execute payment 0', '0 0 * * * ?');
-    ExecutePaymentEveryDay.scheduleIt('Execute payment 10', '0 10 * * * ?');
-    ExecutePaymentEveryDay.scheduleIt('Execute payment 20', '0 20 * * * ?');
-    ExecutePaymentEveryDay.scheduleIt('Execute payment 30', '0 30 * * * ?');
-    ExecutePaymentEveryDay.scheduleIt('Execute payment 40', '0 40 * * * ?');
-    ExecutePaymentEveryDay.scheduleIt('Execute payment 50', '0 50 * * * ?');
-	*/
-   
     global static String scheduleIt(String name, String cronExpr) {
         ExecutePaymentEveryDay job = new ExecutePaymentEveryDay();
         return System.schedule(name, cronExpr, job);
