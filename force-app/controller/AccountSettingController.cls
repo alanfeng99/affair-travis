@@ -226,7 +226,7 @@ public with sharing class AccountSettingController extends ApexBaseController {
 
         viewModel.account.FacebookEmail__c = facebookUserEmail;
         if (!AccountModel.updateAccount(viewModel.account))
-            addMessage(Apexpages.Severity.ERROR, 'Link Google wrong.');
+            addMessage(Apexpages.Severity.ERROR, 'Link Facebook wrong.');
 
         return null;
     }
