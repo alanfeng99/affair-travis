@@ -261,7 +261,14 @@
         <shortDescription>Msg_信用卡資訊更新失敗</shortDescription>
         <value>信用卡資訊尚未更新，請稍後再試</value>
     </labels>
-
+    <labels>
+        <fullName>Msg_ProductStartDate</fullName>
+        <categories>Messages</categories>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>Msg_產品起始日期</shortDescription>
+        <value>10</value>
+    </labels>
     <labels>
         <fullName>GREET_MORNING</fullName>
         <categories>Messages</categories>
@@ -322,4 +329,5 @@
         <shortDescription>ENDPOINT_CANCEL_PAYMENT</shortDescription>
         <value>/payment/api/cancel_payment.cgi</value>
     </labels>
+    
 </CustomLabels>
