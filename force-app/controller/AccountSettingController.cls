@@ -204,11 +204,15 @@ public with sharing class AccountSettingController extends ApexBaseController {
     }
 
     public Pagereference linkAccountWithGoogle() {
-        if (googleUserEmail == null)
+        if (googleUserEmail == null) {
             addMessage(Apexpages.Severity.ERROR, 'Link Google wrong.');
-
-        if (AccountModel.getAccountByOnlyGoogleEmail(googleUserEmail) != null)
+            return null;
+        }
+            
+        if (AccountModel.getAccountByOnlyGoogleEmail(googleUserEmail) != null) {
             addMessage(Apexpages.Severity.ERROR, 'An account is already linked with this Google account.');
+            return null;
+        }
 
         viewModel.account.GoogleEmail__c = googleUserEmail;
         if (!AccountModel.updateAccount(viewModel.account))
@@ -218,12 +222,16 @@ public with sharing class AccountSettingController extends ApexBaseController {
     }
 
     public Pagereference linkAccountWithFacebook() {
-        if (facebookUserEmail == null)
+        if (facebookUserEmail == null) {
             addMessage(Apexpages.Severity.ERROR, 'Link Facebook wrong.');
-
-        if (AccountModel.getAccountByOnlyFacebookEmail(facebookUserEmail) != null)
+            return null;
+        }
+            
+        if (AccountModel.getAccountByOnlyFacebookEmail(facebookUserEmail) != null) {
             addMessage(Apexpages.Severity.ERROR, 'An account is already linked with this Facebook account.');
-
+            return null;
+        }
+            
         viewModel.account.FacebookEmail__c = facebookUserEmail;
         if (!AccountModel.updateAccount(viewModel.account))
             addMessage(Apexpages.Severity.ERROR, 'Link Facebook wrong.');

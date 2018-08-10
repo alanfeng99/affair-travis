@@ -13,33 +13,71 @@
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
             <!-- FontsStyle CSS -->
             <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/cwtexyen.css"/> 
-            <script src="//connect.facebook.net/en_US/all.js"></script> 
+            <script src="//connect.facebook.net/zh_TW/all.js"></script> 
             <script src="https://apis.google.com/js/platform.js?onload=renderButton" async="async defer"></script>      
             <apex:stylesheet value="{!$Resource.MediaqueryCSS}"/>
             <apex:stylesheet value="{!$Resource.TemplateCSS}"/>
         </head>
+
+        <style type="text/css">
+            #customBtn {
+              display: inline-block;
+              background: #4285f4;
+              color: white;
+              white-space: nowrap;
+              width: 99% !important;
+              height: 44px;
+              border-radius: 5px;
+            }
+            #customBtn:hover {
+              cursor: pointer;
+            }
+            span.label {
+              font-family: serif;
+              font-weight: normal;
+            }
+            span.icon {
+              background: url('https://developers.google.com/identity/sign-in/g-normal.png') transparent 5px 50% no-repeat;
+              display: inline-block;
+              vertical-align: middle;
+              width: 42px;
+              height: 42px;
+            }
+            span.buttonText {
+              display: inline-block;
+              vertical-align: middle;
+              padding-left: 50px;
+              padding-right: 42px;
+              font-size: 17px;
+              font-family: 'Roboto', sans-serif;
+            }
+          </style>
         <body class="bg-light">
             <script>
-                function onSuccess(googleUser) {
-                    var url = new URL(window.location.href);
-                    var profile = googleUser.getBasicProfile();
-                    linkAccountWithGoogleJS(profile.getEmail());
-                }
-
-                function onFailure(error) {
-                    console.log(error);
-                }
-                    
-                function renderButton() {
-                    gapi.signin2.render('my-signin2', {
-                        'scope': 'profile email',
-                        'width': 340,
-                        'height': 40,
-                        'longtitle': true,
-                        'theme': 'dark',
-                        'onsuccess': onSuccess,
-                        'onfailure': onFailure
+                var googleUser = {};
+            var startApp = function () {
+                    gapi.load('auth2', function () {
+                        // Retrieve the singleton for the GoogleAuth library and set up the client.
+                        auth2 = gapi.auth2.init({
+                            client_id: '460302933995-0dvvjqjl832ttipjg9plbipc5fe49n63.apps.googleusercontent.com',
+                            cookiepolicy: 'single_host_origin',
+                            // Request scopes in addition to 'profile' and 'email'
+                            //scope: 'additional_scope'
+                        });
+                        attachSignin(document.getElementById('customBtn'));
                     });
+                };
+
+                function attachSignin(element) {
+                    console.log(element.id);
+                    auth2.attachClickHandler(element, {},
+                        function (googleUser) {
+                            var url = new URL(window.location.href);
+                            var profile = googleUser.getBasicProfile();
+                            linkAccountWithGoogleJS(profile.getEmail());
+                        }, function (error) {
+                            console.log(JSON.stringify(error, undefined, 2));
+                        });
                 }
 
                 window.fbAsyncInit = function() {
@@ -54,7 +92,7 @@
                         var url = new URL(window.location.href);
                         if (response.authResponse != null) {
                             var token = response.authResponse.accessToken;
-                            FB.api('/me', { locale: 'en_US', fields: 'name, email' },
+                            FB.api('/me', { locale: 'zh_TW', fields: 'name, email' },
                             function(response) {
                                 linkAccountWithFacebookJS(response.email);
                             });
@@ -66,7 +104,7 @@
                     var js, fjs = d.getElementsByTagName(s)[0];
                     if (d.getElementById(id)) return;
                     js = d.createElement(s); js.id = id;
-                    js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=220395842018721&autoLogAppEvents=1';
+                    js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.8&appId=220395842018721&autoLogAppEvents=1';
                     fjs.parentNode.insertBefore(js, fjs);
                     }(document, 'script', 'facebook-jssdk'));
             </script>
@@ -364,7 +402,14 @@
                                 </apex:outputPanel>
                                 <apex:outputPanel rendered="{!IF(viewModel.account.GoogleEmail__c == null, true, false)}">
                                     <div class="form-group">
-                                        <div id="my-signin2" class="g-signin2" data-onsuccess="onSignIn"></div>  
+                                        <div id="gSignInWrapper">
+                                            <div id="customBtn" class="customGPlusSignIn">
+                                            <span class="icon"></span>
+                                            <span class="buttonText">以 Google 帳號繼續</span>
+                                            </div>
+                                        </div>
+                                        <div id="name"></div>
+                                        <script>startApp();</script>
                                     </div>
                                 </apex:outputPanel>
                                 <apex:outputPanel rendered="{!IF(viewModel.account.FacebookEmail__c == null, false, true)}">
