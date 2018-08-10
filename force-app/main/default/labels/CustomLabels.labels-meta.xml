@@ -27,7 +27,7 @@
         <language>zh_TW</language>
         <protected>true</protected>
         <shortDescription>Msg_密碼格式提醒</shortDescription>
-        <value>密碼長度需8~12碼，且至少需要一個數字和英文</value>
+        <value>密碼長度需8碼以上，且至少需要一個數字和英文</value>
     </labels>
     <labels>
         <fullName>Msg_Password_Inconsistent</fullName>
