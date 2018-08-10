@@ -3,8 +3,7 @@
     <fullName>Active__c</fullName>
     <defaultValue>false</defaultValue>
     <externalId>false</externalId>
-    <label>Active</label>
-    <trackHistory>false</trackHistory>
-    <trackTrending>false</trackTrending>
+    <label>驗證通過</label>
+    <trackFeedHistory>false</trackFeedHistory>
     <type>Checkbox</type>
 </CustomField>

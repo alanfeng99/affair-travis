@@ -20,7 +20,7 @@
         </head>
         <body class="bg-light">
             <script>
-            function onSuccess(googleUser) {
+                function onSuccess(googleUser) {
                     var url = new URL(window.location.href);
                     var profile = googleUser.getBasicProfile();
                     linkAccountWithGoogleJS(profile.getEmail());
@@ -29,7 +29,7 @@
                 function onFailure(error) {
                     console.log(error);
                 }
-                
+                    
                 function renderButton() {
                     gapi.signin2.render('my-signin2', {
                         'scope': 'profile email',
