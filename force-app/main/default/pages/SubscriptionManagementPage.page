@@ -223,7 +223,10 @@
                                                     <apex:outputPanel rendered="{!IF(sub.Payment_method__c == 'ATM轉帳',true,false)}">
                                                         <div class="form-row">
                                                             <div class="col-auto">
-                                                                轉帳號碼:<br/> <apex:outputField value="{!sub.PaymentInformation__c}"></apex:outputField>
+                                                                轉帳號碼:
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <apex:outputField value="{!sub.PaymentInformation__c}"></apex:outputField>
                                                             </div>
                                                         </div>
                                                     </apex:outputPanel>
