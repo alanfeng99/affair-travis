@@ -262,6 +262,38 @@
         <value>信用卡資訊尚未更新，請稍後再試</value>
     </labels>
     <labels>
+        <fullName>Msg_FBConnectFail</fullName>
+        <categories>Messages</categories>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>Msg_FB連線錯誤</shortDescription>
+        <value>FB連線錯誤</value>
+    </labels>
+    <labels>
+        <fullName>Msg_GoogleConnectFail</fullName>
+        <categories>Messages</categories>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>Msg_Google連線錯誤</shortDescription>
+        <value>Google連線錯誤</value>
+    </labels>
+    <labels>
+        <fullName>Msg_GoogleAlreadyExist</fullName>
+        <categories>Messages</categories>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>Msg_Google帳號已存在</shortDescription>
+        <value>此Google帳號已經綁定於其他帳號</value>
+    </labels>
+    <labels>
+        <fullName>Msg_FBAlreadyExist</fullName>
+        <categories>Messages</categories>
+        <language>zh_TW</language>
+        <protected>true</protected>
+        <shortDescription>Msg_FB帳號已存在</shortDescription>
+        <value>此FB帳號已經綁定於其他帳號</value>
+    </labels>
+    <labels>
         <fullName>Msg_ProductStartDate</fullName>
         <categories>Messages</categories>
         <language>zh_TW</language>

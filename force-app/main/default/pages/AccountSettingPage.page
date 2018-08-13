@@ -26,7 +26,7 @@
               color: white;
               white-space: nowrap;
               width: 99% !important;
-              height: 44px;
+              height: 42px;
               border-radius: 5px;
             }
             #customBtn:hover {
@@ -55,6 +55,16 @@
         <body class="bg-light">
             <script>
                 var googleUser = {};
+            
+            window.onLoadCallback = function(){
+                    gapi.auth2.init({
+                            client_id: '460302933995-0dvvjqjl832ttipjg9plbipc5fe49n63.apps.googleusercontent.com',
+                            cookiepolicy: 'single_host_origin',
+                            // Request scopes in addition to 'profile' and 'email'
+                            //scope: 'additional_scope'
+                        });
+                }
+            
             var startApp = function () {
                     gapi.load('auth2', function () {
                         // Retrieve the singleton for the GoogleAuth library and set up the client.
@@ -109,12 +119,12 @@
                     }(document, 'script', 'facebook-jssdk'));
             </script>
             <apex:form >
-                <apex:actionFunction action="{!linkAccountWithGoogle}" name="linkAccountWithGoogleJS" rerender="showname">
+                <apex:actionFunction action="{!linkAccountWithGoogle}" name="linkAccountWithGoogleJS" rerender="form">
                     <apex:param name="googleUserEmail" value="" assignTo="{!googleUserEmail}"/>                    
                 </apex:actionFunction>
             </apex:form>
             <apex:form >
-                <apex:actionFunction action="{!linkAccountWithFacebook}" name="linkAccountWithFacebookJS" rerender="showname">
+                <apex:actionFunction action="{!linkAccountWithFacebook}" name="linkAccountWithFacebookJS" rerender="form">
                     <apex:param name="facebookUserEmail" value="" assignTo="{!facebookUserEmail}"/>
                 </apex:actionFunction>
             </apex:form>
@@ -167,7 +177,6 @@
                             <div class="form-group">
                                 你目前使用 {!viewModel.account.PersonEmail } 做為登入信箱。
                             </div>
-                            <apex:outputText styleClass="fontsize12px" style="font-color:red;" rendered="{!ifChangeEmail}">您已更改電子郵件，請至信箱重新認證帳號</apex:outputText>
                             <small><apex:messages style="color:red"/></small>
                             <apex:panelGroup id="id_show">
                                 <apex:outputPanel rendered="{!isMainShow}">
@@ -413,24 +422,14 @@
                                     </div>
                                 </apex:outputPanel>
                                 <apex:outputPanel rendered="{!IF(viewModel.account.FacebookEmail__c == null, false, true)}">
-                                    <div class="form-group form-row">
-                                        <div class="col-sm-4 col-md-3 col-lg-3">
-                                        	Facebook                                                    
-                                        </div>
-                                        <div class="col-sm-8 col-md-9 col-lg-9">
-                                            <apex:outputField value="{!viewModel.account.FacebookEmail__c}"/>
-                                        </div>
-                                    </div>    
+                                    <div>
+                                    	<apex:commandButton action="{!unconnectFacebook}" image="{!$Resource.FB_Unconnect}" style="width:99%; height:42px; border-radius:5px"/>    
+                                    </div>                                    
                                 </apex:outputPanel>
                                 <apex:outputPanel rendered="{!IF(viewModel.account.GoogleEmail__c == null, false, true)}">
-                                    <div class="form-group form-row">
-                                        <div class="col-sm-4 col-md-3 col-lg-3">
-                                        	Google                                                    
-                                        </div>
-                                        <div class="col-sm-8 col-md-9 col-lg-9">
-                                            <apex:outputField value="{!viewModel.account.GoogleEmail__c}"/>
-                                        </div>
-                                    </div>
+                                    <div>
+                                    	<apex:commandButton action="{!unconnectGoogle}" image="{!$Resource.Google_Unconnect}" style="width:99%; height:42px; border-radius:5px"/>    
+                                    </div>                                    
                                 </apex:outputPanel>
                             </td>
                         </tr>

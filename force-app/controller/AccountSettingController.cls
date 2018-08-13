@@ -203,39 +203,52 @@ public with sharing class AccountSettingController extends ApexBaseController {
         ApexPages.currentPage().setCookies(new Cookie[]{authToken, accountId});
     }
 
-    public Pagereference linkAccountWithGoogle() {
+    public PageReference linkAccountWithGoogle() {
         if (googleUserEmail == null) {
-            addMessage(Apexpages.Severity.ERROR, 'Link Google wrong.');
+            addMessage(Apexpages.Severity.ERROR, System.Label.Msg_GoogleConnectFail);
             return null;
         }
             
-        if (AccountModel.getAccountByOnlyGoogleEmail(googleUserEmail) != null) {
-            addMessage(Apexpages.Severity.ERROR, 'An account is already linked with this Google account.');
+        if (AccountModel.getAccountByOnlyGoogleEmail(googleUserEmail) != null && viewModel.account.GoogleEmail__c != googleUserEmail) {
+            addMessage(Apexpages.Severity.ERROR, System.Label.Msg_GoogleAlreadyExist);
             return null;
         }
 
         viewModel.account.GoogleEmail__c = googleUserEmail;
         if (!AccountModel.updateAccount(viewModel.account))
-            addMessage(Apexpages.Severity.ERROR, 'Link Google wrong.');
+            addMessage(Apexpages.Severity.ERROR, System.Label.Msg_GoogleConnectFail);
 
-        return null;
+        return ApexUtility.toPage('AccountSettingPage');
     }
 
-    public Pagereference linkAccountWithFacebook() {
+    public PageReference linkAccountWithFacebook() {
         if (facebookUserEmail == null) {
-            addMessage(Apexpages.Severity.ERROR, 'Link Facebook wrong.');
+            addMessage(Apexpages.Severity.ERROR, System.Label.Msg_FBConnectFail);
             return null;
         }
             
-        if (AccountModel.getAccountByOnlyFacebookEmail(facebookUserEmail) != null) {
-            addMessage(Apexpages.Severity.ERROR, 'An account is already linked with this Facebook account.');
+        if (AccountModel.getAccountByOnlyFacebookEmail(facebookUserEmail) != null && viewModel.account.FacebookEmail__c != facebookUserEmail) {
+            addMessage(Apexpages.Severity.ERROR, System.Label.Msg_FBAlreadyExist);
             return null;
         }
             
         viewModel.account.FacebookEmail__c = facebookUserEmail;
         if (!AccountModel.updateAccount(viewModel.account))
-            addMessage(Apexpages.Severity.ERROR, 'Link Facebook wrong.');
+            addMessage(Apexpages.Severity.ERROR, System.Label.Msg_FBConnectFail);
 
+        return ApexUtility.toPage('AccountSettingPage');
+    }
+    
+    public PageReference unconnectFacebook() {
+        viewModel.account.FacebookEmail__c = null;
+        update viewModel.account;
         return null;
     }
+
+    public PageReference unconnectGoogle() {
+        viewModel.account.GoogleEmail__c = null;
+        update viewModel.account;
+        return null;
+    }
+
 }

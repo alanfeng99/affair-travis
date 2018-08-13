@@ -36,7 +36,7 @@
           color: white;
           white-space: nowrap;
           width: 99% !important;
-          height: 44px;
+          height: 42px;
           border-radius: 5px;
         }
         #customBtn:hover {
@@ -56,7 +56,7 @@
         span.buttonText {
           display: inline-block;
           vertical-align: middle;
-          padding-left: 50px;
+          padding-left: 61px;
           padding-right: 42px;
           font-size: 17px;
           font-family: 'Roboto', sans-serif;
