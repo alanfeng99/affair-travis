@@ -40,7 +40,7 @@ public with sharing class NewSubscriptionViewModel {
 
             for (Subscription__c sub : subscriptionInsertList) {
                 sub.PaymentInformation__c = checkOrderResult.GlobalPayment_result.other_01;
-                if (firstSub.Payment_method__c == Constants.PAYMENT_METHOD_CREDIT_CARD)
+                if (firstSub.Payment_method__c == Constants.PAYMENT_METHOD_CREDIT_CARD && checkOrderResult.GlobalPayment_result.state == '5')
                     sub.Payment_status__c = Constants.PAYMENT_STATUS_DONE;
             }
 

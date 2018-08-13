@@ -7,6 +7,8 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
     public String currentCancelRowId {get; set;}
     public String subIdForUpdateCredit {get; set;}
 
+    public String subIdToRenewWithCreditCard {get; set;}
+    
     public Boolean updatedCreditcard {get; set;} 
     public Boolean orderSucceed {get; set;}
     private List<Subscription__c> originalSubscriptions;
@@ -121,6 +123,14 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
                     if (subscription.Tel__c != null)
                         subscription.Tel__c = originalSubscription.Tel__c;
                 }
+    }
+
+    public Pagereference changePaymentForRenewCreditCard() {
+        PageReference page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/UpdateCreditcardPage');
+        page.getParameters().put('subId', subIdForUpdateCredit);
+        page.setRedirect(true);
+        
+        return page;
     }
 
     public Pagereference toUpdateCreditcardPage() {    

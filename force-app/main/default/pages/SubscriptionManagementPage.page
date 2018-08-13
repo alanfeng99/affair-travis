@@ -219,6 +219,13 @@
                                                                 <apex:outputField value="{!sub.PaymentInformation__c}"></apex:outputField>
                                                             </div>
                                                         </div>
+                                                        <div class="form-row">
+                                                            <div class="col-auto">
+                                                                <apex:commandLink action="{!changePaymentForRenewCreditCard}" value="啟用信用卡自動續訂服務" rendered="{!IF(sub.payment_status__c == 'paymentdone', true, false)}">
+                                                                    <apex:param assignTo="{!subIdToRenewWithCreditCard}" value="{!sub.Id}" />
+                                                                </apex:commandLink>                     
+                                                            </div>
+                                                        </div>
                                                     </apex:outputPanel>
                                                     <apex:outputPanel rendered="{!IF(sub.Payment_method__c == 'ATM轉帳',true,false)}">
                                                         <div class="form-row">
@@ -227,6 +234,13 @@
                                                             </div>
                                                             <div class="col-auto">
                                                                 <apex:outputField value="{!sub.PaymentInformation__c}"></apex:outputField>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <div class="col-auto">
+                                                                <apex:commandLink action="{!changePaymentForRenewCreditCard}" value="啟用信用卡自動續訂服務" rendered="{!IF(sub.payment_status__c == 'paymentdone', true, false)}">
+                                                                    <apex:param assignTo="{!subIdToRenewWithCreditCard}" value="{!sub.Id}" />
+                                                                </apex:commandLink>                     
                                                             </div>
                                                         </div>
                                                     </apex:outputPanel>

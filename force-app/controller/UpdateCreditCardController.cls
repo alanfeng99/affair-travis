@@ -1,6 +1,7 @@
 public with sharing class UpdateCreditCardController extends ApexBaseController {
     public UpdateCreditCardViewModel viewModel {get; set;}
     public List<SelectOption> year {get; set;}
+    public String subId {get; set;}
     
     public UpdateCreditCardController() {
 		Cookie accountIdCookie = ApexPages.currentPage().getCookies().get(Label.COOKIE_ACCOUNT_ID);
@@ -8,6 +9,8 @@ public with sharing class UpdateCreditCardController extends ApexBaseController 
         if (accountIdCookie != null) {
             String accountId = accountIdCookie.getValue();
         	viewModel = new UpdateCreditCardViewModel(accountId);
+            subId = ApexPages.currentPage().getParameters().get('subId');     
+            
         }    
     }
 
@@ -22,6 +25,13 @@ public with sharing class UpdateCreditCardController extends ApexBaseController 
         if(!viewModel.updateSubscription()) {
             addMessage(ApexPages.Severity.ERROR, System.Label.Msg_CreditcardUploadFail);
             return null; 
+        }
+
+        if (subId != null) {
+            Subscription__c subscription = [SELECT Id, Payment_method__c, isReplenish__c FROM Subscription__c WHERE Id = :subId];
+            subscription.Payment_method__c = Constants.PAYMENT_METHOD_CREDIT_CARD;
+            subscription.isReplenish__c = true;
+            update subscription;
         }
         
         addMessage(ApexPages.Severity.INFO, System.Label.Msg_UpdateCompleted);
