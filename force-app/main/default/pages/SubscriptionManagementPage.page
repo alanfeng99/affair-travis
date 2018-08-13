@@ -203,12 +203,12 @@
                                                             <div class="col-auto">
                                                                 <apex:commandLink action="{!stopAutoOrderPanel}" value="取消自動續訂服務" rendered="{!IF(sub.isReplenish__c == true, true, false)}" reRender="form">
                                                                     <apex:param id="getCancelIdbyCredit" name="getEditRowId" assignTo="{!currentCancelRowId}" value="{!sub.Id}" />
-                                                                </apex:commandLink>
-                                                                <apex:commandLink action="{!useAutoOrderPanel}" value="使用自動續訂服務" rendered="{!IF(sub.isReplenish__c == false, true, false)}" reRender="form">
-                                                                    <apex:param id="getUseIdByCredit" name="getEditRowId" assignTo="{!currentUseRowId}" value="{!sub.Id}" />
-                                                                </apex:commandLink>
+                                                                </apex:commandLink>                     
                                                             </div>
                                                         </div>
+                                                        <apex:commandLink action="{!useAutoOrderPanel}" value="使用自動續訂服務" rendered="{!IF(sub.isReplenish__c == false, true, false)}" reRender="form">
+                                                             <apex:param id="getUseIdByCredit" name="getEditRowId" assignTo="{!currentUseRowId}" value="{!sub.Id}" />
+                                                        </apex:commandLink>
                                                     </apex:outputPanel>
                                                     <apex:outputPanel rendered="{!IF(sub.Payment_method__c == '超商付款',true,false)}">
                                                         <div class="form-row">
