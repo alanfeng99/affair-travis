@@ -38,11 +38,14 @@ public with sharing class NewSubscriptionViewModel {
 
             insert gmoPaymentBean;
 
-            for (Subscription__c sub : subscriptionInsertList)
+            for (Subscription__c sub : subscriptionInsertList) {
                 sub.PaymentInformation__c = checkOrderResult.GlobalPayment_result.other_01;
+                if (firstSub.Payment_method__c == Constants.PAYMENT_METHOD_CREDIT_CARD)
+                    sub.Payment_status__c = Constants.PAYMENT_STATUS_DONE;
+            }
 
 			List<Database.SaveResult> results = Database.insert(subscriptionInsertList);
-            for (Database.SaveResult result : results) 
+            for (Database.SaveResult result : results)
                 if (result.isSuccess() == false) 
                     updateResult = false;
             

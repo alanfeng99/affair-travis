@@ -14,4 +14,9 @@ public class Constants {
     public static String PAYMENT_METHOD_CREDIT_CARD = '信用卡';
     public static String PAYMENT_METHOD_SUPER_PAYMENT = '超商付款';
     public static String PAYMENT_METHOD_ATM = 'ATM轉帳';
+    
+    public static String PAYMENT_STATUS_PENDING = 'paymentpending';
+    public static String PAYMENT_STATUS_DONE = 'paymentdone';
+
+
 }

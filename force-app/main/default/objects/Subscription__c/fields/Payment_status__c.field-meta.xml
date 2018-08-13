@@ -12,12 +12,12 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>待付款</fullName>
+                <fullName>paymentpending</fullName>
                 <default>true</default>
                 <label>待付款</label>
             </value>
             <value>
-                <fullName>已付款</fullName>
+                <fullName>paymentdone</fullName>
                 <default>false</default>
                 <label>已付款</label>
             </value>
