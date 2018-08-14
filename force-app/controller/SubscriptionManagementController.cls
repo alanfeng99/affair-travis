@@ -126,10 +126,17 @@ public with sharing class SubscriptionManagementController extends ApexBaseContr
     }
 
     public Pagereference changePaymentForRenewCreditCard() {
+        if (viewModel.account.credit_card_number__c != null) {
+            Subscription__c subscription = [SELECT Id, Payment_method__c, isReplenish__c FROM Subscription__c WHERE Id = :subIdToRenewWithCreditCard];
+            subscription.Payment_method__c = Constants.PAYMENT_METHOD_CREDIT_CARD;
+            subscription.isReplenish__c = true;
+            update subscription;
+            return ApexUtility.toPage('SubscriptionManagementPage');
+        }
+
         PageReference page = new PageReference(URL.getSalesforceBaseUrl().toExternalForm() + '/apex/UpdateCreditcardPage');
-        page.getParameters().put('subId', subIdForUpdateCredit);
+        page.getParameters().put('subId', subIdToRenewWithCreditCard);
         page.setRedirect(true);
-        
         return page;
     }
 

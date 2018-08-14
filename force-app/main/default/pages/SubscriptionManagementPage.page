@@ -222,7 +222,7 @@
                                                         <div class="form-row">
                                                             <div class="col-auto">
                                                                 <apex:commandLink action="{!changePaymentForRenewCreditCard}" value="啟用信用卡自動續訂服務" rendered="{!IF(sub.payment_status__c == 'paymentdone', true, false)}">
-                                                                    <apex:param assignTo="{!subIdToRenewWithCreditCard}" value="{!sub.Id}" />
+                                                                    <apex:param name="renewWithCreditCardSuperPayment" assignTo="{!subIdToRenewWithCreditCard}" value="{!sub.Id}" />
                                                                 </apex:commandLink>                     
                                                             </div>
                                                         </div>
@@ -239,8 +239,8 @@
                                                         <div class="form-row">
                                                             <div class="col-auto">
                                                                 <apex:commandLink action="{!changePaymentForRenewCreditCard}" value="啟用信用卡自動續訂服務" rendered="{!IF(sub.payment_status__c == 'paymentdone', true, false)}">
-                                                                    <apex:param assignTo="{!subIdToRenewWithCreditCard}" value="{!sub.Id}" />
-                                                                </apex:commandLink>                     
+                                                                    <apex:param name="renewWithCreditCardATM" assignTo="{!subIdToRenewWithCreditCard}" value="{!sub.Id}" />
+                                                                </apex:commandLink>           
                                                             </div>
                                                         </div>
                                                     </apex:outputPanel>

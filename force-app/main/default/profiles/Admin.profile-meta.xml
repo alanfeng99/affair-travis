@@ -961,10 +961,6 @@
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
-        <tab>SubscriptionProgram__c</tab>
-        <visibility>Hidden</visibility>
-    </tabVisibilities>
-    <tabVisibilities>
         <tab>Subscription__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
