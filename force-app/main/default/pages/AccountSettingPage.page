@@ -423,12 +423,12 @@
                                 </apex:outputPanel>
                                 <apex:outputPanel rendered="{!IF(viewModel.account.FacebookEmail__c == null, false, true)}">
                                     <div>
-                                    	<apex:commandButton action="{!unconnectFacebook}" image="{!$Resource.FB_Unconnect}" style="width:99%; height:42px; border-radius:5px"/>    
+                                    	<apex:commandButton action="{!unconnectFacebook}" image="{!$Resource.FB_Unconnect}" style="width:98%; height:42px; border-radius:5px"/>    
                                     </div>                                    
                                 </apex:outputPanel>
                                 <apex:outputPanel rendered="{!IF(viewModel.account.GoogleEmail__c == null, false, true)}">
                                     <div>
-                                    	<apex:commandButton action="{!unconnectGoogle}" image="{!$Resource.Google_Unconnect}" style="width:99%; height:42px; border-radius:5px"/>    
+                                    	<apex:commandButton action="{!unconnectGoogle}" image="{!$Resource.Google_Unconnect}" style="width:98%; height:42px; border-radius:5px"/>    
                                     </div>                                    
                                 </apex:outputPanel>
                             </td>

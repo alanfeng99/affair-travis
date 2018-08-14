@@ -275,4 +275,122 @@ public  class accountSettingTestCases {
         Pagereference page = controller.logOut();
         System.assertNotEquals(null, page);
     }
+
+    public static testMethod void testGoogleUserEmail_Null_Return_Msg() {
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
+        AccountSettingController controller = new AccountSettingController(account.id);
+        Pagereference page = controller.linkAccountWithGoogle();
+        System.assertEquals(null, page);
+        System.assertEquals(System.Label.Msg_GoogleConnectFail, controller.baseErrorMessage);
+    }
+
+    public static testMethod void testGoogleUserEmail_Not_Null() {
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
+        AccountSettingController controller = new AccountSettingController(account.id);
+        controller.googleUserEmail = 'jin@4idps.com';
+        Pagereference page = controller.linkAccountWithGoogle();
+        System.assertNotEquals(System.Label.Msg_GoogleConnectFail, controller.baseErrorMessage);
+    }
+
+    public static testMethod void testGoogleEmailAlreadyExist_Return_Msg() {
+        Account tempAccount = new Account(LastName = 'jin', GoogleEmail__c = 'jin@4idps.com');
+        insert tempAccount;
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
+        AccountSettingController controller = new AccountSettingController(account.id);
+        controller.googleUserEmail = 'jin@4idps.com';
+        Pagereference page = controller.linkAccountWithGoogle();
+        System.assertEquals(null, page);
+        System.assertEquals(System.Label.Msg_GoogleAlreadyExist, controller.baseErrorMessage);
+    }
+
+    public static testMethod void testGoogleEmail_Not_Exist() {
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
+        AccountSettingController controller = new AccountSettingController(account.id);
+        controller.googleUserEmail = 'jin1234@4idps.com';
+        Pagereference page = controller.linkAccountWithGoogle();
+        System.assertNotEquals(System.Label.Msg_GoogleAlreadyExist, controller.baseErrorMessage);
+    }
+
+    public static testMethod void test_googleUserEmail_Equal_GoogleEmail_c() {
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
+        AccountSettingController controller = new AccountSettingController(account.id);
+        controller.googleUserEmail = 'jin@4idps.com';
+        Pagereference page = controller.linkAccountWithGoogle();
+        System.assertEquals(controller.googleUserEmail, controller.viewModel.account.GoogleEmail__c);
+    }
+
+    public static testMethod void testLinkAccountWithGoogle_Success() {
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
+        AccountSettingController controller = new AccountSettingController(account.id);
+        controller.googleUserEmail = 'jin@4idps.com';
+        Pagereference page = controller.linkAccountWithGoogle();
+        System.assertNotEquals(System.Label.Msg_GoogleConnectFail, controller.baseErrorMessage);
+        System.assertNotEquals(null, page);
+    }
+
+    public static testMethod void testFBUserEmail_Null_Return_Msg() {
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
+        AccountSettingController controller = new AccountSettingController(account.id);
+        Pagereference page = controller.linkAccountWithFacebook();
+        System.assertEquals(null, page);
+        System.assertEquals(System.Label.Msg_FBConnectFail, controller.baseErrorMessage);
+    }
+
+    public static testMethod void testFBUserEmail_Not_Null() {
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
+        AccountSettingController controller = new AccountSettingController(account.id);
+        controller.facebookUserEmail = 'jin@4idps.com';
+        Pagereference page = controller.linkAccountWithFacebook();
+        System.assertNotEquals(System.Label.Msg_FBConnectFail, controller.baseErrorMessage);
+    }
+
+    public static testMethod void testFBEmailAlreadyExist_Return_Msg() {
+        Account tempAccount = new Account(LastName = 'jin', FacebookEmail__c = 'jin@4idps.com');
+        insert tempAccount;
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
+        AccountSettingController controller = new AccountSettingController(account.id);
+        controller.facebookUserEmail = 'jin@4idps.com';
+        Pagereference page = controller.linkAccountWithFacebook();
+        System.assertEquals(null, page);
+        System.assertEquals(System.Label.Msg_FBAlreadyExist, controller.baseErrorMessage);
+    }
+
+    public static testMethod void testFBEmail_Not_Exist() {
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
+        AccountSettingController controller = new AccountSettingController(account.id);
+        controller.facebookUserEmail = 'jin1234@4idps.com';
+        Pagereference page = controller.linkAccountWithFacebook();
+        System.assertNotEquals(System.Label.Msg_FBAlreadyExist, controller.baseErrorMessage);
+    }
+
+    public static testMethod void test_facebookUserEmail_Equal_FacebookEmail_c() {
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
+        AccountSettingController controller = new AccountSettingController(account.id);
+        controller.facebookUserEmail = 'jin@4idps.com';
+        Pagereference page = controller.linkAccountWithFacebook();
+        System.assertEquals(controller.facebookUserEmail, controller.viewModel.account.FacebookEmail__c);
+    }
+
+    public static testMethod void testLinkAccountWithFB_Success() {
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
+        AccountSettingController controller = new AccountSettingController(account.id);
+        controller.facebookUserEmail = 'jin@4idps.com';
+        Pagereference page = controller.linkAccountWithFacebook();
+        System.assertNotEquals(System.Label.Msg_FBConnectFail, controller.baseErrorMessage);
+        System.assertNotEquals(null, page);
+    }
+
+    public static testMethod void testUnConnectFacebook_FacebookEmail_c_Null() {
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
+        AccountSettingController controller = new AccountSettingController(account.id);
+        Pagereference page = controller.unconnectFacebook();
+        System.assertEquals(null, controller.viewModel.account.FacebookEmail__c);
+    }
+
+    public static testMethod void testUnConnectGoogle_GoogleEmail_c_Null() {
+        Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
+        AccountSettingController controller = new AccountSettingController(account.id);
+        Pagereference page = controller.unconnectGoogle();
+        System.assertEquals(null, controller.viewModel.account.GoogleEmail__c);
+    }
 }
