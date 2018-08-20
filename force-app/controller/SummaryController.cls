@@ -10,15 +10,15 @@ public with sharing class SummaryController extends ApexBaseController  {
             String accountId = accountIdCookie.getValue();
         	viewModel = new SummaryViewModel(accountId);
             Account account = viewModel.getAccount();
-            Integer timeForGreeting = Integer.valueOf(System.now().format('k'));   
+            Integer timeForGreeting = Integer.valueOf(Datetime.now().format('HH', 'Asia/Taipei'));  
             greetingChange(timeForGreeting);
-        }    
+        }
     }
 
     public SummaryController(String accountId) {
         viewModel = new SummaryViewModel(accountId);
         Account account = viewModel.getAccount();
-        Integer timeForGreeting = Integer.valueOf(System.now().format('k'));
+        Integer timeForGreeting = Integer.valueOf(Datetime.now().format('HH', 'Asia/Taipei'));
         greetingChange(timeForGreeting);
     }
 
