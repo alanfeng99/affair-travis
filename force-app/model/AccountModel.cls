@@ -82,7 +82,7 @@ public with sharing class AccountModel {
         if (accounts.size() > 0)
             return null;
         
-        Account account = new Account(PersonEmail = email, LastName = lastName, FacebookEmail__c = email);
+        Account account = new Account(PersonEmail = email, LastName = lastName, FacebookEmail__c = email, Active__c = true);
         insert account;
 
         return account;
@@ -93,7 +93,7 @@ public with sharing class AccountModel {
         if (accounts.size() > 0)
             return null;
         
-        Account account = new Account(PersonEmail = email, LastName = lastName, GoogleEmail__c = email);
+        Account account = new Account(PersonEmail = email, LastName = lastName, GoogleEmail__c = email, Active__c = true);
         insert account;
 
         return account;

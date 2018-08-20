@@ -143,7 +143,7 @@
                                                 <td>
                                                     <div class="form-row">
                                                         <div class="col-auto">
-                                                            訂一份送家人、朋友：
+                                                            訂一份報紙給自己或送給家人、朋友:
                                                         </div>
                                                         <div class="col-auto">
                                                             <apex:commandLink value="我要新增訂閱" action="{!toNewSubscriptionPage}"/>
