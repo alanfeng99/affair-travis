@@ -1,0 +1,33 @@
+<apex:component id="Navbar" controller="SummaryController">
+    <apex:attribute name="accountName" required="true" type="String" description="Account Name"/>
+    
+    <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom" >
+        <a class="navbar-brand" href="#">
+            <apex:image url="{!$Resource.Logo}" styleClass="w110px h40px"/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{!accountName}</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <apex:commandLink action="{!logOut}" value="登出" styleClass="dropdown-item"/>
+                    </div>
+                </li>
+                <li class="nav-item ">
+                    <apex:commandLink value="總覽" action="{!toSummaryPage}" styleClass="nav-link"/>
+                    
+                </li>
+                <li class="nav-item">
+                    <apex:commandLink value="帳戶設定" action="{!toAccountSettingPage}" styleClass="nav-link"/>
+                </li>
+                <li class="nav-item">
+                    <apex:commandLink value="訂閱管理" action="{!toSubscriptionManagementPage}" styleClass="nav-link "/>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</apex:component>

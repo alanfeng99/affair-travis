@@ -44,34 +44,7 @@
         <body class="bg-light">
             <apex:form id="form">   
                 <apex:actionFunction name="afterSubmit" action="{!afterSubmit}" reRender="form"/>
-                <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
-                    <a class="navbar-brand" href="#">
-                        <apex:image url="{!$Resource.Logo}" styleClass="w110px h40px"/>
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    
-                    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{!viewModel.account.LastName}</a>
-                                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                                    <apex:commandLink action="{!logOut}" value="登出" styleClass="dropdown-item"/>
-                                </div>
-                            </li>
-                            <li class="nav-item ">
-                                <apex:commandLink value="總覽" action="{!toSummaryPage}" styleClass="nav-link"/>   
-                            </li>
-                            <li class="nav-item">
-                                <apex:commandLink value="帳戶設定" action="{!toAccountSettingPage}" styleClass="nav-link"/>
-                            </li>
-                            <li class="nav-item">
-                                <apex:commandLink value="訂閱管理" action="{!toSubscriptionManagementPage}" styleClass="nav-link "/>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>  
+                 <c:Navbar accountName="{!viewModel.account.LastName}"/>
                 <div class="card  border-light bg-light " >
                     <div class="card-header bg-white">                  
                         <div align="center" class="lineheight22px">
@@ -146,7 +119,7 @@
                                                         <div class="form-group">
                                                             收件者資料
                                                         </div>
-                                                        <small style="color:red"><apex:messages/></small>
+                                                        <small style="color:red"><apex:messages /></small>
                                                         <div class="form-group form-row">
                                                             <div class="col-12 col-sm-10 col-md-8">
                                                                 <apex:inputField value="{!sub.Recipient__c}" styleClass="form-control" html-placeholder="收件人名稱"/>
@@ -221,7 +194,7 @@
                                                         </div>
                                                         <div class="form-row">
                                                             <div class="col-auto">
-                                                                <apex:commandLink action="{!changePaymentForRenewCreditCard}" value="啟用信用卡自動續訂服務" rendered="{!IF(sub.payment_status__c == 'paymentdone', true, false)}">
+                                                                <apex:commandLink action="{!changePaymentForRenewCreditCard}" value="啟用信用卡自動續訂服務" rendered="{!IF(sub.Payment_status__c == 'paymentdone', true, false)}">
                                                                     <apex:param name="renewWithCreditCardSuperPayment" assignTo="{!subIdToRenewWithCreditCard}" value="{!sub.Id}" />
                                                                 </apex:commandLink>                     
                                                             </div>
@@ -238,7 +211,7 @@
                                                         </div>
                                                         <div class="form-row">
                                                             <div class="col-auto">
-                                                                <apex:commandLink action="{!changePaymentForRenewCreditCard}" value="啟用信用卡自動續訂服務" rendered="{!IF(sub.payment_status__c == 'paymentdone', true, false)}">
+                                                                <apex:commandLink action="{!changePaymentForRenewCreditCard}" value="啟用信用卡自動續訂服務" rendered="{!IF(sub.Payment_status__c == 'paymentdone', true, false)}">
                                                                     <apex:param name="renewWithCreditCardATM" assignTo="{!subIdToRenewWithCreditCard}" value="{!sub.Id}" />
                                                                 </apex:commandLink>           
                                                             </div>
