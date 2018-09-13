@@ -1,10 +1,4 @@
-public with sharing class NavbarController {
-    public NavbarController() {}
-
-    public PageReference toNewSubscriptionPage(){
-        return ApexUtility.toPage('NewSubscriptionPage');
-    }
-    
+public with sharing class NavbarController {   
     public PageReference toSummaryPage(){
         return ApexUtility.toPage('SummaryPage');
     }
