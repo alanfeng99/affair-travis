@@ -16,12 +16,9 @@
     </head>
     <body class="bg-light" >
         <apex:form id="form">
-            <div class="card border-light bg-light">   
-                <c:Navbar accountName="{!viewModel.account.LastName}"/>
-                <div class="card-header bg-white ">
-                    <div class="letterspacing3px fontsize20px" align="center">信用卡資訊更新</div><br/>
-                    <div align="center" class="fontsize12px">信用卡資訊新增、變更</div>
-                </div>
+            <c:Navbar accountName="{!viewModel.account.LastName}"/>
+            <div class="card border-light bg-light">                   
+                <c:PageHeader showDescription="true" pageTitle="信用卡資訊更新" pageDescription="信用卡資訊新增、變更"/>
                 <div class="card-body container" style="max-width:500px;">
                     <div class="form-group" style="font-size:15px;">
                         信用卡資訊 

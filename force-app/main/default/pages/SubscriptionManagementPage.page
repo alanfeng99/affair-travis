@@ -44,14 +44,9 @@
         <body class="bg-light">
             <apex:form id="form">   
                 <apex:actionFunction name="afterSubmit" action="{!afterSubmit}" reRender="form"/>
-                 <c:Navbar accountName="{!viewModel.account.LastName}"/>
+                <c:Navbar accountName="{!viewModel.account.LastName}"/>
                 <div class="card  border-light bg-light " >
-                    <div class="card-header bg-white">                  
-                        <div align="center" class="lineheight22px">
-                            <div class="letterspacing3px fontsize20px">訂閱管理</div><br/>
-                            <div class="fontsize12px">查看訂閱明細，變更修改付款、收件資料</div>
-                        </div>
-                    </div>
+                    <c:PageHeader showDescription="true" pageTitle="訂閱管理" pageDescription="查看訂閱明細，變更修改付款、收件資料"/>
                     <apex:outputPanel rendered="{!orderSucceed}">
                         <small class="form-text text-danger text-center" >感謝您的訂閱！我們將依據您選擇的訂閱方案將報紙配送給您。</small>
                     </apex:outputPanel>

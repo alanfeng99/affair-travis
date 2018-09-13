@@ -18,12 +18,7 @@
     <body class="bg-light">  
         <apex:form id="form">
             <div class="card  border-light bg-light">   
-                <div class="card-header bg-white">
-                    <div align="center" class="title">
-                        <b class="letterspacing3px">週刊編集</b><br/>
-                        <b ><span>The Affairs Medium</span></b>
-                    </div>
-                </div>
+                <c:PageHeader showAffairs="true"/>
                 <br/>
                 <div align="center" class="fontsize20px">
                     建立帳號

@@ -1,0 +1,21 @@
+<apex:component id="PageHeader">
+    <apex:attribute type="Boolean" description="show just Affairs name" name="showAffairs" default="false" required="false"/>
+    <apex:attribute type="Boolean" description="show just description" name="showDescription" default="false" required="false"/>
+    <apex:attribute type="String" description="Page Title" name="pageTitle" required="false"/>
+    <apex:attribute type="String" description="Page Description" name="pageDescription" required="false"/>
+ 
+    <div class="card-header bg-white" >
+        <apex:outputPanel rendered="{!showAffairs}">
+            <div align="center" class="title lineheight22px">
+                <b class="letterspacing3px">週刊編集</b><br/>
+                <b ><span>The Affairs Medium</span></b>
+            </div>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!showDescription}">              
+            <div align="center" class="lineheight22px">
+                <div class="letterspacing3px fontsize20px">{!pageTitle}</div><br/>
+                <div class="fontsize12px">{!pageDescription}</div>
+            </div>
+        </apex:outputPanel>
+    </div>
+</apex:component>

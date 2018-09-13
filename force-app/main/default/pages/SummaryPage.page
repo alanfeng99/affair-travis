@@ -20,15 +20,7 @@
             <apex:form > 
                 <c:Navbar accountName="{!viewModel.account.LastName}"/>
                 <div class="card  border-light bg-light ">
-                    <div class="card-header bg-white">                  
-                        <div align="center" class="lineheight22px">
-                            <div class="letterspacing3px fontsize20px">
-                                {!greetingWord}，<apex:outputText value="{!Account.LastName}"/>
-                            </div><br/>
-                            <div class="fontsize12px">{!viewModel.year}年{!viewModel.month}月{!viewModel.day}日註冊成為會員</div>
-                        </div>
-                    </div>
-                    
+                    <c:PageHeader showDescription="true" pageTitle="{!greetingWord}，{!Account.LastName}" pageDescription="{!viewModel.year}年{!viewModel.month}月{!viewModel.day}日註冊成為會員"/>
                     <div class="card-body fontsize14px"> 
                         <div class="container"> 
                             <div class="form-row">

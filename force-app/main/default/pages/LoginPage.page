@@ -166,13 +166,8 @@
         </apex:form>
         
         <apex:form id="form">
-            <div class="card border-light bg-light" >   
-                <div class="card-header bg-white w100" >
-                    <div align="center" class="title lineheight22px">
-                        <b class="letterspacing3px">週刊編集</b><br/>
-                        <b ><span>The Affairs Medium</span></b>
-                    </div>
-                </div>
+            <div class="card border-light bg-light" >         
+                <c:PageHeader showAffairs="true"/>
                 <br/>
                 <div align="center" class="letterspacing3px fontsize20px">
                     請先登入

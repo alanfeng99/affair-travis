@@ -131,12 +131,7 @@
             <apex:form id="form"> 
                 <c:Navbar accountName="{!viewModel.account.LastName}"/>
                 <div class="card  border-light bg-light ">
-                    <div class="card-header bg-white">                  
-                        <div align="center" style="line-height:20px;">
-                            <div class="letterspacing3px fontsize20px">帳戶設定</div><br/>
-                            <div class="fontsize12px">編輯修改你的個人帳號</div>
-                        </div>
-                    </div>
+                    <c:PageHeader showDescription="true" pageTitle="帳戶設定" pageDescription="編輯修改你的個人帳號"/>
                     <apex:outputPanel rendered="{!updatedCreditCard}">
                         <small class="form-text text-danger text-center" >信用卡資訊已完成新增(變更)，訂閱到期時將會透過此信用卡繳款</small>
                     </apex:outputPanel>
