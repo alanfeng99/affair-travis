@@ -252,31 +252,7 @@ public  class accountSettingTestCases {
         Pagereference page = controller.changeCreditCard();
         System.assertNotEquals(null, page); 
     }
-
-    public static testMethod void testTurn_To_SummaryPage() {
-        AccountSettingController controller = new AccountSettingController();
-        Pagereference page = controller.toSummaryPage();
-        System.assertNotEquals(null, page);
-    }
-
-    public static testMethod void testTurn_To_AccountSettingPage() {
-        AccountSettingController controller = new AccountSettingController();
-        Pagereference page = controller.toAccountSettingPage();
-        System.assertNotEquals(null, page);
-    }
-    public static testMethod void testTurn_To_SubscriptionManagementPage() {
-        AccountSettingController controller = new AccountSettingController();
-        Pagereference page = controller.toSubscriptionManagementPage();
-        System.assertNotEquals(null, page);
-    }
-
-    public static testMethod void testLogOut() {
-        AccountSettingController controller = new AccountSettingController();
-        Pagereference page = controller.logOut();
-        System.assertNotEquals(null, page);
-    }
-
-    public static testMethod void testGoogleUserEmail_Null_Return_Msg() {
+        public static testMethod void testGoogleUserEmail_Null_Return_Msg() {
         Account account = [SELECT ID FROM Account WHERE PersonEmail = 'jin@fff.com'];
         AccountSettingController controller = new AccountSettingController(account.id);
         Pagereference page = controller.linkAccountWithGoogle();

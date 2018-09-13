@@ -12,27 +12,10 @@ public with sharing class PaymentResultControllerTestCases {
     //     PaymentResultController controller = new PaymentResultController(account.id);
     //     System.assertEquals(Constants.PAYMENT_METHOD_ATM, controller.paymentMethod);
     // }
-    
-    public static testMethod void testTurn_To_UpdateCreditcardPage() {
-        PaymentResultController controller = new PaymentResultController();
-        Pagereference page = controller.toUpdateCreditcardPage();
-        System.assertNotEquals(null, page);
-    }
 
     public static testMethod void testTurn_To_SummaryPage() {
         PaymentResultController controller = new PaymentResultController();
         Pagereference page = controller.toSummaryPage();
-        System.assertNotEquals(null, page);
-    }
-
-    public static testMethod void testTurn_To_AccountSettingPage() {
-        PaymentResultController controller = new PaymentResultController();
-        Pagereference page = controller.toAccountSettingPage();
-        System.assertNotEquals(null, page);
-    }
-    public static testMethod void testTurn_To_SubscriptionManagementPage() {
-        PaymentResultController controller = new PaymentResultController();
-        Pagereference page = controller.toSubscriptionManagementPage();
         System.assertNotEquals(null, page);
     }
 

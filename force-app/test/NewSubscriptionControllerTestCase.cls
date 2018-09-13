@@ -324,33 +324,4 @@ public with sharing class NewSubscriptionControllerTestCase {
     //     Pagereference page = controller.submitForm();
     //     System.assertEquals(controller.baseErrorMessage, System.Label.Msg_Creditcard_CheckCVC);
     // }
-
-    public static testMethod void testTurn_To_UpdateCreditcardPage() {
-        NewSubscriptionController controller = new NewSubscriptionController();
-        Pagereference page = controller.toUpdateCreditcardPage();
-        System.assertNotEquals(null, page);
-    }
-
-    public static testMethod void testTurn_To_SummaryPage() {
-        NewSubscriptionController controller = new NewSubscriptionController();
-        Pagereference page = controller.toSummaryPage();
-        System.assertNotEquals(null, page);
-    }
-
-    public static testMethod void testTurn_To_AccountSettingPage() {
-        NewSubscriptionController controller = new NewSubscriptionController();
-        Pagereference page = controller.toAccountSettingPage();
-        System.assertNotEquals(null, page);
-    }
-    public static testMethod void testTurn_To_SubscriptionManagementPage() {
-        NewSubscriptionController controller = new NewSubscriptionController();
-        Pagereference page = controller.toSubscriptionManagementPage();
-        System.assertNotEquals(null, page);
-    }
-
-    public static testMethod void testLogOut() {
-        NewSubscriptionController controller = new NewSubscriptionController();
-        Pagereference page = controller.logOut();
-        System.assertNotEquals(null, page);
-    }
 }

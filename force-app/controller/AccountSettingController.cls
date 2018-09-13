@@ -180,22 +180,6 @@ public with sharing class AccountSettingController extends ApexBaseController {
         viewModel.account.Password__c = tempAccount.Password__c;
     }
     
-    public PageReference toSummaryPage(){
-        return ApexUtility.toPage('SummaryPage');
-    }
-    
-    public PageReference toAccountSettingPage(){
-    	return ApexUtility.toPage('AccountSettingPage');
-    }
-    
-    public PageReference toSubscriptionManagementPage(){
-    	return ApexUtility.toPage('SubscriptionManagementPage');
-    }
-    
-    public PageReference logOut() {  
-        return AuthUtility.logOut();
-    }
-
     public void saveLoginCookies(Account realAccount) {
         String token = AccountModel.saveToken(realAccount);
         Cookie authToken = new Cookie(Label.COOKIE_AUTH_TOKEN, token, null, Constants.COOKIE_DURATION, false);

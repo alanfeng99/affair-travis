@@ -1,6 +1,6 @@
-<apex:component id="Navbar" controller="SummaryController">
+<apex:component id="Navbar" controller="NavbarController">
     <apex:attribute name="accountName" required="true" type="String" description="Account Name"/>
-    
+
     <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom" >
         <a class="navbar-brand" href="#">
             <apex:image url="{!$Resource.Logo}" styleClass="w110px h40px"/>
@@ -17,9 +17,8 @@
                         <apex:commandLink action="{!logOut}" value="登出" styleClass="dropdown-item"/>
                     </div>
                 </li>
-                <li class="nav-item ">
+                <li class="nav-item">
                     <apex:commandLink value="總覽" action="{!toSummaryPage}" styleClass="nav-link"/>
-                    
                 </li>
                 <li class="nav-item">
                     <apex:commandLink value="帳戶設定" action="{!toAccountSettingPage}" styleClass="nav-link"/>

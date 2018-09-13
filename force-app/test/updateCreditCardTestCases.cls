@@ -18,33 +18,4 @@ public  class updateCreditCardTestCases {
         Boolean result = viewModel.updateAccount();
         System.assertEquals(true, result);
     }
-
-    public static testMethod void testTurn_To_UpdateCreditcardPage() {
-        UpdateCreditCardController controller = new UpdateCreditCardController();
-        Pagereference page = controller.toUpdateCreditcardPage();
-        System.assertNotEquals(null, page);
-    }
-
-    public static testMethod void testTurn_To_SummaryPage() {
-        UpdateCreditCardController controller = new UpdateCreditCardController();
-        Pagereference page = controller.toSummaryPage();
-        System.assertNotEquals(null, page);
-    }
-
-    public static testMethod void testTurn_To_AccountSettingPage() {
-        UpdateCreditCardController controller = new UpdateCreditCardController();
-        Pagereference page = controller.toAccountSettingPage();
-        System.assertNotEquals(null, page);
-    }
-    public static testMethod void testTurn_To_SubscriptionManagementPage() {
-        UpdateCreditCardController controller = new UpdateCreditCardController();
-        Pagereference page = controller.toSubscriptionManagementPage();
-        System.assertNotEquals(null, page);
-    }
-
-    public static testMethod void testLogOut() {
-        UpdateCreditCardController controller = new UpdateCreditCardController();
-        Pagereference page = controller.logOut();
-        System.assertNotEquals(null, page);
-    }
 }

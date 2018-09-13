@@ -47,30 +47,7 @@ public with sharing class SummaryControllerTestCase {
         Pagereference page = controller.toNewSubscriptionPage();
         System.assertNotEquals(null, page);
     }
-
-    public static testMethod void testTurn_To_SummaryPage() {
-        SummaryController controller = new SummaryController();
-        Pagereference page = controller.toSummaryPage();
-        System.assertNotEquals(null, page);
-    }
-
-    public static testMethod void testTurn_To_AccountSettingPage() {
-        SummaryController controller = new SummaryController();
-        Pagereference page = controller.toAccountSettingPage();
-        System.assertNotEquals(null, page);
-    }
-    public static testMethod void testTurn_To_SubscriptionManagementPage() {
-        SummaryController controller = new SummaryController();
-        Pagereference page = controller.toSubscriptionManagementPage();
-        System.assertNotEquals(null, page);
-    }
-
-    public static testMethod void testLogOut() {
-        SummaryController controller = new SummaryController();
-        Pagereference page = controller.logOut();
-        System.assertNotEquals(null, page);
-    }
-
+    
     public static testMethod void testViewModel_GetSumOfSubscription() {
         Account account = new Account(PersonEmail = 'jin@4idps.com', LastName = 'Jin');
         account.recordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'PersonAccount' and SObjectType = 'Account'].Id;
@@ -79,6 +56,4 @@ public with sharing class SummaryControllerTestCase {
         Integer size = controller.viewModel.getSumOfSubscription();
         System.assertEquals(0, size);
     }
-  
-    
 }

@@ -155,27 +155,4 @@ public with sharing class SubscriptionManagerControllerTestCase {
         Pagereference page = controller.toUpdateCreditcardPage();
         System.assertNotEquals(null, page);
     }
-
-    public static testMethod void testTurn_To_SummaryPage() {
-        SubscriptionManagementController controller = new SubscriptionManagementController();
-        Pagereference page = controller.toSummaryPage();
-        System.assertNotEquals(null, page);
-    }
-
-    public static testMethod void testTurn_To_AccountSettingPage() {
-        SubscriptionManagementController controller = new SubscriptionManagementController();
-        Pagereference page = controller.toAccountSettingPage();
-        System.assertNotEquals(null, page);
-    }
-    public static testMethod void testTurn_To_SubscriptionManagementPage() {
-        SubscriptionManagementController controller = new SubscriptionManagementController();
-        Pagereference page = controller.toSubscriptionManagementPage();
-        System.assertNotEquals(null, page);
-    }
-
-    public static testMethod void testLogOut() {
-        SubscriptionManagementController controller = new SubscriptionManagementController();
-        Pagereference page = controller.logOut();
-        System.assertNotEquals(null, page);
-    }
 }
