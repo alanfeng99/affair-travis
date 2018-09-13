@@ -265,12 +265,7 @@
                 </script>
                      
             </apex:form>   
-            <div class="footer text-muted text-right">
-                <hr class="w100"/>
-                <p >
-                    The Affairs Mediuum Ltd. 編集者新聞社有限公司
-                </p>
-            </div>     
+            <c:PageFooter/>    
         </body>
         
         
