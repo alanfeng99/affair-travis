@@ -169,3 +169,7 @@ h1 {
     background-color:#dde2e2; 
     border-width:0px;
 }
+
+input[type="radio"] {
+    margin-right: .3125rem;
+}
