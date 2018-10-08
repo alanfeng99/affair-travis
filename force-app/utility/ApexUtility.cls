@@ -108,7 +108,7 @@ public with sharing class ApexUtility {
     }
     
     public static SObject mergeSecondObjectIntoFirstObject(SObject object1, SObject object2) {
-        for(SObjectField field:object1.getSObjectType().getDescribe().fields.getMap().values()) {
+        for (SObjectField field:object1.getSObjectType().getDescribe().fields.getMap().values()) {
             try {
                 Object opp1Field = object1.get(field);
                 Object opp2Field = object2.get(field);
@@ -124,7 +124,7 @@ public with sharing class ApexUtility {
         if (object1 == null || object2 == null)
             return null;
         
-        for(SObjectField field : object1.getSObjectType().getDescribe().fields.getMap().values()) {
+        for (SObjectField field : object1.getSObjectType().getDescribe().fields.getMap().values()) {
             try {
                 String fieldObject1 = String.valueOf(field);
                 Object opp1Field = object1.get(fieldObject1);
